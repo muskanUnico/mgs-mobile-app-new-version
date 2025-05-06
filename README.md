@@ -50,3 +50,4 @@ Join our community of developers creating universal apps.
 - [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
 # mgs-mobile-app-new-version
 # NEW-MGS-MOBILE
+# mgs-tailwind-remove
