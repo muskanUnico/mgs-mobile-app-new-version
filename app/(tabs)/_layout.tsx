@@ -1,45 +1,71 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
-import { Platform } from 'react-native';
-
-import { HapticTab } from '@/components/HapticTab';
-import { IconSymbol } from '@/components/ui/IconSymbol';
-import TabBarBackground from '@/components/ui/TabBarBackground';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
+import { Ionicons } from "@expo/vector-icons";
+import { Tabs } from "expo-router";
+import React from "react";
+import { Platform } from "react-native";
+// import { HapticTab } from "@/src/components/HapticTab";
+// import TabBarBackground from "@/src/components/ui/TabBarBackground";
+// import { useColorScheme } from "@/src/hooks/useColorScheme";
+// import { "#f5f5f5" } from "@/src/constants/Colors";
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
         headerShown: false,
-        tabBarButton: HapticTab,
-        tabBarBackground: TabBarBackground,
+        // tabBarButton: HapticTab,
+        // tabBarBackground: TabBarBackground,
+        tabBarActiveTintColor:"#f59b90",
+        tabBarInactiveTintColor: "gray",
         tabBarStyle: Platform.select({
           ios: {
-            // Use a transparent background on iOS to show the blur effect
-            position: 'absolute',
+            position: "absolute",
           },
           default: {},
         }),
-      }}>
+        tabBarLabelStyle: {
+          fontFamily: "medium",
+          fontSize: 10,
+        },
+      }}
+    >
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
+          title: "Home",tabBarIcon: ({ color, focused }) => (
+            <Ionicons name="home"  size={25} color={focused ? "#f59b90" : "#555555"} />
+          ),
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="approvedAppointments"
         options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
+          title: "Approved",
+          tabBarIcon: ({ color, focused }) => (
+            <Ionicons name="calendar" size={25} color={focused ? "#f59b90" : "#555555"} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="createAppointments"
+        options={{
+          title: "Create",
+          tabBarIcon: ({ color, focused }) => (
+            <Ionicons name="create" size={25} color={focused ? "#f59b90" : "#555555"} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="team"
+        options={{
+          title: "Team",
+          headerShown: false,
+          tabBarIcon: ({ focused }) => (
+            <Ionicons name="people" size={25} color={focused ? "#f59b90" : "#555555"} />
+          ),
         }}
       />
     </Tabs>
   );
 }
+
+
