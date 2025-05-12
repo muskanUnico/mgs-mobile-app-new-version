@@ -1,17 +1,17 @@
 import {
-  DarkTheme,
   DefaultTheme,
-  ThemeProvider,
+  ThemeProvider
 } from "@react-navigation/native";
 import { useFonts } from "expo-font";
 import { Drawer } from "expo-router/drawer";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import DrawerContent from "../components/DrawerContent";
+// import DrawerContent from "../src/components/DrawerContent";
+import DrawerContent from "../src/components/ui/DrawerContent/DrawerContent";
 
 export default function RootLayout() {
   const [loaded] = useFonts({
-    SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
+    SpaceMono: require("../src/assets/fonts/Poppins-Regular.ttf"),
   });
 
   if (!loaded) {

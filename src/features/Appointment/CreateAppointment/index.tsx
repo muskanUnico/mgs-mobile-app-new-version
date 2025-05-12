@@ -1,0 +1,183 @@
+//@ts-nocheck
+import React from "react";
+import { FlatList, StyleSheet, View } from "react-native";
+import { styles as externalStyles } from "../../../assets/css";
+import { brandGreyColor } from "../../../constants/COLORS";
+import Title from "../../../components/elements/Title/Title";
+import Loader from "../../../components/elements/Loader/Loader";
+import Button from "../../../components/elements/Button/Button";
+import ConfirmAppointment from "../ConfirmAppointment/ConfirmAppointment";
+import useAppointmentFlow from "../../../hooks/CreateAppointment/useAppointmentFlow";
+import CreateAppointmentFromFeature from "./CreateAppointmentFromFeature/CreateAppointmentFromFeature";
+import CreateAppointmentCardFeature from "./CreateAppointmentCardFeature/CreateAppointmentCardFeature";
+import {
+  ErrorRender,
+  createAppointment,
+} from "../../../hooks/CreateAppointment";
+import { useTheme } from "../../../context/ThemeContext";
+
+const CreateAppointmentFeature = ({ navigation }) => {
+  const { theme } = useTheme();
+  const {
+    API_RUN,
+    clientInfoData,
+    SetClientInfoData,
+    appointmentDetails,
+    setAppointmentDetails,
+    tableselectedData,
+    setTableselectedData,
+    discount,
+    Loading,
+    setLoading,
+    memberResponse,
+    finalResponse,
+    Next,
+    SetNext,
+    errors,
+    setErrors,
+    appointmentRes,
+    setAppointmentRes,
+    paymentData,
+    setPaymentData,
+    find,
+    next,
+    previewData,
+    manageDiscount,
+    setManageDiscount,
+  } = useAppointmentFlow();
+
+  const handleSubmit = () => {
+    const body = { ...finalResponse, discount: {} };
+
+    if (manageDiscount.code) {
+      body.discount.code = manageDiscount.code;
+    }
+
+    if (manageDiscount.custom?.customValue > 0) {
+      body.discount.custom = manageDiscount.custom;
+    }
+    createAppointment(body, setErrors, setLoading, setAppointmentRes);
+  };
+
+  return (
+    <View style={{ flex: 1 }}>
+      {!Next && (
+        <>
+          <FlatList
+            ListHeaderComponent={
+              <>
+                <Title navigation={navigation} title="Create Appointments" />
+                <View style={{ marginHorizontal: 8 }}>
+                  <CreateAppointmentFromFeature
+                    clientData={{
+                      defaultValue: clientInfoData,
+                      setValue: SetClientInfoData,
+                    }}
+                    details={appointmentDetails}
+                    setDetails={setAppointmentDetails}
+                  />
+                </View>
+                {!Next && (
+                  <View style={[externalStyles.container]}>
+                    <ErrorRender
+                      API_RUN={API_RUN}
+                      memberResponse={memberResponse}
+                      errors={errors}
+                    />
+                  </View>
+                )}
+
+                <CreateAppointmentCardFeature
+                  setTableselectedData={setTableselectedData}
+                  tableselectedData={tableselectedData}
+                  manageDiscount={manageDiscount}
+                  setManageDiscount={setManageDiscount}
+                  discount={discount}
+                />
+              </>
+            }
+          />
+
+          <View style={styles.container}>
+            {Loading == "find" ? (
+              <Loader />
+            ) : (
+              <Button title="FIND" onPress={find} />
+            )}
+
+            {Loading == "next" ? (
+              <Loader />
+            ) : (
+              API_RUN && (
+                <View style={{ marginLeft: 16 }}>
+                  <Button title="NEXT" onPress={next} />
+                </View>
+              )
+            )}
+          </View>
+        </>
+      )}
+
+      {Next && (
+        <FlatList
+          ListHeaderComponent={
+            <>
+              <View
+                style={{
+                  minHeight: screenHeight,
+                  paddingBottom: 64,
+                  backgroundColor: theme.brandGreyColor,
+                }}
+              >
+                <Title navigation={navigation} title="Confirm Appointments" />
+                <View>
+                  <ConfirmAppointment
+                    API_RUN={API_RUN}
+                    memberResponse={memberResponse}
+                    errors={errors}
+                    tableselectedData={tableselectedData}
+                    setTableselectedData={setTableselectedData}
+                    discount={discount}
+                    findLoading={Loading == "find"}
+                    nextLoading={Loading == "next"}
+                    find={find}
+                    next={next}
+                    setNext={SetNext}
+                    setErrors={setErrors}
+                    previewData={previewData}
+                    setPaymentData={setPaymentData}
+                    takePayment
+                  />
+                  <View
+                    style={{
+                      marginBottom: 64,
+                      marginHorizontal: 12,
+                    }}
+                  >
+                    <Button
+                      loading={Loading == "submit"}
+                      title="Save"
+                      onPress={handleSubmit}
+                    />
+                  </View>
+                </View>
+              </View>
+            </>
+          }
+        />
+      )}
+    </View>
+  );
+};
+
+export default CreateAppointmentFeature;
+const styles = StyleSheet.create({
+  container: {
+    zIndex: 30,
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    marginHorizontal: 16,
+    marginBottom: 16,
+  },
+});
