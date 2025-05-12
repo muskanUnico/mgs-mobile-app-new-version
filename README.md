@@ -51,3 +51,4 @@ Join our community of developers creating universal apps.
 # mgs-mobile-app-new-version
 # NEW-MGS-MOBILE
 # mgs-tailwind-remove
+# event
