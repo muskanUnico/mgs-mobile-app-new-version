@@ -1,6 +1,6 @@
 import { Text } from "react-native";
-import { useAuth } from "../context/AuthContext";
 import React from "react";
+import { useAuth } from "../context/AuthContext";
 
 export function PermissionAccess({
   requiredPermissions = [],
