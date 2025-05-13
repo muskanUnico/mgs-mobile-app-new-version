@@ -1,29 +1,15 @@
-import React from "react";
-import { SafeAreaView } from "react-native";
-import { useTheme } from "@/src/context/ThemeContext";
-import Title from "@/src/components/elements/Title/Title";
-import GlobalLoader from "@/src/features/GlobalLoader/GlobalLoader";
-import { SecurePageByPackage } from "@/src/middleware/PermissionAccess";
-import AllAppointment from "@/src/features/Appointment/AllAppointment/AllAppointment";
-import { setTeamMemberColors } from "@/src/hooks/TeamMembers";
+//Components
+import AuthBg from "@/src/components/ui/AuthBg";
+import LoginInfo from "@/src/components/ui/Login/Info";
+import LoginModule from "@/src/features/Auth/Login/LoginModule";
 
-const AllAppointmentScreen = ({ navigation }: any) => {
-  setTeamMemberColors();
-  const { theme } = useTheme();
-
+function LoginScreen() {
   return (
-    <GlobalLoader>
-      <SafeAreaView
-        style={[
-          { backgroundColor: theme.brandGreyColor },
-          { minHeight: "100%" },
-        ]}
-      >
-        <Title navigation={navigation} title="All Appointments" />
-        <AllAppointment navigation={navigation} />
-      </SafeAreaView>
-    </GlobalLoader>
+    <AuthBg>
+      <LoginInfo />
+      <LoginModule />
+    </AuthBg>
   );
-};
+}
 
-export default SecurePageByPackage(AllAppointmentScreen, ["view_appointments"]);
+export default LoginScreen;

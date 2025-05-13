@@ -3,6 +3,7 @@ import { getItemFromLocalStorage } from "./useLocalStorage";
 
 const apiUrl = process.env.BACKEND_URL;
 
+
 const fetcher = axios.create({
     baseURL: apiUrl,
     headers: {
