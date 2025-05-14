@@ -1,7 +1,8 @@
 import axios from "axios";
 import { getItemFromLocalStorage } from "./useLocalStorage";
 
-const apiUrl = process.env.BACKEND_URL;
+// const apiUrl = process.env.BACKEND_URL;
+const apiUrl = "https://mgs-backend-api.onrender.com/api/v1/admin";
 
 
 const fetcher = axios.create({

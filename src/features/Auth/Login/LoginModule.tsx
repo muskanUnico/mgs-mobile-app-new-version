@@ -5,6 +5,8 @@ import { AuthService } from "../../../services/AuthServices";
 import LoginForm from "../../../components/ui/Login/LoginForm";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { DevSettings } from 'react-native';
+import { router } from "expo-router";
+
 
 interface FormDataProps {
   email: string;
@@ -19,7 +21,7 @@ const LoginModule = () => {
     email: "",
     password: "",
   });
-
+ 
   // submit
   const handleSubmit = () => {
     if (formData.email.length < 1) {
@@ -32,6 +34,8 @@ const LoginModule = () => {
         .then((res) => {
           AsyncStorage.setItem("user", JSON.stringify(res));
           reload()
+          router.push("/(tabs)");
+          setUser(res);
           // DevSettings.reload();
           // setLoading(false);
         })
