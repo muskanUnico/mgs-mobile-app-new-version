@@ -4,7 +4,7 @@ import { useAuth } from "../../../context/AuthContext";
 import { AuthService } from "../../../services/AuthServices";
 import LoginForm from "../../../components/ui/Login/LoginForm";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { DevSettings } from 'react-native';
+// import { DevSettings } from 'react-native';
 import { router } from "expo-router";
 
 
@@ -19,7 +19,7 @@ const LoginModule = () => {
   // data manage
   const [formData, setFormData] = useState<FormDataProps>({
     email: "",
-    password: "",
+    password:"",
   });
  
   // submit

@@ -18,8 +18,6 @@ const HomeCards = () => {
   const allreports = useGetAllReports();
   const allAppprovedRepots = useGetAllApprovedReports();
 
-  console.log("HomeCards.tsx — allreports:", allreports);
-  console.log("HomeCards.tsx — allAppprovedRepots:", allAppprovedRepots);
 
   const [activeSlide, setActiveSlide] = useState(0);
 
@@ -80,7 +78,7 @@ const HomeCards = () => {
 
   return (
     <View style={styles.container}>
-      <Carousel
+      {/* <Carousel
         data={carouselItems}
         renderItem={renderItem}
         sliderWidth={screenWidth}
@@ -89,7 +87,7 @@ const HomeCards = () => {
         autoplay
         autoplayInterval={4000}
         onSnapToItem={(index) => setActiveSlide(index)}
-      />
+      /> */}
     </View>
   );
 };

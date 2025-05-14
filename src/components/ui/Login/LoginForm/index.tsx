@@ -5,6 +5,7 @@ import CustomButton from "../../../elements/GradientButton/GradientBtn";
 import HiddenInput from "../../../elements/HiddenInput";
 import LoginInput from "../../../elements/LoginInput/LoginInput";
 import { navigate } from "../../../../utils/navigationServices";
+import { router } from "expo-router";
 
 // Define the interface for the LoginFormProps
 interface LoginFormProps {
@@ -44,7 +45,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
       </View>
       <View style={styles.rowEndLayout}>
         <Text
-          onPress={() => navigate("SetPassword")}
+          onPress={() => router.push("/forgot-password")}
           style={{ fontFamily: "Regular", color: "#5e5e5e" }}
         >
           forgot password?

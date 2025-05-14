@@ -22,6 +22,7 @@ import { formatCardCount } from "../../../utils/functions";
 
 const screenWidth = Dimensions.get("window").width;
 
+
 const AppointmentReportFeatures = () => {
   const allreports = useGetAllReports();
   const allAppprovedRepots = useGetAllApprovedReports();
