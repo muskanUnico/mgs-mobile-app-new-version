@@ -27,7 +27,7 @@ function AuthenticatedDrawer() {
   ) : (
     <>
       <Drawer
-        screenOptions={{ headerShown: true }}
+        screenOptions={{ headerShown:false }}
         drawerContent={(props) => <DrawerContent {...props} />}
       >
         <Drawer.Screen name="(tabs)" options={{ headerShown: false }} />

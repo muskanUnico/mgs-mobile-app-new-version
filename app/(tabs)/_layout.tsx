@@ -10,7 +10,7 @@ export default function TabLayout() {
       screenOptions={{
         headerShown: false,
         // tabBarButton: HapticTab,
-        // tabBarBackground: TabBarBackground,
+       
         tabBarActiveTintColor:"#f59b90",
         tabBarInactiveTintColor: "gray",
         tabBarStyle: Platform.select({
@@ -22,13 +22,15 @@ export default function TabLayout() {
         tabBarLabelStyle: {
           fontFamily: "medium",
           fontSize: 10,
+          marginBottom: 5,
+          
         },
       }}
     >
       <Tabs.Screen
         name="index"
         options={{
-          title: "Home",tabBarIcon: ({ color, focused }) => (
+          title: "",tabBarIcon: ({ color, focused }) => (
             <Ionicons name="home"  size={25} color={focused ? "#f59b90" : "#555555"} />
           ),
         }}
@@ -36,7 +38,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="approvedAppointments"
         options={{
-          title: "Approved",
+          title: "",
           tabBarIcon: ({ color, focused }) => (
             <Ionicons name="calendar" size={25} color={focused ? "#f59b90" : "#555555"} />
           ),
@@ -45,7 +47,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="createAppointments"
         options={{
-          title: "Create",
+          title: "",
           tabBarIcon: ({ color, focused }) => (
             <Ionicons name="create" size={25} color={focused ? "#f59b90" : "#555555"} />
           ),
@@ -54,7 +56,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="team"
         options={{
-          title: "Team",
+          title: "",
           headerShown: false,
           tabBarIcon: ({ focused }) => (
             <Ionicons name="people" size={25} color={focused ? "#f59b90" : "#555555"} />
