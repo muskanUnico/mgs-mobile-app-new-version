@@ -32,7 +32,7 @@ const Card: React.FC<CardProps> = ({
       : `${appointmentCount}`;
 
 
-      console.log("formattedCount", formattedCount);
+    
 
   const styles = useStyles();
   const { theme } = useTheme();

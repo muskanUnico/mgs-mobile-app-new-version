@@ -27,7 +27,8 @@ function AuthenticatedDrawer() {
   ) : (
     <>
       <Drawer
-        screenOptions={{ headerShown:false }}
+        screenOptions={{ headerShown: false ,drawerStyle:{backgroundColor: brandColor, width: "74%"}}}
+        initialRouteName="(tabs)"
         drawerContent={(props) => <DrawerContent {...props} />}
       >
         <Drawer.Screen name="(tabs)" options={{ headerShown: false }} />
