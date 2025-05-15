@@ -1,12 +1,20 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import React from "react";
+import { SafeAreaView } from "react-native";
+import { useTheme } from "@/src/context/ThemeContext";
+import GlobalLoader from "@/src/features/GlobalLoader/GlobalLoader";
+import CreateAppointmentFeature from "@/src/features/Appointment/CreateAppointment";
+import { SecurePageByPackage } from "@/src/middleware/PermissionAccess";
 
-const createAppointments = () => {
+const createAppointments = ({ navigation }: any) => {
+  const { theme } = useTheme();
+
   return (
-    <View>
-      <Text>createAppointments</Text>
-    </View>
-  )
-}
+    <GlobalLoader>
+      <SafeAreaView style={{ backgroundColor: theme.brandWhiteColor, flex: 1 }}>
+        <CreateAppointmentFeature navigation={navigation} />
+      </SafeAreaView>
+    </GlobalLoader>
+  );
+};
 
-export default createAppointments
+export default SecurePageByPackage(createAppointments, ["create_appointments"]);

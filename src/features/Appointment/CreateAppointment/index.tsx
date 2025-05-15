@@ -2,19 +2,18 @@
 import React from "react";
 import { FlatList, StyleSheet, View } from "react-native";
 import { styles as externalStyles } from "../../../assets/css";
-import { brandGreyColor } from "../../../constants/COLORS";
-import Title from "../../../components/elements/Title/Title";
-import Loader from "../../../components/elements/Loader/Loader";
 import Button from "../../../components/elements/Button/Button";
-import ConfirmAppointment from "../ConfirmAppointment/ConfirmAppointment";
-import useAppointmentFlow from "../../../hooks/CreateAppointment/useAppointmentFlow";
-import CreateAppointmentFromFeature from "./CreateAppointmentFromFeature/CreateAppointmentFromFeature";
-import CreateAppointmentCardFeature from "./CreateAppointmentCardFeature/CreateAppointmentCardFeature";
+import Loader from "../../../components/elements/Loader/Loader";
+import Title from "../../../components/elements/Title/Title";
+import { useTheme } from "../../../context/ThemeContext";
 import {
   ErrorRender,
   createAppointment,
 } from "../../../hooks/CreateAppointment";
-import { useTheme } from "../../../context/ThemeContext";
+import useAppointmentFlow from "../../../hooks/CreateAppointment/useAppointmentFlow";
+import ConfirmAppointment from "../ConfirmAppointment/ConfirmAppointment";
+import CreateAppointmentCardFeature from "./CreateAppointmentCardFeature/CreateAppointmentCardFeature";
+import CreateAppointmentFromFeature from "./CreateAppointmentFromFeature/CreateAppointmentFromFeature";
 
 const CreateAppointmentFeature = ({ navigation }) => {
   const { theme } = useTheme();
@@ -65,7 +64,7 @@ const CreateAppointmentFeature = ({ navigation }) => {
         <>
           <FlatList
             ListHeaderComponent={
-              <>
+              <View>
                 <Title navigation={navigation} title="Create Appointments" />
                 <View style={{ marginHorizontal: 8 }}>
                   <CreateAppointmentFromFeature
@@ -86,7 +85,6 @@ const CreateAppointmentFeature = ({ navigation }) => {
                     />
                   </View>
                 )}
-
                 <CreateAppointmentCardFeature
                   setTableselectedData={setTableselectedData}
                   tableselectedData={tableselectedData}
@@ -94,7 +92,7 @@ const CreateAppointmentFeature = ({ navigation }) => {
                   setManageDiscount={setManageDiscount}
                   discount={discount}
                 />
-              </>
+              </View>
             }
           />
 
@@ -124,7 +122,6 @@ const CreateAppointmentFeature = ({ navigation }) => {
             <>
               <View
                 style={{
-                  minHeight: screenHeight,
                   paddingBottom: 64,
                   backgroundColor: theme.brandGreyColor,
                 }}
@@ -178,6 +175,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "flex-start",
     marginHorizontal: 16,
-    marginBottom: 16,
+    paddingBottom: 90,
   },
 });

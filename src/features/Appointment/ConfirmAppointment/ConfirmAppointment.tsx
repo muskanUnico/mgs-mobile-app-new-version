@@ -32,7 +32,7 @@ const ConfirmAppointment = ({
     });
 
   return (
-    <>
+    <View>
       {/* 
           client information
        */}
@@ -70,7 +70,7 @@ const ConfirmAppointment = ({
           errors={errors}
         />
       </View>
-    </>
+    </View>
   );
 };
 
