@@ -37,7 +37,7 @@ function AuthenticatedDrawer() {
         <Drawer.Screen
           name="(tabs)"
           options={{
-            headerShown: false,
+            headerShown: true,
           }}
         />
       </Drawer>
