@@ -1,3 +1,4 @@
+import Header from "@/src/components/ui/Header/Header";
 import { brandColor } from "@/src/constants/COLORS";
 import { TimeProvider } from "@/src/context/TimeTrackerContext";
 import { useFonts } from "expo-font";
@@ -23,15 +24,19 @@ function AuthenticatedDrawer() {
     <Stack>
       <Stack.Screen name="index" options={{ headerShown: false }} />
       <Stack.Screen name="+not-found" />
+
     </Stack>
   ) : (
     <>
       <Drawer
-        screenOptions={{ headerShown: false ,drawerStyle:{backgroundColor: brandColor, width: "74%"}}}
-        initialRouteName="(tabs)"
+        screenOptions={{ header: (props) => <Header {...props} />,
+        headerShown: true,drawerStyle:{backgroundColor: brandColor, width: "74%"}}}
+        
         drawerContent={(props) => <DrawerContent {...props} />}
       >
-        <Drawer.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Drawer.Screen name="(tabs)" options={{
+         headerShown:true
+         }} />
       </Drawer>
     </>
   );
