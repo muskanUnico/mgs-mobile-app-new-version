@@ -168,7 +168,7 @@ const DrawerContent = (props: any) => {
                 <TouchableHighlight
                   underlayColor={theme.brandGreyColor}
                   onPress={() =>
-                    props.navigation.navigate("ApprovedAppointment")
+                    props.navigation.navigate("approvedAppointment")
                   }
                   style={styles.drawerSubItem}
                 >
@@ -191,7 +191,7 @@ const DrawerContent = (props: any) => {
                     underlayColor={theme.brandGreyColor}
                     // CreateAppointment
                     onPress={() =>
-                      props.navigation.navigate("CreateAppointment")
+                      props.navigation.navigate("createAppointment")
                     }
                     style={styles.drawerSubItem}
                   >
