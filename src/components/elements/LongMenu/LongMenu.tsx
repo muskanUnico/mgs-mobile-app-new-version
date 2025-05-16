@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
-import { Menu, MenuItem, MenuDivider } from "react-native-material-menu";
 import { MaterialIcons } from "@expo/vector-icons";
+import React, { useState } from "react";
+import { StyleSheet, Text, View } from "react-native";
+import { Menu, MenuDivider, MenuItem } from "react-native-material-menu";
 
 interface LongMenuProps {
   options: any;
