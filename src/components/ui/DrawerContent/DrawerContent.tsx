@@ -19,6 +19,7 @@ import { useTheme } from "../../../context/ThemeContext";
 import { PermissionAccess } from "../../../middleware/PermissionAccess";
 import { navigate } from "../../../utils/navigationServices";
 
+
 const DrawerContent = (props: any) => {
   const styles = useStyles();
   const { theme } = useTheme();
@@ -27,6 +28,7 @@ const DrawerContent = (props: any) => {
     "appointments",
     "customers",
   ]);
+ 
 
   const SCREEN_WIDTH = Dimensions.get("window").width;
 
@@ -146,7 +148,7 @@ const DrawerContent = (props: any) => {
                 {/* All Appointments */}
                 <TouchableHighlight
                   underlayColor={theme.brandGreyColor}
-                  onPress={() => props.navigation.navigate("AllAppointment")}
+                 onPress={() => props.navigation.navigate("allAppointments")}
                   style={styles.drawerSubItem}
                 >
                   <View style={styles.rowLayout}>
