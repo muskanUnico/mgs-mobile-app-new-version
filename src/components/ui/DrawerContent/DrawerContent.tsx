@@ -243,7 +243,7 @@ const DrawerContent = (props: any) => {
               {/* All Customers */}
               <TouchableHighlight
                 underlayColor={theme.brandGreyColor}
-                onPress={() => props.navigation.navigate("AllCustomer")}
+                onPress={() => props.navigation.navigate("allCustomer")}
                 style={styles.drawerSubItem}
               >
                 <View style={styles.rowLayout}>
@@ -266,7 +266,7 @@ const DrawerContent = (props: any) => {
               {/* <PermissionAccess requiredPermissions={["create_customer"]}> */}
               <TouchableHighlight
                 underlayColor={theme.brandGreyColor}
-                onPress={() => props.navigation.navigate("CreateCustomer")}
+                onPress={() => props.navigation.navigate("createCustomer")}
                 style={styles.drawerSubItem}
               >
                 <View style={styles.rowLayout}>
@@ -318,7 +318,7 @@ const DrawerContent = (props: any) => {
                   {/* All Referrals */}
                   <TouchableHighlight
                     underlayColor={theme.brandGreyColor}
-                    onPress={() => props.navigation.navigate("AllReferrals")}
+                    onPress={() => props.navigation.navigate("allReferral")}
                     style={styles.drawerSubItem}
                   >
                     <View style={styles.rowLayout}>
@@ -341,7 +341,7 @@ const DrawerContent = (props: any) => {
                   {/* Add Referral */}
                   <TouchableHighlight
                     underlayColor={theme.brandGreyColor}
-                    onPress={() => props.navigation.navigate("AddReferrals")}
+                    onPress={() => props.navigation.navigate("addReferrals")}
                     style={styles.drawerSubItem}
                   >
                     <View style={styles.rowLayout}>
@@ -368,7 +368,7 @@ const DrawerContent = (props: any) => {
             <TouchableHighlight
               underlayColor={theme.brandGreyColor}
               style={styles.drawerItem}
-              onPress={() => props.navigation.navigate("PaymentHistory")}
+              onPress={() => props.navigation.navigate("paymentHistory")}
             >
               <View style={{ flexDirection: "row", alignItems: "center" }}>
                 <View style={styles.iconWrapper}>
@@ -420,7 +420,7 @@ const DrawerContent = (props: any) => {
                 {/* All Team Members */}
                 <TouchableHighlight
                   underlayColor={theme.brandGreyColor}
-                  onPress={() => props.navigation.navigate("AllTeamMember")}
+                  onPress={() => props.navigation.navigate("team")}
                   style={styles.drawerSubItem}
                 >
                   <View style={styles.rowLayout}>
@@ -464,7 +464,7 @@ const DrawerContent = (props: any) => {
                   <TouchableHighlight
                     underlayColor={theme.brandGreyColor}
                     onPress={() =>
-                      props.navigation.navigate("CreateTeamMember")
+                      props.navigation.navigate("createTeamMember")
                     }
                     style={styles.drawerSubItem}
                   >
@@ -509,7 +509,7 @@ const DrawerContent = (props: any) => {
                   {/* Manage Payroll */}
                   <TouchableHighlight
                     underlayColor={theme.brandGreyColor}
-                    onPress={() => props.navigation.navigate("ManagePayroll")}
+                    onPress={() => props.navigation.navigate("managePayroll")}
                     style={styles.drawerSubItem}
                   >
                     <View style={styles.rowLayout}>

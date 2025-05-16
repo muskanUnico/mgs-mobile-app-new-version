@@ -1,6 +1,5 @@
 import React from "react";
-import { View } from "native-base";
-import { StyleSheet, Text } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import SingleDatePicker from "../../../../components/elements/SingleDatePicker/SingleDatePicker";
 import { styles as externalStyles } from "../../../../assets/css";
 import StandardInput from "../../../../components/elements/StandardInput/StandardInput";
