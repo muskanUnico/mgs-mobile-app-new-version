@@ -31,6 +31,9 @@ const Card: React.FC<CardProps> = ({
       ? `$${appointmentCount}`
       : `${appointmentCount}`;
 
+
+    
+
   const styles = useStyles();
   const { theme } = useTheme();
 

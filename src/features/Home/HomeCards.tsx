@@ -78,7 +78,8 @@ const HomeCards = () => {
 
   return (
     <View style={styles.container}>
-      {/* <Carousel
+   
+     {/* <Carousel
         data={carouselItems}
         renderItem={renderItem}
         sliderWidth={screenWidth}
@@ -87,7 +88,7 @@ const HomeCards = () => {
         autoplay
         autoplayInterval={4000}
         onSnapToItem={(index) => setActiveSlide(index)}
-      /> */}
+      />  */}
     </View>
   );
 };
