@@ -1,9 +1,7 @@
-import Header from "@/src/components/ui/Header/Header";
 import { Ionicons } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
 import React from "react";
 import { Platform } from "react-native";
-
 
 export default function TabLayout() {
   return (
@@ -11,8 +9,8 @@ export default function TabLayout() {
       screenOptions={{
         headerShown: false,
         // tabBarButton: HapticTab,
-       
-        tabBarActiveTintColor:"#f59b90",
+
+        tabBarActiveTintColor: "#f59b90",
         tabBarInactiveTintColor: "gray",
         tabBarStyle: Platform.select({
           ios: {
@@ -29,23 +27,31 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: "",tabBarIcon: ({ color, focused }) => (
-            <Ionicons name="home"  size={25} color={focused ? "#f59b90" : "#555555"} />
+          title: "",
+          tabBarIcon: ({ color, focused }) => (
+            <Ionicons
+              name="home"
+              size={25}
+              color={focused ? "#f59b90" : "#555555"}
+            />
           ),
-          header: (props) => <Header {...props} />,
-          headerShown: true,
+          // header: (props) => <Header {...props} />,
+          headerShown: false,
         }}
       />
       <Tabs.Screen
         name="approvedAppointments"
-
         options={{
           title: "",
           tabBarIcon: ({ color, focused }) => (
-            <Ionicons name="calendar" size={25} color={focused ? "#f59b90" : "#555555"} />
+            <Ionicons
+              name="calendar"
+              size={25}
+              color={focused ? "#f59b90" : "#555555"}
+            />
           ),
-          header: (props) => <Header {...props} />,
-          headerShown: true,
+          // header: (props) => <Header {...props} />,
+          headerShown: false,
         }}
       />
       <Tabs.Screen
@@ -53,10 +59,14 @@ export default function TabLayout() {
         options={{
           title: "",
           tabBarIcon: ({ color, focused }) => (
-            <Ionicons name="create" size={25} color={focused ? "#f59b90" : "#555555"} />
+            <Ionicons
+              name="create"
+              size={25}
+              color={focused ? "#f59b90" : "#555555"}
+            />
           ),
-          header: (props) => <Header {...props} />,
-          headerShown: true,
+          // header: (props) => <Header {...props} />,
+          headerShown: false,
         }}
       />
       <Tabs.Screen
@@ -65,14 +75,15 @@ export default function TabLayout() {
           title: "",
           headerShown: false,
           tabBarIcon: ({ focused }) => (
-            <Ionicons name="people" size={25} color={focused ? "#f59b90" : "#555555"} />
+            <Ionicons
+              name="people"
+              size={25}
+              color={focused ? "#f59b90" : "#555555"}
+            />
           ),
-          header: (props) => <Header {...props} />,
-          headerShown: true,
+          // header: (props) => <Header {...props} />,
         }}
       />
     </Tabs>
   );
 }
-
-

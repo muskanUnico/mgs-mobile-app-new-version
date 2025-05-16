@@ -12,31 +12,34 @@ import DrawerContent from "../src/components/ui/DrawerContent/DrawerContent";
 import { AuthProvider, useAuth } from "../src/context/AuthContext";
 import { ThemeProvider } from "../src/context/ThemeContext";
 
-
 function AuthenticatedDrawer() {
   const { user, isLoading } = useAuth();
 
   if (!isLoading) {
-    return null; 
+    return null;
   }
 
   return !user ? (
     <Stack>
       <Stack.Screen name="index" options={{ headerShown: false }} />
       <Stack.Screen name="+not-found" />
-
     </Stack>
   ) : (
     <>
       <Drawer
-        screenOptions={{ header: (props) => <Header {...props} />,
-        headerShown: true,drawerStyle:{backgroundColor: brandColor, width: "74%"}}}
-        
+        screenOptions={{
+          headerShown: true,
+          header: (props) => <Header {...props} />,
+          drawerStyle: { backgroundColor: brandColor, width: "74%" },
+        }}
         drawerContent={(props) => <DrawerContent {...props} />}
       >
-        <Drawer.Screen name="(tabs)" options={{
-         headerShown:true
-         }} />
+        <Drawer.Screen
+          name="(tabs)"
+          options={{
+            headerShown: false,
+          }}
+        />
       </Drawer>
     </>
   );
@@ -52,20 +55,19 @@ export default function RootLayout() {
   }
 
   return (
-      <GestureHandlerRootView style={{ flex: 1 }}>
-       <SafeAreaProvider>
-        <AutocompleteDropdownContextProvider >
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <SafeAreaProvider>
+        <AutocompleteDropdownContextProvider>
           <AuthProvider>
             <ThemeProvider>
               <TimeProvider>
-              <AuthenticatedDrawer />
+                <AuthenticatedDrawer />
               </TimeProvider>
             </ThemeProvider>
           </AuthProvider>
         </AutocompleteDropdownContextProvider>
-        <StatusBar style="dark" backgroundColor= {brandColor}/>
-        </SafeAreaProvider>
-      </GestureHandlerRootView>
+        <StatusBar style="dark" backgroundColor={brandColor} />
+      </SafeAreaProvider>
+    </GestureHandlerRootView>
   );
 }
-
