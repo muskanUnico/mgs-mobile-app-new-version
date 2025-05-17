@@ -1,5 +1,3 @@
-import { addTimeInTime } from "../../utils/tools";
-import { navigate } from "../../utils/navigationServices";
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import {
     iconColor1,
@@ -10,22 +8,24 @@ import {
     iconColor7,
     redLabelColor
 } from "../../constants/COLORS";
+import { navigate } from "../../utils/navigationServices";
+import { addTimeInTime } from "../../utils/tools";
 
 const iconsMap = {
-    CheckCircle: 'md-checkmark-circle-outline',
-    Cancel: 'md-close-circle-outline',
-    Update: 'md-sync',
-    Description: 'md-document',
-    Delete: 'md-trash',
-    Message: 'md-chatbubbles',
-    HourglassEmpty: 'md-hourglass-outline',
-    AttachMoney: 'md-cash',
-    Receipt: 'md-receipt',
-    QueryBuilderIcon: 'md-time',
+    CheckCircle: 'checkmark-circle-outline',
+    Cancel: 'close-circle-outline',
+    Update: 'sync',
+    Description: 'document',
+    Delete: 'trash',
+    Message: 'chatbubbles',
+    HourglassEmpty: 'hourglass-outline',
+    AttachMoney: 'cash',
+    Receipt: 'receipt',
+    QueryBuilderIcon: 'time',
 };
 
 const CustomIcon = ({ name, size = 24, color = 'black' }) => {
-    const iconName = iconsMap[name] || 'md-help-circle-outline';
+    const iconName = iconsMap[name] || 'help-circle-outline';
 
     if (name === 'QueryBuilderIcon') {
         return <MaterialCommunityIcons name={iconName} size={size} color={color} />;
