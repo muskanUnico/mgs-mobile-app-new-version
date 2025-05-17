@@ -1,5 +1,4 @@
 import React from "react";
-import { CheckIcon } from "native-base";
 import { TouchableOpacity, View } from "react-native";
 
 interface ColorBoxProps {
@@ -33,7 +32,7 @@ const ColorBox: React.FC<ColorBoxProps> = ({color, isSelected, onPress }) => {
             padding: 30,
           }}
         >
-          <CheckIcon />
+          {/* <CheckIcon /> */}
         </View>
       )}
     </TouchableOpacity>
