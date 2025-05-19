@@ -1,23 +1,24 @@
-import React from "react";
-import { useState } from "react";
+import { MaterialIcons } from "@expo/vector-icons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { DrawerContentScrollView } from "@react-navigation/drawer";
+import { DrawerActions } from "@react-navigation/native";
+import React, { useState } from "react";
 import {
-  View,
-  Text,
-  TouchableOpacity,
+  Dimensions,
   StyleSheet,
+  Text,
   TouchableHighlight,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  View,
 } from "react-native";
 import { Avatar } from "react-native-paper";
-import { MaterialIcons } from "@expo/vector-icons";
-import { useAuth } from "../../../context/AuthContext";
-import { TouchableWithoutFeedback } from "react-native";
-import { DrawerActions } from "@react-navigation/native";
-import { useTheme } from "../../../context/ThemeContext";
-import { navigate } from "../../../utils/navigationServices";
-import { DrawerContentScrollView } from "@react-navigation/drawer";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useAuth } from "../../../context/AuthContext";
+import { useTheme } from "../../../context/ThemeContext";
 import { PermissionAccess } from "../../../middleware/PermissionAccess";
+import { navigate } from "../../../utils/navigationServices";
+
 
 const DrawerContent = (props: any) => {
   const styles = useStyles();
@@ -27,6 +28,9 @@ const DrawerContent = (props: any) => {
     "appointments",
     "customers",
   ]);
+ 
+
+  const SCREEN_WIDTH = Dimensions.get("window").width;
 
   const handleDropdown = (key: string) => {
     let arr = [...dropdownTabs];
@@ -53,11 +57,14 @@ const DrawerContent = (props: any) => {
     return dropdownTabs.includes(key);
   };
 
+
   return (
     <DrawerContentScrollView {...props}>
       <View
         style={{
-          marginTop: -4,
+          marginTop: -SCREEN_WIDTH * 0.0305,
+           marginRight: -SCREEN_WIDTH * 0.0315,
+           marginLeft: -SCREEN_WIDTH * 0.0295,
           backgroundColor: theme.brandColor,
           paddingTop: 12,
         }}
@@ -90,7 +97,7 @@ const DrawerContent = (props: any) => {
         <View style={styles.customView}>
           {/* Your sidebar content */}
           <TouchableHighlight
-            onPress={() => props.navigation.navigate("Home")}
+            onPress={() => props.navigation.navigate("(tabs)")}
             style={styles.drawerItem}
             underlayColor="transparent"
           >
@@ -100,11 +107,7 @@ const DrawerContent = (props: any) => {
                   <Icon name="home" size={20} style={styles.icon} />
                 </View>
                 <Text
-                  style={{
-                    marginLeft: 10,
-                    fontFamily: "BoldText",
-                    fontSize: 13,
-                  }}
+                  style={styles.boldtext}
                 >
                   Home
                 </Text>
@@ -124,11 +127,7 @@ const DrawerContent = (props: any) => {
                     <Icon name="calendar" size={20} style={styles.icon} />
                   </View>
                   <Text
-                    style={{
-                      marginLeft: 10,
-                      fontFamily: "BoldText",
-                      fontSize: 13,
-                    }}
+                    style={styles.boldtext}
                   >
                     Appointments
                   </Text>
@@ -149,7 +148,7 @@ const DrawerContent = (props: any) => {
                 {/* All Appointments */}
                 <TouchableHighlight
                   underlayColor={theme.brandGreyColor}
-                  onPress={() => props.navigation.navigate("AllAppointment")}
+                 onPress={() => props.navigation.navigate("allAppointments")}
                   style={styles.drawerSubItem}
                 >
                   <View style={styles.rowLayout}>
@@ -169,7 +168,7 @@ const DrawerContent = (props: any) => {
                 <TouchableHighlight
                   underlayColor={theme.brandGreyColor}
                   onPress={() =>
-                    props.navigation.navigate("ApprovedAppointment")
+                    props.navigation.navigate("approvedAppointment")
                   }
                   style={styles.drawerSubItem}
                 >
@@ -192,7 +191,7 @@ const DrawerContent = (props: any) => {
                     underlayColor={theme.brandGreyColor}
                     // CreateAppointment
                     onPress={() =>
-                      props.navigation.navigate("CreateAppointment")
+                      props.navigation.navigate("createAppointment")
                     }
                     style={styles.drawerSubItem}
                   >
@@ -225,11 +224,7 @@ const DrawerContent = (props: any) => {
                   <Icon name="account-multiple" size={20} style={styles.icon} />
                 </View>
                 <Text
-                  style={{
-                    marginLeft: 10,
-                    fontFamily: "BoldText",
-                    fontSize: 13,
-                  }}
+                  style={styles.boldtext}
                 >
                   Customers
                 </Text>
@@ -248,7 +243,7 @@ const DrawerContent = (props: any) => {
               {/* All Customers */}
               <TouchableHighlight
                 underlayColor={theme.brandGreyColor}
-                onPress={() => props.navigation.navigate("AllCustomer")}
+                onPress={() => props.navigation.navigate("allCustomer")}
                 style={styles.drawerSubItem}
               >
                 <View style={styles.rowLayout}>
@@ -271,7 +266,7 @@ const DrawerContent = (props: any) => {
               {/* <PermissionAccess requiredPermissions={["create_customer"]}> */}
               <TouchableHighlight
                 underlayColor={theme.brandGreyColor}
-                onPress={() => props.navigation.navigate("CreateCustomer")}
+                onPress={() => props.navigation.navigate("createCustomer")}
                 style={styles.drawerSubItem}
               >
                 <View style={styles.rowLayout}>
@@ -304,11 +299,7 @@ const DrawerContent = (props: any) => {
                     <Icon name="share" size={20} style={styles.icon} />
                   </View>
                   <Text
-                    style={{
-                      marginLeft: 10,
-                      fontFamily: "BoldText",
-                      fontSize: 13,
-                    }}
+                    style={styles.boldtext}
                   >
                     Referral
                   </Text>
@@ -327,7 +318,7 @@ const DrawerContent = (props: any) => {
                   {/* All Referrals */}
                   <TouchableHighlight
                     underlayColor={theme.brandGreyColor}
-                    onPress={() => props.navigation.navigate("AllReferrals")}
+                    onPress={() => props.navigation.navigate("allReferral")}
                     style={styles.drawerSubItem}
                   >
                     <View style={styles.rowLayout}>
@@ -350,7 +341,7 @@ const DrawerContent = (props: any) => {
                   {/* Add Referral */}
                   <TouchableHighlight
                     underlayColor={theme.brandGreyColor}
-                    onPress={() => props.navigation.navigate("AddReferrals")}
+                    onPress={() => props.navigation.navigate("addReferrals")}
                     style={styles.drawerSubItem}
                   >
                     <View style={styles.rowLayout}>
@@ -377,7 +368,7 @@ const DrawerContent = (props: any) => {
             <TouchableHighlight
               underlayColor={theme.brandGreyColor}
               style={styles.drawerItem}
-              onPress={() => props.navigation.navigate("PaymentHistory")}
+              onPress={() => props.navigation.navigate("paymentHistory")}
             >
               <View style={{ flexDirection: "row", alignItems: "center" }}>
                 <View style={styles.iconWrapper}>
@@ -385,11 +376,7 @@ const DrawerContent = (props: any) => {
                 </View>
 
                 <Text
-                  style={{
-                    marginLeft: 10,
-                    fontFamily: "BoldText",
-                    fontSize: 13,
-                  }}
+                  style={styles.boldtext}
                 >
                   Payment History
                 </Text>
@@ -413,11 +400,7 @@ const DrawerContent = (props: any) => {
                     />
                   </View>
                   <Text
-                    style={{
-                      marginLeft: 10,
-                      fontFamily: "BoldText",
-                      fontSize: 13,
-                    }}
+                    style={ styles.boldtext}
                   >
                     Team Members
                   </Text>
@@ -437,7 +420,7 @@ const DrawerContent = (props: any) => {
                 {/* All Team Members */}
                 <TouchableHighlight
                   underlayColor={theme.brandGreyColor}
-                  onPress={() => props.navigation.navigate("AllTeamMember")}
+                  onPress={() => props.navigation.navigate("team")}
                   style={styles.drawerSubItem}
                 >
                   <View style={styles.rowLayout}>
@@ -481,7 +464,7 @@ const DrawerContent = (props: any) => {
                   <TouchableHighlight
                     underlayColor={theme.brandGreyColor}
                     onPress={() =>
-                      props.navigation.navigate("CreateTeamMember")
+                      props.navigation.navigate("createTeamMember")
                     }
                     style={styles.drawerSubItem}
                   >
@@ -526,7 +509,7 @@ const DrawerContent = (props: any) => {
                   {/* Manage Payroll */}
                   <TouchableHighlight
                     underlayColor={theme.brandGreyColor}
-                    onPress={() => props.navigation.navigate("ManagePayroll")}
+                    onPress={() => props.navigation.navigate("managePayroll")}
                     style={styles.drawerSubItem}
                   >
                     <View style={styles.rowLayout}>
@@ -570,11 +553,7 @@ const DrawerContent = (props: any) => {
                     />
                   </View>
                   <Text
-                    style={{
-                      marginLeft: 10,
-                      fontFamily: "BoldText",
-                      fontSize: 13,
-                    }}
+                    style={styles.boldtext}
                   >
                     Accounts
                   </Text>
@@ -679,11 +658,7 @@ const DrawerContent = (props: any) => {
                   <Icon name="cog-outline" size={20} style={styles.icon} />
                 </View>
                 <Text
-                  style={{
-                    marginLeft: 10,
-                    fontFamily: "BoldText",
-                    fontSize: 13,
-                  }}
+                  style={styles.boldtext}
                 >
                   App Settings
                 </Text>
@@ -789,6 +764,7 @@ const DrawerContent = (props: any) => {
 
 const useStyles = () => {
   const { theme } = useTheme();
+  const ScreenWidth = Dimensions.get("window").width;
 
   return StyleSheet.create({
     container: {
@@ -892,6 +868,12 @@ const useStyles = () => {
       color: "white",
       marginBottom: 24,
     },
+    boldtext:{
+      marginLeft: 10,
+      fontFamily: "BoldText",
+      fontSize: 13,
+      fontWeight: "800",
+    }
   });
 };
 

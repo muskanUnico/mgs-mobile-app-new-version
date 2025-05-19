@@ -1,12 +1,12 @@
 //@ts-nocheck
 import React, { useState } from "react";
-import { View, StyleSheet, Dimensions } from "react-native";
+import { Dimensions, StyleSheet, View } from "react-native";
 import Carousel from "react-native-snap-carousel";
+import Card from "../../components/elements/Card/Card";
 import {
   useGetAllApprovedReports,
   useGetAllReports
 } from "../../hooks/Accounts/Accounts";
-import Card from "../../components/elements/Card/Card";
 
 const screenWidth = Dimensions.get("window").width;
 const i1 = require("../../assets/images/aa.png");
@@ -17,6 +17,7 @@ const i4 = require("../../assets/images/a.png");
 const HomeCards = () => {
   const allreports = useGetAllReports();
   const allAppprovedRepots = useGetAllApprovedReports();
+
 
   const [activeSlide, setActiveSlide] = useState(0);
 
@@ -77,7 +78,8 @@ const HomeCards = () => {
 
   return (
     <View style={styles.container}>
-      <Carousel
+   
+     {/* <Carousel
         data={carouselItems}
         renderItem={renderItem}
         sliderWidth={screenWidth}
@@ -86,7 +88,7 @@ const HomeCards = () => {
         autoplay
         autoplayInterval={4000}
         onSnapToItem={(index) => setActiveSlide(index)}
-      />
+      />  */}
     </View>
   );
 };

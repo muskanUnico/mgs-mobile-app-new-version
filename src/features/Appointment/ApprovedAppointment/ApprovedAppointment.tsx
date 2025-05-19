@@ -9,13 +9,9 @@ import WarningModal from "../../../components/elements/WarningModal/WarningModal
 import { styles as externalStyles } from "../../../assets/css";
 import { Switch } from "react-native-paper";
 import {
-  brandColor,
-  brandGreyColor,
-  brandPastelColor,
   borderColor,
 } from "../../../constants/COLORS";
 import MyCalendar from "../../../components/ui/Calendar/Calendar";
-import { convertAppointmentsToMarkedDates } from "../../../utils/functions";
 import { useTheme } from "../../../context/ThemeContext";
 import BookingInfoCard from "../../../components/elements/BookingInfoCard/BookingInfoCard";
 import { FilterAppointmentFeature } from "../FilterAppointmentFeature/FilterAppointmentFeature";

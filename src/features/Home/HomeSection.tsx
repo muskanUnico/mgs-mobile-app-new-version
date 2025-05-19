@@ -1,13 +1,13 @@
+import { router } from "expo-router";
 import React from "react";
 import {
-  View,
+  Platform,
+  StyleSheet,
   Text,
   TouchableOpacity,
-  StyleSheet,
-  Platform,
+  View,
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { navigate } from "../../utils/navigationServices";
 import { useTheme } from "../../context/ThemeContext";
 
 export const HomeSection = () => {
@@ -21,7 +21,10 @@ export const HomeSection = () => {
             <TouchableOpacity
               style={styles.circle}
               onPress={() =>
-                navigate("AppointmentReport", { y: 6000, ScrollDown: true })
+                router.push({
+                  pathname: "/appointmentreport",
+                  params: { y: 6000, ScrollDown: "true" },
+                })
               }
             >
               <Icon
@@ -37,7 +40,10 @@ export const HomeSection = () => {
             <TouchableOpacity
               style={styles.circle}
               onPress={() =>
-                navigate("AppointmentReport", { y: 500, ScrollDown: true })
+                router.push({
+                  pathname: "/appointmentreport",
+                  params: { y: 6000, ScrollDown: "true" },
+                })
               }
             >
               <Icon
@@ -53,7 +59,10 @@ export const HomeSection = () => {
             <TouchableOpacity
               style={styles.circle}
               onPress={() =>
-                navigate("AppointmentReport", { y: 800, ScrollDown: true })
+                router.push({
+                  pathname: "/appointmentreport",
+                  params: { y: 6000, ScrollDown: "true" },
+                })
               }
             >
               <Icon
@@ -69,7 +78,10 @@ export const HomeSection = () => {
             <TouchableOpacity
               style={styles.circle}
               onPress={() =>
-                navigate("AppointmentReport", { y: 900, ScrollDown: true })
+                router.push({
+                  pathname: "/appointmentreport", 
+                  params: { y: 6000, ScrollDown: "true" },
+                })
               }
             >
               <Icon
