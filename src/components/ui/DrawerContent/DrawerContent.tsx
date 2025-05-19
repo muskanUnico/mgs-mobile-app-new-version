@@ -341,12 +341,11 @@ const DrawerContent = (props: any) => {
                   {/* Add Referral */}
                   <TouchableHighlight
                     underlayColor={theme.brandGreyColor}
-                    onPress={() => props.navigation.navigate("addReferrals")}
+                    onPress={() => props.navigation.navigate("addReferral")}
                     style={styles.drawerSubItem}
                   >
                     <View style={styles.rowLayout}>
                       <Icon name="account-plus-outline" size={20} />
-
                       <Text
                         style={{
                           marginLeft: 10,
@@ -700,7 +699,7 @@ const DrawerContent = (props: any) => {
                 {/* Services */}
                 <TouchableHighlight
                   underlayColor={theme.brandGreyColor}
-                  onPress={() => props.navigation.navigate("AllServices")}
+                  onPress={() => props.navigation.navigate("services")}
                   style={styles.drawerSubItem}
                 >
                   <View style={styles.rowLayout}>

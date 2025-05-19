@@ -38,20 +38,20 @@ const AddReferralFeature = ({ route }: any) => {
 
   useFocusEffect(
     useCallback(() => {
-      if (route.params?.edit) {
+      if (route?.params?.edit) {
         setCustomer({
-          id: route.params.data?.customer?.id,
-          title: route.params.data?.customer?.name,
+          id: route?.params.data?.customer?.id,
+          title: route?.params.data?.customer?.name,
         });
         // setCoupon(route.params.data?.couponCode);
-        setPercent(route.params?.data?.discountPercentage?.toString());
+        setPercent(route?.params?.data?.discountPercentage?.toString());
       }
-    }, [route.params?.data])
+    }, [route?.params?.data])
   );
 
   // Handle submit action
   const handleAddReferral = () => {
-    if (route.params?.edit) {
+    if (route?.params?.edit) {
       updateReferral.handleUpdate(customer.id, {
         discountPercentage: parseInt(percent, 10),
       });
