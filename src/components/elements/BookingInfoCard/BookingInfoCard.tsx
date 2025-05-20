@@ -1,27 +1,33 @@
-import React, { useState } from "react";
-import { Text, TouchableWithoutFeedback } from "react-native";
-import LongMenu from "../LongMenu/LongMenu";
+import { FontAwesome } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 import moment from "moment";
-import { View, StyleSheet, Platform } from "react-native";
+import React, { useState } from "react";
 import {
-  AppointmentPayment,
-  appointmentActionOptions,
-} from "../../../hooks/Appointment/hooks";
-import { useAuth } from "../../../context/AuthContext";
-import { chips, formatDateTable, formatTimeRange } from "../../../utils/tools";
-import { styles as externalStyles } from "../../../assets/css";
+  Platform,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  View,
+} from "react-native";
 import { Divider } from "react-native-paper";
+import { styles as externalStyles } from "../../../assets/css";
 import {
   iconCalenderColor,
   iconColor5,
   iconColor8,
   iconPhoneColor,
 } from "../../../constants/COLORS";
-import { FontAwesome } from "@expo/vector-icons";
-import { PermissionAccess } from "../../../middleware/PermissionAccess";
-import CustomModal from "../CustomModal/CustomModal";
-import { TouchableOpacity } from "react-native";
+import { useAuth } from "../../../context/AuthContext";
 import { useTheme } from "../../../context/ThemeContext";
+import {
+  AppointmentPayment,
+  appointmentActionOptions,
+} from "../../../hooks/Appointment/hooks";
+import { PermissionAccess } from "../../../middleware/PermissionAccess";
+import { chips, formatDateTable, formatTimeRange } from "../../../utils/tools";
+import CustomModal from "../CustomModal/CustomModal";
+import LongMenu from "../LongMenu/LongMenu";
 
 interface BookingInfoCardProps {
   handleOptions: any;
@@ -40,7 +46,7 @@ const BookingInfoCard = ({
   const { permissions } = useAuth();
   const { paidAmount, unpaidAmount } = AppointmentPayment(item.paymentId);
   const { theme } = useTheme();
-
+  const router = useRouter();
   return (
     <View style={[externalStyles.card]}>
       <View
@@ -80,8 +86,13 @@ const BookingInfoCard = ({
 
       <TouchableWithoutFeedback
         onPress={() =>
-          navigation.navigate("ViewAppointment", {
-            id: item?.paymentId?.appointmentId,
+          // navigation.navigate("ViewAppointment", {
+          //   id: item?.paymentId?.appointmentId,
+          // })
+
+          router.push({
+            pathname: "/viewAppointments",
+            params: { id: item?.paymentId?.appointmentId },
           })
         }
       >

@@ -1,11 +1,13 @@
+import { Ionicons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
 import { useTheme } from "../../../context/ThemeContext";
 
-const Title = ({ title, navigation }: { title: string; navigation: any }) => {
+const Title = ({ title }: { title: string }) => {
 
   const { theme } = useTheme();
+  const navigation = useNavigation();
 
   return (
     <View
