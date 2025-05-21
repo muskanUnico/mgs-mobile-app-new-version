@@ -20,6 +20,8 @@ import ViewAppointment from "./ViewAppointmentFeature/ViewAppointment";
 
 const ViewAppointmentFeature = ({ navigation, id , selectedTab: selectedTabProp }: any) => {
   // context
+
+  console.log("id", selectedTabProp);
   const { permissions } = useAuth();
   // integration hooks call
   const appointment = getAppointmentById(id);
