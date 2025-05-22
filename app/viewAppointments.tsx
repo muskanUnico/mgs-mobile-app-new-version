@@ -20,7 +20,7 @@ const ViewAppointmentScreen = ({ navigation }: any) => {
         ]}
       >
         <Title navigation={navigation} title="View Appoinment" />
-1         <ViewAppointmentFeature navigation={navigation}  id={id} selectedTab={selected} />
+        <ViewAppointmentFeature navigation={navigation}  id={id} selectedTab={selected} />
       </SafeAreaView>
     </GlobalLoader>
   );
