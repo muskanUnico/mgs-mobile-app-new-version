@@ -9,6 +9,7 @@ import { SafeAreaView } from "react-native";
 const ViewAppointmentScreen = ({ navigation }: any) => {
   const { theme } = useTheme();
   const { id , selectedTab } = useLocalSearchParams();
+      const selected = Number(selectedTab) || 0;
 
   return (
     <GlobalLoader>
@@ -19,7 +20,7 @@ const ViewAppointmentScreen = ({ navigation }: any) => {
         ]}
       >
         <Title navigation={navigation} title="View Appoinment" />
-1         <ViewAppointmentFeature navigation={navigation}  id={id} selectedTab={selectedTab} />
+1         <ViewAppointmentFeature navigation={navigation}  id={id} selectedTab={selected} />
       </SafeAreaView>
     </GlobalLoader>
   );

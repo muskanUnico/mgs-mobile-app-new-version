@@ -18,23 +18,26 @@ import { chips, formatTime } from "../../../utils/tools";
 import PatientsNotes from "./PatientNoteFeature/PatientsNotes";
 import ViewAppointment from "./ViewAppointmentFeature/ViewAppointment";
 
-const ViewAppointmentFeature = ({ navigation, id , selectedTab: selectedTabProp }: any) => {
+const  ViewAppointmentFeature = ({ navigation, id , selectedTab:selectedTabProp }: any) => {
   // context
 
-  console.log("id", selectedTabProp);
+  // console.log("id", selectedTabProp);
   const { permissions } = useAuth();
   // integration hooks call
   const appointment = getAppointmentById(id);
   const data = appointment.data as Appointment;
-  // tab state
+
+   
 
   const [selectedTab, setSelectedTab] = useState(0);
+
 
   // useEffect(() => {
   //   if (route.params.selectedTab) {
   //     setSelectedTab(route.params.selectedTab);
   //   }
   // }, [route.params.selectedTab]);
+
    useEffect(() => {
     if (selectedTabProp !== undefined) {
       setSelectedTab(selectedTabProp);
@@ -59,7 +62,7 @@ const ViewAppointmentFeature = ({ navigation, id , selectedTab: selectedTabProp 
     handleConfirmbtn,
     handleRightbtn,
     isLoading,
-  } = useActionHooks({ appointments: [data] });
+  } = useActionHooks({ appointments: [data]});
 
   useEffect(() => {
     if (isLoading)
