@@ -13,17 +13,14 @@ import {
   formatAppointmentIntoConfirmAppointmentHook,
 } from "../../../hooks/Appointment/hooks";
 import { Appointment } from "../../../interface/Appointment";
-import { goBack } from "../../../utils/navigationServices";
+// import { goBack } from "../../../utils/navigationServices";
 import { chips, formatTime } from "../../../utils/tools";
 import PatientsNotes from "./PatientNoteFeature/PatientsNotes";
 import ViewAppointment from "./ViewAppointmentFeature/ViewAppointment";
 
 const  ViewAppointmentFeature = ({ navigation, id , selectedTab:selectedTabProp }: any) => {
-  // context
 
-  // console.log("id", selectedTabProp);
   const { permissions } = useAuth();
-  // integration hooks call
   const appointment = getAppointmentById(id);
   const data = appointment.data as Appointment;
 
@@ -31,12 +28,6 @@ const  ViewAppointmentFeature = ({ navigation, id , selectedTab:selectedTabProp 
 
   const [selectedTab, setSelectedTab] = useState(0);
 
-
-  // useEffect(() => {
-  //   if (route.params.selectedTab) {
-  //     setSelectedTab(route.params.selectedTab);
-  //   }
-  // }, [route.params.selectedTab]);
 
    useEffect(() => {
     if (selectedTabProp !== undefined) {
@@ -67,7 +58,7 @@ const  ViewAppointmentFeature = ({ navigation, id , selectedTab:selectedTabProp 
   useEffect(() => {
     if (isLoading)
       setTimeout(() => {
-        goBack();
+        // goBack();
       }, 3000);
   }, [isLoading]);
 
@@ -99,7 +90,7 @@ const  ViewAppointmentFeature = ({ navigation, id , selectedTab:selectedTabProp 
           handleOptions={(option: any) =>
             handleActionClick(data?.id, option, data.paymentId?.id)
           }
-          timestamp={moment(data?.createdAt).format("DD MMM YYYY h:mm a")}
+          timestamp={moment(data?.createdAt).format("DD MMM YYYY h:mm a ")}
         />
         <View style={{ marginHorizontal: 20, marginTop: 8 }}>
           <Tabs
