@@ -1,19 +1,18 @@
 //@ts-nocheck
+import { FontAwesome } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 import moment from "moment";
 import React from "react";
-import { Text, View, StyleSheet, TouchableWithoutFeedback } from "react-native";
-import { FontAwesome } from "@expo/vector-icons";
-import { formatTime } from "../../../../../utils/tools";
+import { StyleSheet, Text, TouchableWithoutFeedback, View } from "react-native";
 import { styles as externalStyles } from "../../../../../assets/css";
 import {
-  border,
-  brandColor,
   dividerColor,
   iconCalenderColor,
   iconColor10,
-  iconColor12,
+  iconColor12
 } from "../../../../../constants/COLORS";
 import { useTheme } from "../../../../../context/ThemeContext";
+import { formatTime } from "../../../../../utils/tools";
 
 const PatientNote = ({
   item,
@@ -24,6 +23,7 @@ const PatientNote = ({
   appointmentId,
 }: any) => {
   const { theme } = useTheme();
+  const router = useRouter();
 
   return (
     <View
@@ -57,7 +57,15 @@ const PatientNote = ({
           </View>
         </View>
         <TouchableWithoutFeedback
-          onPress={() => navigation.navigate("EditComment", { item })}
+          // onPress={() => navigation.navigate("EditComment", { item })}
+          onPress={() =>
+            router.push({
+              pathname: "editComment",
+              params: {
+                item: encodeURIComponent(JSON.stringify(item)), 
+              },
+            })
+          }
         >
           <FontAwesome name="edit" size={22} />
         </TouchableWithoutFeedback>

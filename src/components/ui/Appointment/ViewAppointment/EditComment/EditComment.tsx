@@ -1,9 +1,9 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import Button from "../../../../elements/Button/Button";
-import CustomInput from "../../../../elements/Input";
 import Title from "../../../../../components/elements/Title/Title";
+import Button from "../../../../elements/Button/Button";
 import CustomTextArea from "../../../../elements/CustomTextArea/CustomTextArea";
+import CustomInput from "../../../../elements/Input";
 
 interface EditCommentProps {
   formData: {

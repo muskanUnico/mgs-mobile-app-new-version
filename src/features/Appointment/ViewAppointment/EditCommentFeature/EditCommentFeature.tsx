@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { addAllNotes } from "../../../../hooks/Appointment";
 import EditComment from "../../../../components/ui/Appointment/ViewAppointment/EditComment/EditComment";
+import { addAllNotes } from "../../../../hooks/Appointment";
 
-const EditCommentFeature = ({ route, navigation }: any) => {
+const EditCommentFeature = ({ route, navigation , item}: any) => {
   const { submit, loading, setLoading } = addAllNotes();
 
   // state store form data
@@ -16,10 +16,12 @@ const EditCommentFeature = ({ route, navigation }: any) => {
     adminComment: "",
     customerComment: "",
   });
+   
 
-  // use to set item data
+  
   useEffect(() => {
-    const data = route.params.item.data.reduce((acc: any, it: any) => {
+    
+    const data = item.data.reduce((acc: any, it: any) => {
       acc[it.title] = it.desc;
       return acc;
     }, {});
@@ -30,11 +32,11 @@ const EditCommentFeature = ({ route, navigation }: any) => {
       energyPulse: data["energy-pluse"],
       numOfPulse: data["offpluse"],
       dcdSprayDelay: data["dcd"],
-      adminComment: route.params.item.adminDescription,
-      customerComment: route.params.item.description,
+      adminComment: item.adminDescription,
+      customerComment:item.description,
     });
-    setAppointment(route.params.item.appointmentId);
-  }, [route.params.item]);
+    setAppointment(item.appointmentId);
+  }, [item]);
 
   // formate data for api
   let inputdata = {
