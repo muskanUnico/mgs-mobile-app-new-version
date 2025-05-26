@@ -16,7 +16,8 @@
         "foregroundImage": "./src/assets/icon.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.sameer_unico.myapp"
     },
     "web": {
       "bundler": "metro",
@@ -28,7 +29,7 @@
       [
         "expo-splash-screen",
         {
-          "image":  "./src/assets/splash.png",
+          "image": "./src/assets/splash.png",
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
         }
@@ -36,6 +37,12 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "cb9f8928-baf6-42ff-ade4-4d475188e6e0"
+      }
     }
   }
 }
