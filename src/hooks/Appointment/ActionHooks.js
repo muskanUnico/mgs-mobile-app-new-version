@@ -1,13 +1,12 @@
 import { useRouter } from "expo-router";
 import { useState } from "react";
 import {
-    approvedAppointment,
-    cancelAppointment,
-    deleteAppointment,
-    rejectedAppointment,
+  approvedAppointment,
+  cancelAppointment,
+  deleteAppointment,
+  rejectedAppointment,
 } from "../../hooks/Appointment";
 import { handleApppointmentAction } from "../../hooks/Appointment/hooks";
-import { navigate } from "../../utils/navigationServices";
 const router = useRouter();
 
 export const useActionHooks = ({ appointments = [] }) => {
@@ -109,13 +108,28 @@ export const useActionHooks = ({ appointments = [] }) => {
       // console.log("amount===>>>>", amount)
       // console.log("appointmentData===>>>>", getAppointment)
 
-      navigate("paymentpage", {
-        customerId:
-          getAppointment?.customerId?.id || getAppointment?.customerId,
-        appointmentId: appointmentId,
-        amount: amount,
-        appointmentData: getAppointment,
-      });
+      // navigate("paymentpage", {
+
+      // });
+
+      // useAppointmentStore.getState().setAppointment({
+      //   customerId:
+      //     getAppointment?.customerId?.id || getAppointment?.customerId,
+      //   appointmentId,
+      //   amount,
+      //   appointmentData: getAppointment,
+      // });
+
+      // router.push("/paymentpage" );
+      router.push({
+   pathname: "/paymentpage",
+    params: {
+    customerId: getAppointment?.customerId?.id || getAppointment?.customerId,
+    appointmentId: appointmentId,
+    amount: String(amount), // Important: all values must be strings
+    appointmentData: JSON.stringify(getAppointment), // send full object as string
+  },
+});
     }
 
     if (actionItem.id === "sms") {
@@ -123,11 +137,12 @@ export const useActionHooks = ({ appointments = [] }) => {
         (appointment) => appointment.id == appointmentId
       );
       // navigate("smsScreen", { getAppointment })
-     
 
-     router.push(
-  `/smsScreen?getAppointment=${encodeURIComponent(JSON.stringify(getAppointment))}`
-);
+      router.push(
+        `/smsScreen?getAppointment=${encodeURIComponent(
+          JSON.stringify(getAppointment)
+        )}`
+      );
     }
   };
 
