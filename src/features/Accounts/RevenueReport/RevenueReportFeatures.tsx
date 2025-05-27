@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { View } from "react-native";
 import Tabs from "../../../components/elements/Tabs/Tabs";
-import BookingIncomeFeature from "./RevenueFeatures/BookingIncomeFeature";
-import BookingExpenseFeature from "./RevenueFeatures/BookingExpenseFeature";
-import OtherRevenueFeature from "./RevenueFeatures/OtherRevenueFeature";
-import OtherIncomeFeature from "./RevenueFeatures/OtherIncome";
-import { useGetTotalRevenue } from "../../../hooks/Accounts/Revenue";
-import { useGetTotalExpense } from "../../../hooks/Accounts/Expense";
-import { useGetProfitLossThis } from "../../../hooks/Accounts/Accounts";
 import RevenurReportCards from "../../../components/ui/Report/RevenueReport/RevenurReportCards";
+import { useGetProfitLossThis } from "../../../hooks/Accounts/Accounts";
+import { useGetTotalExpense } from "../../../hooks/Accounts/Expense";
+import { useGetTotalRevenue } from "../../../hooks/Accounts/Revenue";
+import BookingExpenseFeature from "./RevenueFeatures/BookingExpenseFeature";
+import BookingIncomeFeature from "./RevenueFeatures/BookingIncomeFeature";
+import OtherIncomeFeature from "./RevenueFeatures/OtherIncome";
+import OtherRevenueFeature from "./RevenueFeatures/OtherRevenueFeature";
 
 const tabs = [
   { id: 1, label: "Booking Income" },
@@ -16,6 +16,8 @@ const tabs = [
   { id: 3, label: "Other Income" },
   { id: 4, label: "Other Expense" },
 ];
+
+console.log(tabs)
 
 const RevenueReportFeatures = ({ navigation }: any) => {
   const { totalRevenue } = useGetTotalRevenue();

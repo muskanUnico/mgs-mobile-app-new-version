@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Dimensions } from "react-native";
-import Carousel, { Pagination } from "react-native-snap-carousel";
-import AppointmentCard from "../AppointmentReport/AppointmentCard";
-import { brandColor } from "../../../../constants/COLORS";
+import { Dimensions, StyleSheet, View } from "react-native";
 import { useTheme } from "../../../../context/ThemeContext";
+import AppointmentCard from "../AppointmentReport/AppointmentCard";
+
 
 const screenWidth = Dimensions.get("window").width;
 
@@ -61,7 +60,7 @@ const RevenueReportCards = ({
 
   return (
     <View style={styles.container}>
-      <Carousel
+      {/* <Carousel
         data={carouselItems}
         renderItem={renderItem}
         sliderWidth={screenWidth}
@@ -70,15 +69,15 @@ const RevenueReportCards = ({
         autoplay
         autoplayInterval={5000}
         onSnapToItem={(index) => setActiveSlide(index)}
-      />
-      <Pagination
+      /> */}
+      {/* <Pagination
         dotsLength={carouselItems.length}
         activeDotIndex={activeSlide}
         containerStyle={styles.paginationContainer}
         dotStyle={styles.dotStyle}
         inactiveDotOpacity={0.4}
         inactiveDotScale={0.6}
-      />
+      /> */}
     </View>
   );
 };

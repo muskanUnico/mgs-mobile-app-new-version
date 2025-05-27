@@ -573,7 +573,7 @@ const DrawerContent = (props: any) => {
                   {/* Sales Revenue Report */}
                   <TouchableHighlight
                     underlayColor={theme.brandGreyColor}
-                    onPress={() => props.navigation.navigate("RevenueReport")}
+                    onPress={() => props.navigation.navigate("revenueReport")}
                     style={styles.drawerSubItem}
                   >
                     <View style={styles.rowLayout}>
@@ -598,7 +598,7 @@ const DrawerContent = (props: any) => {
                   {/* Income vs Expense Report */}
                   <TouchableHighlight
                     underlayColor={theme.brandGreyColor}
-                    onPress={() => props.navigation.navigate("IncomeVsExpense")}
+                    onPress={() => props.navigation.navigate("incomeVsExpense")}
                     style={styles.drawerSubItem}
                   >
                     <View style={styles.rowLayout}>
