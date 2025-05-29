@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { View } from "react-native";
 import Tabs from "../../components/elements/Tabs/Tabs";
-import { MyProfile } from "./MyProfile";
 import MyPayroll from "./MyPayroll";
+import { MyProfile } from "./MyProfile";
 
 export const MyProfileFeature = () => {
   const [selectedTab, setSelectedTab] = useState<number>(1);

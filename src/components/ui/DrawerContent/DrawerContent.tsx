@@ -71,7 +71,7 @@ const DrawerContent = (props: any) => {
       >
         <TouchableHighlight
           underlayColor={theme.brandColor}
-          onPress={() => props.navigation.navigate("MyProfile")}
+          onPress={() => props.navigation.navigate("myProfile")}
         >
           <View style={styles.centeredContainer}>
             <View style={styles.customItem}>
@@ -420,7 +420,7 @@ const DrawerContent = (props: any) => {
                 {/* All Team Members */}
                 <TouchableHighlight
                   underlayColor={theme.brandGreyColor}
-                  onPress={() => props.navigation.navigate("team")}
+                  onPress={() => props.navigation.navigate("allTeamMember")}
                   style={styles.drawerSubItem}
                 >
                   <View style={styles.rowLayout}>
@@ -599,7 +599,7 @@ const DrawerContent = (props: any) => {
                   {/* Income vs Expense Report */}
                   <TouchableHighlight
                     underlayColor={theme.brandGreyColor}
-                    onPress={() => props.navigation.navigate("incomeVsExpense")}
+                    onPress={() => props.navigation.navigate("incomeVsExpense")} 
                     style={styles.drawerSubItem}
                   >
                     <View style={styles.rowLayout}>
@@ -612,7 +612,7 @@ const DrawerContent = (props: any) => {
                           fontSize: 12,
                         }}
                       >
-                        {" "}
+                        {/* {"  "} */}
                         Income vs Expense Report
                       </Text>
                     </View>
