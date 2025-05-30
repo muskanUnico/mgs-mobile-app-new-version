@@ -1,24 +1,24 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { Keyboard, TouchableWithoutFeedback, View } from "react-native";
-import ViewDetailsCards from "./PayrollCards";
-import PayrollTablefeature from "./PayrollTablefeature";
-import { useAuth } from "../../../context/AuthContext";
+// import ViewDetailsCards from "./PayrollCards";
+import { AntDesign } from "@expo/vector-icons";
+import { useFocusEffect } from "@react-navigation/native";
 import { styles as externalStyles } from "../../../assets/css";
-import Button from "../../../components/elements/Button/Button";
 import AutoComplete from "../../../components/elements/AutoComplete/AutoComplete";
+import Button from "../../../components/elements/Button/Button";
+import CustomPagination from "../../../components/elements/CustomPagination/CustomPagination";
+import Loader from "../../../components/elements/Loader/Loader";
+import WarningModal from "../../../components/elements/WarningModal/WarningModal";
+import { useAuth } from "../../../context/AuthContext";
+import { getTeamMembers } from "../../../hooks/TeamMembers";
 import {
   useDeleteTimeTracker,
   useGetTimeTracker,
   useUpdateTimeTrackerStatus,
 } from "../../../hooks/TimeTracker";
-import { getTeamMembers } from "../../../hooks/TeamMembers";
-import { DefaultSelected } from "../../../utils/functions";
-import { useFocusEffect } from "@react-navigation/native";
-import WarningModal from "../../../components/elements/WarningModal/WarningModal";
-import Loader from "../../../components/elements/Loader/Loader";
 import { PermissionAccess } from "../../../middleware/PermissionAccess";
-import CustomPagination from "../../../components/elements/CustomPagination/CustomPagination";
-import { AntDesign } from "@expo/vector-icons";
+import { DefaultSelected } from "../../../utils/functions";
+import PayrollTablefeature from "./PayrollTablefeature";
 
 const ManagePayrollfeature = ({ navigation }: any) => {
   const { permissions } = useAuth();
@@ -28,6 +28,7 @@ const ManagePayrollfeature = ({ navigation }: any) => {
     page: 1,
     limit: 10,
   });
+  
 
   const { page } = params;
 
@@ -99,7 +100,7 @@ const ManagePayrollfeature = ({ navigation }: any) => {
 
   return (
     <>
-      <ViewDetailsCards />
+      {/* <ViewDetailsCards /> */}
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View
           style={[
