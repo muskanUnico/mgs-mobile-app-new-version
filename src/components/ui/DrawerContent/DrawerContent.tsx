@@ -505,7 +505,7 @@ const DrawerContent = (props: any) => {
                   </View>
                 </TouchableHighlight>
 
-                <PermissionAccess requiredPermissions={["view_payroll"]}>
+                {/* <PermissionAccess requiredPermissions={["view_payroll"]}> */}
                   {/* Manage Payroll */}
                   <TouchableHighlight
                     underlayColor={theme.brandGreyColor}
@@ -526,7 +526,7 @@ const DrawerContent = (props: any) => {
                       </Text>
                     </View>
                   </TouchableHighlight>
-                </PermissionAccess>
+                {/* </PermissionAccess> */}
               </>
             )}
           </PermissionAccess>
