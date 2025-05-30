@@ -441,7 +441,7 @@ const DrawerContent = (props: any) => {
                 {/* Leave Calendar */}
                 <TouchableHighlight
                   underlayColor={theme.brandGreyColor}
-                  onPress={() => props.navigation.navigate("LeaveCalendar")}
+                  onPress={() => props.navigation.navigate("leaveCalender")}
                   style={styles.drawerSubItem}
                 >
                   <View style={styles.rowLayout}>
@@ -465,6 +465,7 @@ const DrawerContent = (props: any) => {
                     underlayColor={theme.brandGreyColor}
                     onPress={() =>
                       props.navigation.navigate("createTeamMember")
+                      
                     }
                     style={styles.drawerSubItem}
                   >

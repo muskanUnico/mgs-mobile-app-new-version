@@ -26,7 +26,7 @@ import {
   useRejectLeaveRequests,
 } from "../../hooks/LeaveCalender/LeaveRequest";
 import LeaveCalender from "./LeaveCalender";
-import { CheckCircleIcon } from "native-base";
+// import { CheckCircleIcon } from "native-base";
 import LeaveCalenderCard from "./LeaveCalenderCard";
 import CustomTextArea from "../../components/elements/CustomTextArea/CustomTextArea";
 import CustomBottomSheet from "../../components/elements/BottomSheet/CustomBottomSheet";
