@@ -633,7 +633,7 @@ const DrawerContent = (props: any) => {
                   <TouchableHighlight
                     underlayColor={theme.brandGreyColor}
                     onPress={() =>
-                      props.navigation.navigate("AppointmentReport")
+                      props.navigation.navigate("appointmentReport")
                     }
                     style={styles.drawerSubItem}
                   >

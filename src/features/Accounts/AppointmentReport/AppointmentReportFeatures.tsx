@@ -166,7 +166,7 @@ const AppointmentReportFeatures = () => {
   const { theme } = useTheme();
   return (
     <View style={styles.container}>
-      <Carousel
+      {/* <Carousel
         data={carouselItems}
         renderItem={renderItem}
         sliderWidth={screenWidth}
@@ -183,7 +183,7 @@ const AppointmentReportFeatures = () => {
         dotStyle={styles.dotStyle}
         inactiveDotOpacity={0.4}
         inactiveDotScale={0.6}
-      />
+      /> */}
     </View>
   );
 };

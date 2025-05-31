@@ -280,7 +280,7 @@ export const useUpdateInsideTimeTrackerEntry = () => {
 };
 
 export const useGetTodayAppointment = (teamMemberId: string) => {
-  console.log("teamMemberId-------------kkk",teamMemberId)
+  // console.log("teamMemberId-------------kkk",teamMemberId)
   const [data, setdata] = useState<Appointment[] | []>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -296,7 +296,6 @@ export const useGetTodayAppointment = (teamMemberId: string) => {
     TimeTracker.getTodayAppointment(teamMemberId)
       .then((res) => {
         setdata(res.data);
-        console.log("dogggesh---data",res.data)
       })
       .finally(() => {
         setLoading(false);

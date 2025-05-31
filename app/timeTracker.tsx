@@ -23,7 +23,7 @@ const TimeTrackerCardDetails = () => {
   const { completedTime, setCompletedTime } = useTimeTracker();
   const { user } = useAuth();
   const { data } = useGetTodayAppointment(user?.id);
-  console.log("user in TimeTrackerCardDetails:", user);
+//   console.log("user in TimeTrackerCardDetails:", user);
 
 
   const [modalVisible, setModalVisible] = useState(false);
@@ -73,10 +73,10 @@ const TimeTrackerCardDetails = () => {
     setModalVisible(true);
   };
   const { theme } = useTheme();
-  console.log("completedTime:", completedTime);
+//   console.log("completedTime:", completedTime);
   
   
-  console.log("data from hook:", data);
+//   console.log("data from hook:", data);
 
 
 
