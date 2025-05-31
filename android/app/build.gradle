@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 apply plugin: "com.android.application"
+=======
+apply plugin: 'com.android.application' 
+>>>>>>> 57f6691 (build)
 apply plugin: "org.jetbrains.kotlin.android"
 apply plugin: "com.facebook.react"
 
@@ -87,9 +91,15 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
+<<<<<<< HEAD
     namespace 'com.sameer_unico.myapp'
     defaultConfig {
         applicationId 'com.sameer_unico.myapp'
+=======
+    namespace 'com.muskanunico.myapp'
+    defaultConfig {
+        applicationId 'com.muskanunico.myapp'
+>>>>>>> 57f6691 (build)
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

@@ -9,7 +9,8 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.muskanunico.myapp"
     },
     "android": {
       "adaptiveIcon": {
@@ -17,7 +18,7 @@
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
-      "package": "com.sameer_unico.myapp"
+      "package": "com.muskanunico.myapp"
     },
     "web": {
       "bundler": "metro",
@@ -41,8 +42,9 @@
     "extra": {
       "router": {},
       "eas": {
-        "projectId": "cb9f8928-baf6-42ff-ade4-4d475188e6e0"
+        "projectId": "e129ab9a-3fe4-4288-abc9-793f1db4d0cf"
       }
-    }
+    },
+    "owner": "muskanunico"
   }
 }

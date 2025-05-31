@@ -4,6 +4,8 @@ buildscript {
   repositories {
     google()
     mavenCentral()
+     maven { url("$rootDir/../node_modules/react-native/android") } // Required for react-native
+        maven { url 'https://www.jitpack.io' } // If any libraries use it
   }
   dependencies {
     classpath('com.android.tools.build:gradle')
