@@ -2,6 +2,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { DrawerContentScrollView } from "@react-navigation/drawer";
 import { DrawerActions } from "@react-navigation/native";
+import { useRouter } from "expo-router";
 import React, { useState } from "react";
 import {
   Dimensions,
@@ -17,18 +18,25 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useAuth } from "../../../context/AuthContext";
 import { useTheme } from "../../../context/ThemeContext";
 import { PermissionAccess } from "../../../middleware/PermissionAccess";
-import { navigate } from "../../../utils/navigationServices";
 
 
 const DrawerContent = (props: any) => {
   const styles = useStyles();
   const { theme } = useTheme();
   const { user, setUser } = useAuth();
+  const router = useRouter();
   const [dropdownTabs, setDropdownTabs] = useState([
     "appointments",
     "customers",
   ]);
- 
+  
+    const navigateWithClose = (screenName: string) => {
+    console.log("navigaying to",screenName);
+  props.navigation.dispatch(DrawerActions.closeDrawer());
+  setTimeout(() => {
+    props.navigation.navigate(screenName);
+  }, 250); // Small delay to allow drawer to close
+};
 
   const SCREEN_WIDTH = Dimensions.get("window").width;
 
@@ -486,7 +494,8 @@ const DrawerContent = (props: any) => {
 
                 {/* Time Tracker */}
                 <TouchableHighlight
-                  onPress={() => navigate("Timetracker")}
+                  onPress={ () => navigateWithClose("timeTracker")}
+
                   underlayColor={theme.brandGreyColor}
                   style={styles.drawerSubItem}
                 >
@@ -505,7 +514,7 @@ const DrawerContent = (props: any) => {
                   </View>
                 </TouchableHighlight>
 
-                {/* <PermissionAccess requiredPermissions={["view_payroll"]}> */}
+                <PermissionAccess requiredPermissions={["view_payroll"]}>
                   {/* Manage Payroll */}
                   <TouchableHighlight
                     underlayColor={theme.brandGreyColor}
@@ -526,7 +535,7 @@ const DrawerContent = (props: any) => {
                       </Text>
                     </View>
                   </TouchableHighlight>
-                {/* </PermissionAccess> */}
+                </PermissionAccess>
               </>
             )}
           </PermissionAccess>

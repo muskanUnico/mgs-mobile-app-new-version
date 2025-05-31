@@ -1,12 +1,12 @@
+import { useFocusEffect } from "@react-navigation/native";
 import moment from "moment";
+import { useCallback, useEffect, useState } from "react";
 import { Alert } from "react-native";
 import { Appointment } from "../interface/Appointment";
 import { timeTracker } from "../interface/Reports";
-import { getLastDate } from "../utils/tools";
-import { useCallback, useEffect, useState } from "react";
 import { TimeTracker } from "../services/TimeTracker/TimeTracker";
-import { useFocusEffect } from "@react-navigation/native";
 import { navigate } from "../utils/navigationServices";
+import { getLastDate } from "../utils/tools";
 
 export const useGetTimeTracker = (setParams: any, params: any) => {
   const [timeData, setData] = useState<timeTracker>({
@@ -280,6 +280,7 @@ export const useUpdateInsideTimeTrackerEntry = () => {
 };
 
 export const useGetTodayAppointment = (teamMemberId: string) => {
+  console.log("teamMemberId-------------kkk",teamMemberId)
   const [data, setdata] = useState<Appointment[] | []>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -291,11 +292,11 @@ export const useGetTodayAppointment = (teamMemberId: string) => {
     // Increment the refetch counter to force a re-fetch
     setRefetchCounter((prevCounter) => prevCounter + 1);
   };
-
   useEffect(() => {
     TimeTracker.getTodayAppointment(teamMemberId)
       .then((res) => {
         setdata(res.data);
+        console.log("dogggesh---data",res.data)
       })
       .finally(() => {
         setLoading(false);
