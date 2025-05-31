@@ -1,5 +1,6 @@
 import React from "react";
 import { TouchableOpacity, View } from "react-native";
+// import { CheckIcon } from "native-base";
 
 interface ColorBoxProps {
   color: string;
