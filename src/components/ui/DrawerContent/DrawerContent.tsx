@@ -686,7 +686,7 @@ const DrawerContent = (props: any) => {
                 {/* Permissions */}
                 <TouchableHighlight
                   underlayColor={theme.brandGreyColor}
-                  onPress={() => props.navigation.navigate("AllPermissions")}
+                  onPress={() => props.navigation.navigate("allPermissions")}
                   style={styles.drawerSubItem}
                 >
                   <View style={styles.rowLayout}>
@@ -731,7 +731,7 @@ const DrawerContent = (props: any) => {
               {/* CMS */}
               <TouchableHighlight
                 underlayColor={theme.brandGreyColor}
-                onPress={() => props.navigation.navigate("Cms")}
+                onPress={() => props.navigation.navigate("cms")}
                 style={styles.drawerSubItem}
               >
                 <View style={styles.rowLayout}>
