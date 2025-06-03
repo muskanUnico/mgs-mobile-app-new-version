@@ -13,7 +13,8 @@ import { SecurePageByPackage } from "@/src/middleware/PermissionAccess";
   return (
     <GlobalLoader>
       <SafeAreaView
-      style={[{ backgroundColor: theme.brandGreyColor }, { minHeight: '100%' }]}
+      style={[{ backgroundColor: theme.brandGreyColor }, { minHeight: '100%', paddingBottom:60
+       }]}
 
       >
         <Title navigation={navigation} title="Revenue Report" />

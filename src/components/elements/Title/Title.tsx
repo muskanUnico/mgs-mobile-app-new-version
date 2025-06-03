@@ -1,5 +1,5 @@
 import { Ionicons } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import { useTheme } from "../../../context/ThemeContext";
@@ -8,6 +8,9 @@ const Title = ({ title }: { title: string }) => {
 
   const { theme } = useTheme();
   const navigation = useNavigation();
+
+const route = useRoute();
+const lastScreen = (route.params as { fromScreen?: string } | undefined)?.fromScreen || 'Home';
 
   return (
     <View

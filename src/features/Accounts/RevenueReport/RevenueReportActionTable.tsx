@@ -1,30 +1,33 @@
+import { FontAwesome, MaterialIcons } from "@expo/vector-icons";
 import moment from "moment";
 import React, { useRef, useState } from "react";
-import { Text, View, StyleSheet } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { Divider } from "react-native-paper";
-import { FontAwesome } from "@expo/vector-icons";
+import LongMenu from "../../..//components/elements/LongMenu/LongMenu";
+import { styles as externalStyles } from "../../../assets/css";
+import Button from "../../../components/elements/Button/Button";
+import CustomModal from "../../../components/elements/CustomModal/CustomModal";
+import Title from "../../../components/elements/Title/Title";
 import {
   iconCalenderColor,
   iconColor3,
   iconPhoneColor,
 } from "../../../constants/COLORS";
-import AddIncome from "../IvsE/AddIncome";
-import { MaterialIcons } from "@expo/vector-icons";
-import { styles as externalStyles } from "../../../assets/css";
-import LongMenu from "../../..//components/elements/LongMenu/LongMenu";
-import Title from "../../../components/elements/Title/Title";
-import CustomModal from "../../../components/elements/CustomModal/CustomModal";
-import Button from "../../../components/elements/Button/Button";
 import { useDeleteExpense } from "../../../hooks/Accounts/Expense";
+import AddIncome from "../IvsE/AddIncome";
 
 interface RevenueReportActionTableProps {
   navigation: any;
   route: any;
+  data:any,
+  action:any,
 }
 
 const RevenueReportActionTable: React.FC<RevenueReportActionTableProps> = ({
   route,
   navigation,
+  data,
+  action
 }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const bottomSheetRef = useRef<any>(null);
@@ -68,10 +71,10 @@ const RevenueReportActionTable: React.FC<RevenueReportActionTableProps> = ({
     <>
       <Title
         navigation={navigation}
-        title={`${moment(route.params.data.date).format("DD MMM YYYY")}`}
+        title={`${moment(data.date).format("DD MMM YYYY")}`}
       />
 
-      {route.params.data.entries.map((item: any, index: number) => {
+      {data.entries.map((item: any, index: number) => {
         return (
           <View style={[externalStyles.card]} key={index}>
             <View
@@ -88,10 +91,10 @@ const RevenueReportActionTable: React.FC<RevenueReportActionTableProps> = ({
                 />
                 <Text style={[externalStyles.label]}>DATE : </Text>
                 <Text style={[externalStyles.content]}>
-                  {moment(route.params.data.date).format("DD MMM YYYY")}
+                  {moment(data.date).format("DD MMM YYYY")}
                 </Text>
               </View>
-              {route.params.action && (
+              {action && (
                 <LongMenu
                   options={options}
                   handleOptions={(option: any) => handleOptions(option, item)}
@@ -139,7 +142,7 @@ const RevenueReportActionTable: React.FC<RevenueReportActionTableProps> = ({
         bottomSheetRef={bottomSheetRef}
         form={form}
         getOption={getOption}
-        wholeData={route.params.data}
+        wholeData={data}
       />
 
       <CustomModal
@@ -163,7 +166,7 @@ const RevenueReportActionTable: React.FC<RevenueReportActionTableProps> = ({
         >
           <Button
             loading={!isLoading}
-            onPress={() => handleDelete(route.params.data._id, form?._id)}
+            onPress={() => handleDelete(data._id, form?._id)}
             title="Delete"
           />
           <Button onPress={() => setModalVisible(false)} title="Cancel" />

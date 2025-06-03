@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Dimensions, StyleSheet, View } from "react-native";
+import Carousel from "react-native-reanimated-carousel";
 import { useTheme } from "../../../../context/ThemeContext";
 import AppointmentCard from "../AppointmentReport/AppointmentCard";
-
 
 const screenWidth = Dimensions.get("window").width;
 
@@ -60,24 +60,30 @@ const RevenueReportCards = ({
 
   return (
     <View style={styles.container}>
-      {/* <Carousel
+      <Carousel
         data={carouselItems}
+        width={screenWidth}
+        height={160}
         renderItem={renderItem}
-        sliderWidth={screenWidth}
-        itemWidth={screenWidth}
         loop
-        autoplay
-        autoplayInterval={5000}
+        autoPlay
+        autoPlayInterval={5000}
         onSnapToItem={(index) => setActiveSlide(index)}
-      /> */}
-      {/* <Pagination
-        dotsLength={carouselItems.length}
-        activeDotIndex={activeSlide}
-        containerStyle={styles.paginationContainer}
-        dotStyle={styles.dotStyle}
-        inactiveDotOpacity={0.4}
-        inactiveDotScale={0.6}
-      /> */}
+      />
+
+      <View style={styles.paginationContainer}>
+        {carouselItems.map((_, index) => (
+          <View
+            key={index}
+            style={[
+              styles.dot,
+              index === activeSlide
+                ? { backgroundColor: theme.brandColor }
+                : { backgroundColor: "#ccc" },
+            ]}
+          />
+        ))}
+      </View>
     </View>
   );
 };
@@ -85,19 +91,22 @@ const RevenueReportCards = ({
 const useStyles = () => {
   const { theme } = useTheme();
 
-  return StyleSheet.create({  container: {
-    alignItems: "center",
-    marginVertical: 10,
-  },
-  paginationContainer: {
-    paddingVertical: 8,
-  },
-  dotStyle: {
-    width: 5,
-    height: 5,
-    borderRadius: 5,
-    backgroundColor: theme.brandColor,
-  },
-});
-}
+  return StyleSheet.create({
+    container: {
+      alignItems: "center",
+      marginVertical: 10,
+    },
+    paginationContainer: {
+      flexDirection: "row",
+      justifyContent: "center",
+      paddingVertical: 10,
+    },
+    dot: {
+      width: 8,
+      height: 8,
+      borderRadius: 4,
+      marginHorizontal: 5,
+    },
+  });
+};
 export default RevenueReportCards;

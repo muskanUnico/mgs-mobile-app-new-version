@@ -1,20 +1,28 @@
-import { StyleSheet, View } from "react-native";
 import React, { useEffect, useState } from "react";
-import { createMember } from "../../../hooks/Customer";
+import { StyleSheet, View } from "react-native";
 import { styles as externalStyles } from "../../../assets/css";
 import Button from "../../../components/elements/Button/Button";
-import SelectRole from "../../../components/ui/TeamMember/SelectRole/SelectRole";
 import CustomColorPicker from "../../../components/elements/ColorPicker/ColorPicker";
 import CustomHeading from "../../../components/elements/CustomHeading/CustomHeading";
 import CreateMemberForm from "../../../components/ui/TeamMember/CreateMemberForm/CreateMemberForm";
+import SelectRole from "../../../components/ui/TeamMember/SelectRole/SelectRole";
 import ColorSelectorfeature from "../../../features/ColorSelectorfeature/ColorSelectorfeature";
+import { createMember } from "../../../hooks/Customer";
 
 const CreateMember = () => {
-  const [formData, setFormData] = useState({
+  type FormData = {
+    name: string;
+    telephone: string;
+    email: string;
+    teamMemberId?: string;
+    color: string;
+    role?: any;
+  };
+
+  const [formData, setFormData] = useState<FormData>({
     name: "",
     telephone: "",
     email: "",
-    teamMemberId: "",
     color: "#fff",
   });
   const createMemberHooks = createMember();
@@ -58,7 +66,15 @@ const CreateMember = () => {
         </View>
         <View style={[styles.mt2, styles.mx4]}>
           <Button
-            onPress={() => createMemberHooks.submit(formData)}
+            onPress={() => {
+              const cleanedData = { ...formData };
+
+              if (!cleanedData.teamMemberId) {
+                delete cleanedData.teamMemberId; // Remove if empty
+              }
+
+              createMemberHooks.submit(cleanedData);
+            }}
             loading={createMemberHooks.loading}
             title="Save"
           />

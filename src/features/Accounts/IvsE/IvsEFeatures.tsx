@@ -19,8 +19,8 @@ import {
 import AddExpense from "./AddExpense";
 import AddIncome from "./AddIncome";
 import ChartFilterFeature from "./ChartFilterFeature";
+import IvsEcards from "./IvsEcards";
 import IvsEtable from "./IvsEtable";
-// import IvsEcards from "./IvsEcards";
 
 export const IvsEFeatures = () => {
   const [selectedTab, setSelectedTab] = useState<number>(1);
@@ -31,7 +31,6 @@ export const IvsEFeatures = () => {
   const [active, setActive] = useState(1);
   const [filter, setFilter] = useState("Monthly");
 
-  console.log("data in iVSexpense---", data)
   const tabs = [
     { id: 1, label: "Table" },
     { id: 2, label: "Chart" },
@@ -82,7 +81,7 @@ export const IvsEFeatures = () => {
 
   return (
     <>
-      {/* <IvsEcards /> */}
+      <IvsEcards />
       <View style={styles.rowBetweenCenter}>
         <Tabs
           tabs={tabs}
