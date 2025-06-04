@@ -1,28 +1,28 @@
-import moment, { months } from "moment";
-import { View } from "react-native";
-import React, { useCallback, useState } from "react";
-import { Alert, Text } from "react-native";
 import { Fontisto } from "@expo/vector-icons";
-import { iconColor7 } from "../../../constants/COLORS";
-import { getTeamMembers } from "../../../hooks/TeamMembers";
+import { useFocusEffect } from "@react-navigation/native";
+import moment from "moment";
+import React, { useCallback, useState } from "react";
+import { Alert, Text, View } from "react-native";
+import { styles as externalStyles } from "../../../assets/css";
 import AutoComplete from "../../../components/elements/AutoComplete/AutoComplete";
 import SingleDatePicker from "../../../components/elements/SingleDatePicker/SingleDatePicker";
 import { AddTime } from "../../../components/ui/TeamMember/AddTime/AddTime";
-import { styles as externalStyles } from "../../../assets/css";
+import { iconColor7 } from "../../../constants/COLORS";
+import { getTeamMembers } from "../../../hooks/TeamMembers";
 import {
   useCreateTime,
   useUpdateDataTimeTracker,
 } from "../../../hooks/TimeTracker";
-import { convertStringTimeToNumber } from "../../../utils/tools";
 import {
   CalculateDuration,
   convertToISOFormat,
 } from "../../../utils/functions";
-import { useFocusEffect } from "@react-navigation/native";
+import { convertStringTimeToNumber } from "../../../utils/tools";
 
-export const AddPayrollFeature = ({ route }: any) => {
+export const AddPayrollFeature = ({ route, isEdit }: any) => {
   const { handleUpdate, loader } = useUpdateDataTimeTracker();
   const root = route.params;
+
 
   const { handleCreateTime, loading } = useCreateTime();
   const { data } = getTeamMembers();
@@ -65,7 +65,7 @@ export const AddPayrollFeature = ({ route }: any) => {
         workedType: item?.workedType,
         reference: item?.ref || "",
       }));
-      if (route.params.edit) {
+      if (isEdit) {
         setFields(exiting);
         setDateFilter(new Date(root.data?.date));
       }
@@ -97,7 +97,7 @@ export const AddPayrollFeature = ({ route }: any) => {
       Alert.alert("Task is Required");
     } else if (team?.id == "") {
       Alert.alert("Team Member is Required");
-    } else if (route.params.edit) {
+    } else if (isEdit) {
       handleUpdate(root.data?.id, formateData);
     } else {
       handleCreateTime(formateData);

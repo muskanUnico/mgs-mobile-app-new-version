@@ -3,6 +3,7 @@ import { Keyboard, TouchableWithoutFeedback, View } from "react-native";
 // import ViewDetailsCards from "./PayrollCards";
 import { AntDesign } from "@expo/vector-icons";
 import { useFocusEffect } from "@react-navigation/native";
+import { useRouter } from "expo-router";
 import { styles as externalStyles } from "../../../assets/css";
 import AutoComplete from "../../../components/elements/AutoComplete/AutoComplete";
 import Button from "../../../components/elements/Button/Button";
@@ -28,8 +29,8 @@ const ManagePayrollfeature = ({ navigation }: any) => {
     page: 1,
     limit: 10,
   });
-  
 
+  const router = useRouter();
   const { page } = params;
 
   const { timeData, setPage, isloading, refetch } = useGetTimeTracker(
@@ -48,10 +49,14 @@ const ManagePayrollfeature = ({ navigation }: any) => {
   const [getOption, setGetOptions] = useState({
     id: "",
   });
-  const dataSet = data.map((item) => ({ title: item.name, id: item?.id }));
+  const dataSet = data.map((item) => ({ title: item.name, id: item?.id}));
 
   const handleAddPayroll = () => {
-    navigation.navigate("AddPayroll", { edit: false });
+    router.push({
+      pathname: "/addPayroll",
+      params: { edit: "false" 
+      },
+    });
   };
 
   const option = [
@@ -73,7 +78,12 @@ const ManagePayrollfeature = ({ navigation }: any) => {
   const handleOptions = (option: any, item: any) => {
     setGetOptions(item);
     if (option.id == 1) {
-      navigation.navigate("AddPayroll", { edit: true, data: item });
+     router.push({
+      pathname: "/addPayroll",
+      params: { edit: "true" ,
+        root: encodeURIComponent(JSON.stringify(item)),
+      },
+    });
     } else if (option.id == 2) {
       setTimeout(() => {
         setModalOpen(true);

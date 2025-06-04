@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { StyleSheet, Text, View } from "react-native";
 import {
   AutocompleteDropdown,
   TAutocompleteDropdownItem,
 } from "react-native-autocomplete-dropdown";
-import { Text, View, StyleSheet } from "react-native";
 import { styles as externalStyles } from "../../../assets/css";
-import { borderColor, placeholderTextColor } from "../../../constants/COLORS";
+import { borderColor, brandBlackColor, placeholderTextColor } from "../../../constants/COLORS";
 
 interface AutoCompleteProps {
   inputValue: any;
@@ -65,6 +65,16 @@ const AutoComplete = ({
         onChangeText={(text: string) => setInputValue(text)}
         showChevron={false}
         renderItem={renderItem} // Apply custom render item
+        suggestionsListContainerStyle={{
+          backgroundColor: "#fff",
+          borderRadius: 8,
+          paddingVertical: 4,
+          shadowColor: "#000",
+          shadowOffset: { width: 0, height: 2 },
+          shadowOpacity: 0.2,
+          shadowRadius: 4,
+          elevation: 6,
+        }}
         textInputProps={{
           placeholder: placeholder,
           autoCorrect: false,
@@ -74,7 +84,8 @@ const AutoComplete = ({
             paddingLeft: 0,
             fontSize: 14,
             fontFamily: "Regular",
-          },
+            color: brandBlackColor
+          }
         }}
       />
     </View>
@@ -89,7 +100,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     fontFamily: "Regular",
     fontSize:14,
-
+    backgroundColor: "#fff"
   },
   suggestionText: {
     fontFamily: "Regular",
