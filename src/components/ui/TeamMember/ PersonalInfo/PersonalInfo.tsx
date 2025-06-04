@@ -71,7 +71,8 @@ const PersonalInfoCard: React.FC<PersonalInfoCardProps> = ({
         <CustomHeading iconName="wpforms" text="Personal Information" />
 
         <TouchableOpacity
-          onPress={() => navigate("EditPersonalInfo", { personalInfo: data })}
+          onPress={() =>  navigate("editPersonalInfo", { personalInfo: data })
+        }
         >
           <Text style={externalStyles.BlueText}>EDIT</Text>
         </TouchableOpacity>

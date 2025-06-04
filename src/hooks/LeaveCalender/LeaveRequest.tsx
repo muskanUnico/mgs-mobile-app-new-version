@@ -1,9 +1,9 @@
-import { Leave } from "../../interface/LeaveRequest";
-import { useCallback, useEffect, useState } from "react";
-import { LeaveRequest } from "../../services/LeaveCalender/LeaveCalender";
-import { DeleteIcon } from "native-base";
-import { Alert } from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
+import { useCallback, useEffect, useState } from "react";
+import { MdDelete } from "react-icons/md";
+import { Alert } from "react-native";
+import { Leave } from "../../interface/LeaveRequest";
+import { LeaveRequest } from "../../services/LeaveCalender/LeaveCalender";
 import { navigate } from "../../utils/navigationServices";
 
 export const useLongMenuLeaveRequest = ({
@@ -21,9 +21,9 @@ export const useLongMenuLeaveRequest = ({
     title: "",
   });
 
-  const option = [
-    { id: 2, title: "Delete", icon: <DeleteIcon />, line: false },
-  ];
+ const option = [
+  { id: 2, title: "Delete", icon: <MdDelete />, line: false },
+];
 
   // handle three dot btn
   const handleOptions = (option: any, item: Leave) => {

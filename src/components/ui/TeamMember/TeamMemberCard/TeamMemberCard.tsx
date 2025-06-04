@@ -1,34 +1,31 @@
+import { FontAwesome } from "@expo/vector-icons";
+import * as Clipboard from "expo-clipboard";
+import { useRouter } from "expo-router";
 import React, { useState } from "react";
 import {
-  Text,
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  Platform,
   Alert,
+  Platform,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from "react-native";
-import { FontAwesome } from "@expo/vector-icons";
 import { Divider, Switch } from "react-native-paper";
 import { styles as externalStyles } from "../../../../assets/css";
 import {
   borderColor,
-  brandColor,
-  brandGreyColor,
-  brandPastelColor,
   dividerColor,
   iconColor2,
   iconColor3,
   iconColor4,
   iconColor5,
   iconColor6,
-  iconColor7,
+  iconColor7
 } from "../../../../constants/COLORS";
-import { convertSchedule } from "../../../../utils/tools";
-import * as Clipboard from "expo-clipboard";
-import { navigate } from "../../../../utils/navigationServices";
-import { TeamMemberService } from "../../../../services/TeamMember/TeamMember";
-import { EmptyTimetableExample } from "../../../../interface/TeamMembers";
 import { useTheme } from "../../../../context/ThemeContext";
+import { EmptyTimetableExample } from "../../../../interface/TeamMembers";
+import { TeamMemberService } from "../../../../services/TeamMember/TeamMember";
+import { convertSchedule } from "../../../../utils/tools";
 
 const TeamMemberCard = ({ item, index, showDeleteModal }: any) => {
   const getAvailability = (timetable: any) => {
@@ -41,7 +38,7 @@ const TeamMemberCard = ({ item, index, showDeleteModal }: any) => {
     });
     return data.map((day) => day.substring(0, 2));
   };
-
+  const router = useRouter();
   const [phoneNumber, setPhoneNumber] = useState(item?.telephone);
 
   // Function to copy phone number to clipboard
@@ -98,7 +95,12 @@ const TeamMemberCard = ({ item, index, showDeleteModal }: any) => {
             </Text>
           </View>
           <TouchableOpacity
-            onPress={() => navigate("ViewTeamMember", { memberId: item.id })}
+            onPress={() =>
+              router.push({
+                pathname: "/viewTeamMember",
+                params: { memberId: item.id }
+              })
+              }
             style={styles.row}
           >
             <Text style={[externalStyles.BlueText]}>{item.name}</Text>
