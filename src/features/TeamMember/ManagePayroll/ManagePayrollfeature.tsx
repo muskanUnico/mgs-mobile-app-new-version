@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from "react";
 import { Keyboard, TouchableWithoutFeedback, View } from "react-native";
-// import ViewDetailsCards from "./PayrollCards";
+import ViewDetailsCards from "./PayrollCards";
 import { AntDesign } from "@expo/vector-icons";
 import { useFocusEffect } from "@react-navigation/native";
 import { useRouter } from "expo-router";
@@ -110,7 +110,7 @@ const ManagePayrollfeature = ({ navigation }: any) => {
 
   return (
     <>
-      {/* <ViewDetailsCards /> */}
+      <ViewDetailsCards />
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View
           style={[
