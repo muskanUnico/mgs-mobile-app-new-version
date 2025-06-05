@@ -1,8 +1,9 @@
-import { Alert } from "react-native";
-import { useCallback, useState } from "react";
-import { navigate } from "../utils/navigationServices";
-import { Referral } from "../services/Referral/Referral";
 import { useFocusEffect } from "@react-navigation/native";
+import { useRouter } from "expo-router";
+import { useCallback, useState } from "react";
+import { Alert } from "react-native";
+import { Referral } from "../services/Referral/Referral";
+import { navigate } from "../utils/navigationServices";
 
 export const useHandleOptionsReferral = ({
   setWarninigModalOpen, // Function to set the warning modal open state
@@ -43,7 +44,7 @@ export const useHandleOptionsReferral = ({
       handleDelete(referralId); // Handle deletion
     }
   };
-
+  const router = useRouter();
   // Handler for options
   const handleOptions = (
     selectedTabId: number,
@@ -60,14 +61,17 @@ export const useHandleOptionsReferral = ({
       });
       setTimeout(() => {
         setWarninigModalOpen(true);
-    }, 5000);
+      }, 5000);
       setreferralId(referralId);
     } else if (selectedTabId == 1) {
       // If the selected tab is for editing
-      navigate("AddReferrals", {
-        data: referral,
-        edit: true,
-        title: "Edit Refferal",
+      router.push({
+        pathname: "/addReferral",
+        params: {
+          data: JSON.stringify(referral),
+          edit: "true",
+          title: "Edit Refferal",
+        },
       });
     } else if (selectedTabId == 2) {
       setWarning({
@@ -76,10 +80,10 @@ export const useHandleOptionsReferral = ({
         btnSecName: "Cancel",
         title: "You Want to Delete the Referral?",
       });
-      
+
       setTimeout(() => {
         setWarninigModalOpen(true);
-    }, 1000);
+      }, 1000);
       // setWarninigModalOpen(true);
       setreferralId(referral.customer?.id);
     }

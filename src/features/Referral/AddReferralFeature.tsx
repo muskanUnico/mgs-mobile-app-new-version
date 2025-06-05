@@ -1,17 +1,17 @@
-import { View } from "react-native";
+import { useFocusEffect } from "@react-navigation/native";
 import React, { useCallback, useState } from "react";
+import { View } from "react-native";
 import { styles as externalStyles } from "../../assets/css";
-import Button from "../../components/elements/Button/Button";
 import AutoComplete from "../../components/elements/AutoComplete/AutoComplete";
+import Button from "../../components/elements/Button/Button";
 import StandardInput from "../../components/elements/StandardInput/StandardInput";
 import { getCustomers } from "../../hooks/Customer";
 import {
   useCreateReferral,
   useUpdateReferral,
 } from "../../hooks/ManageReferral";
-import { useFocusEffect } from "@react-navigation/native";
 
-const AddReferralFeature = ({ route }: any) => {
+const AddReferralFeature = ({isEdit, referral}: any) => {
   const [percent, setPercent] = useState("");
   // const [coupon, setCoupon] = useState("");
   const [customer, setCustomer] = useState({
@@ -38,20 +38,20 @@ const AddReferralFeature = ({ route }: any) => {
 
   useFocusEffect(
     useCallback(() => {
-      if (route?.params?.edit) {
+      if (isEdit) {
         setCustomer({
-          id: route?.params.data?.customer?.id,
-          title: route?.params.data?.customer?.name,
+          id: referral?.customer?.id,
+          title: referral?.customer?.name,
         });
         // setCoupon(route.params.data?.couponCode);
-        setPercent(route?.params?.data?.discountPercentage?.toString());
+        setPercent(referral?.discountPercentage?.toString());
       }
-    }, [route?.params?.data])
+    }, [referral])
   );
 
   // Handle submit action
   const handleAddReferral = () => {
-    if (route?.params?.edit) {
+    if (isEdit) {
       updateReferral.handleUpdate(customer.id, {
         discountPercentage: parseInt(percent, 10),
       });
