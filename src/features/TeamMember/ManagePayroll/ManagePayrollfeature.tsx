@@ -1,9 +1,8 @@
-import React, { useCallback, useState } from "react";
-import { Keyboard, TouchableWithoutFeedback, View } from "react-native";
-import ViewDetailsCards from "./PayrollCards";
 import { AntDesign } from "@expo/vector-icons";
 import { useFocusEffect } from "@react-navigation/native";
 import { useRouter } from "expo-router";
+import React, { useCallback, useState } from "react";
+import { Keyboard, TouchableWithoutFeedback, View } from "react-native";
 import { styles as externalStyles } from "../../../assets/css";
 import AutoComplete from "../../../components/elements/AutoComplete/AutoComplete";
 import Button from "../../../components/elements/Button/Button";
@@ -19,6 +18,7 @@ import {
 } from "../../../hooks/TimeTracker";
 import { PermissionAccess } from "../../../middleware/PermissionAccess";
 import { DefaultSelected } from "../../../utils/functions";
+import ViewDetailsCards from "./PayrollCards";
 import PayrollTablefeature from "./PayrollTablefeature";
 
 const ManagePayrollfeature = ({ navigation }: any) => {
@@ -52,11 +52,11 @@ const ManagePayrollfeature = ({ navigation }: any) => {
   const dataSet = data.map((item) => ({ title: item.name, id: item?.id}));
 
   const handleAddPayroll = () => {
-    router.push({
-      pathname: "/addPayroll",
-      params: { edit: "false" 
-      },
-    });
+    // router.push({
+    //   pathname: "/addPayroll",
+    //   params: { edit: "false" 
+    //   },
+    // });
   };
 
   const option = [
