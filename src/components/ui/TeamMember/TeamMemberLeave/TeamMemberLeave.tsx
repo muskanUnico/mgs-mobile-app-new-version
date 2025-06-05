@@ -1,15 +1,15 @@
-import React from "react";
+import { useRouter } from "expo-router";
 import moment from "moment";
+import React from "react";
 import { Text, View } from "react-native";
-import Button from "../../../elements/Button/Button";
-import CustomHeading from "../../../elements/CustomHeading/CustomHeading";
 import { styles as externalStyles } from "../../../../assets/css";
 import { useLeaveDatesTeamMember } from "../../../../hooks/LeaveCalender/LeaveRequest";
-import { navigate } from "../../../../utils/navigationServices";
+import Button from "../../../elements/Button/Button";
+import CustomHeading from "../../../elements/CustomHeading/CustomHeading";
 
 const TeamMemberLeaveCard = ({ user }: any) => {
   const { dates } = useLeaveDatesTeamMember(user?.id);
-
+  const router = useRouter();
   return (
     <View style={externalStyles.card}>
       <CustomHeading iconName="suitcase" text="Team Member Leave" />
@@ -22,7 +22,7 @@ const TeamMemberLeaveCard = ({ user }: any) => {
           );
         })}
       </View>
-      <Button title="Manage leave" onPress={() => navigate("LeaveCalendar")} />
+      <Button title="Manage leave" onPress={() => router.push("/leaveCalender")} />
     </View>
   );
 };
