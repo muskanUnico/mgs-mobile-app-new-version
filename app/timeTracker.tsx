@@ -1,199 +1,114 @@
-import { styles as externalStyles } from "@/src/assets/css";
-import TrackerCustomDuration from "@/src/components/TrackerCustomDuration";
+import Button from "@/src/components/elements/Button/Button";
+import CustomDropDown from "@/src/components/elements/CustomDropDown/CustomDropDown";
+import Title from "@/src/components/elements/Title/Title";
 import { useAuth } from "@/src/context/AuthContext";
 import { useTheme } from "@/src/context/ThemeContext";
 import { useTimeTracker } from "@/src/context/TimeTrackerContext";
-import { useGetTodayAppointment } from "@/src/hooks/TimeTracker";
-import moment from "moment";
-import React, { useState } from "react";
-import { Text, TouchableWithoutFeedback, View } from "react-native";
+import GlobalLoader from "@/src/features/GlobalLoader/GlobalLoader";
+import {
+  getItemFromLocalStorage,
+  removeItemFromLocalStorage,
+} from "@/src/helper/useLocalStorage";
+import { useCreateTime, useGetTodayAppointment } from "@/src/hooks/TimeTracker";
+import { convertDataFormat } from "@/src/utils/functions";
+import { formatTime } from "@/src/utils/tools";
+import { useFocusEffect } from "@react-navigation/native";
+import React, { useCallback } from "react";
+import { StyleSheet, View } from "react-native";
+import OnlyTimeTracker from "../src/components/ui/TimeTracker/OnlyTimeTracker";
+import TimeTrackerCardDetails from "../src/components/ui/TimeTracker/TimeTrackerCardDetails";
 
-interface Appointment {
-  appointmentId: string;
-  customerId: { id: string; name: string };
-  start_time: string;
-  end_time: string;
-}
-
-interface CompletedTime {
-  [key: string]: Appointment[];
-}
-
-const TimeTrackerCardDetails = () => {
-  const { completedTime, setCompletedTime } = useTimeTracker();
+const TimeTracker = ({ navigation }: any) => {
   const { user } = useAuth();
   const { data } = useGetTodayAppointment(user?.id);
-//   console.log("user in TimeTrackerCardDetails:", user);
+  const { setSelect, select, completedTime } = useTimeTracker();
+  const { handleCreateTime, loading } = useCreateTime();
 
+  useFocusEffect(
+    useCallback(() => {
+      if (select) {
+        getItemFromLocalStorage("timeTrackerSelect");
+      }
+    }, [select])
+  );
 
-  const [modalVisible, setModalVisible] = useState(false);
-  const [selectedMinute, setSelectedMinute] = useState("00");
-  const [selectedHour, setSelectedHour] = useState("00");
-  const [currentAppointmentId, setCurrentAppointmentId] = useState<
-    string | null
-  >(null);
-  const [currentIndex, setCurrentIndex] = useState<number | null>(null);
-  const [isStartTime, setIsStartTime] = useState(true);
+  const option = data.map((item) => ({
+    value: item?.customerId?.id,
+    label: `${item?.customerId?.name} ${formatTime(item?.start_time_range)}`,
+  }));
 
-  const handleSaveDuration = () => {
-    if (currentAppointmentId !== null && currentIndex !== null) {
-      const newTime = `${selectedHour}:${selectedMinute}:00`;
-      setCompletedTime((prevCompletedTime: CompletedTime) => {
-        const updatedCompletedTime = { ...prevCompletedTime };
-        const appointmentData = updatedCompletedTime[currentAppointmentId];
-        const updatedAppointment = { ...appointmentData[currentIndex] };
-
-        if (isStartTime) {
-          updatedAppointment.start_time = newTime;
-        } else {
-          updatedAppointment.end_time = newTime;
-        }
-
-        appointmentData[currentIndex] = updatedAppointment;
-        return updatedCompletedTime;
-      });
-    }
-    setModalVisible(false);
-  };
-
-  const handleDateChange = (
-    id: string,
-    index: number,
-    appointment: Appointment,
-    isStart: boolean
-  ) => {
-    const timeParts = isStart
-      ? appointment.start_time.split(":")
-      : appointment.end_time.split(":");
-    setSelectedMinute(timeParts[1]);
-    setSelectedHour(timeParts[0]);
-    setIsStartTime(isStart);
-    setCurrentAppointmentId(id);
-    setCurrentIndex(index);
-    setModalVisible(true);
+  const handleSaveTime = () => {
+    handleCreateTime(convertDataFormat(completedTime, user.id));
+    removeItemFromLocalStorage("completedTime");
   };
   const { theme } = useTheme();
-//   console.log("completedTime:", completedTime);
-  
-  
-//   console.log("data from hook:", data);
-
-
-
 
   return (
-    <>
-      {Object.entries(completedTime).map(
-        ([appointmentId, appointmentData]: any) => {
-          const id = appointmentData?.[0]?.appointmentId || "";
-          const customer = data.filter(
-            (item: any) => item?.customerId?.id == id
-          );
-
-          return (
-            <View
-              key={appointmentId}
-              style={[
-                externalStyles.pinkcard,
-                {
-                  paddingHorizontal: 16,
-                  paddingVertical: 24,
-                  marginHorizontal: 12,
-                  marginTop: 20,
-                  height: "auto",
-                },
-              ]}
-            >
-              <View>
-                <Text
-                  style={[
-                    externalStyles.label,
-                    { color: theme.brandColor, fontSize: 18 },
-                  ]}
-                >
-                  {moment(new Date()).format("DD MMM YYYY")}
-                </Text>
-                <Text
-                  style={[
-                    externalStyles.globalFontLight,
-                    { fontSize: 16, paddingVertical: 8 },
-                  ]}
-                >
-                  {customer[0]?.customerId.name}
-                </Text>
-                {appointmentData.map((appointment: any, index: number) => (
-                  <View key={index}>
-                    <View
-                      style={{ flexDirection: "row", alignItems: "center" }}
-                    >
-                      <TouchableWithoutFeedback
-                        onPress={() =>
-                          handleDateChange(
-                            appointmentId,
-                            index,
-                            appointment,
-                            true
-                          )
-                        }
-                      >
-                        <Text style={{ color: "#2563eb" }}>
-                          {appointment.start_time}
-                        </Text>
-                      </TouchableWithoutFeedback>
-                      <Text
-                        style={[
-                          externalStyles.globalFontLight,
-                          { marginHorizontal: 8 },
-                        ]}
-                      >
-                        to
-                      </Text>
-                      <TouchableWithoutFeedback
-                        onPress={() =>
-                          handleDateChange(
-                            appointmentId,
-                            index,
-                            appointment,
-                            false
-                          )
-                        }
-                      >
-                        <Text style={{ color: "#2563eb" }}>
-                          {appointment.end_time}
-                        </Text>
-                      </TouchableWithoutFeedback>
-                    </View>
-                    <View style={{ marginTop: 8 }}>
-                      <Text style={externalStyles.globalFontLight}>
-                        Duration:
-                        {moment
-                          .utc(
-                            moment(appointment.end_time, "HH:mm:ss").diff(
-                              moment(appointment.start_time, "HH:mm:ss")
-                            )
-                          )
-                          .format("HH:mm:ss")}
-                      </Text>
-                    </View>
-                  </View>
-                ))}
-              </View>
+    <View style={[styles.screen, { backgroundColor: theme.brandGreyColor }]}>
+      <Title navigation={navigation} title="Time Tracker" />
+      <View style={styles.container}>
+        <View style={styles.card}>
+           <View style={styles.dropdownWrapper}>
+            <CustomDropDown
+              items={option}
+              value={select}
+              setValue={setSelect && setSelect}
+              placeholder="Select Appointment"
+            />
+          </View>
+          <OnlyTimeTracker />
+        </View>
+        {Object.keys(completedTime).length > 0 && (
+          <>
+            <TimeTrackerCardDetails />
+             <View style={styles.buttonWrapper}>
+              <Button
+                onPress={handleSaveTime}
+                loading={!loading}
+                title="Save"
+              />
             </View>
-          );
-        }
-      )}
-
-      <TrackerCustomDuration
-        modal={modalVisible}
-        setModal={setModalVisible}
-        handleSaveDuration={handleSaveDuration}
-        setSelectedMinute={setSelectedMinute}
-        setSelectedHour={setSelectedHour}
-        selectedMinute={selectedMinute}
-        selectedHour={selectedHour}
-      />
-    </>
+          </>
+        )}
+      </View>
+    </View>
   );
 };
 
-export default TimeTrackerCardDetails;
+const Index = (props) => (
+  <GlobalLoader>
+    <TimeTracker {...props} />
+  </GlobalLoader>
+);
+export default Index;
+
+const styles = StyleSheet.create({
+  screen: {
+    flex: 1,
+    minHeight: "100%", // for full-screen height
+  },
+  container: {
+    paddingHorizontal: 16,
+    paddingVertical: 16,
+  },
+  card: {
+    padding: 20,
+    borderWidth: 1,
+    borderColor: "#f3f4f6", // Tailwind's gray-100
+    borderRadius: 8,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 2,
+    backgroundColor: "#fff",
+  },
+  dropdownWrapper: {
+    zIndex: 50, // For proper dropdown layering
+    marginBottom: 20,
+  },
+  buttonWrapper: {
+    marginTop: 20,
+    marginHorizontal: 12,
+  },
+});
