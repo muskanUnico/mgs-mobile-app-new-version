@@ -14,8 +14,8 @@ const AddPayrollScreen = ({ navigation, route }: any) => {
   return (
     <GlobalLoader>
       <SafeAreaView
-        className="min-h-screen pb-16"
-        style={{ backgroundColor: theme.brandWhiteColor }}
+      
+        style={{  flex: 1 , backgroundColor: theme.brandWhiteColor , paddingBottom:40}}
       >
         <Title navigation={navigation} title="Add Custom Data" />
         <AddPayrollFeature route={route} isEdit={isEdit} />

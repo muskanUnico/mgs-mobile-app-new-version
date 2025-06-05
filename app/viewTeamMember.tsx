@@ -17,8 +17,8 @@ const ViewTeamMemberScreen = ({ navigation, route }: any) => {
         ListHeaderComponent={
           <ViewTeamMember navigation={navigation} route={route} memberId={memberId}  />
         }
-        style={{ backgroundColor: theme.brandGreyColor }}
-        className="min-h-screen"
+        style={{flex:1, backgroundColor: theme.brandGreyColor }}
+        
       />
     </GlobalLoader>
   );

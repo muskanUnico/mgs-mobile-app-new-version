@@ -1,18 +1,17 @@
+import { useRouter } from "expo-router";
 import React, { useEffect, useState } from "react";
-import { EditJob } from "../EditJob/EditJob";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { styles as externalStyles } from "../../../../assets/css";
 import Button from "../../../../components/elements/Button/Button";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
-import CustomModal from "../../../../components/elements/CustomModal/CustomModal";
-import CustomHeading from "../../../../components/elements/CustomHeading/CustomHeading";
-import { navigate } from "../../../../utils/navigationServices";
-import { updateMember } from "../../../../hooks/TeamMembers";
-import StandardInput from "../../../../components/elements/StandardInput/StandardInput";
 import CustomDropdown from "../../../../components/elements/CustomDropDown/CustomDropDown";
+import CustomHeading from "../../../../components/elements/CustomHeading/CustomHeading";
+import CustomModal from "../../../../components/elements/CustomModal/CustomModal";
+import StandardInput from "../../../../components/elements/StandardInput/StandardInput";
+import { updateMember } from "../../../../hooks/TeamMembers";
 
 const JobInfoCard = ({ user }: any) => {
   const [modalVisible, setModalVisible] = useState(false);
-
+  const router= useRouter();
   const handleOpenModel = () => {
     setTimeout(() => {
       setModalVisible(true);
@@ -115,7 +114,7 @@ const JobInfoCard = ({ user }: any) => {
         )}
 
         <TouchableOpacity
-          onPress={() => navigate("ManagePayroll")}
+          onPress={() => router.push("/managePayroll")}
           style={styles.managePayrollLink}
         >
           <Text

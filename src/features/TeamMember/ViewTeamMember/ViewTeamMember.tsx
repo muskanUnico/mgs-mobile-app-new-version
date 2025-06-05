@@ -13,7 +13,7 @@ import { getSingleMember } from "../../../hooks/TeamMembers";
 
 export const ViewTeamMember = ({ navigation, route , memberId}: any) => {
   let memberDetail = getSingleMember(memberId);
-  console.log(memberDetail)
+  // console.log(memberDetail)
   const user = memberDetail.data;
 
   const data = {

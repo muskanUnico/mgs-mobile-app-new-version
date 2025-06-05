@@ -1,20 +1,19 @@
-import { View, Text } from "react-native";
 import React, { useEffect, useState } from "react";
-import { updateMember } from "../../../hooks/Customer";
-import { useTheme } from "../../../context/ThemeContext";
-import Title from "../../../components/elements/Title/Title";
+import { StyleSheet, Text, View } from "react-native";
 import Button from "../../../components/elements/Button/Button";
-import { useUpdateActiveStatus } from "../../../hooks/TeamMembers";
-import WarningModal from "../../../components/elements/WarningModal/WarningModal";
 import CustomColorPicker from "../../../components/elements/ColorPicker/ColorPicker";
-import ColorSelectorfeature from "../../../features/ColorSelectorfeature/ColorSelectorfeature";
+import Title from "../../../components/elements/Title/Title";
+import WarningModal from "../../../components/elements/WarningModal/WarningModal";
 import CreateMemberForm from "../../../components/ui/TeamMember/CreateMemberForm/CreateMemberForm";
-import { StyleSheet } from "react-native";
+import { useTheme } from "../../../context/ThemeContext";
+import ColorSelectorfeature from "../../../features/ColorSelectorfeature/ColorSelectorfeature";
+import { updateMember } from "../../../hooks/Customer";
+import { useUpdateActiveStatus } from "../../../hooks/TeamMembers";
 
-const EditPersonalInfo = ({ navigation, route }: any) => {
+const EditPersonalInfo = ({ navigation, route , personalInfo}: any) => {
   const { theme } = useTheme();
   const [showModal, setShowModal] = useState(false);
-  const data = route.params.personalInfo;
+  const data = personalInfo;
 
   let defaultValue = {
     name: data?.name,

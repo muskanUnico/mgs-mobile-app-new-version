@@ -13,8 +13,8 @@ const RevenueReportActionScreen = ({ navigation, route }: any) => {
   return (
     <GlobalLoader>
       <SafeAreaView
-        style={[{ backgroundColor: theme.brandGreyColor },{paddingBottom:60}]}
-        className="min-h-screen"
+        style={[{flex:1, backgroundColor: theme.brandGreyColor },{paddingBottom:60}]}
+       
       >
         <RevenueReportActionTable route={route} navigation={navigation}  data= {parsedData} action = {action}/>
       </SafeAreaView>

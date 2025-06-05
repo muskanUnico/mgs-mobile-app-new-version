@@ -1,13 +1,13 @@
 //@ts-nocheck
+import { useRouter } from "expo-router";
 import React, { useRef, useState } from "react";
-import SelectRole from "../SelectRole/SelectRole";
-import { updateMember } from "../../../../hooks/TeamMembers";
+import { Pressable, Text, TouchableOpacity, View } from "react-native";
 import { styles as externalStyles } from "../../../../assets/css";
-import Button from "../../../../components/elements/Button/Button";
-import { View, Text, TouchableOpacity, Pressable } from "react-native";
-import CustomHeading from "../../../../components/elements/CustomHeading/CustomHeading";
 import CustomBottomSheet from "../../../../components/elements/BottomSheet/CustomBottomSheet";
-import { navigate } from "../../../../utils/navigationServices";
+import Button from "../../../../components/elements/Button/Button";
+import CustomHeading from "../../../../components/elements/CustomHeading/CustomHeading";
+import { updateMember } from "../../../../hooks/TeamMembers";
+import SelectRole from "../SelectRole/SelectRole";
 
 interface PermissionInfoCardProps {
   data: {
@@ -35,7 +35,7 @@ const PermissionInfoCard: React.FC<PermissionInfoCardProps> = ({
   const [formData, setFormData] = useState({
     role: role,
   });
-
+  const router = useRouter();
   return (
     <View style={externalStyles.card}>
       <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
@@ -57,7 +57,10 @@ const PermissionInfoCard: React.FC<PermissionInfoCardProps> = ({
       <View style={{ marginTop: 10 }}>
         <Text style={externalStyles.label}>PERMISSIONS</Text>
         <Pressable
-          onPress={() => navigate("ViewAccess", { roleId: role?.roleId })}
+          onPress={() => router.push({
+  pathname: "/viewAcess",
+  params: { roleId: role?.roleId },
+})}
         >
           <Text style={externalStyles.BlueText}>View Access</Text>
         </Pressable>
