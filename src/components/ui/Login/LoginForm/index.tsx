@@ -1,11 +1,10 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import {  StyleSheet, Text, View } from "react-native";
 
+import { router } from "expo-router";
 import CustomButton from "../../../elements/GradientButton/GradientBtn";
 import HiddenInput from "../../../elements/HiddenInput";
 import LoginInput from "../../../elements/LoginInput/LoginInput";
-import { navigate } from "../../../../utils/navigationServices";
-import { router } from "expo-router";
 
 // Define the interface for the LoginFormProps
 interface LoginFormProps {
@@ -51,7 +50,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
           forgot password?
         </Text>
       </View>
-    </View>
+   </View>
   );
 };
 

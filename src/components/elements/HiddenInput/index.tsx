@@ -1,12 +1,12 @@
+import { MaterialIcons } from "@expo/vector-icons";
 import React, { useState } from "react";
 import {
-  View,
+  StyleSheet,
   TextInput,
   TextInputProps,
   TouchableOpacity,
-  StyleSheet,
+  View,
 } from "react-native";
-import { MaterialIcons } from "@expo/vector-icons";
 import { styles as externalStyles } from "../../../assets/css";
 import { useTheme } from "../../../context/ThemeContext";
 
@@ -49,7 +49,8 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#d1d5db",
     borderRadius: 24,
-    paddingVertical: 8,
+    alignItems:"center",
+    paddingVertical:0,
     paddingHorizontal: 20,
     fontSize: 16,
   },
