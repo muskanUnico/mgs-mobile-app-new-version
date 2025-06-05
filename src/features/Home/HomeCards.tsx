@@ -1,11 +1,11 @@
 //@ts-nocheck
 import React, { useState } from "react";
 import { Dimensions, StyleSheet, View } from "react-native";
-import Carousel from "react-native-snap-carousel";
+import Carousel from "react-native-reanimated-carousel";
 import Card from "../../components/elements/Card/Card";
 import {
   useGetAllApprovedReports,
-  useGetAllReports
+  useGetAllReports,
 } from "../../hooks/Accounts/Accounts";
 
 const screenWidth = Dimensions.get("window").width;
@@ -17,8 +17,7 @@ const i4 = require("../../assets/images/a.png");
 const HomeCards = () => {
   const allreports = useGetAllReports();
   const allAppprovedRepots = useGetAllApprovedReports();
-
-
+  // console.log("allreports home---", allreports,allAppprovedRepots)
   const [activeSlide, setActiveSlide] = useState(0);
 
   const carouselItems = [
@@ -27,7 +26,9 @@ const HomeCards = () => {
       component: (
         <Card
           image={i1}
-          appointmentCount={allAppprovedRepots.approved?.myTodaysAppointments || 0}
+          appointmentCount={
+            allAppprovedRepots.approved?.myTodaysAppointments || 0
+          }
           cardTitle="My Today's Appointment"
           bgCustom="#e6e6e6"
           dollarIcon={false}
@@ -40,7 +41,9 @@ const HomeCards = () => {
       component: (
         <Card
           image={i2}
-          appointmentCount={allAppprovedRepots.approved?.thisWeekAppointments || 0}
+          appointmentCount={
+            allAppprovedRepots.approved?.thisWeekAppointments || 0
+          }
           cardTitle="This Week"
           bgCustom="#e6e6e6"
           dollarIcon={false}
@@ -53,7 +56,9 @@ const HomeCards = () => {
       component: (
         <Card
           image={i4}
-          appointmentCount={allAppprovedRepots.approved?.thisMonthAppointments || 0}
+          appointmentCount={
+            allAppprovedRepots.approved?.thisMonthAppointments || 0
+          }
           cardTitle="This Month"
           bgCustom="#e6e6e6"
           dollarIcon={false}
@@ -78,17 +83,16 @@ const HomeCards = () => {
 
   return (
     <View style={styles.container}>
-   
-     {/* <Carousel
+      <Carousel
         data={carouselItems}
         renderItem={renderItem}
-        sliderWidth={screenWidth}
-        itemWidth={screenWidth}
+        width={screenWidth}
+        height={200}
         loop
-        autoplay
-        autoplayInterval={4000}
+        autoPlay
+        autoPlayInterval={4000}
         onSnapToItem={(index) => setActiveSlide(index)}
-      />  */}
+      />
     </View>
   );
 };

@@ -1,3 +1,4 @@
+import CustomCrouselPagination from "@/src/components/elements/CustomCrouselPagination/CustomCrouselPagination";
 import React, { useState } from "react";
 import { Dimensions, StyleSheet, View } from "react-native";
 import Carousel from "react-native-reanimated-carousel";
@@ -79,19 +80,10 @@ const IvsEcards = () => {
         autoPlayInterval={5000}
         onSnapToItem={(index) => setActiveSlide(index)}
       />
-     <View style={styles.paginationContainer}>
-        {carouselItems.map((_, index) => (
-          <View
-            key={index}
-            style={[
-              styles.dot,
-              index === activeSlide
-                ? { backgroundColor: theme.brandColor }
-                : { backgroundColor: "#ccc" },
-            ]}
-          />
-        ))}
-      </View>
+       <CustomCrouselPagination
+        dotsLength={carouselItems.length}
+        activeDotIndex={activeSlide}
+      />
     </View>
   );
 };
@@ -103,18 +95,7 @@ const useStyles = () => {
     container: {
       alignItems: "center",
       marginVertical: 10,
-    },
-    paginationContainer: {
-    flexDirection: "row",
-    justifyContent: "center",
-    paddingVertical: 10,
-  },
-  dot: {
-    width: 8,
-    height: 8,
-    borderRadius: 4,
-    marginHorizontal: 5,
-  },
+    }
 });
 };
 export default IvsEcards;
