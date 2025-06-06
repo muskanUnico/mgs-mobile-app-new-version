@@ -1,29 +1,29 @@
 //@ts-nocheck
-import { View } from "react-native";
 import React, { useEffect, useRef, useState } from "react";
+import { View } from "react-native";
 
 // components
 import Loader from "../../../components/elements/Loader/Loader";
 import Title from "../../../components/elements/Title/Title";
 import AddNotes from "../../../components/ui/Customer/AddNotes/AddNotes";
+import BuyerSummary from "../../../components/ui/Customer/BuyerSummary/BuyerSummary";
+import CustomerActivity from "../../../components/ui/Customer/CustomerActivity/CustomerActivity";
+import EditPersonalDetails from "../../../components/ui/Customer/EditPersonalDetails/EditPersonalDetails";
+import PastAppointments from "../../../components/ui/Customer/PastAppointments/PastAppointments";
+import PersonalDetails from "../../../components/ui/Customer/PersonalDetails/PersonalDetails";
+import UpcomingAppointments from "../../../components/ui/Customer/UpcomingAppointments/UpcomingAppointments";
 import {
   getPastAppointments,
   getSingleCustomer,
   useUpdateCustomer,
 } from "../../../hooks/Customer";
-import ManagesCustomerCards from "../ManageCustomerCards/ManagesCustomerCards";
-import BuyerSummary from "../../../components/ui/Customer/BuyerSummary/BuyerSummary";
-import PastAppointments from "../../../components/ui/Customer/PastAppointments/PastAppointments";
-import PersonalDetails from "../../../components/ui/Customer/PersonalDetails/PersonalDetails";
-import CustomerActivity from "../../../components/ui/Customer/CustomerActivity/CustomerActivity";
-import UpcomingAppointments from "../../../components/ui/Customer/UpcomingAppointments/UpcomingAppointments";
-import EditPersonalDetails from "../../../components/ui/Customer/EditPersonalDetails/EditPersonalDetails";
 import { navigate } from "../../../utils/navigationServices";
+import ManagesCustomerCards from "../ManageCustomerCards/ManagesCustomerCards";
 
-const CustomerDetails = ({ navigation, route }: any) => {
+const CustomerDetails = ({ navigation, route, customerId }: any) => {
   const bottomSheetRef = useRef<any>(null);
-  let customerDetail = getSingleCustomer(route.params.customerId);
-  const appointments = getPastAppointments(route.params.customerId);
+  let customerDetail = getSingleCustomer(customerId);
+  const appointments = getPastAppointments(customerId);
 
   let customer = customerDetail.data && customerDetail.data.customer;
   let buyerSummary = customerDetail.data && customerDetail.data.buyerSummary;
@@ -50,7 +50,7 @@ const CustomerDetails = ({ navigation, route }: any) => {
   }, [customerDetail.data]);
 
   const { submit, loading } = useUpdateCustomer(
-    route.params.customerId,
+    customerId,
     formData,
     navigation,
     bottomSheetRef
@@ -73,15 +73,15 @@ const CustomerDetails = ({ navigation, route }: any) => {
             handleRelocate={() => navigate("IntakeForm", { id: customer?.id })}
           />
 
-          <UpcomingAppointments customerId={route.params.customerId} />
+          <UpcomingAppointments customerId={customerId} />
 
           <PastAppointments appointments={appointments} />
           <AddNotes data={customer} />
           <BuyerSummary data={buyerSummary} />
 
-          <CustomerActivity customerId={route.params.customerId} />
+          <CustomerActivity customerId={customerId} />
 
-          <ManagesCustomerCards customerId={route.params.customerId} />
+          <ManagesCustomerCards customerId={customerId} />
 
           {/* -------------- edit personal details ------------------*/}
 

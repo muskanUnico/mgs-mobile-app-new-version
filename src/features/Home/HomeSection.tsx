@@ -22,7 +22,7 @@ export const HomeSection = () => {
               style={styles.circle}
               onPress={() =>
                 router.push({
-                  pathname: "/appointmentreport",
+                  pathname: "/appointmentReport",
                   params: { y: 6000, ScrollDown: "true" },
                 })
               }
