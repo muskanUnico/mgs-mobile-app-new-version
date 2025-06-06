@@ -1,4 +1,5 @@
 import { useFocusEffect } from "@react-navigation/native";
+import { useRouter } from "expo-router";
 import { useCallback, useEffect, useState } from "react";
 import { MdDelete } from "react-icons/md";
 import { Alert } from "react-native";
@@ -20,15 +21,18 @@ export const useLongMenuLeaveRequest = ({
     btnSecName: "",
     title: "",
   });
-
- const option = [
-  { id: 2, title: "Delete", icon: <MdDelete />, line: false },
-];
+  const router = useRouter();
+  const option = [{ id: 2, title: "Delete", icon: <MdDelete />, line: false }];
 
   // handle three dot btn
   const handleOptions = (option: any, item: Leave) => {
     if (option.id == 1) {
-      navigate("RequestLeave", { item });
+      // navigate("RequestLeave", { item });
+      router.push({
+        pathname: "/requestLeave",
+        params: {
+        },
+      });
       //@ts-ignore
       setCurrentbtn({ currentOptions: option.id, id: item });
     } else if (option.id == 2) {

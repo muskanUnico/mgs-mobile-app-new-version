@@ -1,34 +1,30 @@
+import { Feather, FontAwesome } from "@expo/vector-icons";
 import moment from "moment";
-import { Divider } from "react-native-paper";
-import { FontAwesome } from "@expo/vector-icons";
-import { Calendar } from "react-native-calendars";
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { TouchableOpacity, View, Text, StyleSheet, ScrollView } from "react-native";
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Calendar } from "react-native-calendars";
+import { Divider } from "react-native-paper";
+import { styles as externalStyles } from "../../assets/css";
+import CustomBottomSheet from "../../components/elements/BottomSheet/CustomBottomSheet";
+import Button from "../../components/elements/Button/Button";
 import CustomModal from "../../components/elements/CustomModal/CustomModal";
+import CustomTextArea from "../../components/elements/CustomTextArea/CustomTextArea";
+import LongMenu from "../../components/elements/LongMenu/LongMenu";
+import WarningModal from "../../components/elements/WarningModal/WarningModal";
 import {
-  brandColor,
   iconColor1,
   iconColor5,
   iconColor9,
-  iconEmailColor,
+  iconEmailColor
 } from "../../constants/COLORS";
-import { styles as externalStyles } from "../../assets/css";
-import { LeaveCalenderChips } from "../../utils/tools";
-import LongMenu from "../../components/elements/LongMenu/LongMenu";
-import { useLongMenuLeaveRequest } from "../../hooks/LeaveCalender/LeaveRequest";
+import { useTheme } from "../../context/ThemeContext";
 import {
   useApprovedLeaveRequests,
   useDeleteLeaveRequests,
-  useGetAllLeaveRequests,
-  useRejectLeaveRequests,
+  useGetAllLeaveRequests, useLongMenuLeaveRequest, useRejectLeaveRequests
 } from "../../hooks/LeaveCalender/LeaveRequest";
-import { CheckCircleIcon } from "native-base";
-import Button from "../../components/elements/Button/Button";
-import CustomBottomSheet from "../../components/elements/BottomSheet/CustomBottomSheet";
-import CustomTextArea from "../../components/elements/CustomTextArea/CustomTextArea";
-import WarningModal from "../../components/elements/WarningModal/WarningModal";
 import { convertDatesToMarkedFormat } from "../../utils/functions";
-import { useTheme } from "../../context/ThemeContext";
+import { LeaveCalenderChips } from "../../utils/tools";
 
 const LeaveCalender = ({ markedDates }) => {
   const [open, setOpen] = useState(false);
@@ -82,13 +78,13 @@ const LeaveCalender = ({ markedDates }) => {
           {
             id: 3,
             title: "Approve / Reject",
-            icon: <CheckCircleIcon />,
+            icon: <Feather name="check-circle" size={20} color="green" />, 
             line: false,
           },
           {
             id: 1,
             title: "Edit Leave",
-            icon: <CheckCircleIcon />,
+            icon:  <Feather name="check-circle" size={20} color="green" />,
             line: true,
           }
         );

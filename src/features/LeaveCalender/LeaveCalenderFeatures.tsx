@@ -1,23 +1,24 @@
-import { Switch } from "react-native-paper";
-import React, { useState, useRef } from "react";
+import { borderColor } from "@/src/constants/COLORS";
+import { Feather } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
+import moment from "moment";
+import React, { useRef, useState } from "react";
 import {
   Alert,
-  View,
-  Text,
-  StyleSheet,
   Platform,
   ScrollView,
+  StyleSheet,
+  Switch,
+  Text,
+  View
 } from "react-native";
-import moment from "moment";
-import {
-  brandColor,
-  brandGreyColor,
-  brandPastelColor,
-  borderColor,
-} from "../../constants/COLORS";
 import { styles as externalStyles } from "../../assets/css";
+import CustomBottomSheet from "../../components/elements/BottomSheet/CustomBottomSheet";
 import Button from "../../components/elements/Button/Button";
+import CustomModal from "../../components/elements/CustomModal/CustomModal";
+import CustomTextArea from "../../components/elements/CustomTextArea/CustomTextArea";
 import WarningModal from "../../components/elements/WarningModal/WarningModal";
+import { useTheme } from "../../context/ThemeContext";
 import {
   useApprovedLeaveRequests,
   useDeleteLeaveRequests,
@@ -26,13 +27,7 @@ import {
   useRejectLeaveRequests,
 } from "../../hooks/LeaveCalender/LeaveRequest";
 import LeaveCalender from "./LeaveCalender";
-// import { CheckCircleIcon } from "native-base";
 import LeaveCalenderCard from "./LeaveCalenderCard";
-import CustomTextArea from "../../components/elements/CustomTextArea/CustomTextArea";
-import CustomBottomSheet from "../../components/elements/BottomSheet/CustomBottomSheet";
-import CustomModal from "../../components/elements/CustomModal/CustomModal";
-import { navigate } from "../../utils/navigationServices";
-import { useTheme } from "../../context/ThemeContext";
 
 const LeaveCalenderFeatures = () => {
   const leaveHook = useGetAllLeaveRequests();
@@ -44,6 +39,7 @@ const LeaveCalenderFeatures = () => {
   const [open, setOpen] = useState(false);
   const [comment, setComment] = useState("");
   const [isSwitchOn, setIsSwitchOn] = useState(false);
+  const router =useRouter();
 
   const onToggleSwitch = () => setIsSwitchOn(!isSwitchOn);
   const [currentbtn, setCurrentbtn] = useState({
@@ -58,6 +54,7 @@ const LeaveCalenderFeatures = () => {
     dates: [],
     status: true,
   });
+
 
   const {
     warning,
@@ -91,7 +88,9 @@ const LeaveCalenderFeatures = () => {
       <View style={[externalStyles.container, { marginVertical: 8 }]}>
         <Button
           title="Request Leave"
-          onPress={() => navigate("RequestLeave")}
+          onPress={() => 
+            router.push("/requestLeave")
+          }
         />
       </View>
 
@@ -126,13 +125,13 @@ const LeaveCalenderFeatures = () => {
               {
                 id: 3,
                 title: "Approve / Reject",
-                icon: <CheckCircleIcon />,
+                icon: <Feather name="check-circle" size={20} color="green" />,
                 line: false,
               },
               {
                 id: 1,
                 title: "Edit Leave",
-                icon: <CheckCircleIcon />,
+                icon: <Feather name="check-circle" size={20} color="green" />,
                 line: true,
               }
             );

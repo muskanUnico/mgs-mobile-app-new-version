@@ -1,6 +1,6 @@
+import { Feather } from "@expo/vector-icons";
 import React from "react";
 import { TouchableOpacity, View } from "react-native";
-// import { CheckIcon } from "native-base";
 
 interface ColorBoxProps {
   color: string;
@@ -8,7 +8,7 @@ interface ColorBoxProps {
   onPress?: () => void;
 }
 
-const ColorBox: React.FC<ColorBoxProps> = ({color, isSelected, onPress }) => {
+const ColorBox: React.FC<ColorBoxProps> = ({ color, isSelected, onPress }) => {
   return (
     <TouchableOpacity
       style={{
@@ -27,13 +27,13 @@ const ColorBox: React.FC<ColorBoxProps> = ({color, isSelected, onPress }) => {
         <View
           style={{
             position: "absolute",
-            top:-20,
-            right:-20,
+            top: -20,
+            right: -20,
             borderRadius: 50,
             padding: 30,
           }}
         >
-          {/* <CheckIcon /> */}
+          <Feather name="check" size={24} color="green" />
         </View>
       )}
     </TouchableOpacity>
