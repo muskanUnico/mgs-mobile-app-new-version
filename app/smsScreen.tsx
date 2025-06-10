@@ -8,12 +8,16 @@ import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { useLocalSearchParams } from "expo-router";
 import React, { useEffect, useRef, useState } from "react";
 import {
-    Modal,
-    ScrollView,
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-    View,
+  Keyboard,
+  KeyboardAvoidingView,
+  Modal,
+  Platform,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  View,
 } from "react-native";
 
 interface Message {
@@ -172,202 +176,229 @@ const SMSScreen = ({ route }: any) => {
         flex: 1,
         flexDirection: "column",
         position: "relative",
+        bottom:10,
         backgroundColor: "white",
-        paddingBottom: 50,
+        paddingBottom: 40,
+
       }}
     >
-      <ScrollView
-        // refreshControl={
-        //   <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        // }
-        onScroll={({ nativeEvent }) => {
-          if (nativeEvent.contentOffset.y <= 0 && !loading) {
-            loadMoreMessages();
-          }
-        }}
-        scrollEventThrottle={400}
-        style={{
-          flex: 1,
-          marginBottom: 16,
-          padding: 16,
-          backgroundColor: "#f3f4f6",
-        }}
-        ref={chatContainerRef}
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={{ flex: 1}}
+      keyboardVerticalOffset={Platform.OS === "ios" ? 110 : 95}
       >
-        {messages.map((message: any, index: number) => (
-          <View
-            key={index}
-            style={{
-              marginBottom: 16,
-              flexDirection: "row",
-              justifyContent:
-                message.type === "sent"
-                  ? "flex-end"
-                  : message.type === "appointment"
-                  ? "center"
-                  : "flex-start",
-            }}
-          >
-            {message.type === "appointment" ? (
-              <View
-                style={{
-                  marginTop: 16,
-                  borderTopWidth: 1,
-                  borderTopColor: "#d1d5db",
-                  paddingTop: 16,
-                  marginBottom: 28,
-                  borderRadius: 8,
-                }}
-              >
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <View style={{ flex: 1, paddingBottom: 0 }}>
+            <ScrollView
+              ref={chatContainerRef}
+               contentContainerStyle={{ padding: 16, paddingBottom: 10 }} 
+                keyboardShouldPersistTaps="handled"
+              // refreshControl={
+              //   <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+              // }
+              onScroll={({ nativeEvent }) => {
+                if (nativeEvent.contentOffset.y <= 0 && !loading) {
+                  loadMoreMessages();
+                }
+              }}
+              scrollEventThrottle={400}
+              style={{
+                flex: 1,
+                backgroundColor: "#f3f4f6",
+              }}
+            >
+              
+              {messages.map((message: any, index: number) => (
                 <View
+                  key={index}
                   style={{
-                    backgroundColor: "white",
-                    borderWidth: 1,
-                    borderColor: "gray",
-                    borderRadius: 8,
-                    justifyContent: "center",
-                    marginHorizontal: 32,
-                    padding: 16,
+                    marginBottom: 16,
+                    flexDirection: "row",
+                    justifyContent:
+                      message.type === "sent"
+                        ? "flex-end"
+                        : message.type === "appointment"
+                        ? "center"
+                        : "flex-start",
                   }}
                 >
-                  <View
-                    style={{ flex: 1, alignItems: "center", marginBottom: 8 }}
-                  >
+                  {message.type === "appointment" ? (
                     <View
                       style={{
+                        marginTop: 16,
+                        borderTopWidth: 1,
+                        borderTopColor: "#d1d5db",
+                        paddingTop: 16,
+                        // marginBottom: 28,
                         borderRadius: 8,
-                        backgroundColor: "#E5E7EB",
-                        padding: 8,
-                        marginRight: 12,
                       }}
                     >
-                      <Feather name="calendar" size={20} color="black" />
-                    </View>
-                    <View>
-                      <Text
+                      <View
                         style={{
-                          fontSize: 14,
-                          color: "#374151",
-                          fontWeight: "bold",
+                          backgroundColor: "white",
+                          borderWidth: 1,
+                          borderColor: "gray",
+                          borderRadius: 8,
+                          justifyContent: "center",
+                          marginHorizontal: 32,
+                          padding: 16,
                         }}
                       >
-                        {message.title}
+                        <View
+                          style={{
+                            flex: 1,
+                            alignItems: "center",
+                            marginBottom: 8,
+                          }}
+                        >
+                          <View
+                            style={{
+                              borderRadius: 8,
+                              backgroundColor: "#E5E7EB",
+                              padding: 8,
+                              marginRight: 12,
+                            }}
+                          >
+                            <Feather name="calendar" size={20} color="black" />
+                          </View>
+                          <View>
+                            <Text
+                              style={{
+                                fontSize: 14,
+                                color: "#374151",
+                                fontWeight: "bold",
+                              }}
+                            >
+                              {message.title}
+                            </Text>
+                            <Text style={{ fontSize: 12, color: "#6B7280" }}>
+                              {message.client}
+                            </Text>
+                          </View>
+                        </View>
+                        <TouchableOpacity>
+                          <Text
+                            style={{
+                              textAlign: "center",
+                              color: "#2563EB",
+                              textDecorationLine: "underline",
+                            }}
+                          >
+                            View appointment
+                          </Text>
+                        </TouchableOpacity>
+                      </View>
+                    </View>
+                  ) : (
+                    <View
+                      style={[
+                        {
+                          paddingTop: 8,
+                          paddingBottom: 4,
+                          paddingLeft: 8,
+                          paddingRight: 20,
+                          borderRadius: 12,
+                          shadowColor: "white",
+                          shadowOpacity: 0.8,
+                          shadowRadius: 10,
+                        },
+                        message.type === "sent"
+                          ? { backgroundColor: "#6B7280", color: "white" }
+                          : { backgroundColor: "white", color: "#4B5563" },
+                      ]}
+                    >
+                      {message.icon && message.type !== "appointment" && (
+                        <View
+                          style={{
+                            flexDirection: "row",
+                            alignItems: "flex-start",
+                          }}
+                        >
+                          <View
+                            style={{
+                              borderRadius: 8,
+                              backgroundColor: "#E5E7EB",
+                              padding: 4,
+                              marginRight: 12,
+                            }}
+                          >
+                            <MaterialIcons
+                              name="message"
+                              size={15}
+                              color="black"
+                            />
+                          </View>
+                          <View>
+                            <Text
+                              style={{
+                                fontSize: 12,
+                                fontWeight: "bold",
+                                color: "white",
+                              }}
+                            >
+                              {message.sender}
+                            </Text>
+                          </View>
+                        </View>
+                      )}
+                      <Text
+                        style={[
+                          { fontSize: 12 },
+                          message.type === "sent"
+                            ? { color: "white" }
+                            : { backgroundColor: "white", color: "#4B5563" },
+                        ]}
+                      >
+                        {message.text}
                       </Text>
-                      <Text style={{ fontSize: 12, color: "#6B7280" }}>
-                        {message.client}
+                      <Text
+                        style={{ marginTop: 4, fontSize: 12, color: "white" }}
+                      >
+                        {message.time}
                       </Text>
                     </View>
-                  </View>
-                  <TouchableOpacity>
-                    <Text
-                      style={{
-                        textAlign: "center",
-                        color: "#2563EB",
-                        textDecorationLine: "underline",
-                      }}
-                    >
-                      View appointment
-                    </Text>
-                  </TouchableOpacity>
+                  )}
                 </View>
+              ))}
+             
+             
+            </ScrollView>
+
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center",
+                width: "100%",
+                paddingHorizontal: 16,
+                paddingTop: 8,
+                // position: "absolute",
+                // bottom: 28
+              }}
+            >
+              <View>
+                <Entypo
+                  name="plus"
+                  size={24}
+                  color="black"
+                  onPress={() => updateState({ showPopup: !showPopup })}
+                />
               </View>
-            ) : (
-              <View
-                style={[
-                  {
-                    paddingTop: 8,
-                    paddingBottom: 4,
-                    paddingLeft: 8,
-                    paddingRight: 20,
-                    borderRadius: 12,
-                    shadowColor: "white",
-                    shadowOpacity: 0.8,
-                    shadowRadius: 10,
-                  },
-                  message.type === "sent"
-                    ? { backgroundColor: "#6B7280", color: "white" }
-                    : { backgroundColor: "white", color: "#4B5563" },
-                ]}
-              >
-                {message.icon && message.type !== "appointment" && (
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      alignItems: "flex-start",
-                    }}
-                  >
-                    <View
-                      style={{
-                        borderRadius: 8,
-                        backgroundColor: "#E5E7EB",
-                        padding: 4,
-                        marginRight: 12,
-                      }}
-                    >
-                      <MaterialIcons name="message" size={15} color="black" />
-                    </View>
-                    <View>
-                      <Text
-                        style={{
-                          fontSize: 12,
-                          fontWeight: "bold",
-                          color: "white",
-                        }}
-                      >
-                        {message.sender}
-                      </Text>
-                    </View>
-                  </View>
-                )}
-                <Text
-                  style={[
-                    { fontSize: 12 },
-                    message.type === "sent"
-                      ? { color: "white" }
-                      : { backgroundColor: "white", color: "#4B5563" },
-                  ]}
-                >
-                  {message.text}
-                </Text>
-                <Text style={{ marginTop: 4, fontSize: 12, color: "white" }}>
-                  {message.time}
-                </Text>
+
+              <View style={{ width: "60%" }}>
+                <CustomInput
+                  placeholder="Type a message"
+                  value={newMessage}
+                  onChangeText={(text) => updateState({ newMessage: text })}
+                />
               </View>
-            )}
+              <View style={{ width: "25%" }}>
+                <Button title=" Send" onPress={handleSendMessage} />
+              </View>
+            </View>
           </View>
-        ))}
-      </ScrollView>
-
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "center",
-          width: "100%",
-          paddingHorizontal: 16,
-          paddingBottom: 8,
-        }}
-      >
-        <View>
-          <Entypo
-            name="plus"
-            size={24}
-            color="black"
-            onPress={() => updateState({ showPopup: !showPopup })}
-          />
-        </View>
-
-        <View style={{ width: "60%" }}>
-          <CustomInput
-            placeholder="Type a message"
-            value={newMessage}
-            onChangeText={(text) => updateState({ newMessage: text })}
-          />
-        </View>
-        <View style={{ width: "25%" }}>
-          <Button title=" Send" onPress={handleSendMessage} />
-        </View>
-      </View>
+        </TouchableWithoutFeedback>
+      </KeyboardAvoidingView>
 
       <Modal
         visible={showPopup}

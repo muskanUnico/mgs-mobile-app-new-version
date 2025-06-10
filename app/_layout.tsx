@@ -4,7 +4,9 @@ import { TimeProvider } from "@/src/context/TimeTrackerContext";
 import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import { Drawer } from "expo-router/drawer";
+import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
+import { useEffect } from "react";
 import { AutocompleteDropdownContextProvider } from "react-native-autocomplete-dropdown";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { SafeAreaProvider } from "react-native-safe-area-context";
@@ -41,16 +43,27 @@ function AuthenticatedDrawer() {
           }}
         />
       </Drawer>
+      
     </>
   );
 }
 
 export default function RootLayout() {
-  const [loaded] = useFonts({
+
+  useEffect(() => {
+    SplashScreen.preventAutoHideAsync();  
+  }, []);
+  const [fontsLoaded] = useFonts({
     SpaceMono: require("../src/assets/fonts/Poppins-Regular.ttf"),
   });
 
-  if (!loaded) {
+  useEffect(() => {
+    if (fontsLoaded) {
+      SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded]);
+
+  if (!fontsLoaded) {
     return null;
   }
 
