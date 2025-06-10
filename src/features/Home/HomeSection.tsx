@@ -23,7 +23,7 @@ export const HomeSection = () => {
               onPress={() =>
                 router.push({
                   pathname: "/appointmentReport",
-                  params: { y: 6000, ScrollDown: "true" },
+                  params: { y: 520, ScrollDown: "true" },
                 })
               }
             >
@@ -41,8 +41,8 @@ export const HomeSection = () => {
               style={styles.circle}
               onPress={() =>
                 router.push({
-                  pathname: "/appointmentreport",
-                  params: { y: 6000, ScrollDown: "true" },
+                  pathname: "/appointmentReport",
+                  params: { y: 500, ScrollDown: "true" },
                 })
               }
             >
@@ -60,8 +60,8 @@ export const HomeSection = () => {
               style={styles.circle}
               onPress={() =>
                 router.push({
-                  pathname: "/appointmentreport",
-                  params: { y: 6000, ScrollDown: "true" },
+                  pathname: "/appointmentReport",
+                  params: { y: 800, ScrollDown: "true" },
                 })
               }
             >
@@ -79,8 +79,8 @@ export const HomeSection = () => {
               style={styles.circle}
               onPress={() =>
                 router.push({
-                  pathname: "/appointmentreport", 
-                  params: { y: 6000, ScrollDown: "true" },
+                  pathname: "/appointmentReport", 
+                  params: { y: 800, ScrollDown: "true" },
                 })
               }
             >

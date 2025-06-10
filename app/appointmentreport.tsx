@@ -14,17 +14,19 @@ import Top5TeamMembers from "@/src/features/Accounts/Analytics/Top_5_Team_Member
 import AppointmentReportFeatures from "@/src/features/Accounts/AppointmentReport/AppointmentReportFeatures";
 import { SecurePageByPackage } from "@/src/middleware/PermissionAccess";
 import { useFocusEffect } from "@react-navigation/native";
+import { useLocalSearchParams } from "expo-router";
 
 const AppointmentReportScreen = ({ navigation, route }: any) => {
   const scrollViewRef = useRef(null);
   const { theme } = useTheme();
+  const params = useLocalSearchParams();
 
   useFocusEffect(
     useCallback(() => {
-      // if (route.params?.ScrollDown) {
-      //   //@ts-ignore
-        // scrollViewRef.current?.scrollToEnd({ animated: true });               //needed to fix
-      // }
+      if (params?.ScrollDown) {
+        //@ts-ignore
+        scrollViewRef.current?.scrollToEnd({ animated: true });               //needed to fix
+      }
     }, [])
   );
 
