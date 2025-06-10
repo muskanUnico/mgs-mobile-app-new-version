@@ -7,6 +7,7 @@ import Button from "../../components/elements/Button/Button";
 import PermissionCard from "../../components/ui/Permissions/PermissionCard/PermissionCard";
 import { FilterBorder, placeholderTextColor } from "../../constants/COLORS";
 import MaterialCommunityIcon from "react-native-vector-icons/MaterialCommunityIcons";
+import { router } from "expo-router";
 
 export const AllPermissions = ({ navigation }: any) => {
   const styles = useStyles();
@@ -25,7 +26,10 @@ export const AllPermissions = ({ navigation }: any) => {
         <Button
           title="Create Role"
           loading={false}
-          onPress={() => navigation.navigate("create-permission")}
+          onPress={() => 
+            // navigation.navigate("create-permission")
+             router.push("/createPermission")
+          }
         />
       </View>
       <View style={styles.searchContainer}>
