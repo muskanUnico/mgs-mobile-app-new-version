@@ -1,10 +1,9 @@
+import Title from "@/src/components/elements/Title/Title";
+import { useTheme } from "@/src/context/ThemeContext";
+import GlobalLoader from "@/src/features/GlobalLoader/GlobalLoader";
+import MyProfileFeature from "@/src/features/MyProfile/MyProfileFeature";
 import React from "react";
 import { SafeAreaView } from "react-native";
-import { brandGreyColor } from "@/src//constants/COLORS";
-import Title from "@/src/components/elements/Title/Title";
-import MyProfileFeature from "@/src/features/MyProfile/MyProfileFeature";
-import GlobalLoader from "@/src/features/GlobalLoader/GlobalLoader";
-import { useTheme } from "@/src/context/ThemeContext";
 
 const MyProfileScreen = ({ navigation }: any) => {
   const { theme } = useTheme();
@@ -14,7 +13,7 @@ const MyProfileScreen = ({ navigation }: any) => {
       <SafeAreaView
         style={[
           { backgroundColor: theme.brandGreyColor },
-          { minHeight: "100%" },
+          { minHeight: "100%" , marginBottom:60},
         ]}
       >
         <Title navigation={navigation} title="My Profile" />
