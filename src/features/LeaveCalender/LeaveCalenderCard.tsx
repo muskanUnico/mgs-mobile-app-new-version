@@ -1,25 +1,23 @@
-import React from "react";
-import { Text, View, StyleSheet } from "react-native";
-import { Divider } from "react-native-paper";
 import { FontAwesome } from "@expo/vector-icons";
+import React from "react";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Divider } from "react-native-paper";
+import { styles as externalStyles } from "../../assets/css";
+import LongMenu from "../../components/elements/LongMenu/LongMenu";
 import {
   iconColor1,
   iconColor5,
   iconColor9,
   iconEmailColor,
 } from "../../constants/COLORS";
-import LongMenu from "../../components/elements/LongMenu/LongMenu";
-import { styles as externalStyles } from "../../assets/css";
-import { LeaveCalenderChips } from "../../utils/tools";
-import { TouchableOpacity } from "react-native";
 import { useTheme } from "../../context/ThemeContext";
+import { LeaveCalenderChips } from "../../utils/tools";
 
 const LeaveCalenderCard = ({
   handleOptions,
   option,
   setLeaveDates,
   setOpen,
-  navigation,
   item,
   index,
 }: any) => {
@@ -47,7 +45,7 @@ const LeaveCalenderCard = ({
           <LongMenu
             options={option}
             handleOptions={(option: any) =>
-              handleOptions(option, item, navigation)
+              handleOptions(option, item)
             }
           />
         </View>
