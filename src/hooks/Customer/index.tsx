@@ -1,16 +1,19 @@
-import { useCallback, useState } from "react";
-import {
-  Customer,
-  BookingResults,
-  PaymentResults,
-  Data,
-} from "../../interface/Customer";
-import { Alert } from "react-native";
-import { removeEmptyValues } from "../../utils/tools";
-import { goBack, navigate } from "../../utils/navigationServices";
 import { useFocusEffect } from "@react-navigation/native";
+import { useRouter } from "expo-router";
+import { useCallback, useState } from "react";
+import { Alert } from "react-native";
+import {
+  BookingResults,
+  Customer,
+  Data,
+  PaymentResults,
+} from "../../interface/Customer";
 import { CustomerService } from "../../services/Customer/Customer";
 import { TeamMemberService } from "../../services/TeamMember/TeamMember";
+import { goBack } from "../../utils/navigationServices";
+import { removeEmptyValues } from "../../utils/tools";
+
+const router= useRouter();
 
 export const getCustomers = ({ defaultParams }: any) => {
   const [data, setdata] = useState<Customer[]>([]);
@@ -112,8 +115,9 @@ export const updateMember = (memberId: string) => {
       })
       .then((res) => {
         if (res?.success) {
+          console.log("Update response:", res);
           Alert.alert("Member updated successfully");
-          navigate("AllTeamMember");
+          router.push("/allTeamMember");
         }
       })
       .finally(() => {
@@ -138,7 +142,7 @@ export const createMember = () => {
       .then((res) => {
         if (res?.success) {
           Alert.alert("Member created successfully");
-          navigate("AllTeamMember");
+           router.push("/allTeamMember");
         }
       })
       .finally(() => {
@@ -435,7 +439,11 @@ export const CreateCustomer = (navigation: any) => {
             RefId: "",
             dob: "",
           });
-          navigation.navigate("AllCustomer", { updatestate: 1 });
+          // navigation.navigate("AllCustomer", { updatestate: 1 });
+          router.push({
+            pathname:"/allCustomer",
+            params: { updateState: 1 },
+          });
         }
       })
       .catch((err) => {
@@ -465,7 +473,11 @@ export const useUpdateCustomer = (
           setLoading(true);
           bottomSheetRef.current.close();
           Alert.alert("Updated Successfully");
-          navigation.navigate("AllCustomer", { updateState: 1 });
+          // navigation.navigate("AllCustomer", { updateState: 1 });
+           router.push({
+            pathname:"/allCustomer",
+            params: { updateState: 1 },
+          });
         }
       })
       .catch((err) => {

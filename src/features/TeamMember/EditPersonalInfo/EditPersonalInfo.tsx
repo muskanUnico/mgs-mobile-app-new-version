@@ -13,8 +13,10 @@ import { useUpdateActiveStatus } from "../../../hooks/TeamMembers";
 const EditPersonalInfo = ({ navigation, route , personalInfo}: any) => {
   const { theme } = useTheme();
   const [showModal, setShowModal] = useState(false);
-  const data = personalInfo;
+  const data = JSON.parse(personalInfo);
+  
 
+ 
   let defaultValue = {
     name: data?.name,
     email: data?.email,
@@ -31,7 +33,7 @@ const EditPersonalInfo = ({ navigation, route , personalInfo}: any) => {
     handleStatus(data?.id as string, data.active);
   };
 
-  const updateHook = updateMember(data?.id as string);
+  const updateHook = updateMember(data?.id as string );
   const [selectedColor, setSelectedColor] = useState(data?.color);
 
   const updateState = (data: any) => {

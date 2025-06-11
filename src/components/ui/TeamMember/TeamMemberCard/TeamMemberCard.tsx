@@ -52,14 +52,17 @@ const TeamMemberCard = ({ item, index, showDeleteModal }: any) => {
 
   const [toggle, setToggle] = useState(item.staffHours?.onlineBooking || false);
 
-  const handleSubmit = (onlineBooking: any) => {
-    TeamMemberService.updateStaffHours(item.id, {
-      onlineBooking: onlineBooking,
-      timetable: item.staffHours?.timetable || EmptyTimetableExample,
-    }).then((res) => {
-      setToggle(onlineBooking);
-    });
-  };
+
+  const handleSubmit = (onlineBooking: boolean) => {
+  setToggle(onlineBooking);
+  TeamMemberService.updateStaffHours(item.id, {
+    onlineBooking,
+    timetable: item.staffHours?.timetable || EmptyTimetableExample,
+  }).catch(() => {
+    // 3. If API fails, revert the toggle
+    setToggle(!onlineBooking);
+  });
+};
   const { theme } = useTheme();
 
   return (

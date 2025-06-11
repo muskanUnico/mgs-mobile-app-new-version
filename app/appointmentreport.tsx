@@ -42,7 +42,7 @@ const AppointmentReportScreen = ({ navigation, route }: any) => {
         <AppointmentReportFeatures />
         <Top5Services />
         <Top5GrossingServices />
-
+        
         <Bottom5Services />
         <Top5TeamMembers />
         <Top5BookableTimeslot />
