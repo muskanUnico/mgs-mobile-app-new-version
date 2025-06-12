@@ -4,14 +4,12 @@ import { useRouter } from "expo-router";
 import moment from "moment";
 import React, { useRef, useState } from "react";
 import {
-  Alert,
-  Platform,
-  ScrollView,
+  Alert, Platform, ScrollView,
   StyleSheet,
   Switch,
   Text,
   View
-} from "react-native";
+} from 'react-native';
 import { styles as externalStyles } from "../../assets/css";
 import CustomBottomSheet from "../../components/elements/BottomSheet/CustomBottomSheet";
 import Button from "../../components/elements/Button/Button";
@@ -105,7 +103,7 @@ const LeaveCalenderFeatures = () => {
             isSwitchOn ? theme.brandPastelColor : theme.brandGreyColor
           }
           trackColor={{ true: theme.brandColor, false: borderColor }}
-          style={[styles.switch, { marginHorizontal: 4 }]}
+          style={styles.switch}
         />
         <Text style={[externalStyles.label, { color: theme.brandColor }]}>
           CALENDAR VIEW
@@ -125,13 +123,13 @@ const LeaveCalenderFeatures = () => {
               {
                 id: 3,
                 title: "Approve / Reject",
-                icon: <Feather name="check-circle" size={20} color="green" />,
+                icon: <Feather name="check-circle" size={18} color="green" />,
                 line: false,
               },
               {
                 id: 1,
                 title: "Edit Leave",
-                icon: <Feather name="check-circle" size={20} color="green" />,
+                icon: <Feather name="edit" size={16} color="#6B7280" />,
                 line: true,
               }
             );
@@ -214,9 +212,10 @@ const styles = StyleSheet.create({
   },
 
   switch: {
-    ...(Platform.OS === "ios" && {
+   ...(Platform.OS === "ios" && {
       transform: [{ scaleX: 0.7 }, { scaleY: 0.7 }],
     }),
+    marginHorizontal: 4,
   },
 });
 

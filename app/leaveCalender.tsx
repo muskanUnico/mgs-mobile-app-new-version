@@ -14,7 +14,7 @@ import LeaveCalenderFeatures from "@/src/features/LeaveCalender/LeaveCalenderFea
       <SafeAreaView
         style={[
           { backgroundColor: theme.brandGreyColor },
-          { minHeight: "100%" },
+          { minHeight: "100%", marginBottom: 60},
         ]}
       >
         <Title navigation={navigation} title="Leave Calendar" />
