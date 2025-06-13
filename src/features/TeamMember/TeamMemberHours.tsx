@@ -1,33 +1,27 @@
 //@ts-nocheck
-import React, { useState, useCallback, useEffect } from "react";
-import moment from "moment";
-import {
-  View,
-  Text,
-  Switch,
-  TouchableOpacity,
-  StyleSheet,
-  TouchableWithoutFeedback,
-  Platform,
-} from "react-native";
-import { convertTimes } from "./features";
-import GlobalLoader from "../GlobalLoader/GlobalLoader";
 import { useFocusEffect } from "@react-navigation/native";
-import Title from "../../components/elements/Title/Title";
-import { styles as externalStyles } from "../../assets/css";
-import DateTimePicker from "@react-native-community/datetimepicker";
-import { updateStaffHours } from "../../hooks/TeamMembers/StaffHours";
+import moment from "moment";
+import React, { useCallback, useEffect, useState } from "react";
 import {
-  borderColor,
-  brandBlackColor,
-  brandColor,
-  brandGreyColor,
-  brandPastelColor,
-} from "../../constants/COLORS";
+  Platform,
+  StyleSheet,
+  Switch,
+  Text,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  View,
+} from "react-native";
+import { styles as externalStyles } from "../../assets/css";
 import Button from "../../components/elements/Button/Button";
-import CustomDuration from "../Appointment/CreateAppointment/CustomDuration";
-import TimePickerModal from "./TimePickerModal";
+import Title from "../../components/elements/Title/Title";
+import {
+  borderColor
+} from "../../constants/COLORS";
 import { useTheme } from "../../context/ThemeContext";
+import { updateStaffHours } from "../../hooks/TeamMembers/StaffHours";
+import GlobalLoader from "../GlobalLoader/GlobalLoader";
+import { convertTimes } from "./features";
+import TimePickerModal from "./TimePickerModal";
 
 interface TimeSlot {
   start_time: moment.Moment;
@@ -41,9 +35,11 @@ interface DayAvailability {
 
 interface StaffMemberModalProps {
   route: any;
+  user?: any; 
+  navigation?: any;
 }
-const TeamMemberHours = ({ navigation, route }: StaffMemberModalProps) => {
-  const user = route.params.user;
+const TeamMemberHours = ({ navigation, route , user}: StaffMemberModalProps) => {
+  // const user = route.params.user;
   let timetable = user.staffHours?.timetable;
   const updateHours = updateStaffHours(user.id);
   const [showPicker, setShowPicker] = useState(false);

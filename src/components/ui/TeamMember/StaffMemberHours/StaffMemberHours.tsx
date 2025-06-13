@@ -1,9 +1,9 @@
+import { router } from "expo-router";
 import React from "react";
 import { Text, View } from "react-native";
-import Button from "../../../elements/Button/Button";
-import { convertSchedule } from "../../../../utils/tools";
-import { navigate } from "../../../../utils/navigationServices";
 import { styles as externalStyles } from "../../../../assets/css";
+import { convertSchedule } from "../../../../utils/tools";
+import Button from "../../../elements/Button/Button";
 import CustomHeading from "../../../elements/CustomHeading/CustomHeading";
 
 const StaffMemberHoursCard = ({ user }: any) => {
@@ -50,7 +50,13 @@ const StaffMemberHoursCard = ({ user }: any) => {
         })}
       </View>
       <Button
-        onPress={() => navigate("teamMemberHorus", { user })}
+        onPress={() => 
+          // navigate("teamMemberHorus", { user })
+          router.push({
+            pathname: "/teamMemberHours",
+            params: { user: JSON.stringify(user)},
+          })
+        }
         title="Manage team hours"
       />
     </View>

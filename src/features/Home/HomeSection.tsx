@@ -23,7 +23,7 @@ export const HomeSection = () => {
               onPress={() =>
                 router.push({
                   pathname: "/appointmentReport",
-                  params: { y: 520, ScrollDown: "true" },
+                  params: { y: 3000, ScrollDown: "true" },
                 })
               }
             >
@@ -42,7 +42,7 @@ export const HomeSection = () => {
               onPress={() =>
                 router.push({
                   pathname: "/appointmentReport",
-                  params: { y: 500, ScrollDown: "true" },
+                  params: { y: 1400, ScrollDown: "true" },
                 })
               }
             >
@@ -80,7 +80,7 @@ export const HomeSection = () => {
               onPress={() =>
                 router.push({
                   pathname: "/appointmentReport", 
-                  params: { y: 800, ScrollDown: "true" },
+                  params: { y: 2500, ScrollDown: "true" },
                 })
               }
             >

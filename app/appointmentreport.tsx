@@ -13,21 +13,26 @@ import Top5TeamMembers from "@/src/features/Accounts/Analytics/Top_5_Team_Member
 // import AppointmentReportFeatures from "@/src/features/Accounts/AppointmentReport/AppointmentReportFeatures";
 import AppointmentReportFeatures from "@/src/features/Accounts/AppointmentReport/AppointmentReportFeatures";
 import { SecurePageByPackage } from "@/src/middleware/PermissionAccess";
-import { useFocusEffect } from "@react-navigation/native";
-import { useLocalSearchParams } from "expo-router";
+import { useFocusEffect, useLocalSearchParams } from "expo-router";
 
 const AppointmentReportScreen = ({ navigation, route }: any) => {
-  const scrollViewRef = useRef(null);
+  const scrollViewRef = useRef<ScrollView>(null);
   const { theme } = useTheme();
   const params = useLocalSearchParams();
 
+
+
   useFocusEffect(
     useCallback(() => {
-      if (params?.ScrollDown) {
-        //@ts-ignore
-        scrollViewRef.current?.scrollToEnd({ animated: true });               //needed to fix
-      }
-    }, [])
+    if (params?.y) {
+      const y = Number(params.y);
+      const timer = setTimeout(() => {
+        scrollViewRef.current?.scrollTo({ y, animated: true });
+      }, 500); 
+
+      return () => clearTimeout(timer);
+    }
+    }, [params?.y])
   );
 
   return (

@@ -85,7 +85,7 @@ export const styles = StyleSheet.create({
   },
   description: {
     fontSize: 13,
-    marginBottom: 10,
+    marginBottom: 8,
     color: '#6B7280',
     fontFamily: "Regular",
 
