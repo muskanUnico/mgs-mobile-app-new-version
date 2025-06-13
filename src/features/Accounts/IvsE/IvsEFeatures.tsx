@@ -1,6 +1,6 @@
 //@ts-nocheck
 import { MaterialIcons } from "@expo/vector-icons";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import CustomPagination from "../../../components/elements/CustomPagination/CustomPagination";
 import LineChartTwo from "../../../components/elements/LineChart/LineChart";
@@ -62,22 +62,21 @@ export const IvsEFeatures = () => {
     }, 1000);
   };
 
-  const lineData = totalRevenueChartFormateData(
-    chartData.data.results,
-    filter != "Monthly" ? true : false
-  );
-  const lineData2 = totalExpenseChartFormateData(
-    chartData.data.results,
-    filter != "Monthly" ? true : false
-  );
-  const lineData3 = ProfitChartFormateData(
-    chartData.data.results,
-    filter != "Monthly" ? true : false
-  );
-  const xAxisLabels = currentMonthChartFormateData(
-    chartData.data.results,
-    filter != "Monthly" ? true : false
-  );
+  const [lineData, setLineData] = useState([]);
+const [lineData2, setLineData2] = useState([]);
+const [lineData3, setLineData3] = useState([]);
+const [xAxisLabels, setXAxisLabels] = useState([]);
+
+ useEffect(() => {
+  if (chartData?.data?.results?.length > 1) {
+    const isNotMonthly = filter !== "Monthly";
+
+    setLineData(totalRevenueChartFormateData(chartData.data.results, isNotMonthly));
+    setLineData2(totalExpenseChartFormateData(chartData.data.results, isNotMonthly));
+    setLineData3(ProfitChartFormateData(chartData.data.results, isNotMonthly));
+    setXAxisLabels(currentMonthChartFormateData(chartData.data.results, isNotMonthly));
+  }
+}, [filter]);
 
   return (
     <>

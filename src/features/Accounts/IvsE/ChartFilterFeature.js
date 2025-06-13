@@ -17,6 +17,10 @@ const ChartFilterFeature = ({ setParams, setFilter, filter }) => {
   });
 
   useEffect(() => {
+    handleResetFilter();
+}, []);
+
+  useEffect(() => {
     if (chooseOptions == "fixed") {
       setParams({
         from: getLastDate(filter),
