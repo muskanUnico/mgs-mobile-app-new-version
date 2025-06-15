@@ -5,20 +5,14 @@ import React, { useEffect, useState } from "react";
 // utils
 import { formatDateForFilter, getLastDate } from "../../../utils/tools";
 
-
 const ChartFilterFeature = ({ setParams, setFilter, filter }) => {
-  // filter logic
   const [chooseOptions, setChooseOption] = useState("fixed");
 
-  //---------------- Date Range (start) ---------------
   const [dateRange, setDateRange] = useState({
-    from: moment().subtract(1, 'months').toDate(),
+    from: moment().subtract(1, "months").toDate(),
     to: new Date(),
   });
 
-  useEffect(() => {
-    handleResetFilter();
-}, []);
 
   useEffect(() => {
     if (chooseOptions == "fixed") {
@@ -34,11 +28,10 @@ const ChartFilterFeature = ({ setParams, setFilter, filter }) => {
     }
   }, [dateRange, filter]);
 
-  // handle reset filter button
   const handleResetFilter = () => {
     setFilter("");
     setDateRange({
-      from: moment().subtract(1, 'months').toDate(),
+      from: moment().subtract(1, "months").toDate(),
       to: new Date(),
     });
   };

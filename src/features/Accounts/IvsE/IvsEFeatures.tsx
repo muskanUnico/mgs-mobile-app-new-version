@@ -59,7 +59,7 @@ export const IvsEFeatures = () => {
     }
     setTimeout(() => {
       bottomSheetRef.current.open();
-    }, 1000);
+    }, 500);
   };
 
   const [lineData, setLineData] = useState([]);

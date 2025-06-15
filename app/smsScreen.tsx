@@ -303,8 +303,8 @@ const SMSScreen = ({ route }: any) => {
                           shadowRadius: 10,
                         },
                         message.type === "sent"
-                          ? { backgroundColor: "#6B7280", color: "white" }
-                          : { backgroundColor: "white", color: "#4B5563" },
+                          ? { backgroundColor: "#6B7280" }
+                          : { backgroundColor: "white" },
                       ]}
                     >
                       {message.icon && message.type !== "appointment" && (

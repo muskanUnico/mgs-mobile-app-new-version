@@ -34,7 +34,7 @@ const EditPermission = ({ navigation, route }: any) => {
   const roleData = getSingleRole(params?.id);
   const [active, setActive] = useState(0);
   const [title, setTitle] = useState("");
-  const routwer = useRouter();
+  const router = useRouter();
 
   const { permissionData, setpermissionData, filteredPermissions } =
     managePermissionData();
@@ -52,8 +52,10 @@ const EditPermission = ({ navigation, route }: any) => {
   };
 
   useEffect(() => {
-    setTitle(roleData.data?.title);
-    setSwitchValue(roleData.data?.fullAccess);
+   if (roleData?.data) {
+    setTitle(roleData.data.title || "");
+    setSwitchValue(roleData.data.fullAccess || false);
+  }
   }, [roleData.data]);
 
   // handle submit
@@ -70,6 +72,7 @@ const EditPermission = ({ navigation, route }: any) => {
       (err) => {
         setLoading(false);
         Alert.alert(err.response?.data?.message || "An error occurred");
+         return;
       }
     );
 
