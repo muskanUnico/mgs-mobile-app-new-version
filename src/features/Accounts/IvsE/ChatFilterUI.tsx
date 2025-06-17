@@ -1,10 +1,10 @@
+import moment from "moment";
 import React from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import Button from "../../../components/elements/Button/Button";
 import CustomDropDown from "../../../components/elements/CustomDropDown/CustomDropDown";
 import StartEndDatePicker from "../../../components/elements/StartEndDatePicker/StartEndDatePicker";
 import { useTheme } from "../../../context/ThemeContext";
-import moment from "moment";
 
 interface HeaderTitleProps {
   title: string;
@@ -63,7 +63,7 @@ const ChatFilterUI: React.FC<ReportHeaderProps> = ({
     { label: "Range", value: "range" },
   ];
 
-  const handleDangeRangeChange = (type: "from" | "to", date: Date | null) => {
+  const handleDateRangeChange = (type: "from" | "to", date: Date | null) => {
     setDateRange({ ...dateRange, [type]: date });
     setFilter("fixed");
   };
@@ -110,7 +110,7 @@ const ChatFilterUI: React.FC<ReportHeaderProps> = ({
           <StartEndDatePicker
             endDate={dateRange.from}
             startDate={dateRange.to}
-            onDatesSelected={handleDangeRangeChange}
+            onDatesSelected={handleDateRangeChange}
           />
         )}
       </View>
