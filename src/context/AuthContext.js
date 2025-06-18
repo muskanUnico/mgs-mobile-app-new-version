@@ -1,6 +1,6 @@
-import { TeamMemberService } from "../services/TeamMember/TeamMember";
 import { createContext, useContext, useEffect, useState } from "react";
 import { CMSServices } from "../services/CMS";
+import { TeamMemberService } from "../services/TeamMember/TeamMember";
 
 const AuthContext = createContext();
 

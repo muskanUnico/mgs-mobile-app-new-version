@@ -1,3 +1,4 @@
+import Loader from "@/src/components/elements/Loader/Loader";
 import Header from "@/src/components/ui/Header/Header";
 import { brandColor } from "@/src/constants/COLORS";
 import { TimeProvider } from "@/src/context/TimeTrackerContext";
@@ -14,59 +15,67 @@ import DrawerContent from "../src/components/ui/DrawerContent/DrawerContent";
 import { AuthProvider, useAuth } from "../src/context/AuthContext";
 import { ThemeProvider } from "../src/context/ThemeContext";
 
-function AuthenticatedDrawer() {
-  const { user, isLoading } = useAuth();
 
-  if (!isLoading) {
-    return null;
-  }
 
-  return !user ? (
-    <Stack>
-      <Stack.Screen name="index" options={{ headerShown: false }} />
-      <Stack.Screen name="+not-found" />
-    </Stack>
-  ) : (
-    <>
-      <Drawer
-        screenOptions={{
+function AuthenticatedDrawer({ user }: { user: any }) {
+  return (
+    <Drawer
+      screenOptions={{
+        headerShown: true,
+        header: (props) => <Header {...props} />,
+        drawerStyle: { backgroundColor: brandColor, width: "74%" },
+      }}
+      drawerContent={(props) => <DrawerContent {...props} />}
+    >
+      <Drawer.Screen
+        name="(tabs)"
+        options={{
           headerShown: true,
-          header: (props) => <Header {...props} />,
-          drawerStyle: { backgroundColor: brandColor, width: "74%" },
         }}
-        drawerContent={(props) => <DrawerContent {...props} />}
-      >
-        <Drawer.Screen
-          name="(tabs)"
-          options={{
-            headerShown: true,
-          }}
-        />
-      </Drawer>
-      
-    </>
+      />
+    </Drawer>
   );
 }
 
-export default function RootLayout() {
 
-  useEffect(() => {
-    SplashScreen.preventAutoHideAsync();  
-  }, []);
+
+// Separate this from RootLayout — it will be wrapped by AuthProvider
+function RootLayoutInner() {
   const [fontsLoaded] = useFonts({
     SpaceMono: require("../src/assets/fonts/Poppins-Regular.ttf"),
   });
 
+  const { user, isLoading } = useAuth();
+
   useEffect(() => {
-    if (fontsLoaded) {
+    SplashScreen.preventAutoHideAsync();
+  }, []);
+
+  useEffect(() => {
+    if (fontsLoaded && isLoading) {
       SplashScreen.hideAsync();
     }
-  }, [fontsLoaded]);
+  }, [fontsLoaded, isLoading]);
 
-  if (!fontsLoaded) {
-    return null;
-  }
+  if (!fontsLoaded ||  !isLoading) return <Loader/>;
 
+  return  !user ? (
+    <Stack>
+      <Stack.Screen name="index" options={{ headerShown: false }} />
+        <Stack.Screen name="forgot-password" options={{ headerShown: false }} />
+    </Stack>
+  ) : (
+    <>
+      <AuthenticatedDrawer user={user} />
+      <StatusBar style="dark" backgroundColor={brandColor} />
+    </>
+  );
+}
+
+
+
+
+export default function RootLayout() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <SafeAreaProvider>
@@ -74,13 +83,15 @@ export default function RootLayout() {
           <AuthProvider>
             <ThemeProvider>
               <TimeProvider>
-                <AuthenticatedDrawer />
+                <RootLayoutInner /> 
               </TimeProvider>
             </ThemeProvider>
           </AuthProvider>
         </AutocompleteDropdownContextProvider>
-        <StatusBar style="dark" backgroundColor={brandColor} />
       </SafeAreaProvider>
     </GestureHandlerRootView>
   );
 }
+
+
+
