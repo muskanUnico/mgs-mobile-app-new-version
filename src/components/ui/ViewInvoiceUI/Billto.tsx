@@ -1,11 +1,11 @@
 import moment from "moment";
 import React from "react";
 import { Text, View } from "react-native";
-import { useTheme } from "../../../context/ThemeContext";
-import { navigate } from "../../../utils/navigationServices";
 import { styles as externalStyles } from "../../../assets/css";
 import Button from "../../../components/elements/Button/Button";
+import { useTheme } from "../../../context/ThemeContext";
 import { transformViewInvoiceData } from "../../../utils/functions";
+import { navigate } from "../../../utils/navigationServices";
 
 export const Billto = ({ data }: any) => {
   const { theme } = useTheme();
@@ -85,6 +85,7 @@ export const Billto = ({ data }: any) => {
             flexDirection: "row",
             width: "100%",
             paddingRight: 8,
+            paddingLeft: 10,
             margin: 0,
           }}
         >
@@ -104,7 +105,7 @@ export const Billto = ({ data }: any) => {
               </View>
             )}
             {data.paymentId?.paymentStatus == "refunded" && (
-              <View>
+              <View >
                 <Button loading={false} title="REFUNDED" />
               </View>
             )}

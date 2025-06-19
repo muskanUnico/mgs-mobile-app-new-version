@@ -11,7 +11,6 @@ import {
   collectManualPayment,
   collectPaymentFromStripe,
 } from "../../../hooks/Payment";
-import { navigate } from "../../../utils/navigationServices";
 import GlobalLoader from "../../GlobalLoader/GlobalLoader";
 
 const Tips = ({ tips = [], setTips }) => {
@@ -42,18 +41,18 @@ const Tips = ({ tips = [], setTips }) => {
 };
 
 const CollectPaymentPage = ({
-//   route,
-//   navigation,
+  //   route,
+  //   navigation,
   customerId,
   appointmentId,
   amount,
-  appointmentData
+  appointmentData,
 }) => {
-//   const customerId = customerId;
-//   const appointmentId = appointmentId;
-//   const appointmentData = appointmentData;
-//   const amount = amount;
-// const navigation = useNavigation();
+  //   const customerId = customerId;
+  //   const appointmentId = appointmentId;
+  //   const appointmentData = appointmentData;
+  //   const amount = amount;
+  // const navigation = useNavigation();
   const { theme } = useTheme();
   const router = useRouter();
   // console.log("customerId===>>>>", customerId)
@@ -108,9 +107,16 @@ const CollectPaymentPage = ({
           // console.log("res", res?.data)
           console.log("res", res?.data?.redirect_url);
 
-          navigate("WebViewScreen", {
-            url: res?.data?.redirect_url,
-            data: res,
+          // navigate("WebViewScreen", {
+          //   url: res?.data?.redirect_url,
+          //   data: res,
+          // });
+          router.push({
+            pathname: "/webViewscreen",
+            params: {
+              url: res?.data?.redirect_url,
+              data: JSON.stringify(res),
+            },
           });
         })
         .catch((err) => {
@@ -139,7 +145,7 @@ const CollectPaymentPage = ({
           })
           .then((res) => {
             // goBack()
-           router.back();
+            router.back();
           });
       }
     }
