@@ -15,25 +15,23 @@ import DrawerContent from "../src/components/ui/DrawerContent/DrawerContent";
 import { AuthProvider, useAuth } from "../src/context/AuthContext";
 import { ThemeProvider } from "../src/context/ThemeContext";
 
-
-
 function AuthenticatedDrawer({ user }: { user: any }) {
   return (
-    <Drawer
-      screenOptions={{
-        headerShown: true,
-        header: (props) => <Header {...props} />,
-        drawerStyle: { backgroundColor: brandColor, width: "74%" },
-      }}
-      drawerContent={(props) => <DrawerContent {...props} />}
-    >
-      <Drawer.Screen
-        name="(tabs)"
-        options={{
-          headerShown: true,
-        }}
-      />
-    </Drawer>
+        <Drawer
+          screenOptions={{
+            headerShown: true,
+            header: (props) => <Header {...props} />,
+            drawerStyle: { backgroundColor: brandColor, width: "74%" },
+          }}
+          drawerContent={(props) => <DrawerContent {...props} />}
+        >
+          <Drawer.Screen
+            name="(tabs)"
+            options={{
+              headerShown: true,
+            }}
+          />
+        </Drawer>
   );
 }
 
@@ -57,12 +55,12 @@ function RootLayoutInner() {
     }
   }, [fontsLoaded, isLoading]);
 
-  if (!fontsLoaded ||  !isLoading) return <Loader/>;
+  if (!fontsLoaded || !isLoading) return <Loader />;
 
-  return  !user ? (
+  return !user ? (
     <Stack>
       <Stack.Screen name="index" options={{ headerShown: false }} />
-        <Stack.Screen name="forgot-password" options={{ headerShown: false }} />
+      <Stack.Screen name="forgot-password" options={{ headerShown: false }} />
     </Stack>
   ) : (
     <>
@@ -72,9 +70,6 @@ function RootLayoutInner() {
   );
 }
 
-
-
-
 export default function RootLayout() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
@@ -83,7 +78,7 @@ export default function RootLayout() {
           <AuthProvider>
             <ThemeProvider>
               <TimeProvider>
-                <RootLayoutInner /> 
+                <RootLayoutInner />
               </TimeProvider>
             </ThemeProvider>
           </AuthProvider>
@@ -92,6 +87,3 @@ export default function RootLayout() {
     </GestureHandlerRootView>
   );
 }
-
-
-

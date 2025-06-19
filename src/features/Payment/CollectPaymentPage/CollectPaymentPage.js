@@ -1,4 +1,4 @@
-import { useNavigation } from "@react-navigation/native";
+import { useRouter } from "expo-router";
 import React, { useState } from "react";
 import { Alert, StyleSheet, Text, View } from "react-native";
 import { styles as externalStyles } from "../../../assets/css";
@@ -11,7 +11,7 @@ import {
   collectManualPayment,
   collectPaymentFromStripe,
 } from "../../../hooks/Payment";
-import { goBack, navigate } from "../../../utils/navigationServices";
+import { navigate } from "../../../utils/navigationServices";
 import GlobalLoader from "../../GlobalLoader/GlobalLoader";
 
 const Tips = ({ tips = [], setTips }) => {
@@ -53,9 +53,9 @@ const CollectPaymentPage = ({
 //   const appointmentId = appointmentId;
 //   const appointmentData = appointmentData;
 //   const amount = amount;
-const navigation = useNavigation();
+// const navigation = useNavigation();
   const { theme } = useTheme();
-
+  const router = useRouter();
   // console.log("customerId===>>>>", customerId)
   // console.log("appointmentId===>>>>", appointmentId)
   // console.log("amount===>>>>", amount)
@@ -138,7 +138,8 @@ const navigation = useNavigation();
             console.log(err.response?.data?.message);
           })
           .then((res) => {
-            goBack();
+            // goBack()
+           router.back();
           });
       }
     }

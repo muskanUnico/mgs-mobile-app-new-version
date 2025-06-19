@@ -19,7 +19,7 @@ const ViewAppointmentScreen = ({ navigation }: any) => {
           { minHeight: "100%", paddingBottom: 64 },
         ]}
       >
-        <Title navigation={navigation} title="View Appoinment" />
+        <Title title="View Appoinment" />
         <ViewAppointmentFeature navigation={navigation}  id={id} selectedTab={selected} />
       </SafeAreaView>
     </GlobalLoader>

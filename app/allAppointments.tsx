@@ -1,11 +1,12 @@
+import Title from "@/src/components/elements/Title/Title";
+import { useTheme } from "@/src/context/ThemeContext";
+import AllAppointment from "@/src/features/Appointment/AllAppointment/AllAppointment";
+import GlobalLoader from "@/src/features/GlobalLoader/GlobalLoader";
+import { setTeamMemberColors } from "@/src/hooks/TeamMembers";
+import { SecurePageByPackage } from "@/src/middleware/PermissionAccess";
 import React from "react";
 import { SafeAreaView } from "react-native";
-import { useTheme } from "@/src/context/ThemeContext";
-import Title from "@/src/components/elements/Title/Title";
-import GlobalLoader from "@/src/features/GlobalLoader/GlobalLoader";
-import { SecurePageByPackage } from "@/src/middleware/PermissionAccess";
-import AllAppointment from "@/src/features/Appointment/AllAppointment/AllAppointment";
-import { setTeamMemberColors } from "@/src/hooks/TeamMembers";
+
 
 const AllAppointmentScreen = ({ navigation }: any) => {
   setTeamMemberColors();
@@ -19,7 +20,7 @@ const AllAppointmentScreen = ({ navigation }: any) => {
           { minHeight: "100%" },
         ]}
       >
-        <Title navigation={navigation} title="All Appointments" />
+        <Title  title="All Appointments" />
         <AllAppointment navigation={navigation} />
       </SafeAreaView>
     </GlobalLoader>
