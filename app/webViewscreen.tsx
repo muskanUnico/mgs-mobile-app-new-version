@@ -10,7 +10,7 @@ const WebViewScreen = ({ route }: any) => {
 
   const { url, data } = useLocalSearchParams();
   const parsedData = data ? JSON.parse(data as string) : null;
-    const finalUrl = Array.isArray(url) ? url[0] : url;
+   const finalUrl = typeof url === "string" ? url : url?.[0] ?? "";
 
   const appointmentId = parsedData?.data?.paymentIntent?.metadata?.appointmentId;
   console.log("url=====>>>>>>", finalUrl);

@@ -84,8 +84,8 @@ export const Billto = ({ data }: any) => {
           style={{
             flexDirection: "row",
             width: "100%",
-            paddingRight: 8,
-            paddingLeft: 10,
+            paddingRight: 6,
+            paddingLeft: 6,
             margin: 0,
           }}
         >
@@ -116,7 +116,7 @@ export const Billto = ({ data }: any) => {
                 style={{
                   flexDirection: "row",
                   marginTop: 16,
-                  marginHorizontal: 12,
+                  marginHorizontal: 8,
                 }}
               >
                 <Text
@@ -130,17 +130,20 @@ export const Billto = ({ data }: any) => {
               </View>
               <View
                 style={{
+                      flexShrink: 1,
                   flexDirection: "row",
                   marginVertical: 8,
-                  marginHorizontal: 12,
+                  marginHorizontal: 8,
+                  paddingRight:10
+              
                 }}
               >
                 <Text
-                  style={{ color: theme.brandColor, fontFamily: "BoldText" }}
+                  style={{ color: theme.brandColor, fontFamily: "BoldText"}}
                 >
                   INVOICE DATE:
                 </Text>
-                <Text style={{ fontWeight: "600", fontFamily: "Regular" }}>
+                <Text style={{ fontWeight: "600", fontFamily: "Regular"}}>
                   {moment(data?.invoiceDate).format("DD MMM YYYY") ||
                     "Not Available"}
                 </Text>

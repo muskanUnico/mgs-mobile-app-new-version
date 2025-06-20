@@ -1,14 +1,14 @@
 import { useCallback, useEffect, useState } from "react";
 import { removeEmptyValues } from "../../utils/tools";
 //interface
+import { useFocusEffect } from "@react-navigation/native";
+import { useRouter } from "expo-router";
 import { PaymentResults } from "../../interface/Customer";
 import { PaymentService } from "../../services/Payment";
-import { navigate } from "../../utils/navigationServices";
-import { useFocusEffect } from "@react-navigation/native";
 
 export const collectPaymentFromStripe = () => {
   const [loading, setLoading] = useState<boolean>(false);
-
+  const router = useRouter();
   // Define a function to trigger a re-fetch
   const submit = async (body = {}) => {
     setLoading(true);
@@ -25,7 +25,14 @@ export const collectPaymentFromStripe = () => {
 
     if (!res?.success) return;
 
-    navigate("WebViewScreen", { url: res?.data?.redirect_url, data: res });
+    // navigate("WebViewScreen", { url: res?.data?.redirect_url, data: res });
+    router.push({
+      pathname: "/webViewscreen",
+      params: {
+        url: res?.data?.redirect_url,
+        data: JSON.stringify(res),
+      },
+    });
     return res;
   };
 
@@ -34,6 +41,7 @@ export const collectPaymentFromStripe = () => {
 
 export const collectManualPayment = () => {
   const [loading, setLoading] = useState<boolean>(false);
+  const router = useRouter();
 
   // Define a function to trigger a re-fetch
   const submit = async (body = {}) => {
@@ -50,7 +58,11 @@ export const collectManualPayment = () => {
       });
 
     if (!res?.url) return;
-    navigate("ViewAppointment", { id: res.chargePayment.appointmentId });
+    // navigate("ViewAppointment", { id: res.chargePayment.appointmentId });
+    router.push({
+      pathname: "/viewAppointments",
+      params: { id: res.chargePayment.appointmentId },
+    });
     return res;
   };
 
@@ -59,7 +71,7 @@ export const collectManualPayment = () => {
 
 export const collectLater = () => {
   const [loading, setLoading] = useState<boolean>(false);
-
+  const router = useRouter();
   // Define a function to trigger a re-fetch
   const submit = async (body = {}) => {
     setLoading(true);
@@ -74,7 +86,10 @@ export const collectLater = () => {
 
     if (!res?.url) return;
     setLoading(false);
-    navigate("ViewAppointment", { id: res.chargePayment.appointmentId });
+      router.push({
+      pathname: "/viewAppointments",
+      params: { id: res.chargePayment.appointmentId },
+    });
     return res;
   };
 
