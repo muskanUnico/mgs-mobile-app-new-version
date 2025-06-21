@@ -58,10 +58,12 @@ export const collectManualPayment = () => {
       });
 
     if (!res?.url) return;
+    const appointmentId = res.url.split("/").pop(); // ✅ Extract ID from URL
+    if (!appointmentId) return;
     // navigate("ViewAppointment", { id: res.chargePayment.appointmentId });
     router.push({
       pathname: "/viewAppointments",
-      params: { id: res.chargePayment.appointmentId },
+      params: { id: appointmentId },
     });
     return res;
   };
@@ -76,7 +78,7 @@ export const collectLater = () => {
   const submit = async (body = {}) => {
     setLoading(true);
 
-    const res = await PaymentService.collectLater(removeEmptyValues(body))
+    const res = await PaymentService.collectLater(removeEmptyValues(body)) 
       .finally(() => {
         setLoading(false);
       })

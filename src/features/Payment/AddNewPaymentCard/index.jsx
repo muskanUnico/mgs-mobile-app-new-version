@@ -1,30 +1,45 @@
-import React, { useState } from 'react';
-import { PaymentService } from '../../../services';
-import { getSingleCustomer } from '../../../hooks/Customer';
+import {
+  CardField,
+  StripeProvider,
+  useStripe,
+} from "@stripe/stripe-react-native";
+import Constants from 'expo-constants';
+import React, { useState } from "react";
+import {
+  ActivityIndicator,
+  Alert,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from "react-native";
 import Button from "../../../components/elements/Button/Button";
-import { CardField, useStripe, StripeProvider } from '@stripe/stripe-react-native';
-import { View, Text, TextInput, ActivityIndicator, StyleSheet, Alert } from 'react-native';
+import { getSingleCustomer } from "../../../hooks/Customer";
+import { PaymentService } from "../../../services";
 
-const config = {
-  stripe: {
-    publicKey: process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
-  }
-};
-
+// const config = {
+//   stripe: {
+//     publicKey: process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,
+//   },
+// };
+ const publicKey = Constants.expoConfig.extra.stripePublicKey;
 const PaymentAddress = () => {
+ 
   const { createPaymentMethod } = useStripe();
+ console.log("Stripe Public Key:", Constants.expoConfig.extra.stripePublicKey);
+
 
   const handleSubmit = async ({ email, name, country, line1 }) => {
     const { paymentMethod, error } = await createPaymentMethod({
-      paymentMethodType: 'Card',
+      paymentMethodType: "Card",
       billingDetails: {
         email,
         name,
         address: {
           country,
-          line1
-        }
-      }
+          line1,
+        },
+      },
     });
 
     return { paymentMethod, error };
@@ -35,7 +50,7 @@ const PaymentAddress = () => {
 
 const AddNewPaymentCard = ({ customerId, refresh, setOpen }) => {
   const alert = {
-    SnackbarHandler: () => { }
+    SnackbarHandler: () => {},
   };
 
   const findCustomer = getSingleCustomer(customerId);
@@ -51,7 +66,12 @@ const AddNewPaymentCard = ({ customerId, refresh, setOpen }) => {
 
     setLoading(true);
 
-    const { error, paymentMethod } = await payment({ email: customer?.email, name: customer?.name, country: "CA", line1: address });
+    const { error, paymentMethod } = await payment({
+      email: customer?.email,
+      name: customer?.name,
+      country: "CA",
+      line1: address,
+    });
     if (error?.message) {
       setLoading(false);
       return Alert.alert(error.message);
@@ -59,31 +79,36 @@ const AddNewPaymentCard = ({ customerId, refresh, setOpen }) => {
 
     const res = await PaymentService.addNewPaymentCard({
       customerId: customerId,
-      paymentMethodId: paymentMethod.id
-    }).finally(() => {
-      setLoading(false);
-      setOpen(false)
+      paymentMethodId: paymentMethod.id,
     });
-    if (!res?.success) return;
+
+    console.log("res",res);
+
+
+    setLoading(false);
+
+    if (!res?.success) {
+      Alert.alert("Something went wrong");
+      return;
+    }
 
     Alert.alert(res.message);
-
+    setOpen?.(false);
     refresh && refresh();
   };
 
   return (
-
     <View>
       <Text style={styles.label}>Card Number</Text>
       <CardField
         postalCodeEnabled={false}
-        placeholder={{ number: '4242 4242 4242 4242' }}
+        placeholder={{ number: "4242 4242 4242 4242" }}
         style={styles.cardContainer}
       />
 
       <TextInput
         style={styles.input}
-        placeholder='Address'
+        placeholder="Address"
         value={address}
         onChangeText={(text) => setAddress(text)}
       />
@@ -92,7 +117,6 @@ const AddNewPaymentCard = ({ customerId, refresh, setOpen }) => {
           <ActivityIndicator size="small" color="#0000ff" />
         ) : (
           <Button title="Submit" onPress={handleSubmit} />
-
         )}
       </View>
     </View>
@@ -100,51 +124,55 @@ const AddNewPaymentCard = ({ customerId, refresh, setOpen }) => {
 };
 
 const AddNewPaymentCardDefault = ({ customerId, refresh, setOpen }) => (
-  <StripeProvider publishableKey={config.stripe.publicKey}>
-    <AddNewPaymentCard  setOpen={setOpen} customerId={customerId} refresh={refresh} />
+  <StripeProvider publishableKey={publicKey}>
+    <AddNewPaymentCard
+      setOpen={setOpen}
+      customerId={customerId}
+      refresh={refresh}
+    />
   </StripeProvider>
 );
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: "center",
     padding: 16,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
   },
   form: {
     padding: 10,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     borderRadius: 8,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.3,
-    shadowRadius: 2,
-    elevation: 3
-  },
-  label: {
-    fontSize: 14,
-    marginBottom: 8,
-    color: '#333'
-  },
-  input: {
-    width: '100%',
-    padding: 12,
-    backgroundColor: '#fff',
-    borderRadius: 5,
-    borderColor: '#e6e6e6',
-    borderWidth: 1,
-    marginBottom: 16,
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.3,
     shadowRadius: 2,
     elevation: 3,
-    fontFamily: "Regular"
+  },
+  label: {
+    fontSize: 14,
+    marginBottom: 8,
+    color: "#333",
+  },
+  input: {
+    width: "100%",
+    padding: 12,
+    backgroundColor: "#fff",
+    borderRadius: 5,
+    borderColor: "#e6e6e6",
+    borderWidth: 1,
+    marginBottom: 16,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.3,
+    shadowRadius: 2,
+    elevation: 3,
+    fontFamily: "Regular",
   },
   card: {
-    backgroundColor: '#fff',
-    textColor: '#000'
+    backgroundColor: "#fff",
+    textColor: "#000",
   },
   cardContainer: {
     height: 50,
@@ -152,8 +180,8 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     marginTop: 16,
-    alignItems: 'center'
-  }
+    alignItems: "center",
+  },
 });
 
 export default AddNewPaymentCardDefault;

@@ -199,7 +199,7 @@ import {
   Alert,
   StyleSheet,
   Text,
-  View,
+  View
 } from "react-native";
 import { styles as externalStyles } from "../../../assets/css";
 import Button from "../../../components/elements/Button/Button";
@@ -339,7 +339,7 @@ const CollectPaymentPage = ({
   return (
     <GlobalLoader>
       <View
-        style={{ minHeight: "100%", backgroundColor: theme.brandGreyColor }}
+        style={{ minHeight: "100%", backgroundColor: theme.brandGreyColor , marginBottom: 62}}
       >
         <Title title="Collect Payment" />
         <View style={{ marginHorizontal: 16, marginBottom: 12 }}>
