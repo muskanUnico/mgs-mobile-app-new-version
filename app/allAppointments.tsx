@@ -17,7 +17,7 @@ const AllAppointmentScreen = ({ navigation }: any) => {
       <SafeAreaView
         style={[
           { backgroundColor: theme.brandGreyColor },
-          { minHeight: "100%" },
+          { minHeight: "100%" , paddingBottom:60},
         ]}
       >
         <Title  title="All Appointments" />
