@@ -90,10 +90,10 @@ const BookingInfoCard = ({
           //   id: item?.paymentId?.appointmentId,
           // })
 
-          router.push({
-            pathname: "/viewAppointments",
-            params: { id: item?.paymentId?.appointmentId },
-          })
+        router.navigate({
+  pathname: "/(stack)/viewAppointments",
+  params: { id: item?.paymentId?.appointmentId },
+})
         }
       >
         <View style={styles.viewWithLeftMargin}>

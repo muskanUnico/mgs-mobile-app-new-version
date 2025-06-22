@@ -10,9 +10,10 @@ const WebViewScreen = ({ route }: any) => {
 
   const { url, data } = useLocalSearchParams();
   const parsedData = data ? JSON.parse(data as string) : null;
-   const finalUrl = typeof url === "string" ? url : url?.[0] ?? "";
+  const finalUrl = typeof url === "string" ? url : url?.[0] ?? "";
 
-  const appointmentId = parsedData?.data?.paymentIntent?.metadata?.appointmentId;
+  const appointmentId =
+    parsedData?.data?.paymentIntent?.metadata?.appointmentId;
   console.log("url=====>>>>>>", finalUrl);
   console.log("appointmentId===================", appointmentId);
   const handleNavigationStateChange = (newNavState: any) => {
@@ -20,11 +21,12 @@ const WebViewScreen = ({ route }: any) => {
     console.log("newNavState", newNavState);
     if (url === finalUrl) {
       console.log("false pressses ");
-    //   navigate("ViewAppointment", { id: appointmentId });
-   router.push({
-  pathname: "/viewAppointments",
-  params: { id: appointmentId },
-});
+      //   navigate("ViewAppointment", { id: appointmentId });
+
+      router.navigate({
+        pathname: "/(stack)/viewAppointments",
+        params: { id: appointmentId },
+      });
       return false;
     }
     console.log("true pressses ");
@@ -34,7 +36,7 @@ const WebViewScreen = ({ route }: any) => {
   return (
     <View style={{ flex: 1 }}>
       <RNWebView
-        source={{ uri:finalUrl }}
+        source={{ uri: finalUrl }}
         style={{ flex: 1 }}
         startInLoadingState={true}
         renderLoading={() => (

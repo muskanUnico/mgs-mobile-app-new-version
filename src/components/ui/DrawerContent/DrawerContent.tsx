@@ -165,7 +165,7 @@ const DrawerContent = (props: any) => {
                   underlayColor={theme.brandGreyColor}
                  onPress={() =>
                   //  props.navigation.navigate("allAppointments")
-                  router.push("/allAppointments")
+                  router.navigate("/(stack)/allAppointments")
                   }
                   style={styles.drawerSubItem}
                 >
@@ -265,7 +265,7 @@ const DrawerContent = (props: any) => {
                 underlayColor={theme.brandGreyColor}
                 onPress={() =>
                   //  props.navigation.navigate("allCustomer")
-                  router.push("/allCustomer")
+                  router.navigate("/(stack)/allCustomer")
                   }
                 style={styles.drawerSubItem}
               >

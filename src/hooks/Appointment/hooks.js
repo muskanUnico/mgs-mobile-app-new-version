@@ -368,13 +368,13 @@ export const handleActionUrl = (appointmentId, actionId, paymentId) => {
     switch (actionId) {
         case "reschedule":
               // return navigate("editappointment", { id: appointmentId });
-              return router.push({ pathname: "/editAppointment", params: { id: appointmentId } });
+              return router.navigate({ pathname: "/(stack)/editAppointment", params: { id: appointmentId } });
         case "reschedule-request":
-             return router.push({ pathname: "/rescheduleRequest", params: { id: appointmentId } });
+             return router.navigate({ pathname: "/(stack)/rescheduleRequest", params: { id: appointmentId } });
         case "view-invoice":
-             return router.push({ pathname: "/viewInvoice", params: { paymentId } });
+             return router.navigate({ pathname: "/(stack)/viewInvoice", params: { paymentId } });
         case "view-notes":
-              return router.push({ pathname: "/viewAppointments", params: { id: appointmentId, selectedTab: 1 } });
+              return router.navigate({ pathname: "/(stack)/viewAppointments", params: { id: appointmentId, selectedTab: 1 } });
         default:
             return null;
     }

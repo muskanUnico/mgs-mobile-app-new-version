@@ -39,22 +39,22 @@ const PaymentHistoryFeature = () => {
   const handleOptions = (options: any, item: any) => {
    
     if (options.id == 2) {
-      router.push({
-        pathname: "/viewInvoice",
+      router.navigate({
+        pathname: "/(stack)/viewInvoice",
         params: { paymentId:  item?.appointmentId.paymentId },
       });
 
     } else if (options.id == 3) {
 
-      router.push({
-        pathname: "/viewAppointments",
-        params: { id: item?.appointmentId._id, selectedTab: 1},
-      });
+      router.navigate({
+      pathname: "/(stack)/viewAppointments",
+      params:  { id: item?.appointmentId._id, selectedTab: 1},
+      })
 
    
     } else if (options.id == 1) {
-     router.push({
-        pathname:"/paymentPage", 
+     router.navigate({
+        pathname:"/(stack)/paymentPage", 
         params:{
         customerId: item?.customerId?.id || item?.customerId,
         appointmentId: item.appointmentId?.id,
