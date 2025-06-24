@@ -14,6 +14,7 @@ import {
 } from "../../../hooks/Appointment/hooks";
 import { Appointment } from "../../../interface/Appointment";
 // import { goBack } from "../../../utils/navigationServices";
+import { useRouter } from "expo-router";
 import { chips, formatTime } from "../../../utils/tools";
 import PatientsNotes from "./PatientNoteFeature/PatientsNotes";
 import ViewAppointment from "./ViewAppointmentFeature/ViewAppointment";
@@ -54,11 +55,12 @@ const  ViewAppointmentFeature = ({ navigation, id , selectedTab:selectedTabProp 
     handleRightbtn,
     isLoading,
   } = useActionHooks({ appointments: [data]});
-
+ 
+  const router = useRouter();
   useEffect(() => {
     if (isLoading)
       setTimeout(() => {
-        // goBack();
+        router.back();
       }, 3000);
   }, [isLoading]);
 

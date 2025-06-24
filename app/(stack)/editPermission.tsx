@@ -79,7 +79,8 @@ const EditPermission = ({ navigation, route }: any) => {
     if (data?.success) {
       setLoading(false);
       Alert.alert("Role Updated successfully");
-      navigation.navigate("AllPermissions");
+      // navigation.navigate("AllPermissions");
+      router.push("/(stack)/allPermissions")
     }
   };
 

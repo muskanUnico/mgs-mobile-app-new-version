@@ -27,7 +27,7 @@ export const collectPaymentFromStripe = () => {
 
     // navigate("WebViewScreen", { url: res?.data?.redirect_url, data: res });
     router.push({
-      pathname: "/webViewscreen",
+      pathname: "/(stack)/webViewscreen",
       params: {
         url: res?.data?.redirect_url,
         data: JSON.stringify(res),
@@ -62,7 +62,7 @@ export const collectManualPayment = () => {
     if (!appointmentId) return;
     // navigate("ViewAppointment", { id: res.chargePayment.appointmentId });
     router.push({
-      pathname: "/viewAppointments",
+      pathname: "/(stack)/viewAppointments",
       params: { id: appointmentId },
     });
     return res;
@@ -89,7 +89,7 @@ export const collectLater = () => {
     if (!res?.url) return;
     setLoading(false);
       router.push({
-      pathname: "/viewAppointments",
+      pathname: "/(stack)/viewAppointments",
       params: { id: res.chargePayment.appointmentId },
     });
     return res;

@@ -100,7 +100,7 @@ const TeamMemberCard = ({ item, index, showDeleteModal }: any) => {
           <TouchableOpacity
             onPress={() =>
               router.push({
-                pathname: "/viewTeamMember",
+                pathname: "/(stack)/viewTeamMember",
                 params: { memberId: item.id }
               })
               }

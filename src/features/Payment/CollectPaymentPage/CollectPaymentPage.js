@@ -296,7 +296,7 @@ const CollectPaymentPage = ({
         .then((res) => {
           if (res?.data?.redirect_url) {
             router.push({
-              pathname: "/webViewscreen",
+              pathname: "/(stack)/webViewscreen",
               params: {
                 url: res.data.redirect_url,
                 data: JSON.stringify(res),

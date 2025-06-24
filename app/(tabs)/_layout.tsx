@@ -1,3 +1,4 @@
+import Header from "@/src/components/ui/Header/Header";
 import { Ionicons } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
 import React from "react";
@@ -33,8 +34,8 @@ export default function TabLayout() {
               color={focused ? "#f59b90" : "#555555"}
             />
           ),
-          // header: (props) => <Header {...props} />,
-          headerShown: false,
+          header: (props) => <Header {...props} />,
+          headerShown: true,
         }}
       />
       <Tabs.Screen
@@ -48,8 +49,8 @@ export default function TabLayout() {
               color={focused ? "#f59b90" : "#555555"}
             />
           ),
-          // header: (props) => <Header {...props} />,
-          headerShown: false,
+          header: (props) => <Header {...props} />,
+          headerShown: true,
         }}
       />
       <Tabs.Screen
@@ -63,15 +64,15 @@ export default function TabLayout() {
               color={focused ? "#f59b90" : "#555555"}
             />
           ),
-          // header: (props) => <Header {...props} />,
-          headerShown: false,
+          header: (props) => <Header {...props} />,
+          headerShown: true,
         }}
       />
       <Tabs.Screen
         name="team"
         options={{
           title: "",
-          headerShown: false,
+          headerShown: true,
           tabBarIcon: ({ focused }) => (
             <Ionicons
               name="people"
@@ -79,7 +80,8 @@ export default function TabLayout() {
               color={focused ? "#f59b90" : "#555555"}
             />
           ),
-          // header: (props) => <Header {...props} />,
+          header: (props) => <Header {...props} />,
+        
         }}
       />
     </Tabs>

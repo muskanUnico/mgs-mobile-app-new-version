@@ -1,17 +1,15 @@
+import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 import moment from "moment";
-import { Text, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Divider } from "react-native-paper";
-import { TouchableOpacity } from "react-native";
-import { MaterialIcons } from "@expo/vector-icons";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { getPaymentHistory } from "../../../../hooks/Customer";
-import { navigate } from "../../../../utils/navigationServices";
 import { styles as externalStyles } from "../../../../assets/css";
 import CustomHeading from "../../../../components/elements/CustomHeading/CustomHeading";
-import { StyleSheet } from "react-native";
+import { getPaymentHistory } from "../../../../hooks/Customer";
 
 const CustomerActivity = ({ customerId }: any) => {
   const payments = getPaymentHistory(customerId);
+  const router = useRouter();
   return (
     !payments.loading &&
     payments.data?.results?.length > 0 && (
@@ -85,11 +83,16 @@ const CustomerActivity = ({ customerId }: any) => {
 
                     <TouchableOpacity
                       onPress={() =>
-                        navigate("viewinvoice", {
-                          paymentId: item?.appointmentId.paymentId,
-                        })
-                      }
-                    >
+                        // navigate("viewinvoice", {
+                        //   paymentId: item?.appointmentId.paymentId,
+                        // })
+                       router.push({
+  pathname: "/(stack)/viewinvoice",
+  params: {
+    paymentId: item?.appointmentId?.paymentId}
+  })
+            
+}>
                       <MaterialIcons
                         name="arrow-forward-ios"
                         style={[externalStyles.iconStyle]}

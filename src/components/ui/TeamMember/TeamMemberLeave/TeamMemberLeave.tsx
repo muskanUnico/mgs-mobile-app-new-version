@@ -22,7 +22,7 @@ const TeamMemberLeaveCard = ({ user }: any) => {
           );
         })}
       </View>
-      <Button title="Manage leave" onPress={() => router.push("/leaveCalender")} />
+      <Button title="Manage leave" onPress={() => router.push("/(stack)/leaveCalender")} />
     </View>
   );
 };

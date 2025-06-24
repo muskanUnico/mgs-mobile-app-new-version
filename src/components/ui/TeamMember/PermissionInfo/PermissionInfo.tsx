@@ -58,7 +58,7 @@ const PermissionInfoCard: React.FC<PermissionInfoCardProps> = ({
         <Text style={externalStyles.label}>PERMISSIONS</Text>
         <Pressable
           onPress={() => router.push({
-  pathname: "/viewAcess",
+  pathname: "/(stack)/viewAcess",
   params: { roleId: role?.roleId },
 })}
         >

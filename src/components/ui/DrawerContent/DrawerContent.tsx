@@ -30,13 +30,21 @@ const DrawerContent = (props: any) => {
     "customers",
   ]);
   
-    const navigateWithClose = (screenName: string) => {
+//     const navigateWithClose = (screenName: string) => {
+//     console.log("navigaying to",screenName);
+//   props.navigation.dispatch(DrawerActions.closeDrawer());
+//    setTimeout(() => {
+//     // router.push(`/${screenName}` as any);
+//       router.push(`${screenName}` as any);
+//   }, 100);
+// };
+  
+    const navigateNoBack = (screenName: string) => {
     console.log("navigaying to",screenName);
   props.navigation.dispatch(DrawerActions.closeDrawer());
    setTimeout(() => {
-    // router.push(`/${screenName}` as any);
-      router.push(`/${screenName}` as any);
-  }, 250);
+      router.replace(`${screenName}` as any);
+  }, 100);
 };
 
   const SCREEN_WIDTH = Dimensions.get("window").width;
@@ -82,7 +90,7 @@ const DrawerContent = (props: any) => {
           underlayColor={theme.brandColor}
           onPress={() => 
             // props.navigation.navigate("myProfile")
-            router.push("/myProfile")
+            navigateNoBack("/(stack)/myProfile")
           }
         >
           <View style={styles.centeredContainer}>
@@ -111,7 +119,7 @@ const DrawerContent = (props: any) => {
           <TouchableHighlight
             onPress={() => 
               // props.navigation.navigate("(tabs)"
-              router.push("/(tabs)")
+              navigateNoBack("/(tabs)")
               }
             style={styles.drawerItem}
             underlayColor="transparent"
@@ -165,7 +173,7 @@ const DrawerContent = (props: any) => {
                   underlayColor={theme.brandGreyColor}
                  onPress={() =>
                   //  props.navigation.navigate("allAppointments")
-                  router.navigate("/(stack)/allAppointments")
+                 navigateNoBack("/(stack)/allAppointments")
                   }
                   style={styles.drawerSubItem}
                 >
@@ -187,7 +195,7 @@ const DrawerContent = (props: any) => {
                   underlayColor={theme.brandGreyColor}
                   onPress={() =>
                     // props.navigation.navigate("approvedAppointment")
-                    router.push("/approvedAppointment")
+                   navigateNoBack("/(stack)/approvedAppointment")
                   }
                   style={styles.drawerSubItem}
                 >
@@ -211,7 +219,7 @@ const DrawerContent = (props: any) => {
                     // CreateAppointment
                     onPress={() =>
                       // props.navigation.navigate("createAppointment")
-                      router.push("/createAppointment")
+                     navigateNoBack("/(stack)/createAppointment")
                     }
                     style={styles.drawerSubItem}
                   >
@@ -265,7 +273,7 @@ const DrawerContent = (props: any) => {
                 underlayColor={theme.brandGreyColor}
                 onPress={() =>
                   //  props.navigation.navigate("allCustomer")
-                  router.navigate("/(stack)/allCustomer")
+                 navigateNoBack("/(stack)/allCustomer")
                   }
                 style={styles.drawerSubItem}
               >
@@ -291,7 +299,7 @@ const DrawerContent = (props: any) => {
                 underlayColor={theme.brandGreyColor}
                 onPress={() => 
                   // props.navigation.navigate("createCustomer")
-                  router.push("/createCustomer")
+                 navigateNoBack("/(stack)/createCustomer")
                 }
                 style={styles.drawerSubItem}
               >
@@ -346,7 +354,7 @@ const DrawerContent = (props: any) => {
                     underlayColor={theme.brandGreyColor}
                     onPress={() => 
                       // props.navigation.navigate("allReferral")
-                      router.push("/allReferral")
+                     navigateNoBack("/(stack)/allReferral")
                     }
                     style={styles.drawerSubItem}
                   >
@@ -372,7 +380,7 @@ const DrawerContent = (props: any) => {
                     underlayColor={theme.brandGreyColor}
                     onPress={() =>
                       //  props.navigation.navigate("addReferral")
-                      router.push("/addReferral")
+                      navigateNoBack("/(stack)/addReferral")
                       }
                     style={styles.drawerSubItem}
                   >
@@ -401,7 +409,7 @@ const DrawerContent = (props: any) => {
               style={styles.drawerItem}
               onPress={() =>
                 //  props.navigation.navigate("paymentHistory")
-                router.push("/paymentHistory")
+               navigateNoBack("/(stack)/paymentHistory")
 
               }
             >
@@ -457,7 +465,7 @@ const DrawerContent = (props: any) => {
                   underlayColor={theme.brandGreyColor}
                   onPress={() => 
                     // props.navigation.navigate("allTeamMember")
-                    router.push("/allTeamMember")
+                    navigateNoBack("/(stack)/allTeamMember")
                   }
                   style={styles.drawerSubItem}
                 >
@@ -481,7 +489,7 @@ const DrawerContent = (props: any) => {
                   underlayColor={theme.brandGreyColor}
                   onPress={() => 
                     // props.navigation.navigate("leaveCalender")
-                    router.push("/leaveCalender")
+                  navigateNoBack("/(stack)/leaveCalender")
                   }
                   style={styles.drawerSubItem}
                 >
@@ -506,7 +514,7 @@ const DrawerContent = (props: any) => {
                     underlayColor={theme.brandGreyColor}
                     onPress={() =>
                       // props.navigation.navigate("createTeamMember")
-                      router.push("/createTeamMember")
+                      navigateNoBack("/(stack)/createTeamMember")
                     }
                     style={styles.drawerSubItem}
                   >
@@ -528,7 +536,7 @@ const DrawerContent = (props: any) => {
 
                 {/* Time Tracker */}
                 <TouchableHighlight
-                  onPress={ () => navigateWithClose("timeTracker")}
+                  onPress={ () => navigateNoBack("/(stack)/timeTracker")}
 
                   underlayColor={theme.brandGreyColor}
                   style={styles.drawerSubItem}
@@ -554,7 +562,7 @@ const DrawerContent = (props: any) => {
                     underlayColor={theme.brandGreyColor}
                     onPress={() =>
                       //  props.navigation.navigate("managePayroll")
-                      router.push("/managePayroll")
+                      navigateNoBack("/(stack)/managePayroll")
                       }
                     style={styles.drawerSubItem}
                   >
@@ -622,7 +630,7 @@ const DrawerContent = (props: any) => {
                     underlayColor={theme.brandGreyColor}
                     onPress={() =>
                       //  props.navigation.navigate("revenueReport")
-                      router.push("/revenueReport")
+                    navigateNoBack("/(stack)/revenueReport")
                       }
                     style={styles.drawerSubItem}
                   >
@@ -650,7 +658,7 @@ const DrawerContent = (props: any) => {
                     underlayColor={theme.brandGreyColor}
                     onPress={() =>
                       //  props.navigation.navigate("incomeVsExpense")
-                      router.push("/incomeVsExpense")
+                     navigateNoBack("/(stack)/incomeVsExpense")
                       } 
                     style={styles.drawerSubItem}
                   >
@@ -677,7 +685,7 @@ const DrawerContent = (props: any) => {
                     underlayColor={theme.brandGreyColor}
                     onPress={() =>
                       // props.navigation.navigate("appointmentReport")
-                      router.push("/appointmentReport")
+                      navigateNoBack("/(stack)/appointmentReport")
                     }
                     style={styles.drawerSubItem}
                   >
@@ -732,7 +740,7 @@ const DrawerContent = (props: any) => {
                   underlayColor={theme.brandGreyColor}
                   onPress={() => 
                     // props.navigation.navigate("allPermissions")
-                    router.push("/allPermissions")
+                   navigateNoBack("/(stack)/allPermissions")
                   }
                   style={styles.drawerSubItem}
                 >
@@ -758,7 +766,7 @@ const DrawerContent = (props: any) => {
                   underlayColor={theme.brandGreyColor}
                   onPress={() => 
                     // props.navigation.navigate("services")
-                    router.push("/services")
+                   navigateNoBack("/(stack)/services")
 
                   }
                   style={styles.drawerSubItem}
@@ -784,7 +792,7 @@ const DrawerContent = (props: any) => {
                 underlayColor={theme.brandGreyColor}
                 onPress={() => 
                   // props.navigation.navigate("cms")
-                  router.push("/cms")
+                  navigateNoBack("/(stack)/cms")
                 }
                 style={styles.drawerSubItem}
               >

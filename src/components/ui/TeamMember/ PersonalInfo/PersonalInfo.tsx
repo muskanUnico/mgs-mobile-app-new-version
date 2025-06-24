@@ -73,7 +73,7 @@ const PersonalInfoCard: React.FC<PersonalInfoCardProps> = ({
         <TouchableOpacity
           onPress={() =>
             router.push({
-              pathname: "/editPersonalInfo",
+              pathname: "/(stack)/editPersonalInfo",
               params: {
                 personalInfo: JSON.stringify(data),
               },

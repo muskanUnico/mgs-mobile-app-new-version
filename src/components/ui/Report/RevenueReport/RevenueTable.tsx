@@ -72,7 +72,7 @@ const RevenueTable: React.FC<RevenueTableProps> = ({ item, action }) => {
           <TouchableOpacity
             onPress={() =>
               router.push({
-                pathname: "/revenueReportAction",  
+                pathname: "/(stack)/revenueReportAction",  
                 params: {
                   data: JSON.stringify(item),
                   action: action.toString(),

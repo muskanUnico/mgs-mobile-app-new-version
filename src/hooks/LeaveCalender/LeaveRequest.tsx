@@ -27,7 +27,7 @@ export const useLongMenuLeaveRequest = ({
   const handleOptions = (option: any, item: Leave) => {
     if (option.id == 1) {
       router.push({
-        pathname: "/requestLeave",
+        pathname: "/(stack)/requestLeave",
         params: { item: JSON.stringify(item) },
       });
       //@ts-ignore
@@ -135,7 +135,7 @@ export const useRejectLeaveRequests = (leaveHook: any) => {
         Alert.alert(res.message);
         leaveHook.refetch();
         bottomSheetRef.current.close();
-          router.push("/leaveCalender");
+          router.navigate("/(stack)/leaveCalender");
       })
       .catch((err) => {
         setLoading(false);
@@ -156,7 +156,7 @@ export const useApprovedLeaveRequests = (leaveHook: any) => {
       .then((res) => {
         Alert.alert(res.message);
         leaveHook.refetch();
-           router.push("/leaveCalender");
+           router.navigate("/(stack)/leaveCalender");
       })
       .finally(() => {
         setLoading(false);
@@ -178,7 +178,7 @@ export const useCreateLeaveRequests = () => {
       .then((res) => {
         setLoading(false);
         Alert.alert("Request Leave created successfully");
-          router.push("/leaveCalender");
+          router.navigate("/(stack)/leaveCalender");
       })
       .catch((err) => {
         setLoading(false);
@@ -202,7 +202,7 @@ export const useDeleteLeaveRequests = (leaveHook: any) => {
         setLoading(false);
         Alert.alert("Request Leave Deleted successfully");
         leaveHook.refetch();
-           router.push("/leaveCalender");
+           router.navigate("/(stack)/leaveCalender");
       })
       .finally(() => {
         setLoading(false);
@@ -225,7 +225,7 @@ export const useUpdateLeaveRequests = () => {
         setLoading(false);
         Alert.alert("Request Leave Updated successfully");
         // navigate("LeaveCalendar");
-           router.push("/leaveCalender");
+           router.navigate("/(stack)/leaveCalender");
       })
       .catch((err) => {
         setLoading(false);

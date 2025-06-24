@@ -23,7 +23,7 @@ const WebViewScreen = ({ route }: any) => {
       console.log("false pressses ");
       //   navigate("ViewAppointment", { id: appointmentId });
 
-      router.navigate({
+      router.push({
         pathname: "/(stack)/viewAppointments",
         params: { id: appointmentId },
       });

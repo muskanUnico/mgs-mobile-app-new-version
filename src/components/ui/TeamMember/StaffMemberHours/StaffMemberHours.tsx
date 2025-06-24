@@ -53,7 +53,7 @@ const StaffMemberHoursCard = ({ user }: any) => {
         onPress={() => 
           // navigate("teamMemberHorus", { user })
           router.push({
-            pathname: "/teamMemberHours",
+            pathname: "/(stack)/teamMemberHours",
             params: { user: JSON.stringify(user)},
           })
         }

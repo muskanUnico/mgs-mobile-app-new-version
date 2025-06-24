@@ -121,8 +121,8 @@ export const useActionHooks = ({ appointments = [] }) => {
       // });
 
       // router.push("/paymentpage" );
-      router.push({
-   pathname: "/paymentpage",
+      router.navigate({
+   pathname: "/(stack)/paymentpage",
     params: {
     customerId: getAppointment?.customerId?.id || getAppointment?.customerId,
     appointmentId: appointmentId,
@@ -138,8 +138,8 @@ export const useActionHooks = ({ appointments = [] }) => {
       );
       // navigate("smsScreen", { getAppointment })
 
-      router.push(
-        `/smsScreen?getAppointment=${encodeURIComponent(
+      router.navigate(
+        `/(stack)/smsScreen?getAppointment=${encodeURIComponent(
           JSON.stringify(getAppointment)
         )}`
       );

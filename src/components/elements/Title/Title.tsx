@@ -1,6 +1,5 @@
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import { useRouter } from "expo-router";
 import React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import { useTheme } from "../../../context/ThemeContext";
@@ -10,8 +9,9 @@ const Title = ({ title }: { title: string }) => {
   const { theme } = useTheme();
   const navigation = useNavigation();
 
-const router = useRouter();
-// const lastScreen = (route.params as { fromScreen?: string } | undefined)?.fromScreen || 'Home';
+const handleback = ()=>{
+navigation.goBack()
+}
 
   return (
     <View
@@ -31,7 +31,7 @@ const router = useRouter();
       {/* icon  onPress */}
       <TouchableOpacity
         style={{ position: "absolute", left: 16 }}
-        onPress={() =>  router.back()}
+        onPress={() =>  handleback()}
       >
         <Ionicons name="chevron-back-outline" size={24} color="white" />
       </TouchableOpacity>

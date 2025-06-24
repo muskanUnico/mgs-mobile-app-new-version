@@ -65,8 +65,8 @@ export const useHandleOptionsReferral = ({
       setreferralId(referralId);
     } else if (selectedTabId == 1) {
       // If the selected tab is for editing
-      router.push({
-        pathname: "/addReferral",
+      router.navigate({
+        pathname: "/(stack)/addReferral",
         params: {
           data: JSON.stringify(referral),
           edit: "true",

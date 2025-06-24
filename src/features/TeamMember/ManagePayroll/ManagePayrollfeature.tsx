@@ -78,8 +78,8 @@ const ManagePayrollfeature = ({ navigation }: any) => {
   const handleOptions = (option: any, item: any) => {
     setGetOptions(item);
     if (option.id == 1) {
-     router.push({
-      pathname: "/addPayroll",
+     router.navigate({
+      pathname: "/(stack)/addPayroll",
       params: { edit: "true" ,
         root: encodeURIComponent(JSON.stringify(item)),
       },

@@ -1,20 +1,20 @@
-import React from "react";
-import moment from "moment";
-import { StyleSheet, Text, View } from "react-native";
-import { Divider } from "react-native-paper";
-import { TouchableOpacity } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
-import { navigate } from "../../../../utils/navigationServices";
+import { useRouter } from "expo-router";
+import moment from "moment";
+import React from "react";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Divider } from "react-native-paper";
 import { styles as externalStyles } from "../../../../assets/css";
 import Button from "../../../../components/elements/Button/Button";
-import { getUpcomingAppointments } from "../../../../hooks/Customer";
-import { areAllElementsUnique, formatTime } from "../../../../utils/tools";
-import { PermissionAccess } from "../../../../middleware/PermissionAccess";
 import CustomHeading from "../../../../components/elements/CustomHeading/CustomHeading";
+import { getUpcomingAppointments } from "../../../../hooks/Customer";
+import { PermissionAccess } from "../../../../middleware/PermissionAccess";
+import { navigate } from "../../../../utils/navigationServices";
+import { areAllElementsUnique, formatTime } from "../../../../utils/tools";
 
 const UpcomingAppointments = ({ customerId }: any) => {
   const appointments = getUpcomingAppointments(customerId);
-
+  const router = useRouter();
   return (
     <>
       <View style={[externalStyles.card]}>
@@ -54,7 +54,10 @@ const UpcomingAppointments = ({ customerId }: any) => {
                 </View>
 
                 <TouchableOpacity
-                  onPress={() => navigate(`ViewAppointment`, { id: item?.id })}
+                  onPress={router.push({
+                    pathname: "/(stack)/viewAppointments",
+                    params: { id: item?.id },
+                  })}
                 >
                   <MaterialIcons
                     name="notes"

@@ -40,7 +40,7 @@ const Header = ({ navigation }: any) => {
         <View style={styles.rowLayout}>
           <View style={styles.rightMargin}>
             <TouchableOpacity
-              onPress={() => router.push("/timeTracker")}
+              onPress={() => router.push("/(stack)/timeTracker")}
               style={styles.customRowLayout}
             >
               {/* <EvilIcons name="bell" size={26} color="black" /> */}
@@ -59,7 +59,7 @@ const Header = ({ navigation }: any) => {
             </TouchableOpacity>
           </View>
           <TouchableOpacity
-            onPress={() => navigation.navigate("notification")}
+            onPress={() => router.push("/(stack)/notification")}
             style={styles.customRowLayout}
           >
             {/* <EvilIcons name="bell" size={26} color="black" /> */}

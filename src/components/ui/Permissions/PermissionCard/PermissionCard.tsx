@@ -20,7 +20,7 @@ const PermissionCard = ({ item, navigation }: any) => {
         onPress={() => 
           // navigation.navigate("EditPermission", { id: item._id })
           router.push({
-      pathname: "/editPermission",
+      pathname: "/(stack)/editPermission",
       params: { id: item._id },
           })
         }

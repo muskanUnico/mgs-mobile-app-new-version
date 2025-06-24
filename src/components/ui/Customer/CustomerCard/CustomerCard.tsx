@@ -49,7 +49,7 @@ const CustomerCard = ({ item, index }: any) => {
             onPress={() =>
               // navigate("CustomerDetails", { customerId: item._id })
               router.push({
-                pathname: "/customerDetails",
+                pathname: "/(stack)/customerDetails",
                 params: { customerId: item._id },
               })
             }

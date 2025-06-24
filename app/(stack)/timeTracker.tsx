@@ -15,8 +15,8 @@ import { formatTime } from "@/src/utils/tools";
 import { useFocusEffect } from "@react-navigation/native";
 import React, { useCallback } from "react";
 import { StyleSheet, View } from "react-native";
-import OnlyTimeTracker from "../src/components/ui/TimeTracker/OnlyTimeTracker";
-import TimeTrackerCardDetails from "../src/components/ui/TimeTracker/TimeTrackerCardDetails";
+import OnlyTimeTracker from "../../src/components/ui/TimeTracker/OnlyTimeTracker";
+import TimeTrackerCardDetails from "../../src/components/ui/TimeTracker/TimeTrackerCardDetails";
 
 const TimeTracker = ({ navigation }: any) => {
   const { user } = useAuth();

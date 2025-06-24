@@ -87,7 +87,7 @@ const LeaveCalenderFeatures = () => {
         <Button
           title="Request Leave"
           onPress={() => 
-            router.push("/requestLeave")
+            router.push("/(stack)/requestLeave")
           }
         />
       </View>

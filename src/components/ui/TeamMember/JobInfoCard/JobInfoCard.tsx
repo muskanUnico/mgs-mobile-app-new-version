@@ -114,7 +114,7 @@ const JobInfoCard = ({ user }: any) => {
         )}
 
         <TouchableOpacity
-          onPress={() => router.push("/managePayroll")}
+          onPress={() => router.push("/(stack)/managePayroll")}
           style={styles.managePayrollLink}
         >
           <Text

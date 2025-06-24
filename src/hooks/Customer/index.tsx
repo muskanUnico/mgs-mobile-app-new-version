@@ -117,7 +117,7 @@ export const updateMember = (memberId: string) => {
         if (res?.success) {
           console.log("Update response:", res);
           Alert.alert("Member updated successfully");
-          router.push("/allTeamMember");
+          router.navigate("/(stack)/allTeamMember");
         }
       })
       .finally(() => {
@@ -142,7 +142,7 @@ export const createMember = () => {
       .then((res) => {
         if (res?.success) {
           Alert.alert("Member created successfully");
-           router.push("/allTeamMember");
+           router.navigate("/(stack)/allTeamMember");
         }
       })
       .finally(() => {
@@ -440,8 +440,8 @@ export const CreateCustomer = (navigation: any) => {
             dob: "",
           });
           // navigation.navigate("AllCustomer", { updatestate: 1 });
-          router.push({
-            pathname:"/allCustomer",
+          router.navigate({
+            pathname:"/(stack)/allCustomer",
             params: { updateState: 1 },
           });
         }
@@ -474,8 +474,8 @@ export const useUpdateCustomer = (
           bottomSheetRef.current.close();
           Alert.alert("Updated Successfully");
           // navigation.navigate("AllCustomer", { updateState: 1 });
-           router.push({
-            pathname:"/allCustomer",
+           router.navigate({
+            pathname:"/(stack)/allCustomer",
             params: { updateState: 1 },
           });
         }

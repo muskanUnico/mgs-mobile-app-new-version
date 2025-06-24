@@ -72,7 +72,7 @@ const PaymentHistory = ({
           //   paymentId: item?.appointmentId?.paymentId,
           // })
           router.push({
-           pathname: "/viewInvoice",
+           pathname: "/(stack)/viewInvoice",
            params :  item?.appointmentId?.paymentId})
         }
       >

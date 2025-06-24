@@ -1,5 +1,4 @@
 import Loader from "@/src/components/elements/Loader/Loader";
-import Header from "@/src/components/ui/Header/Header";
 import { brandColor } from "@/src/constants/COLORS";
 import { TimeProvider } from "@/src/context/TimeTrackerContext";
 import { useFonts } from "expo-font";
@@ -15,23 +14,42 @@ import DrawerContent from "../src/components/ui/DrawerContent/DrawerContent";
 import { AuthProvider, useAuth } from "../src/context/AuthContext";
 import { ThemeProvider } from "../src/context/ThemeContext";
 
+// function AuthenticatedDrawer({ user }: { user: any }) {
+//   return (
+//         <Drawer
+//           screenOptions={{
+//             lazy:true,
+//             headerShown: true,
+//             header: (props) => <Header {...props} />,
+//             drawerStyle: { backgroundColor: brandColor, width: "74%" },
+//           }}
+//           drawerContent={(props) => <DrawerContent {...props} />}
+//         >
+//           <Drawer.Screen
+//             name="(tabs)"
+//             options={{
+//               headerShown: true,
+//             }}
+//           />
+//             <Drawer.Screen name="(stack)" options={{ headerShown: true}} />
+//         </Drawer>
+//   );
+// }
+
 function AuthenticatedDrawer({ user }: { user: any }) {
   return (
-        <Drawer
-          screenOptions={{
-            headerShown: true,
-            header: (props) => <Header {...props} />,
-            drawerStyle: { backgroundColor: brandColor, width: "74%" },
-          }}
-          drawerContent={(props) => <DrawerContent {...props} />}
-        >
-          <Drawer.Screen
-            name="(tabs)"
-            options={{
-              headerShown: true,
-            }}
-          />
-        </Drawer>
+    <Drawer
+    initialRouteName="(tabs)"
+      screenOptions={{
+        lazy: true,
+        headerShown: true,
+  
+        drawerStyle: { backgroundColor: brandColor, width: "74%" },
+      }}
+      drawerContent={(props) => <DrawerContent {...props} />}
+    >
+      <Drawer.Screen name="(tabs)" options={{ headerShown: false }} />
+    </Drawer>
   );
 }
 

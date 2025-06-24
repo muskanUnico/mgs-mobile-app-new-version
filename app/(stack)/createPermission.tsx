@@ -12,21 +12,23 @@ import Button from "@/src/components/elements/Button/Button";
 import CustomInput from "@/src/components/elements/Input";
 import Title from "@/src/components/elements/Title/Title";
 import {
-    FilterBorder,
-    borderColor,
-    placeholderTextColor,
+  FilterBorder,
+  borderColor,
+  placeholderTextColor,
 } from "@/src/constants/COLORS";
 import { useTheme } from "@/src/context/ThemeContext";
 import GlobalLoader from "@/src/features/GlobalLoader/GlobalLoader";
 import { managePermissionData } from "@/src/hooks/Role/SelectPermission";
 import { SecurePageByPackage } from "@/src/middleware/PermissionAccess";
 import SelectPermission from "@/src/screens/SelectPermission";
+import { useRouter } from "expo-router";
 import MaterialCommunityIcon from "react-native-vector-icons/MaterialCommunityIcons";
 
  const CreatePermission = ({ navigation }: any) => {
   const { theme } = useTheme();
   const styles = useStyles();
   const [loading, setLoading] = useState(false);
+  const router = useRouter()
   // state
   const [switchValue, setSwitchValue] = useState(false);
   const [selectedService, setSelectedService] = useState("");
@@ -62,7 +64,8 @@ import MaterialCommunityIcon from "react-native-vector-icons/MaterialCommunityIc
     if (data?.success) {
       setLoading(false);
       Alert.alert("Role created successfully");
-      navigation.navigate("AllPermissions");
+      // navigation.navigate("AllPermissions");
+      router.push("/(stack)/allAppointments")
     }
   };
 
