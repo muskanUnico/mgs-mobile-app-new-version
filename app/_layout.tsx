@@ -13,45 +13,31 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import DrawerContent from "../src/components/ui/DrawerContent/DrawerContent";
 import { AuthProvider, useAuth } from "../src/context/AuthContext";
 import { ThemeProvider } from "../src/context/ThemeContext";
-
-// function AuthenticatedDrawer({ user }: { user: any }) {
-//   return (
-//         <Drawer
-//           screenOptions={{
-//             lazy:true,
-//             headerShown: true,
-//             header: (props) => <Header {...props} />,
-//             drawerStyle: { backgroundColor: brandColor, width: "74%" },
-//           }}
-//           drawerContent={(props) => <DrawerContent {...props} />}
-//         >
-//           <Drawer.Screen
-//             name="(tabs)"
-//             options={{
-//               headerShown: true,
-//             }}
-//           />
-//             <Drawer.Screen name="(stack)" options={{ headerShown: true}} />
-//         </Drawer>
-//   );
-// }
+import Header from "@/src/components/ui/Header/Header";
 
 function AuthenticatedDrawer({ user }: { user: any }) {
   return (
-    <Drawer
-    initialRouteName="(tabs)"
-      screenOptions={{
-        lazy: true,
-        headerShown: true,
-  
-        drawerStyle: { backgroundColor: brandColor, width: "74%" },
-      }}
-      drawerContent={(props) => <DrawerContent {...props} />}
-    >
-      <Drawer.Screen name="(tabs)" options={{ headerShown: false }} />
-    </Drawer>
+        <Drawer
+          screenOptions={{
+            lazy:true,
+            headerShown: true,
+            header: (props) => <Header {...props} />,
+            drawerStyle: { backgroundColor: brandColor, width: "74%" },
+          }}
+          drawerContent={(props) => <DrawerContent {...props} />}
+        >
+          <Drawer.Screen
+            name="(tabs)"
+            options={{
+              headerShown: true,
+            }}
+          />
+            <Drawer.Screen name="(stack)" options={{ headerShown: true}} />
+        </Drawer>
   );
 }
+
+
 
 
 

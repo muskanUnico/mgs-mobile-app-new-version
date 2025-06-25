@@ -13,7 +13,7 @@ const EditCommentScreen = ({ navigation, route }: any) => {
 
   return (
     <GlobalLoader>
-      <SafeAreaView>
+      <SafeAreaView style={{paddingBottom:60}}>
         <EditCommentFeature route={route} navigation={navigation} item={parsedItem} />
       </SafeAreaView>
     </GlobalLoader>

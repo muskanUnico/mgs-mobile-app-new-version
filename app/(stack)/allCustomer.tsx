@@ -15,7 +15,7 @@ const AllCustomerScreen = ({ navigation, route }: any) => {
       <SafeAreaView
         style={[
           { backgroundColor: theme.brandGreyColor },
-          { minHeight: "100%" },
+          { minHeight: "100%" , paddingBottom:60},
         ]}
       >
         <Title  title="All Customers" />

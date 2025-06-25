@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { View } from "react-native";
 
 // components
+import { useRouter } from "expo-router";
 import Loader from "../../../components/elements/Loader/Loader";
 import Title from "../../../components/elements/Title/Title";
 import AddNotes from "../../../components/ui/Customer/AddNotes/AddNotes";
@@ -17,13 +18,13 @@ import {
   getSingleCustomer,
   useUpdateCustomer,
 } from "../../../hooks/Customer";
-import { navigate } from "../../../utils/navigationServices";
 import ManagesCustomerCards from "../ManageCustomerCards/ManagesCustomerCards";
 
 const CustomerDetails = ({ navigation, route, customerId }: any) => {
   const bottomSheetRef = useRef<any>(null);
   let customerDetail = getSingleCustomer(customerId);
   const appointments = getPastAppointments(customerId);
+  const router = useRouter();
 
   let customer = customerDetail.data && customerDetail.data.customer;
   let buyerSummary = customerDetail.data && customerDetail.data.buyerSummary;
@@ -70,7 +71,12 @@ const CustomerDetails = ({ navigation, route, customerId }: any) => {
           <PersonalDetails
             data={customerDetail.data?.customer}
             handleEdit={() => bottomSheetRef.current.open()}
-            handleRelocate={() => navigate("IntakeForm", { id: customer?.id })}
+            handleRelocate={() =>
+              router.push({
+                pathname: "/(stack)/intakeForm",
+                params: { id: customer?.id },
+              })
+            }
           />
 
           <UpcomingAppointments customerId={customerId} />

@@ -9,7 +9,6 @@ import Button from "../../../../components/elements/Button/Button";
 import CustomHeading from "../../../../components/elements/CustomHeading/CustomHeading";
 import { getUpcomingAppointments } from "../../../../hooks/Customer";
 import { PermissionAccess } from "../../../../middleware/PermissionAccess";
-import { navigate } from "../../../../utils/navigationServices";
 import { areAllElementsUnique, formatTime } from "../../../../utils/tools";
 
 const UpcomingAppointments = ({ customerId }: any) => {
@@ -83,7 +82,9 @@ const UpcomingAppointments = ({ customerId }: any) => {
           <View style={{ paddingTop: 5, marginBottom: 8 }}>
             <Button
               title={"book appointment"}
-              onPress={() => navigate(`CreateAppointment`)}
+              onPress={() => 
+                router.push("/(stack)/createAppointment")
+              }
             />
           </View>
         </PermissionAccess>
