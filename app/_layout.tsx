@@ -1,4 +1,5 @@
 import Loader from "@/src/components/elements/Loader/Loader";
+import Header from "@/src/components/ui/Header/Header";
 import { brandColor } from "@/src/constants/COLORS";
 import { TimeProvider } from "@/src/context/TimeTrackerContext";
 import { useFonts } from "expo-font";
@@ -13,7 +14,6 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import DrawerContent from "../src/components/ui/DrawerContent/DrawerContent";
 import { AuthProvider, useAuth } from "../src/context/AuthContext";
 import { ThemeProvider } from "../src/context/ThemeContext";
-import Header from "@/src/components/ui/Header/Header";
 
 function AuthenticatedDrawer({ user }: { user: any }) {
   return (

@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { Image, StyleSheet } from "react-native";
-import { Text, View, Platform } from "react-native";
-import Loader from "../../../components/elements/Loader/Loader";
-import { getAllApprovedAppointments } from "../../../hooks/Appointment";
-import { useActionHooks } from "../../../hooks/Appointment/ActionHooks";
-import CustomPagination from "../../../components/elements/CustomPagination/CustomPagination";
-import WarningModal from "../../../components/elements/WarningModal/WarningModal";
-import { styles as externalStyles } from "../../../assets/css";
+import { Image, Platform, StyleSheet, Text, View } from "react-native";
 import { Switch } from "react-native-paper";
+import { styles as externalStyles } from "../../../assets/css";
+import BookingInfoCard from "../../../components/elements/BookingInfoCard/BookingInfoCard";
+import CustomPagination from "../../../components/elements/CustomPagination/CustomPagination";
+import Loader from "../../../components/elements/Loader/Loader";
+import WarningModal from "../../../components/elements/WarningModal/WarningModal";
+import MyCalendar from "../../../components/ui/Calendar/Calendar";
 import {
   borderColor,
 } from "../../../constants/COLORS";
-import MyCalendar from "../../../components/ui/Calendar/Calendar";
 import { useTheme } from "../../../context/ThemeContext";
-import BookingInfoCard from "../../../components/elements/BookingInfoCard/BookingInfoCard";
+import { getAllApprovedAppointments } from "../../../hooks/Appointment";
+import { useActionHooks } from "../../../hooks/Appointment/ActionHooks";
 import { FilterAppointmentFeature } from "../FilterAppointmentFeature/FilterAppointmentFeature";
 
 const ApprovedAppointment = ({ navigation }: any) => {

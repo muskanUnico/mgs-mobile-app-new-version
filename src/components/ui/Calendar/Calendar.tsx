@@ -1,15 +1,16 @@
-import { View } from "react-native";
-import CalenderCards from "./CalenderCards";
-import CustomModal from "../../elements/CustomModal/CustomModal";
-import React, { useState, useCallback, useEffect } from "react";
+import moment from "moment";
+import React, { useCallback, useEffect, useState } from "react";
+import { Text, View } from "react-native";
 import {
-  ExpandableCalendar,
   CalendarProvider,
   CalendarUtils,
+  ExpandableCalendar,
 } from "react-native-calendars";
-import moment from "moment";
-import Timeline from "./Timeline";
+import { styles as externalStyles } from "../../../assets/css";
 import { getItemFromLocalStorage } from "../../../helper/useLocalStorage";
+import CustomModal from "../../elements/CustomModal/CustomModal";
+import CalenderCards from "./CalenderCards";
+import Timeline from "./Timeline";
 
 const today = new Date();
 
@@ -96,9 +97,11 @@ const MyCalendar = ({ appointments }: any) => {
           />
         </CalendarProvider>
 
-        {currentAppointment && currentAppointment.length > 0 && (
+        {currentAppointment && currentAppointment.length > 0 ? (
           <Timeline events={currentAppointment} handleCards={handleCards} />
-        )}
+        ):( <View style={{ alignItems: "center", marginTop: 20 }}>
+        <Text style={externalStyles.label}>No data found</Text>
+      </View>)}
       </View>
 
       <CustomModal
