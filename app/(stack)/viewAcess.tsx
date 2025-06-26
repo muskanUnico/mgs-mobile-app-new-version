@@ -1,15 +1,14 @@
-import React from "react";
-import {
-  SafeAreaView,
-  ScrollView,
-  ImageBackground,
-  View,
-  StyleSheet,
-} from "react-native";
-import ViewAccess from "@/src/features/TeamMember/ViewAccess/ViewAccess";
 import Title from "@/src/components/elements/Title/Title";
 import GlobalLoader from "@/src/features/GlobalLoader/GlobalLoader";
+import ViewAccess from "@/src/features/TeamMember/ViewAccess/ViewAccess";
 import { useLocalSearchParams } from "expo-router";
+import React from "react";
+import {
+  ImageBackground,
+  ScrollView,
+  StyleSheet,
+  View
+} from "react-native";
 
 export const ViewAccessScreen = ({ navigation, route }: any) => {
     const { roleId } = useLocalSearchParams();
@@ -20,8 +19,8 @@ export const ViewAccessScreen = ({ navigation, route }: any) => {
         style={styles.backgroundImage}
       />
       <ScrollView>
-        <Title navigation={navigation} title="View Access" />
-        <View style={{ marginHorizontal: 8 }}>
+        <Title  title="View Access" />
+        <View style={{ marginHorizontal: 8  , marginBottom:60}}>
           <ViewAccess navigation={navigation} route={route} roleId={roleId}/>
         </View>
       </ScrollView>

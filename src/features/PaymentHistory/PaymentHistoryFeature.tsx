@@ -37,30 +37,26 @@ const PaymentHistoryFeature = () => {
 
   // handle button of three dots
   const handleOptions = (options: any, item: any) => {
-   
     if (options.id == 2) {
       router.navigate({
         pathname: "/(stack)/viewInvoice",
-        params: { paymentId:  item?.appointmentId.paymentId },
+        params: { paymentId: item?.appointmentId.paymentId },
       });
-
     } else if (options.id == 3) {
-
       router.navigate({
-      pathname: "/(stack)/viewAppointments",
-      params:  { id: item?.appointmentId._id, selectedTab: 1},
-      })
-
-   
+        pathname: "/(stack)/viewAppointments",
+        params: { id: item?.appointmentId._id, selectedTab: 1 },
+      });
     } else if (options.id == 1) {
-     router.navigate({
-        pathname:"/(stack)/paymentPage", 
-        params:{
-        customerId: item?.customerId?.id || item?.customerId,
-        appointmentId: item.appointmentId?.id,
-        amount: item.payment?.amount,
-        appointmentData: JSON.stringify(transformData(item)),
-      },});
+      router.navigate({
+        pathname: "/(stack)/paymentPage",
+        params: {
+          customerId: item?.customerId?.id || item?.customerId,
+          appointmentId: item.appointmentId?.id,
+          amount: item.payment?.amount,
+          appointmentData: JSON.stringify(transformData(item)),
+        },
+      });
     }
   };
 
@@ -100,7 +96,9 @@ const PaymentHistoryFeature = () => {
           />
         </>
       ) : (
-        <Loader />
+        <View style={{ flex: 1, margin: 150 }}>
+          <Loader />
+        </View>
       )}
     </View>
   );

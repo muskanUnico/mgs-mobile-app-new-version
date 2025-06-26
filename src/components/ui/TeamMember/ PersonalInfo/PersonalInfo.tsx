@@ -108,7 +108,7 @@ const PersonalInfoCard: React.FC<PersonalInfoCardProps> = ({
                 { color: iconPersonColor },
               ]}
             />
-            <Text style={externalStyles.content} style={{ marginRight: 4 }}>
+            <Text style={externalStyles.content} style={{ marginRight: 4,fontWeight:700}}>
               {data?.name}
             </Text>
             <View

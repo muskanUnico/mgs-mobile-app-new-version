@@ -8,6 +8,7 @@ import { getRoleInfo } from "../../../hooks/Role";
 interface ViewAccessProps {
   navigation: any;
   route: any;
+ roleId: string | string[];
 }
 
 const ViewAccess: React.FC<ViewAccessProps> = ({ navigation, route , roleId}) => {
@@ -54,7 +55,7 @@ const ViewAccess: React.FC<ViewAccessProps> = ({ navigation, route , roleId}) =>
               </Text>
               <Text
                 style={[externalStyles.label]}
-                style={{ color: theme.brandColor }}
+                style={{ color: theme.brandColor ,fontWeight:700}}
               >
                 {item.title}
               </Text>
