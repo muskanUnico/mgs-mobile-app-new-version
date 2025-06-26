@@ -118,7 +118,7 @@ const EditAppointment = ({ navigation, id}) => {
               width: "100%",
               flexDirection: "row",
               marginHorizontal: 8,
-              marginBottom: 76,
+              marginBottom: 6,
             }}
           >
       

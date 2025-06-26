@@ -1,14 +1,14 @@
-import React from "react";
-import { SafeAreaView } from "react-native";
 import { brandWhiteColor } from "@/src/constants/COLORS";
 import EditAppointment from "@/src/features/Appointment/EditAppointment/EditAppointment";
 import GlobalLoader from "@/src/features/GlobalLoader/GlobalLoader";
 import { SecurePageByPackage } from "@/src/middleware/PermissionAccess";
 import { useLocalSearchParams } from "expo-router";
+import React from "react";
+import { SafeAreaView } from "react-native";
 
 const EditAppointmentScreen = ({ navigation }: any) => {
 
- const {appointmentId} = useLocalSearchParams();
+ const {id} = useLocalSearchParams();
   return (
     <GlobalLoader>
       <SafeAreaView
@@ -17,7 +17,7 @@ const EditAppointmentScreen = ({ navigation }: any) => {
           { minHeight: "100%", paddingBottom: 64 },
         ]}
       >
-        <EditAppointment navigation={navigation}  id ={appointmentId}/>
+        <EditAppointment navigation={navigation}  id ={id}/>
       </SafeAreaView>
     </GlobalLoader>
   );
