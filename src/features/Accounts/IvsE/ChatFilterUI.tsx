@@ -17,7 +17,7 @@ const HeaderTitle: React.FC<HeaderTitleProps> = ({ title }) => {
     <Text
       style={{
         color: theme.brandBlackColor,
-        
+
         fontSize: 17,
         textShadowColor: theme.brandPastelColor,
         textShadowOffset: { width: 1, height: 1 },
@@ -64,9 +64,13 @@ const ChatFilterUI: React.FC<ReportHeaderProps> = ({
   ];
 
   const handleDateRangeChange = (type: "from" | "to", date: Date | null) => {
-    setDateRange({ ...dateRange, [type]: date });
-    setFilter("fixed");
+    let newRange = { ...dateRange, [type]: date };
+    if (newRange.from && newRange.to && newRange.from > newRange.to) {
+      newRange = { from: newRange.to, to: newRange.from };
+    }
+    setDateRange(newRange);
   };
+
 
   const handleSelectChange = (selectedValue: any) => {
     if (selectedValue !== "none") {
@@ -108,8 +112,8 @@ const ChatFilterUI: React.FC<ReportHeaderProps> = ({
 
         {chooseOptions === "range" && (
           <StartEndDatePicker
-            endDate={dateRange.from}
-            startDate={dateRange.to}
+            startDate={dateRange.from}
+            endDate={dateRange.to}
             onDatesSelected={handleDateRangeChange}
           />
         )}

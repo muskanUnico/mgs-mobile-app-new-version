@@ -28,7 +28,7 @@ export const ViewTeamMember = ({ navigation, route , memberId}: any) => {
       {memberDetail.loading ? (
         <Loader />
       ) : (
-        <View style={{ paddingBottom: 128 }}>
+        <View style={{ paddingBottom: 60 }}>
           <Title navigation={navigation} title={`${user.name}`} />
           <PersonalInfoCard data={user} isDelete={true} />
           <PermissionInfoCard

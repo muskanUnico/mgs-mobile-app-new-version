@@ -26,7 +26,7 @@ const ChartFilterFeature = ({ setParams, setFilter, filter }) => {
         to: formatDateForFilter(dateRange.to),
       });
     }
-  }, [dateRange, filter]);
+  }, [dateRange, filter , chooseOptions]);
 
 
   const handleResetFilter = () => {
@@ -37,9 +37,6 @@ const ChartFilterFeature = ({ setParams, setFilter, filter }) => {
     });
   };
 
-useEffect(() => {
-  handleResetFilter();
-}, [filter]);
   return (
     <ChatFilterUI
       setDateRange={setDateRange}
