@@ -1,7 +1,7 @@
 import { AntDesign } from "@expo/vector-icons";
 import { useFocusEffect } from "@react-navigation/native";
 import { useRouter } from "expo-router";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Keyboard, TouchableWithoutFeedback, View } from "react-native";
 import { styles as externalStyles } from "../../../assets/css";
 import AutoComplete from "../../../components/elements/AutoComplete/AutoComplete";
@@ -41,6 +41,8 @@ const ManagePayrollfeature = ({ navigation }: any) => {
   const { handleDelete, loading } = useDeleteTimeTracker();
   let manage_payroll = permissions.includes("manage_payroll");
 
+ const [teamLoading, setTeamLoading] = useState(false);
+
   const [modalOpen, setModalOpen] = useState(false);
   const [team, setTeamMember] = useState({
     id: "",
@@ -49,12 +51,12 @@ const ManagePayrollfeature = ({ navigation }: any) => {
   const [getOption, setGetOptions] = useState({
     id: "",
   });
-  const dataSet = data.map((item) => ({ title: item.name, id: item?.id}));
+  const dataSet = data.map((item) => ({ title: item.name, id: item?.id }));
 
   const handleAddPayroll = () => {
     // router.push({
     //   pathname: "/addPayroll",
-    //   params: { edit: "false" 
+    //   params: { edit: "false"
     //   },
     // });
   };
@@ -77,13 +79,15 @@ const ManagePayrollfeature = ({ navigation }: any) => {
   // handle three dot btn
   const handleOptions = (option: any, item: any) => {
     setGetOptions(item);
+
     if (option.id == 1) {
-     router.navigate({
-      pathname: "/(stack)/addPayroll",
-      params: { edit: "true" ,
-        root: encodeURIComponent(JSON.stringify(item)),
-      },
-    });
+      router.navigate({
+        pathname: "/(stack)/addPayroll",
+        params: {
+          edit: "true",
+          root: encodeURIComponent(JSON.stringify(item)),
+        },
+      });
     } else if (option.id == 2) {
       setTimeout(() => {
         setModalOpen(true);
@@ -97,6 +101,11 @@ const ManagePayrollfeature = ({ navigation }: any) => {
       setSelectedStatus(DefaultSelected(timeData.results));
     }, [timeData])
   );
+  useEffect(() => {
+    if (teamLoading) {
+      setTeamLoading(false);
+    }
+  }, [timeData]);
 
   useFocusEffect(
     useCallback(() => {
@@ -126,7 +135,10 @@ const ManagePayrollfeature = ({ navigation }: any) => {
             <AutoComplete
               inputValue={team}
               dataSet={dataSet}
-              setInputValue={setTeamMember}
+              setInputValue={(value:any) => {
+                setTeamLoading(true);
+                setTeamMember(value);
+              }}
               placeholder="Select Team Member"
             />
           )}
