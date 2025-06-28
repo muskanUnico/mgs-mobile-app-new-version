@@ -43,9 +43,7 @@ export const WorkedHoursFeature = ({ naviagtion, route, item }: any) => {
   ]);
 
   // handle three dot btn
-  const handleOptions = (option: any, item: any) => {
-  
-
+  const handleOptions = (option: any, item: any) => { 
     setGetOption(item);
     if (option == 1) {
       setFields([

@@ -19,6 +19,7 @@ export const useGetTimeTracker = (setParams: any, params: any) => {
   });
   const [isloading, setIsLoading] = useState(true);
 
+  const router = useRouter();
   const setPage = (page: number) => {
     setParams({ ...params, page: page });
   };
@@ -52,7 +53,6 @@ export const useGetTimeTracker = (setParams: any, params: any) => {
 
 export const useCreateTime = () => {
   const [loading, setLoading] = useState(true);
-    const router = useRouter();
   const handleCreateTime = (formateData = {}) => {
     setLoading(false);
     TimeTracker.createTimeTracker(formateData)
@@ -262,14 +262,14 @@ export const useUpdateDataTimeTracker = () => {
 
 export const useUpdateInsideTimeTrackerEntry = () => {
   const [loader, setLoading] = useState(true);
-
+  const router = useRouter();
   const handleUpdateEntry = (trackerId: string, entryId: string, body = {}) => {
     setLoading(false);
     TimeTracker.updateInsideTimeTracker(trackerId, entryId, body)
       .then(() => {
         setLoading(true);
         Alert.alert("Your Data Updated Successfully");
-        navigate("ManagePayroll");
+          router.push("/(stack)/managePayroll")
       })
       .catch((err) => {
         Alert.alert(err?.response?.data?.message);
