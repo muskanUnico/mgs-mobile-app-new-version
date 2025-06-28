@@ -1,8 +1,9 @@
-import React from "react";
-import { Divider } from "react-native-paper";
 import { FontAwesome } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
+import React from "react";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Divider } from "react-native-paper";
 import { styles as externalStyles } from "../../../../assets/css";
-import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import {
   dividerColor,
   iconColor1,
@@ -10,9 +11,9 @@ import {
   iconPhoneColor,
   labelColor,
 } from "../../../../constants/COLORS";
-import { navigate } from "../../../../utils/navigationServices";
 
 const TipCollectedCard = ({ item }: any) => {
+  const router = useRouter();
   return (
     <>
       <View style={[externalStyles.card]}>
@@ -27,7 +28,10 @@ const TipCollectedCard = ({ item }: any) => {
         </View>
         <TouchableOpacity
           onPress={() =>
-            navigate("ViewAppointment", { id: item?.appointmentId })
+            router.push({
+              pathname: "/(stack)/viewAppointments",
+              params: { id: item?.appointmentId },
+            })
           }
         >
           <Text style={[externalStyles.BlueText, { marginLeft: 24 }]}>

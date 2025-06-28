@@ -85,7 +85,7 @@ const ManagePayrollfeature = ({ navigation }: any) => {
         pathname: "/(stack)/addPayroll",
         params: {
           edit: "true",
-          root: encodeURIComponent(JSON.stringify(item)),
+          rootItem: encodeURIComponent(JSON.stringify(item)),
         },
       });
     } else if (option.id == 2) {

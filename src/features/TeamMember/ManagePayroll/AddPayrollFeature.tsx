@@ -19,9 +19,10 @@ import {
 } from "../../../utils/functions";
 import { convertStringTimeToNumber } from "../../../utils/tools";
 
-export const AddPayrollFeature = ({ route, isEdit }: any) => {
+export const AddPayrollFeature = ({ route, isEdit,  item}: any) => {
   const { handleUpdate, loader } = useUpdateDataTimeTracker();
-  const root = route.params;
+  const root = item;
+  console.log("root----",root);
 
 
   const { handleCreateTime, loading } = useCreateTime();
@@ -32,8 +33,8 @@ export const AddPayrollFeature = ({ route, isEdit }: any) => {
 
   const [dateFilter, setDateFilter] = useState(new Date());
   const [team, setTeamMember] = useState({
-    id: root.data?.teamMemberId?.id,
-    title: root.data?.teamMemberId?.id,
+    id: root?.teamMemberId?.id,
+    title: root?.teamMemberId?.id,
   });
 
   const [fields, setFields] = useState<any[]>([
@@ -48,17 +49,20 @@ export const AddPayrollFeature = ({ route, isEdit }: any) => {
 
   useFocusEffect(
     useCallback(() => {
-      const exiting = root.data?.hours.map((item: any, index: any) => ({
+          if (!isEdit || !root) return;
+      const exiting = root?.hours.map((item: any, index: any) => ({
         startTime: new Date(
           convertToISOFormat({
-            date: moment(root.data?.date).format("YYYY-MM-DD"),
-            time: item?.startTime,
+            date: moment(root?.date).format("YYYY-MM-DD"),
+            // time: item?.startTime,
+           time: String(item?.startTime).padStart(4, "0")
           })
         ),
         endTime: new Date(
           convertToISOFormat({
-            date: moment(root.data?.date).format("YYYY-MM-DD"),
-            time: item?.endTime,
+            date: moment(root?.date).format("YYYY-MM-DD"),
+            // time: item?.endTime,
+           time: String(item?.endTime).padStart(4, "0"), 
           })
         ),
         duration: item?.duration,
@@ -67,9 +71,9 @@ export const AddPayrollFeature = ({ route, isEdit }: any) => {
       }));
       if (isEdit) {
         setFields(exiting);
-        setDateFilter(new Date(root.data?.date));
+        setDateFilter(new Date(root?.date));
       }
-    }, [route.params?.data])
+    }, [isEdit,root])
   );
 
   const handleSubmitbtn = () => {
@@ -98,11 +102,12 @@ export const AddPayrollFeature = ({ route, isEdit }: any) => {
     } else if (team?.id == "") {
       Alert.alert("Team Member is Required");
     } else if (isEdit) {
-      handleUpdate(root.data?.id, formateData);
+      handleUpdate(root?.id, formateData);
     } else {
       handleCreateTime(formateData);
     }
   };
+  if (!root) return <Text>Invalid data passed</Text>;
 
   return (
     <>

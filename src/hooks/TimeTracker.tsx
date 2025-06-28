@@ -6,7 +6,6 @@ import { Alert } from "react-native";
 import { Appointment } from "../interface/Appointment";
 import { timeTracker } from "../interface/Reports";
 import { TimeTracker } from "../services/TimeTracker/TimeTracker";
-import { navigate } from "../utils/navigationServices";
 import { getLastDate } from "../utils/tools";
 
 export const useGetTimeTracker = (setParams: any, params: any) => {
@@ -240,14 +239,15 @@ export const useDeleteInsideDataTimeTracker = () => {
 
 export const useUpdateDataTimeTracker = () => {
   const [loader, setLoading] = useState(true);
-
+  const router = useRouter();
   const handleUpdate = (trackerId: string, body = {}) => {
     setLoading(false);
     TimeTracker.UpdateInsideDataTimeTracker(trackerId, body)
       .then(() => {
         setLoading(true);
         Alert.alert("Data Updated Successfully");
-        navigate("ManagePayroll");
+        // navigate("ManagePayroll");
+        router.push("/(stack)/managePayroll");
       })
       .catch((err) => {
         Alert.alert(err?.response?.data?.message);

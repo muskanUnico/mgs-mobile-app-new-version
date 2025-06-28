@@ -8,17 +8,27 @@ import { SafeAreaView } from "react-native";
 
 const AddPayrollScreen = ({ navigation, route }: any) => {
   const { theme } = useTheme();
-  const  {edit }  = useLocalSearchParams();
-  const isEdit = edit==="true";
+  const { edit, rootItem } = useLocalSearchParams();
+  const isEdit = edit === "true";
+  const itemData = rootItem
+    ? JSON.parse(
+        decodeURIComponent(Array.isArray(rootItem) ? rootItem[0] : rootItem)
+      )
+    : null;
+
+  console.log("Decoded item:", itemData);
 
   return (
     <GlobalLoader>
       <SafeAreaView
-      
-        style={{  flex: 1 , backgroundColor: theme.brandWhiteColor , paddingBottom:40}}
+        style={{
+          flex: 1,
+          backgroundColor: theme.brandWhiteColor,
+          paddingBottom: 40,
+        }}
       >
         <Title navigation={navigation} title="Add Custom Data" />
-        <AddPayrollFeature route={route} isEdit={isEdit} />
+        <AddPayrollFeature route={route} isEdit={isEdit} item={itemData} />
       </SafeAreaView>
     </GlobalLoader>
   );
