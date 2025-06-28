@@ -1,15 +1,14 @@
-import { Text, View } from "react-native";
-import TipCollectedCard from "../../../components/ui/TeamMember/TipCollectedCard/TipCollectedCard";
-import React from "react";
 import { FontAwesome } from "@expo/vector-icons";
+import React from "react";
+import { StyleSheet, Text, View } from "react-native";
 import { styles as externalStyles } from "../../../assets/css";
-import { brandColor, greenColor } from "../../../constants/COLORS";
-import { StyleSheet } from "react-native";
-import { TotalTip } from "../../../utils/functions";
+import TipCollectedCard from "../../../components/ui/TeamMember/TipCollectedCard/TipCollectedCard";
+import { greenColor } from "../../../constants/COLORS";
 import { useTheme } from "../../../context/ThemeContext";
+import { TotalTip } from "../../../utils/functions";
 
-export const TipCollectedFeature = ({ naviagtion, route }: any) => {
-  const data = route.params?.item?.tips;
+export const TipCollectedFeature = ({ naviagtion, route,item }: any) => {
+  const data = item?.tips;
   const { theme } = useTheme();
 
   return (

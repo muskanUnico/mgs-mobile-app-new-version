@@ -1,4 +1,5 @@
 import { useFocusEffect } from "@react-navigation/native";
+import { useRouter } from "expo-router";
 import moment from "moment";
 import { useCallback, useEffect, useState } from "react";
 import { Alert } from "react-native";
@@ -51,14 +52,15 @@ export const useGetTimeTracker = (setParams: any, params: any) => {
 
 export const useCreateTime = () => {
   const [loading, setLoading] = useState(true);
-
+    const router = useRouter();
   const handleCreateTime = (formateData = {}) => {
     setLoading(false);
     TimeTracker.createTimeTracker(formateData)
       .then(() => {
         setLoading(true);
         Alert.alert("Your Time Added Successfully");
-        navigate("ManagePayroll");
+        // navigate("ManagePayroll");
+        router.push("/(stack)/managePayroll")
       })
       .catch((err) => {
         Alert.alert(err?.response?.data?.message);
@@ -213,7 +215,7 @@ export const useDeleteTimeTracker = () => {
 
 export const useDeleteInsideDataTimeTracker = () => {
   const [deleteLoading, setLoading] = useState(true);
-
+  const router = useRouter();
   const handleDelete = (
     trackerId: string,
     entryId: string,
@@ -225,7 +227,8 @@ export const useDeleteInsideDataTimeTracker = () => {
         setLoading(true);
         setModalOpen(false);
         Alert.alert("Your Data Delete Successfully");
-        navigate("ManagePayroll");
+        // navigate("ManagePayroll");
+        router.push("/(stack)/managePayroll");
       })
       .finally(() => {
         setLoading(true);
