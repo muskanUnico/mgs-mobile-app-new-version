@@ -56,6 +56,7 @@ const RevenueReportActionTable: React.FC<RevenueReportActionTableProps> = ({
     },
   ];
 
+
   const handleOptions = (option: any, item: any) => {
     setForm(item);
     setGetOption(option);

@@ -1,9 +1,10 @@
-import { Alert } from "react-native";
-import { useCallback, useState } from "react";
 import { useFocusEffect } from "@react-navigation/native";
+import { useRouter } from "expo-router";
+import { useCallback, useState } from "react";
+import { Alert } from "react-native";
+import { ReportsProps, totalRevenue } from "../../interface/Reports";
 import { Revenue } from "../../services/Revenue/Revenue";
 import { navigate } from "../../utils/navigationServices";
-import { ReportsProps, totalRevenue } from "../../interface/Reports";
 
 export const useGetBookingRevenue = () => {
   const [revenue, setdata] = useState<ReportsProps>({
@@ -178,6 +179,7 @@ export const useCreateRevenue = (refetch: any) => {
 
 export const useUpdateRevenue = (navigation: any) => {
   const [loading, setLoading] = useState(false);
+  const router=useRouter();
 
   const handleUpdate = (revenueId: string, entryId: string, form = {}) => {
     setLoading(true);
@@ -185,7 +187,8 @@ export const useUpdateRevenue = (navigation: any) => {
       .then((res) => {
         Alert.alert("Your Revenue Updated Successfully");
         setLoading(false);
-        navigation.navigate("RevenueReport");
+        // navigation.navigate("RevenueReport");
+        router.push("/(stack)/revenueReport")
       })
       .catch((err) => {
         Alert.alert(err.response.data.message);
