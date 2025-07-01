@@ -13,7 +13,7 @@ const CmsScreen = ({ navigation, route }: any) => {
       <SafeAreaView
         style={[
           { backgroundColor: theme.brandWhiteColor },
-          { minHeight: "100%" },
+          { minHeight: "100%" , paddingBottom:60},
         ]}
       >
         <Title navigation={navigation} title="CMS" />

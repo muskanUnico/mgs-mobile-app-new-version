@@ -1,8 +1,9 @@
 import React, { useCallback } from "react";
-import { View, TouchableOpacity, Text, FlatList } from "react-native";
+import { FlatList, Text, TouchableOpacity, View } from "react-native";
 import { useTheme } from "../../../context/ThemeContext";
 
 function CustomPagination({ gotoPage, totalPage, pageIndex }: any) {
+  const { theme } = useTheme();
   const renderPageLinks = useCallback(() => {
     if (totalPage === 0 || isNaN(pageIndex)) return null;
     const visiblePageButtonCount = 5;
@@ -26,7 +27,6 @@ function CustomPagination({ gotoPage, totalPage, pageIndex }: any) {
         pageIndices.push(pageNumberAfter);
       }
     });
-    const { theme } = useTheme();
 
     return pageIndices.map((pageIndexToMap) => (
       <TouchableOpacity
@@ -41,12 +41,13 @@ function CustomPagination({ gotoPage, totalPage, pageIndex }: any) {
           marginTop: 5,
           marginLeft: 6,
           borderColor: theme.brandBlackColor,
-          height:25
+          height: 25,
         }}
       >
         <Text
           style={{
-            color: pageIndex === pageIndexToMap ? "white" : theme.brandBlackColor,
+            color:
+              pageIndex === pageIndexToMap ? "white" : theme.brandBlackColor,
             fontFamily: "BoldText",
           }}
         >

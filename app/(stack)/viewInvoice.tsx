@@ -15,7 +15,7 @@ import React from "react";
 import { SafeAreaView, Text, View } from "react-native";
 
 const ViewInvoiceScreen = ({ navigation, route }: any) => {
-  const {paymentId} = useLocalSearchParams();
+  const { paymentId } = useLocalSearchParams();
 
   const { data, isLoading } = useGetSingleViewInvoice(paymentId);
   if (!isLoading) {
@@ -28,12 +28,7 @@ const ViewInvoiceScreen = ({ navigation, route }: any) => {
         Data Not Found
       </Text>
     );
-  } 
-
-  
-
-
-
+  }
 
   return (
     <SafeAreaView

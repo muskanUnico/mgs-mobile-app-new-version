@@ -28,7 +28,7 @@ export const IvsEFeatures = () => {
   const chartData = useGetExpenseRevenueChart();
 
   const bottomSheetRef = useRef<any>(null);
-  const [active, setActive] = useState(1);
+  const [active, setActive] = useState(null);
   const [filter, setFilter] = useState("Monthly");
 
   const tabs = [
@@ -58,28 +58,39 @@ export const IvsEFeatures = () => {
       setActive(2);
     }
     setTimeout(() => {
-      bottomSheetRef.current.open();
-    }, 500);
+    bottomSheetRef.current?.open?.(); 
+    },300);
   };
+
+  useEffect(() => {
+  console.log("📦 Sheet ref ready?", bottomSheetRef.current);
+}, []);
 
   const [lineData, setLineData] = useState([]);
 const [lineData2, setLineData2] = useState([]);
 const [lineData3, setLineData3] = useState([]);
 const [xAxisLabels, setXAxisLabels] = useState([]);
 
- useEffect(() => {
-  if (chartData?.data?.results?.length > 1) {
+useEffect(() => {
+  const results = chartData?.data?.results;
+
+  if (Array.isArray(results) && results.length > 0) {
     const isNotMonthly = filter !== "Monthly";
 
-    setLineData(totalRevenueChartFormateData(chartData.data.results, isNotMonthly));
-    setLineData2(totalExpenseChartFormateData(chartData.data.results, isNotMonthly));
-    setLineData3(ProfitChartFormateData(chartData.data.results, isNotMonthly));
-    setXAxisLabels(currentMonthChartFormateData(chartData.data.results, isNotMonthly));
+    const formattedRevenue = totalRevenueChartFormateData(results, isNotMonthly);
+    const formattedExpense = totalExpenseChartFormateData(results, isNotMonthly);
+    const formattedProfit = ProfitChartFormateData(results, isNotMonthly);
+    const formattedXAxis = currentMonthChartFormateData(results, isNotMonthly);
+
+    setLineData(formattedRevenue);
+    setLineData2(formattedExpense);
+    setLineData3(formattedProfit);
+    setXAxisLabels(formattedXAxis);
   }
-}, [filter]);
+}, [filter, chartData?.data?.results]); 
 
   return (
-    <>
+    <View>
       <IvsEcards />
       <View style={styles.rowBetweenCenter}>
         <Tabs
@@ -123,14 +134,13 @@ const [xAxisLabels, setXAxisLabels] = useState([]);
           />
         </View>
       )}
-
-      {active == 1 && (
-        <AddIncome bottomSheetRef={bottomSheetRef} refetch={refetch} />
+      {active == 1 && ( 
+        <AddIncome  bottomSheetRef={bottomSheetRef} refetch={refetch} />
       )}
       {active == 2 && (
         <AddExpense bottomSheetRef={bottomSheetRef} refetch={refetch} />
       )}
-    </>
+    </View>
   );
 };
 

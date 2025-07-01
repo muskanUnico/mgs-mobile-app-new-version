@@ -86,7 +86,7 @@ import MaterialCommunityIcon from "react-native-vector-icons/MaterialCommunityIc
               onChangeText={(text: any) => handleRoleName(text)}
             />
           </View>
-          <View className="my-4">
+          <View style={{marginVertical:16}}>
             <Text style={[externalStyles.label,{marginBottom:5}]} >
               Customize this set of permissions
             </Text>

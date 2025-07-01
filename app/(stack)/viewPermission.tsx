@@ -55,7 +55,7 @@ const ViewPermissions: React.FC<ViewAccessProps> = ({ roleId }) => {
               <Text
                 style={[externalStyles.label]}
                 style={{ color: theme.brandColor }}
-                className=" "
+             
               >
                 {item.title}
               </Text>

@@ -1,7 +1,7 @@
 import { Text, TouchableOpacity } from "react-native";
 import { View } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
-
+import { StyleSheet } from "react-native";
 // interface
 interface Permission {
   icon: string;
@@ -48,20 +48,19 @@ const PermissionSidebar: React.FC<PermissionSidebarProps> = ({
       {permissions.map((item) => (
         <TouchableOpacity
           onPress={() => handleItemClick(item.id)}
-          className={`StaffMemberCss p-2 ${
-            selectedItem?.id === item.id ? "bg-blue-200" : ""
-          }`}
+          style={[
+            styles.item,
+            selectedItem?.id === item.id && styles.selectedItem,
+          ]}
           key={item.id}
         >
-          <View className="flex flex-row items-center">
+          <View style={styles.row}>
             <Icon
               name={iconMap[item.icon] || "group"}
               size={25}
               color={item.iconColor}
             />
-            <Text className="ml-2 text-sm " style={{ fontFamily: "BoldText" }}>
-              {item.title}
-            </Text>
+            <Text style={styles.title}>{item.title}</Text>
           </View>
         </TouchableOpacity>
       ))}
@@ -70,3 +69,21 @@ const PermissionSidebar: React.FC<PermissionSidebarProps> = ({
 };
 
 export default PermissionSidebar;
+
+const styles = StyleSheet.create({
+  item: {
+    padding: 8, // Tailwind `p-2`
+  },
+  selectedItem: {
+    backgroundColor: "#bfdbfe", // Tailwind `bg-blue-200`
+  },
+  row: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  title: {
+    marginLeft: 8, // Tailwind `ml-2`
+    fontSize: 14, // Tailwind `text-sm`
+    fontFamily: "BoldText",
+  },
+});
