@@ -14,7 +14,7 @@ const team =  ({ navigation, route }: any) => {
       <SafeAreaView
         style={[
           { backgroundColor: theme.brandGreyColor },
-          { minHeight: "100%" },
+          { minHeight: "100%" ,paddingBottom:60},
         ]}
       >
         <Title navigation={navigation} title="All Team Members" />

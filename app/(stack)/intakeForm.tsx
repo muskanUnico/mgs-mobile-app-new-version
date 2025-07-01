@@ -10,7 +10,7 @@ const IntakeFormScreen = ({navigation, route }: any) => {
   return (
     <GlobalLoader>
       <SafeAreaView
-        style={{ backgroundColor: theme.brandWhiteColor,  minHeight: screenHeight }}
+        style={{ backgroundColor: theme.brandWhiteColor,  minHeight: screenHeight,paddingBottom:60 }}
 
       >
         <IntakeFormFeature navigation={navigation} route={route} />

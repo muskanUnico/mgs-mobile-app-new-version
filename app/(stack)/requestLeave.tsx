@@ -25,6 +25,7 @@ const RequestLeaveScreen = ({ navigation, route }: any) => {
           flex: 1,
           minHeight: screenHeight,
           backgroundColor: theme.brandWhiteColor,
+          paddingBottom:60
         }}
       >
         <FlatList

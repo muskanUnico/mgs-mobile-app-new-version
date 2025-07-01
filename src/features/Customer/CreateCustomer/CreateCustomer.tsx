@@ -1,9 +1,9 @@
 import React from "react";
 import { View } from "react-native";
-import { CreateCustomer } from "../../../hooks/Customer";
-import Title from "../../../components/elements/Title/Title";
 import Button from "../../../components/elements/Button/Button";
+import Title from "../../../components/elements/Title/Title";
 import CustomerForm from "../../../components/ui/Customer/CustomerForm/CustomerForm";
+import { CreateCustomer } from "../../../hooks/Customer";
 
 const CreateCustomeFeature = ({ navigation }: any) => {
   const { formData, setFromData, submit, loader } = CreateCustomer(navigation);
@@ -21,7 +21,7 @@ const CreateCustomeFeature = ({ navigation }: any) => {
   };
 
   return (
-    <View style={{ minHeight: "100%" }}>
+    <View style={{ minHeight: "100%",paddingBottom:60 }}>
       <Title navigation={navigation} title="Create Customer" />
       <View style={{ marginHorizontal: 16 }}>
         <CustomerForm formData={formData} setFromData={setFromData} />

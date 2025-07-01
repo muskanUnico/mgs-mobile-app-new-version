@@ -1,6 +1,6 @@
-import React from "react";
 import { Entypo } from "@expo/vector-icons";
-import { SafeAreaView, Text, View, StyleSheet } from "react-native";
+import React from "react";
+import { SafeAreaView, StyleSheet, Text, View } from "react-native";
 import BottomSheet from "react-native-raw-bottom-sheet";
 import { styles as externalStyles } from "../../../assets/css";
 import { useTheme } from "../../../context/ThemeContext";
@@ -62,5 +62,6 @@ const styles = StyleSheet.create({
   },
   fullHeight: {
     minHeight: "100%",
+    paddingBottom:60
   },
 });

@@ -58,7 +58,7 @@ const CustomerDetails = ({ navigation, route, customerId }: any) => {
   );
 
   return (
-    <View style={{ minHeight: "100%" }}>
+    <View style={{ minHeight: "100%" ,paddingBottom:60}}>
       {customerDetail.loading ? (
         <Loader />
       ) : (

@@ -124,6 +124,7 @@ export default EditPersonalInfo;
 const styles = StyleSheet.create({
   screen: {
     minHeight: "100%",
+    paddingBottom:60
   },
   mx3: {
     marginHorizontal: 12,

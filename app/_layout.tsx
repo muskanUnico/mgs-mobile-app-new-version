@@ -62,7 +62,7 @@ function RootLayoutInner() {
   if (!fontsLoaded || !isLoading) return <Loader />;
 
   return !user ? (
-    <Stack>
+    <Stack screenOptions={{headerShown:false}}>
       <Stack.Screen name="index" options={{ headerShown: false }} />
       <Stack.Screen name="forgot-password" options={{ headerShown: false }} />
     </Stack>
