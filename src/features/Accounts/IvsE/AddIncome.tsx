@@ -26,6 +26,7 @@ const AddIncome = ({
   const createRevenue = useCreateRevenue(refetch);
   const updateRevenue = useUpdateRevenue(navigation);
   // console.log("nav", navigation);
+  
 
   const glodalLoading = createRevenue.loading
     ? createRevenue.loading
@@ -61,7 +62,7 @@ const AddIncome = ({
   };
 
   const handleSubmit = () => {
-    console.log("getoption====",getOption.id);
+    console.log("getoption====",getOption?.id);
     if (getOption?.id == 1) {
       updateRevenue.handleUpdate(wholeData?._id, form?._id, formateEdit);
     } else {

@@ -1,20 +1,20 @@
 import React, { useRef, useState } from "react";
-import AddIncome from "../../IvsE/AddIncome";
+import { Platform, StyleSheet, Text, View } from "react-native";
 import { Switch } from "react-native-paper";
-import { borderColor } from "../../../../constants/COLORS";
-import { View, Text, StyleSheet, Platform } from "react-native";
 import { styles as externalStyles } from "../../../../assets/css";
-import RevenueTable from "../../../../components/ui/Report/RevenueReport/RevenueTable";
+import BarThreeD from "../../../../components/elements/BarChart/BarChart";
 import Button from "../../../../components/elements/Button/Button";
 import CustomPagination from "../../../../components/elements/CustomPagination/CustomPagination";
-import BarThreeD from "../../../../components/elements/BarChart/BarChart";
+import RevenueTable from "../../../../components/ui/Report/RevenueReport/RevenueTable";
+import { borderColor } from "../../../../constants/COLORS";
+import { useTheme } from "../../../../context/ThemeContext";
 import {
   useGetOtherRevenue,
   useGetOtherRevenueChart,
 } from "../../../../hooks/Accounts/Revenue";
 import { formateSalesChartData } from "../../../../utils/functions";
+import AddIncome from "../../IvsE/AddIncome";
 import ChartFilterFeature from "../../IvsE/ChartFilterFeature";
-import { useTheme } from "../../../../context/ThemeContext";
 
 const OtherIncomeFeature = ({ navigation }: any) => {
   const { theme } = useTheme();
@@ -51,7 +51,9 @@ const OtherIncomeFeature = ({ navigation }: any) => {
       <View style={{ marginHorizontal: 24, marginBottom: 12, marginTop: 4 }}>
         <Button
           title="Add Income"
-          onPress={() => bottomSheetRef.current.open()}
+          onPress={() => {
+            bottomSheetRef.current.open();
+          }}
         />
       </View>
 
