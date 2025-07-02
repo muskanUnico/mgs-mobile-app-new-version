@@ -41,7 +41,7 @@ const ManagePayrollfeature = ({ navigation }: any) => {
   const { handleDelete, loading } = useDeleteTimeTracker();
   let manage_payroll = permissions.includes("manage_payroll");
 
- const [teamLoading, setTeamLoading] = useState(false);
+  const [teamLoading, setTeamLoading] = useState(false);
 
   const [modalOpen, setModalOpen] = useState(false);
   const [team, setTeamMember] = useState({
@@ -54,11 +54,10 @@ const ManagePayrollfeature = ({ navigation }: any) => {
   const dataSet = data.map((item) => ({ title: item.name, id: item?.id }));
 
   const handleAddPayroll = () => {
-    // router.push({
-    //   pathname: "/addPayroll",
-    //   params: { edit: "false"
-    //   },
-    // });
+    router.push({
+      pathname: "/(stack)/addPayroll",
+      params: { edit: "false" },
+    });
   };
 
   const option = [
@@ -135,7 +134,7 @@ const ManagePayrollfeature = ({ navigation }: any) => {
             <AutoComplete
               inputValue={team}
               dataSet={dataSet}
-              setInputValue={(value:any) => {
+              setInputValue={(value: any) => {
                 setTeamLoading(true);
                 setTeamMember(value);
               }}

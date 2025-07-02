@@ -22,7 +22,6 @@ import { convertStringTimeToNumber } from "../../../utils/tools";
 export const AddPayrollFeature = ({ route, isEdit,  item}: any) => {
   const { handleUpdate, loader } = useUpdateDataTimeTracker();
   const root = item;
-  console.log("root----",root);
 
 
   const { handleCreateTime, loading } = useCreateTime();
@@ -107,7 +106,8 @@ export const AddPayrollFeature = ({ route, isEdit,  item}: any) => {
       handleCreateTime(formateData);
     }
   };
-  if (!root) return <Text>Invalid data passed</Text>;
+  if (isEdit && !root) return <Text>Invalid data passed</Text>;
+
 
   return (
     <>

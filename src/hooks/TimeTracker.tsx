@@ -52,6 +52,7 @@ export const useGetTimeTracker = (setParams: any, params: any) => {
 
 export const useCreateTime = () => {
   const [loading, setLoading] = useState(true);
+  const router = useRouter()
   const handleCreateTime = (formateData = {}) => {
     setLoading(false);
     TimeTracker.createTimeTracker(formateData)

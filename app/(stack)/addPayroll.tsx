@@ -9,7 +9,8 @@ import { SafeAreaView } from "react-native";
 const AddPayrollScreen = ({ navigation, route }: any) => {
   const { theme } = useTheme();
   const { edit, rootItem } = useLocalSearchParams();
-  const isEdit = edit === "true";
+  const isEdit = String(edit).toLowerCase() === "true";
+
   const itemData = rootItem
     ? JSON.parse(
         decodeURIComponent(Array.isArray(rootItem) ? rootItem[0] : rootItem)
