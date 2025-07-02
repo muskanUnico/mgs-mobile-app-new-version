@@ -62,9 +62,6 @@ export const IvsEFeatures = () => {
     },300);
   };
 
-  useEffect(() => {
-  console.log("📦 Sheet ref ready?", bottomSheetRef.current);
-}, []);
 
   const [lineData, setLineData] = useState([]);
 const [lineData2, setLineData2] = useState([]);
