@@ -32,7 +32,7 @@ const ViewInvoiceScreen = ({ navigation, route }: any) => {
 
   return (
     <SafeAreaView
-      style={{ minHeight: "100%", paddingBottom: 96, backgroundColor: "white" }}
+      style={{ minHeight: "100%", paddingBottom: 36, backgroundColor: "white" }}
     >
       <GlobalLoader>
         <Title navigation={navigation} title="Invoice" />
