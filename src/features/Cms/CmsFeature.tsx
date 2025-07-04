@@ -1,12 +1,12 @@
-import Policy from "./Policy";
-import { View } from "react-native";
-import Taxfeature from "./Taxfeature";
 import React, { useState } from "react";
-import Logofeature from "./Logofeature";
-import Colorsfeature from "./Colorsfeature";
-import { useGetCMS } from "../../hooks/CMS";
-import { OfferBanner } from "./OfferBanner";
+import { View } from "react-native";
 import Tabs from "../../components/elements/Tabs/Tabs";
+import { useGetCMS } from "../../hooks/CMS";
+import Colorsfeature from "./Colorsfeature";
+import Logofeature from "./Logofeature";
+import OfferBanner from "./OfferBanner";
+import Policy from "./Policy";
+import Taxfeature from "./Taxfeature";
 
 export const CmsFeature = () => {
   const { data } = useGetCMS();

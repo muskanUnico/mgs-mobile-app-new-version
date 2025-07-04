@@ -155,6 +155,7 @@ export const getPaymentHistory = () => {
     refetch,
     setparams,
     loading,
+    setLoading,
     showLoadMore,
     loadMore,
     page,

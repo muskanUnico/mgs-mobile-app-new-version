@@ -1,7 +1,7 @@
 import { MaterialIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import React from "react";
-import { View } from "react-native";
+import { Text, View } from "react-native";
 import CustomPagination from "../../components/elements/CustomPagination/CustomPagination";
 import Loader from "../../components/elements/Loader/Loader";
 import PaymentHistory from "../../components/ui/PaymentHistory/PaymentHistory";
@@ -11,7 +11,7 @@ import { transformData } from "../../utils/tools";
 import { FilterAppointmentFeature } from "../Appointment/FilterAppointmentFeature/FilterAppointmentFeature";
 
 const PaymentHistoryFeature = () => {
-  const { data, setparams, loading, setPage, page } = getPaymentHistory();
+  const { data, setparams, loading,setLoading, setPage, page } = getPaymentHistory();
   const router = useRouter();
 
   const options = [
@@ -64,6 +64,7 @@ const PaymentHistoryFeature = () => {
     <View>
       <FilterAppointmentFeature
         setData={(filter: any) => {
+                setLoading(true);
           setparams((old: any) => ({
             ...old,
             query_services: filter.serviceFilter,
@@ -78,7 +79,9 @@ const PaymentHistoryFeature = () => {
 
       {!loading ? (
         <>
-          {data.results.map((item, index) => {
+           {data?.results?.length > 0 ? (
+            <>
+           {data.results.map((item, index) => {
             return (
               <PaymentHistory
                 item={item}
@@ -94,6 +97,12 @@ const PaymentHistoryFeature = () => {
             totalPage={data.totalPages}
             pageIndex={page}
           />
+        </>
+      ) : (
+            <View style={{ marginTop: 100, alignItems: "center" }}>
+              <Text style={{ fontSize: 16, color: "#999" }}>No data found</Text>
+            </View>
+          )}
         </>
       ) : (
         <View style={{ flex: 1, margin: 150 }}>
