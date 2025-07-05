@@ -1,13 +1,13 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { Divider } from "react-native-paper";
-import { dividerColor } from "../../../../../constants/COLORS";
 import { styles as externalStyles } from "../../../../../assets/css";
-import AutoComplete from "../../../../elements/AutoComplete/AutoComplete";
-import SingleDatePicker from "../../../../elements/SingleDatePicker/SingleDatePicker";
-import CustomTimePicker from "../../../../elements/CustomTimePicker/CustomTimePicker";
 import CustomHeading from "../../../../../components/elements/CustomHeading/CustomHeading";
 import StandardInput from "../../../../../components/elements/StandardInput/StandardInput";
+import { dividerColor } from "../../../../../constants/COLORS";
+import AutoComplete from "../../../../elements/AutoComplete/AutoComplete";
+import CustomTimePicker from "../../../../elements/CustomTimePicker/CustomTimePicker";
+import SingleDatePicker from "../../../../elements/SingleDatePicker/SingleDatePicker";
 
 interface CreateAppointmentFormProps {
   setSelectedData?: React.Dispatch<
@@ -41,6 +41,7 @@ const CreateAppointmentForm = ({
   date,
   setDate,
 }: CreateAppointmentFormProps) => {
+  console.log("rddtx", selectedData);
   return (
     <View style={[externalStyles.container]}>
       <View style={styles.spacing}>
