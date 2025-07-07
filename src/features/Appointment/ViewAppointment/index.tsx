@@ -1,38 +1,40 @@
 import moment from "moment";
-import { View } from "react-native";
 import React, { useEffect, useState } from "react";
-import { useAuth } from "../../../context/AuthContext";
-import { chips, formatTime } from "../../../utils/tools";
-import PatientsNotes from "./PatientNoteFeature/PatientsNotes";
-import { getAppointmentById } from "../../../hooks/Appointment";
+import { View } from "react-native";
+import Loader from "../../../components/elements/Loader/Loader";
 import Tabs from "../../../components/elements/Tabs/Tabs";
-import ViewAppointment from "./ViewAppointmentFeature/ViewAppointment";
+import WarningModal from "../../../components/elements/WarningModal/WarningModal";
+import ViewDetails from "../../../components/ui/Appointment/ViewAppointment/ViewDetails/ViewDetails";
+import { useAuth } from "../../../context/AuthContext";
+import { getAppointmentById } from "../../../hooks/Appointment";
 import { useActionHooks } from "../../../hooks/Appointment/ActionHooks";
 import {
   appointmentActionOptions,
   formatAppointmentIntoConfirmAppointmentHook,
 } from "../../../hooks/Appointment/hooks";
 import { Appointment } from "../../../interface/Appointment";
-import Loader from "../../../components/elements/Loader/Loader";
-import WarningModal from "../../../components/elements/WarningModal/WarningModal";
-import ViewDetails from "../../../components/ui/Appointment/ViewAppointment/ViewDetails/ViewDetails";
-import { goBack } from "../../../utils/navigationServices";
+// import { goBack } from "../../../utils/navigationServices";
+import { useRouter } from "expo-router";
+import { chips, formatTime } from "../../../utils/tools";
+import PatientsNotes from "./PatientNoteFeature/PatientsNotes";
+import ViewAppointment from "./ViewAppointmentFeature/ViewAppointment";
 
-const ViewAppointmentFeature = ({ navigation, route }: any) => {
-  // context
+const  ViewAppointmentFeature = ({ navigation, id , selectedTab:selectedTabProp }: any) => {
+
   const { permissions } = useAuth();
-  // integration hooks call
-  const appointment = getAppointmentById(route.params?.id);
+  const appointment = getAppointmentById(id);
   const data = appointment.data as Appointment;
-  // tab state
+
+   
 
   const [selectedTab, setSelectedTab] = useState(0);
 
-  useEffect(() => {
-    if (route.params.selectedTab) {
-      setSelectedTab(route.params.selectedTab);
+
+   useEffect(() => {
+    if (selectedTabProp !== undefined) {
+      setSelectedTab(selectedTabProp);
     }
-  }, [route.params.selectedTab]);
+  }, [selectedTabProp]);
 
   const tabs = [
     {
@@ -52,12 +54,13 @@ const ViewAppointmentFeature = ({ navigation, route }: any) => {
     handleConfirmbtn,
     handleRightbtn,
     isLoading,
-  } = useActionHooks({ appointments: [data] });
-
+  } = useActionHooks({ appointments: [data]});
+ 
+  const router = useRouter();
   useEffect(() => {
     if (isLoading)
       setTimeout(() => {
-        goBack();
+        router.back();
       }, 3000);
   }, [isLoading]);
 
@@ -89,7 +92,7 @@ const ViewAppointmentFeature = ({ navigation, route }: any) => {
           handleOptions={(option: any) =>
             handleActionClick(data?.id, option, data.paymentId?.id)
           }
-          timestamp={moment(data?.createdAt).format("DD MMM YYYY h:mm a")}
+          timestamp={moment(data?.createdAt).format("DD MMM YYYY h:mm a ")}
         />
         <View style={{ marginHorizontal: 20, marginTop: 8 }}>
           <Tabs
@@ -106,7 +109,7 @@ const ViewAppointmentFeature = ({ navigation, route }: any) => {
         )}
         {selectedTab === 1 && (
           <PatientsNotes
-            id={route.params?.id}
+            id={id}
             customerId={data?.customerId?.id}
             navigation={navigation}
           />
@@ -129,3 +132,12 @@ const ViewAppointmentFeature = ({ navigation, route }: any) => {
 };
 
 export default ViewAppointmentFeature;
+
+
+
+
+
+
+
+
+

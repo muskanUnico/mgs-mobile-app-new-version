@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Alert, View } from "react-native";
-import StandardInput from "../../components/elements/StandardInput/StandardInput";
-import Button from "../../components/elements/Button/Button";
 import { styles as externalStyles } from "../../assets/css";
+import Button from "../../components/elements/Button/Button";
+import StandardInput from "../../components/elements/StandardInput/StandardInput";
 import { useGetCMS, useManageCMS } from "../../hooks/CMS";
 
 const Taxfeature = () => {
@@ -11,6 +11,8 @@ const Taxfeature = () => {
   const [tax, setTax] = useState<number>(0);
 
   useEffect(() => {
+
+    if (!data?.tax) return;
     setTax(data.tax);
   }, [data]);
 

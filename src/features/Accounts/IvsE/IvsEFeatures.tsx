@@ -1,27 +1,26 @@
 //@ts-nocheck
-import { StyleSheet, View } from "react-native";
-import IvsEcards from "./IvsEcards";
-import IvsEtable from "./IvsEtable";
-import AddExpense from "./AddExpense";
-import AddIncome from "./AddIncome";
-import React, { useRef, useState } from "react";
 import { MaterialIcons } from "@expo/vector-icons";
-import ChartFilterFeature from "./ChartFilterFeature";
-import Tabs from "../../../components/elements/Tabs/Tabs";
-import { pieColor1, pieColor2 } from "../../../constants/COLORS";
-import LongMenu from "../../../components/elements/LongMenu/LongMenu";
+import React, { useEffect, useRef, useState } from "react";
+import { StyleSheet, View } from "react-native";
+import CustomPagination from "../../../components/elements/CustomPagination/CustomPagination";
 import LineChartTwo from "../../../components/elements/LineChart/LineChart";
+import LongMenu from "../../../components/elements/LongMenu/LongMenu";
+import Tabs from "../../../components/elements/Tabs/Tabs";
 import {
   useGetExpenseRevenue,
   useGetExpenseRevenueChart,
 } from "../../../hooks/Accounts/Accounts";
 import {
-  totalRevenueChartFormateData,
+  currentMonthChartFormateData,
   ProfitChartFormateData,
   totalExpenseChartFormateData,
-  currentMonthChartFormateData,
+  totalRevenueChartFormateData,
 } from "../../../utils/functions";
-import CustomPagination from "../../../components/elements/CustomPagination/CustomPagination";
+import AddExpense from "./AddExpense";
+import AddIncome from "./AddIncome";
+import ChartFilterFeature from "./ChartFilterFeature";
+import IvsEcards from "./IvsEcards";
+import IvsEtable from "./IvsEtable";
 
 export const IvsEFeatures = () => {
   const [selectedTab, setSelectedTab] = useState<number>(1);
@@ -29,7 +28,7 @@ export const IvsEFeatures = () => {
   const chartData = useGetExpenseRevenueChart();
 
   const bottomSheetRef = useRef<any>(null);
-  const [active, setActive] = useState(1);
+  const [active, setActive] = useState(null);
   const [filter, setFilter] = useState("Monthly");
 
   const tabs = [
@@ -59,29 +58,36 @@ export const IvsEFeatures = () => {
       setActive(2);
     }
     setTimeout(() => {
-      bottomSheetRef.current.open();
-    }, 1000);
+    bottomSheetRef.current?.open?.(); 
+    },300);
   };
 
-  const lineData = totalRevenueChartFormateData(
-    chartData.data.results,
-    filter != "Monthly" ? true : false
-  );
-  const lineData2 = totalExpenseChartFormateData(
-    chartData.data.results,
-    filter != "Monthly" ? true : false
-  );
-  const lineData3 = ProfitChartFormateData(
-    chartData.data.results,
-    filter != "Monthly" ? true : false
-  );
-  const xAxisLabels = currentMonthChartFormateData(
-    chartData.data.results,
-    filter != "Monthly" ? true : false
-  );
+
+  const [lineData, setLineData] = useState([]);
+const [lineData2, setLineData2] = useState([]);
+const [lineData3, setLineData3] = useState([]);
+const [xAxisLabels, setXAxisLabels] = useState([]);
+
+useEffect(() => {
+  const results = chartData?.data?.results;
+
+  if (Array.isArray(results) && results.length > 0) {
+    const isNotMonthly = filter !== "Monthly";
+
+    const formattedRevenue = totalRevenueChartFormateData(results, isNotMonthly);
+    const formattedExpense = totalExpenseChartFormateData(results, isNotMonthly);
+    const formattedProfit = ProfitChartFormateData(results, isNotMonthly);
+    const formattedXAxis = currentMonthChartFormateData(results, isNotMonthly);
+
+    setLineData(formattedRevenue);
+    setLineData2(formattedExpense);
+    setLineData3(formattedProfit);
+    setXAxisLabels(formattedXAxis);
+  }
+}, [filter, chartData?.data?.results]); 
 
   return (
-    <>
+    <View>
       <IvsEcards />
       <View style={styles.rowBetweenCenter}>
         <Tabs
@@ -125,14 +131,13 @@ export const IvsEFeatures = () => {
           />
         </View>
       )}
-
-      {active == 1 && (
-        <AddIncome bottomSheetRef={bottomSheetRef} refetch={refetch} />
+      {active == 1 && ( 
+        <AddIncome  bottomSheetRef={bottomSheetRef} refetch={refetch} />
       )}
       {active == 2 && (
         <AddExpense bottomSheetRef={bottomSheetRef} refetch={refetch} />
       )}
-    </>
+    </View>
   );
 };
 

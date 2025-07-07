@@ -1,11 +1,11 @@
 import React from "react";
 import { View } from "react-native";
-import { formatTime } from "../../../utils/tools";
-import { ErrorRender } from "../../../hooks/CreateAppointment";
-import PaymentMethod from "../../../components/ui/PaymentMethod/PaymentMethod";
 import CalculateTotal from "../../../components/ui/Appointment/CreateAppointment/CalculateTotal/CalculateTotal";
-import ViewPersonalInfo from "../../../components/ui/Appointment/ViewAppointment/ViewPersonalInfo/ViewPersonalInfo";
 import AppointmentDetails from "../../../components/ui/Appointment/ViewAppointment/AppointmentDetails/AppointmentDetails";
+import ViewPersonalInfo from "../../../components/ui/Appointment/ViewAppointment/ViewPersonalInfo/ViewPersonalInfo";
+import PaymentMethod from "../../../components/ui/PaymentMethod/PaymentMethod";
+import { ErrorRender } from "../../../hooks/CreateAppointment";
+import { formatTime } from "../../../utils/tools";
 
 const ConfirmAppointment = ({
   API_RUN,
@@ -32,45 +32,46 @@ const ConfirmAppointment = ({
     });
 
   return (
-    <View>
-      {/* 
+
+         <View>
+        {/* 
           client information
        */}
-      <ViewPersonalInfo data={previewData?.client} />
+        <ViewPersonalInfo data={previewData?.client} />
 
-      {/* 
+        {/* 
           Appointments Details
       */}
-      {bookingsFormat.map((item: any, index: number) => {
-        return <AppointmentDetails item={item} key={index} />;
-      })}
+        {bookingsFormat.map((item: any, index: number) => {
+          return <AppointmentDetails item={item} key={index} />;
+        })}
 
-      {/* 
+        {/* 
            calculate total
       */}
-      <View style={{ marginHorizontal: 20, marginVertical: 8 }}>
-        <CalculateTotal data={previewData?.amount} />
-      </View>
+        <View style={{ marginHorizontal: 20, marginVertical: 8 }}>
+          <CalculateTotal data={previewData?.amount} />
+        </View>
 
-      {/* 
+        {/* 
            payment method
       */}
-      <View style={{ marginHorizontal: 12 }}>
-        {takePayment && (
-          <PaymentMethod
-            customerId={previewData?.client?.id}
-            setData={setPaymentData}
-            amount={previewData?.amount?.total}
-            islater={true}
+        <View style={{ marginHorizontal: 12 }}>
+          {takePayment && (
+            <PaymentMethod
+              customerId={previewData?.client?.id}
+              setData={setPaymentData}
+              amount={previewData?.amount?.total}
+              islater={true}
+            />
+          )}
+          <ErrorRender
+            API_RUN={API_RUN}
+            memberResponse={memberResponse}
+            errors={errors}
           />
-        )}
-        <ErrorRender
-          API_RUN={API_RUN}
-          memberResponse={memberResponse}
-          errors={errors}
-        />
-      </View>
-    </View>
+        </View>
+        </View> 
   );
 };
 

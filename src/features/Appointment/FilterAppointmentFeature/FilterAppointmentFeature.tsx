@@ -3,18 +3,17 @@ import { Platform } from "react-native";
 
 import { AntDesign } from "@expo/vector-icons";
 import React, { useEffect, useState } from "react";
-import { View, StyleSheet, Text } from "react-native";
-import { getCustomers } from "../../../hooks/Customer";
-import { getServices } from "../../../hooks/Services";
-import { removeEmptyValues } from "../../../utils/tools";
-import { getTeamMembers } from "../../../hooks/TeamMembers";
+import { StyleSheet, Text, View } from "react-native";
 import FilterAppointment from "../../../components/ui/Appointment/FilterAppointment/FilterAppointment";
 import {
   FilterBorder,
-  brandWhiteColor,
-  placeholderTextColor,
+  placeholderTextColor
 } from "../../../constants/COLORS";
 import { useTheme } from "../../../context/ThemeContext";
+import { getCustomers } from "../../../hooks/Customer";
+import { getServices } from "../../../hooks/Services";
+import { getTeamMembers } from "../../../hooks/TeamMembers";
+import { removeEmptyValues } from "../../../utils/tools";
 
 interface FilterAppointmentFeatureprops {
   appointmentType?: any;

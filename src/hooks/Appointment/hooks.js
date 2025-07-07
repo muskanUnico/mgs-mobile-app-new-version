@@ -1,4 +1,6 @@
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
+// import { navigate } from 'expo-router/build/global-state/routing';
+import { useRouter } from 'expo-router';
 import {
     iconColor1,
     iconColor2,
@@ -8,7 +10,6 @@ import {
     iconColor7,
     redLabelColor
 } from "../../constants/COLORS";
-import { navigate } from "../../utils/navigationServices";
 import { addTimeInTime } from "../../utils/tools";
 
 const iconsMap = {
@@ -249,7 +250,6 @@ export const formatAppointmentDataIntoCalander = (appointments = []) => {
 }
 
 export const appointmentActionOptions = (appointmentStatus, pendingPayment = true, notes = false, permissions = [], data, isTimeTracker) => {
-
     const isUnapprovedStatus = ["unapproved"].includes(appointmentStatus);
     const isNotCompletedRejectedCancelledStatus = !["completed", "rejected", "cancelled"].includes(appointmentStatus);
 
@@ -364,20 +364,44 @@ export const handleApppointmentAction = (appointmentId, actionItem, paymentId) =
 };
 
 export const handleActionUrl = (appointmentId, actionId, paymentId) => {
+    const router = useRouter();
     switch (actionId) {
         case "reschedule":
-            return navigate("editappointment", { id: appointmentId });
+              // return navigate("editappointment", { id: appointmentId });
+              return router.navigate({ pathname: "/(stack)/editAppointment", params: { id: appointmentId } });
         case "reschedule-request":
-            return navigate("rescheduleRequest", { id: appointmentId });
+             return router.navigate({ pathname: "/(stack)/rescheduleRequest", params: { id: appointmentId } });
         case "view-invoice":
-            return navigate("viewinvoice", { paymentId: paymentId });;
+             return router.navigate({ pathname: "/(stack)/viewInvoice", params: { paymentId } });
         case "view-notes":
-            return navigate("ViewAppointment", { id: appointmentId, selectedTab: 1 });
-        // Add more cases as needed
+              return router.navigate({ pathname: "/(stack)/viewAppointments", params: { id: appointmentId, selectedTab: 1 } });
         default:
             return null;
     }
 };
+  
+
+// const handleActionUrl = useHandleActionUrl();
+//   handleActionUrl(appointmentId, actionId, paymentId);
+
+// export const useHandleActionUrl = () => {
+//   const router = useRouter();
+
+//   return (appointmentId, actionId, paymentId) => {
+//     switch (actionId) {
+//       case "reschedule":
+//         return router.push({ pathname: "/editappointment", params: { id: appointmentId } });
+//       case "reschedule-request":
+//         return router.push({ pathname: "/rescheduleRequest", params: { id: appointmentId } });
+//       case "view-invoice":
+//         return router.push({ pathname: "/viewInvoice", params: { paymentId } });
+//       case "view-notes":
+//         return router.push({ pathname: "/viewAppointments", params: { id: appointmentId, selectedTab: 1 } });
+//       default:
+//         return null;
+//     }
+//   };
+// };
 
 
 

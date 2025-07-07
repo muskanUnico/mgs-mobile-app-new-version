@@ -1,9 +1,8 @@
-import React from "react";
-import CreateCustomerFeature from "@/src/features/Customer/CreateCustomer/CreateCustomer";
-import { ImageBackground, SafeAreaView, StyleSheet, View } from "react-native";
-import GlobalLoader from "@/src/features/GlobalLoader/GlobalLoader";
-import { brandGreyColor } from "@/src/constants/COLORS";
 import { useTheme } from "@/src/context/ThemeContext";
+import CreateCustomerFeature from "@/src/features/Customer/CreateCustomer/CreateCustomer";
+import GlobalLoader from "@/src/features/GlobalLoader/GlobalLoader";
+import React from "react";
+import { ImageBackground, SafeAreaView, StyleSheet, View } from "react-native";
 
 const CreateCustomerScreen = ({ navigation, route }: any) => {
   const { theme } = useTheme();
@@ -13,7 +12,7 @@ const CreateCustomerScreen = ({ navigation, route }: any) => {
       <SafeAreaView
         style={[
           { backgroundColor: theme.brandGreyColor },
-          { minHeight: "100%" },
+          { minHeight: "100%" ,paddingBottom:60},
         ]}
       >
         <View style={styles.container}>

@@ -2,11 +2,10 @@ import React from "react";
 import { SafeAreaView } from "react-native";
 // component
 import Title from "@/src/components/elements/Title/Title";
-import { brandGreyColor } from "@/src/constants/COLORS";
+import { useTheme } from "@/src/context/ThemeContext";
+import { ViewCustomers } from "@/src/features/Customer/ViewCustomer/ViewCustomers";
 import GlobalLoader from "@/src/features/GlobalLoader/GlobalLoader";
 import { SecurePageByPackage } from "@/src/middleware/PermissionAccess";
-import { ViewCustomers } from "@/src/features/Customer/ViewCustomer/ViewCustomers";
-import { useTheme } from "@/src/context/ThemeContext";
 
 const AllCustomerScreen = ({ navigation, route }: any) => {
   const { theme } = useTheme();
@@ -16,10 +15,10 @@ const AllCustomerScreen = ({ navigation, route }: any) => {
       <SafeAreaView
         style={[
           { backgroundColor: theme.brandGreyColor },
-          { minHeight: "100%" },
+          { minHeight: "100%" , paddingBottom:60},
         ]}
       >
-        <Title navigation={navigation} title="All Customers" />
+        <Title  title="All Customers" />
         <ViewCustomers />
       </SafeAreaView>
     </GlobalLoader>

@@ -1,11 +1,11 @@
 import React from "react";
 import {
-  View,
-  Text,
-  StyleSheet,
   Image,
   ImageSourcePropType,
   Platform,
+  StyleSheet,
+  Text,
+  View,
 } from "react-native";
 import { useTheme } from "../../../context/ThemeContext";
 
@@ -61,6 +61,7 @@ const useStyles = () => {
 
   return StyleSheet.create({
     container: {
+      flex: 1,
       position: "relative",
       width: "100%",
       // marginBottom: 20,

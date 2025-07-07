@@ -1,11 +1,11 @@
 import moment from "moment";
 import React from "react";
 import { Text, View } from "react-native";
-import { useTheme } from "../../../context/ThemeContext";
-import { navigate } from "../../../utils/navigationServices";
 import { styles as externalStyles } from "../../../assets/css";
 import Button from "../../../components/elements/Button/Button";
+import { useTheme } from "../../../context/ThemeContext";
 import { transformViewInvoiceData } from "../../../utils/functions";
+import { navigate } from "../../../utils/navigationServices";
 
 export const Billto = ({ data }: any) => {
   const { theme } = useTheme();
@@ -84,7 +84,8 @@ export const Billto = ({ data }: any) => {
           style={{
             flexDirection: "row",
             width: "100%",
-            paddingRight: 8,
+            paddingRight: 6,
+            paddingLeft: 6,
             margin: 0,
           }}
         >
@@ -104,7 +105,7 @@ export const Billto = ({ data }: any) => {
               </View>
             )}
             {data.paymentId?.paymentStatus == "refunded" && (
-              <View>
+              <View >
                 <Button loading={false} title="REFUNDED" />
               </View>
             )}
@@ -115,7 +116,7 @@ export const Billto = ({ data }: any) => {
                 style={{
                   flexDirection: "row",
                   marginTop: 16,
-                  marginHorizontal: 12,
+                  marginHorizontal: 8,
                 }}
               >
                 <Text
@@ -129,17 +130,20 @@ export const Billto = ({ data }: any) => {
               </View>
               <View
                 style={{
+                      flexShrink: 1,
                   flexDirection: "row",
                   marginVertical: 8,
-                  marginHorizontal: 12,
+                  marginHorizontal: 8,
+                  paddingRight:10
+              
                 }}
               >
                 <Text
-                  style={{ color: theme.brandColor, fontFamily: "BoldText" }}
+                  style={{ color: theme.brandColor, fontFamily: "BoldText"}}
                 >
                   INVOICE DATE:
                 </Text>
-                <Text style={{ fontWeight: "600", fontFamily: "Regular" }}>
+                <Text style={{ fontWeight: "600", fontFamily: "Regular"}}>
                   {moment(data?.invoiceDate).format("DD MMM YYYY") ||
                     "Not Available"}
                 </Text>

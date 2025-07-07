@@ -1,10 +1,10 @@
+import moment from "moment";
 import React from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import Button from "../../../components/elements/Button/Button";
 import CustomDropDown from "../../../components/elements/CustomDropDown/CustomDropDown";
 import StartEndDatePicker from "../../../components/elements/StartEndDatePicker/StartEndDatePicker";
 import { useTheme } from "../../../context/ThemeContext";
-import moment from "moment";
 
 interface HeaderTitleProps {
   title: string;
@@ -17,7 +17,7 @@ const HeaderTitle: React.FC<HeaderTitleProps> = ({ title }) => {
     <Text
       style={{
         color: theme.brandBlackColor,
-        
+
         fontSize: 17,
         textShadowColor: theme.brandPastelColor,
         textShadowOffset: { width: 1, height: 1 },
@@ -63,10 +63,14 @@ const ChatFilterUI: React.FC<ReportHeaderProps> = ({
     { label: "Range", value: "range" },
   ];
 
-  const handleDangeRangeChange = (type: "from" | "to", date: Date | null) => {
-    setDateRange({ ...dateRange, [type]: date });
-    setFilter("fixed");
+  const handleDateRangeChange = (type: "from" | "to", date: Date | null) => {
+    let newRange = { ...dateRange, [type]: date };
+    if (newRange.from && newRange.to && newRange.from > newRange.to) {
+      newRange = { from: newRange.to, to: newRange.from };
+    }
+    setDateRange(newRange);
   };
+
 
   const handleSelectChange = (selectedValue: any) => {
     if (selectedValue !== "none") {
@@ -108,9 +112,9 @@ const ChatFilterUI: React.FC<ReportHeaderProps> = ({
 
         {chooseOptions === "range" && (
           <StartEndDatePicker
-            endDate={dateRange.from}
-            startDate={dateRange.to}
-            onDatesSelected={handleDangeRangeChange}
+            startDate={dateRange.from}
+            endDate={dateRange.to}
+            onDatesSelected={handleDateRangeChange}
           />
         )}
       </View>

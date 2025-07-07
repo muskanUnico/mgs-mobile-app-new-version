@@ -1,23 +1,22 @@
-import { Switch } from "react-native-paper";
-import React, { useState, useRef } from "react";
-import {
-  Alert,
-  View,
-  Text,
-  StyleSheet,
-  Platform,
-  ScrollView,
-} from "react-native";
+import { borderColor } from "@/src/constants/COLORS";
+import { Feather } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 import moment from "moment";
+import React, { useRef, useState } from "react";
 import {
-  brandColor,
-  brandGreyColor,
-  brandPastelColor,
-  borderColor,
-} from "../../constants/COLORS";
+  Alert, Platform, ScrollView,
+  StyleSheet,
+  Switch,
+  Text,
+  View
+} from 'react-native';
 import { styles as externalStyles } from "../../assets/css";
+import CustomBottomSheet from "../../components/elements/BottomSheet/CustomBottomSheet";
 import Button from "../../components/elements/Button/Button";
+import CustomModal from "../../components/elements/CustomModal/CustomModal";
+import CustomTextArea from "../../components/elements/CustomTextArea/CustomTextArea";
 import WarningModal from "../../components/elements/WarningModal/WarningModal";
+import { useTheme } from "../../context/ThemeContext";
 import {
   useApprovedLeaveRequests,
   useDeleteLeaveRequests,
@@ -26,13 +25,7 @@ import {
   useRejectLeaveRequests,
 } from "../../hooks/LeaveCalender/LeaveRequest";
 import LeaveCalender from "./LeaveCalender";
-import { CheckCircleIcon } from "native-base";
 import LeaveCalenderCard from "./LeaveCalenderCard";
-import CustomTextArea from "../../components/elements/CustomTextArea/CustomTextArea";
-import CustomBottomSheet from "../../components/elements/BottomSheet/CustomBottomSheet";
-import CustomModal from "../../components/elements/CustomModal/CustomModal";
-import { navigate } from "../../utils/navigationServices";
-import { useTheme } from "../../context/ThemeContext";
 
 const LeaveCalenderFeatures = () => {
   const leaveHook = useGetAllLeaveRequests();
@@ -44,6 +37,7 @@ const LeaveCalenderFeatures = () => {
   const [open, setOpen] = useState(false);
   const [comment, setComment] = useState("");
   const [isSwitchOn, setIsSwitchOn] = useState(false);
+  const router =useRouter();
 
   const onToggleSwitch = () => setIsSwitchOn(!isSwitchOn);
   const [currentbtn, setCurrentbtn] = useState({
@@ -58,6 +52,7 @@ const LeaveCalenderFeatures = () => {
     dates: [],
     status: true,
   });
+
 
   const {
     warning,
@@ -91,7 +86,9 @@ const LeaveCalenderFeatures = () => {
       <View style={[externalStyles.container, { marginVertical: 8 }]}>
         <Button
           title="Request Leave"
-          onPress={() => navigate("RequestLeave")}
+          onPress={() => 
+            router.push("/(stack)/requestLeave")
+          }
         />
       </View>
 
@@ -106,7 +103,7 @@ const LeaveCalenderFeatures = () => {
             isSwitchOn ? theme.brandPastelColor : theme.brandGreyColor
           }
           trackColor={{ true: theme.brandColor, false: borderColor }}
-          style={[styles.switch, { marginHorizontal: 4 }]}
+          style={styles.switch}
         />
         <Text style={[externalStyles.label, { color: theme.brandColor }]}>
           CALENDAR VIEW
@@ -126,13 +123,13 @@ const LeaveCalenderFeatures = () => {
               {
                 id: 3,
                 title: "Approve / Reject",
-                icon: <CheckCircleIcon />,
+                icon: <Feather name="check-circle" size={18} color="green" />,
                 line: false,
               },
               {
                 id: 1,
                 title: "Edit Leave",
-                icon: <CheckCircleIcon />,
+                icon: <Feather name="edit" size={16} color="#6B7280" />,
                 line: true,
               }
             );
@@ -215,9 +212,10 @@ const styles = StyleSheet.create({
   },
 
   switch: {
-    ...(Platform.OS === "ios" && {
+   ...(Platform.OS === "ios" && {
       transform: [{ scaleX: 0.7 }, { scaleY: 0.7 }],
     }),
+    marginHorizontal: 4,
   },
 });
 

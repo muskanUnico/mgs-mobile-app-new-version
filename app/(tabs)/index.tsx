@@ -1,17 +1,17 @@
-import React, { useState } from "react";
-import { useAuth } from "@/src/context/AuthContext";
-import HomeCards from "@/src/features/Home/HomeCards";
-import Tabs from "@/src/components/elements/Tabs/Tabs";
 import { styles as externalStyles } from "@/src/assets/css";
-import { HomeSection } from "@/src/features/Home/HomeSection";
-import HomeChartFeature from "@/src/features/Home/HomeChartFeature";
-import { useTopCustomer, useTopMembers } from "@/src/hooks/Reports";
-import GlobalLoader from "@/src/features/GlobalLoader/GlobalLoader";
-import { View, ImageBackground, StyleSheet, Text } from "react-native";
-import { PermissionAccess } from "@/src/middleware/PermissionAccess";
 import CustomCard from "@/src/components/elements/CustomCard/CustomCard";
-import Top5CustomersTable from "@/src/features/Accounts/Analytics/Top_5_Customers/Table";
+import Tabs from "@/src/components/elements/Tabs/Tabs";
+import { useAuth } from "@/src/context/AuthContext";
 import { useTheme } from "@/src/context/ThemeContext";
+import Top5CustomersTable from "@/src/features/Accounts/Analytics/Top_5_Customers/Table";
+import GlobalLoader from "@/src/features/GlobalLoader/GlobalLoader";
+import HomeCards from "@/src/features/Home/HomeCards";
+import HomeChartFeature from "@/src/features/Home/HomeChartFeature";
+import { HomeSection } from "@/src/features/Home/HomeSection";
+import { useTopCustomer, useTopMembers } from "@/src/hooks/Reports";
+import { PermissionAccess } from "@/src/middleware/PermissionAccess";
+import React, { useState } from "react";
+import { ImageBackground, StyleSheet, Text, View } from "react-native";
 
 const HomeScreen = () => {
   const [selectedTab, setSelectedTab] = useState<number>(1);
@@ -19,6 +19,8 @@ const HomeScreen = () => {
   const { members } = useTopMembers();
   const { theme } = useTheme();
   const { user } = useAuth();
+
+   
 
   const tabs = [ 
     { id: 1, label: "Top 5 Customers" },

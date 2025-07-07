@@ -21,8 +21,8 @@ import {
 } from "../../hooks/LeaveCalender/LeaveRequest";
 import { PermissionAccess } from "../../middleware/PermissionAccess";
 
-const RequestLeaveFeature = ({ navigation, route }: any) => {
-  const existingData = route.params?.item;
+const RequestLeaveFeature = ({ navigation, route,item }: any) => {
+  const existingData = item;
 
   const { permissions, user } = useAuth();
   const isAdmin = permissions.includes("manage_leave_request");

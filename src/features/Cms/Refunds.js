@@ -1,12 +1,12 @@
 import React from "react";
-import { View } from "react-native";
+import { TextInput, View } from "react-native";
 
-import RenderHtml from "react-native-render-html";
+import { cleanText } from "@/src/utils/tools";
 import { useWindowDimensions } from "react-native";
 import { useTheme } from "../../context/ThemeContext";
 
-export const Refunds = ({data}) => {
-  const { width } = useWindowDimensions();
+export const Refunds = ({ value, onChangeText }) => {
+
   const { theme } = useTheme();
 
   return (
@@ -17,16 +17,23 @@ export const Refunds = ({data}) => {
         borderWidth: 1,
         borderColor: "black",
         backgroundColor: theme.brandGreyColor,
-        borderRadius:10,
+        borderRadius: 10,
       }}
     >
-      {/* {defaultData} */}
-
-      <RenderHtml
-        contentWidth={width}
-        style={{ fontFamily: "Regular"}}
-        source={{
-          html: data?.policy?.refundsAndCancellationPolicy,
+      <TextInput
+        value={cleanText(value)}
+        onChangeText={onChangeText}
+        placeholder="Write refunds and cancellation policy here..."
+        multiline
+        textAlignVertical="top"
+        scrollEnabled={true}
+        showsVerticalScrollIndicator={true}
+        style={{
+          minHeight: 100,
+          fontSize: 12,
+          padding: 10,
+          backgroundColor: "#fff",
+          borderRadius: 8,
         }}
       />
     </View>

@@ -1,24 +1,25 @@
+import { AntDesign } from "@expo/vector-icons";
+import { useFocusEffect } from "@react-navigation/native";
+import { useRouter } from "expo-router";
 import React, { useCallback, useEffect, useState } from "react";
 import { Keyboard, TouchableWithoutFeedback, View } from "react-native";
-import ViewDetailsCards from "./PayrollCards";
-import PayrollTablefeature from "./PayrollTablefeature";
-import { useAuth } from "../../../context/AuthContext";
 import { styles as externalStyles } from "../../../assets/css";
-import Button from "../../../components/elements/Button/Button";
 import AutoComplete from "../../../components/elements/AutoComplete/AutoComplete";
+import Button from "../../../components/elements/Button/Button";
+import CustomPagination from "../../../components/elements/CustomPagination/CustomPagination";
+import Loader from "../../../components/elements/Loader/Loader";
+import WarningModal from "../../../components/elements/WarningModal/WarningModal";
+import { useAuth } from "../../../context/AuthContext";
+import { getTeamMembers } from "../../../hooks/TeamMembers";
 import {
   useDeleteTimeTracker,
   useGetTimeTracker,
   useUpdateTimeTrackerStatus,
 } from "../../../hooks/TimeTracker";
-import { getTeamMembers } from "../../../hooks/TeamMembers";
-import { DefaultSelected } from "../../../utils/functions";
-import { useFocusEffect } from "@react-navigation/native";
-import WarningModal from "../../../components/elements/WarningModal/WarningModal";
-import Loader from "../../../components/elements/Loader/Loader";
 import { PermissionAccess } from "../../../middleware/PermissionAccess";
-import CustomPagination from "../../../components/elements/CustomPagination/CustomPagination";
-import { AntDesign } from "@expo/vector-icons";
+import { DefaultSelected } from "../../../utils/functions";
+import ViewDetailsCards from "./PayrollCards";
+import PayrollTablefeature from "./PayrollTablefeature";
 
 const ManagePayrollfeature = ({ navigation }: any) => {
   const { permissions } = useAuth();
@@ -29,6 +30,7 @@ const ManagePayrollfeature = ({ navigation }: any) => {
     limit: 10,
   });
 
+  const router = useRouter();
   const { page } = params;
 
   const { timeData, setPage, isloading, refetch } = useGetTimeTracker(
@@ -38,6 +40,8 @@ const ManagePayrollfeature = ({ navigation }: any) => {
   const { handleUpdateStatus } = useUpdateTimeTrackerStatus();
   const { handleDelete, loading } = useDeleteTimeTracker();
   let manage_payroll = permissions.includes("manage_payroll");
+
+  const [teamLoading, setTeamLoading] = useState(false);
 
   const [modalOpen, setModalOpen] = useState(false);
   const [team, setTeamMember] = useState({
@@ -50,7 +54,10 @@ const ManagePayrollfeature = ({ navigation }: any) => {
   const dataSet = data.map((item) => ({ title: item.name, id: item?.id }));
 
   const handleAddPayroll = () => {
-    navigation.navigate("AddPayroll", { edit: false });
+    router.push({
+      pathname: "/(stack)/addPayroll",
+      params: { edit: "false" },
+    });
   };
 
   const option = [
@@ -71,8 +78,15 @@ const ManagePayrollfeature = ({ navigation }: any) => {
   // handle three dot btn
   const handleOptions = (option: any, item: any) => {
     setGetOptions(item);
+
     if (option.id == 1) {
-      navigation.navigate("AddPayroll", { edit: true, data: item });
+      router.navigate({
+        pathname: "/(stack)/addPayroll",
+        params: {
+          edit: "true",
+          rootItem: encodeURIComponent(JSON.stringify(item)),
+        },
+      });
     } else if (option.id == 2) {
       setTimeout(() => {
         setModalOpen(true);
@@ -86,6 +100,11 @@ const ManagePayrollfeature = ({ navigation }: any) => {
       setSelectedStatus(DefaultSelected(timeData.results));
     }, [timeData])
   );
+  useEffect(() => {
+    if (teamLoading) {
+      setTeamLoading(false);
+    }
+  }, [timeData]);
 
   useFocusEffect(
     useCallback(() => {
@@ -115,7 +134,10 @@ const ManagePayrollfeature = ({ navigation }: any) => {
             <AutoComplete
               inputValue={team}
               dataSet={dataSet}
-              setInputValue={setTeamMember}
+              setInputValue={(value: any) => {
+                setTeamLoading(true);
+                setTeamMember(value);
+              }}
               placeholder="Select Team Member"
             />
           )}

@@ -4,7 +4,7 @@ import AddNewPaymentCardDefault from "../../../../features/Payment/AddNewPayment
 
 const AddPaymentCard = ({ customerId, refresh }: any) => {
   return (
-    <View style={{marginLeft: 15}}>
+    <View style={{ marginLeft: 15, paddingBottom: 60 }}>
       <AddNewPaymentCardDefault customerId={customerId} refresh={refresh} />
     </View>
   );

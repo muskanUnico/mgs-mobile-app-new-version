@@ -1,7 +1,6 @@
-import { brandColor } from "../../../constants/COLORS";
 import React, { useEffect, useState } from "react";
-import { View, ScrollView, StyleSheet, Text } from "react-native";
-import { DataTable, Checkbox } from "react-native-paper";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { Checkbox, DataTable } from "react-native-paper";
 import { useTheme } from "../../../context/ThemeContext";
 
 interface TableCell {
@@ -58,9 +57,12 @@ const DynamicTable: React.FC<TableProps> = ({
     <View style={styles.container}>
       <ScrollView horizontal contentContainerStyle={styles.scrollContainer}>
         <DataTable>
+  
           <DataTable.Header>
+                  
             {checkbox && (
               <DataTable.Title style={styles.checkboxTitle}>
+                   <View style={styles.checkboxWrapper}>
                 <Checkbox
                   status={
                     selectedRows.length === data.length
@@ -70,6 +72,7 @@ const DynamicTable: React.FC<TableProps> = ({
                   onPress={handleCheckAll}
                   color={theme.brandColor}
                 />
+                  </View>
               </DataTable.Title>
             )}
 
@@ -78,6 +81,7 @@ const DynamicTable: React.FC<TableProps> = ({
                 {column}
               </DataTable.Title>
             ))}
+          
           </DataTable.Header>
 
           <ScrollView>
@@ -130,12 +134,14 @@ const styles = StyleSheet.create({
   },
   scrollContainer: {
     flexGrow: 1,
+
   },
   checkboxTitle: {
+    width: 50,
     justifyContent: "flex-start",
     alignContent: "flex-start",
     fontFamily: "Regular",
-
+ 
   },
   checkboxCell: {
     justifyContent: "flex-start",
@@ -144,6 +150,10 @@ const styles = StyleSheet.create({
   cellText: {
     fontFamily: "Regular",
   },
+  checkboxWrapper: {
+  width: 40,
+  height: 40,
+},
 });
 
 export default DynamicTable;

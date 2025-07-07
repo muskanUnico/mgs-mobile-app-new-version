@@ -1,18 +1,18 @@
 //@ts-nocheck
 import React, { memo } from "react";
-import { getRoleInfo } from "../../../hooks/Role";
-import { View, Text, StyleSheet } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { styles as externalStyles } from "../../../assets/css";
-import { brandColor } from "../../../constants/COLORS";
 import { useTheme } from "../../../context/ThemeContext";
+import { getRoleInfo } from "../../../hooks/Role";
 
 interface ViewAccessProps {
   navigation: any;
   route: any;
+ roleId: string | string[];
 }
 
-const ViewAccess: React.FC<ViewAccessProps> = ({ navigation, route }) => {
-  const roleInfo = getRoleInfo(route?.params.roleId);
+const ViewAccess: React.FC<ViewAccessProps> = ({ navigation, route , roleId}) => {
+  const roleInfo = getRoleInfo(roleId);
 
   const formatApiResponse = (apiResponse) => {
     const formattedData = [];
@@ -55,7 +55,7 @@ const ViewAccess: React.FC<ViewAccessProps> = ({ navigation, route }) => {
               </Text>
               <Text
                 style={[externalStyles.label]}
-                style={{ color: theme.brandColor }}
+                style={{ color: theme.brandColor ,fontWeight:700}}
               >
                 {item.title}
               </Text>

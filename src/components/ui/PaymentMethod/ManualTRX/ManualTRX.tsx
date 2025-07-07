@@ -1,6 +1,5 @@
-import { StyleSheet, Text } from "react-native";
 import React, { useEffect, useState } from "react";
-import { View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import CustomDropDown from "../../../../components/elements/CustomDropDown/CustomDropDown";
 import CustomInput from "../../../../components/elements/Input";
 
@@ -27,6 +26,7 @@ function ManualTRX({ manualPayment, setManualPayment }: any) {
           Manual Transcation
         </Text>
       </View>
+
 
       <View style={styles.marginVertical}>
         <Text style={[styles.customComponent, { fontFamily: "BoldText" }]}>
@@ -55,6 +55,7 @@ function ManualTRX({ manualPayment, setManualPayment }: any) {
 
       <View style={styles.bottomPadding}>
         <CustomInput
+        value={manualPayment.ref} 
           placeholder="6549 8213 365"
           onChangeText={(value) =>
             setManualPayment({ ...manualPayment, ref: value })

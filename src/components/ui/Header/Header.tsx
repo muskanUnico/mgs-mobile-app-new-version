@@ -1,18 +1,17 @@
 import { DrawerActions } from "@react-navigation/native";
+import { useRouter } from "expo-router";
 import React from "react";
-import { TouchableOpacity, StyleSheet, Image } from "react-native";
-import { View, TouchableWithoutFeedback } from "react-native";
+import { Image, StyleSheet, TouchableOpacity, TouchableWithoutFeedback, View } from "react-native";
 import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
+  heightPercentageToDP as hp
 } from "react-native-responsive-screen";
-import { useTimeTracker } from "../../../context/TimeTrackerContext";
 import { useTheme } from "../../../context/ThemeContext";
+import { useTimeTracker } from "../../../context/TimeTrackerContext";
 
 const Header = ({ navigation }: any) => {
   const { timerRunning } = useTimeTracker();
   const { theme } = useTheme();
-
+  const router = useRouter();
   return (
     <View>
       <View
@@ -41,7 +40,7 @@ const Header = ({ navigation }: any) => {
         <View style={styles.rowLayout}>
           <View style={styles.rightMargin}>
             <TouchableOpacity
-              onPress={() => navigation.navigate("Timetracker")}
+              onPress={() => router.push("/(stack)/timeTracker")}
               style={styles.customRowLayout}
             >
               {/* <EvilIcons name="bell" size={26} color="black" /> */}
@@ -60,7 +59,7 @@ const Header = ({ navigation }: any) => {
             </TouchableOpacity>
           </View>
           <TouchableOpacity
-            onPress={() => navigation.navigate("notification")}
+            onPress={() => router.push("/(stack)/notification")}
             style={styles.customRowLayout}
           >
             {/* <EvilIcons name="bell" size={26} color="black" /> */}

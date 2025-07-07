@@ -1,8 +1,9 @@
-import React from "react";
-import { Divider } from "react-native-paper";
 import { FontAwesome } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
+import React from "react";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Divider } from "react-native-paper";
 import { styles as externalStyles } from "../../../../assets/css";
-import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import {
   dividerColor,
   iconColor3,
@@ -12,10 +13,17 @@ import {
 } from "../../../../constants/COLORS";
 
 const PermissionCard = ({ item, navigation }: any) => {
+  const router = useRouter();
   return (
     <View style={[externalStyles.card]}>
       <TouchableOpacity
-        onPress={() => navigation.navigate("EditPermission", { id: item._id })}
+        onPress={() => 
+          // navigation.navigate("EditPermission", { id: item._id })
+          router.push({
+      pathname: "/(stack)/editPermission",
+      params: { id: item._id },
+          })
+        }
         style={styles.row}
       >
         <FontAwesome

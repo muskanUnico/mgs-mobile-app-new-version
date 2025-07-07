@@ -1,9 +1,9 @@
+import { useTheme } from "@/src/context/ThemeContext";
+import CreateAppointmentFeature from "@/src/features/Appointment/CreateAppointment";
+import GlobalLoader from "@/src/features/GlobalLoader/GlobalLoader";
+import { SecurePageByPackage } from "@/src/middleware/PermissionAccess";
 import React from "react";
 import { SafeAreaView } from "react-native";
-import { useTheme } from "@/src/context/ThemeContext";
-import GlobalLoader from "@/src/features/GlobalLoader/GlobalLoader";
-import CreateAppointmentFeature from "@/src/features/Appointment/CreateAppointment";
-import { SecurePageByPackage } from "@/src/middleware/PermissionAccess";
 
 const createAppointments = ({ navigation }: any) => {
   const { theme } = useTheme();

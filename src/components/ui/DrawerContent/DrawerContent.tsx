@@ -2,6 +2,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { DrawerContentScrollView } from "@react-navigation/drawer";
 import { DrawerActions } from "@react-navigation/native";
+import { useRouter } from "expo-router";
 import React, { useState } from "react";
 import {
   Dimensions,
@@ -17,18 +18,34 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useAuth } from "../../../context/AuthContext";
 import { useTheme } from "../../../context/ThemeContext";
 import { PermissionAccess } from "../../../middleware/PermissionAccess";
-import { navigate } from "../../../utils/navigationServices";
 
 
 const DrawerContent = (props: any) => {
   const styles = useStyles();
   const { theme } = useTheme();
   const { user, setUser } = useAuth();
+  const router = useRouter();
   const [dropdownTabs, setDropdownTabs] = useState([
     "appointments",
     "customers",
   ]);
- 
+  
+//     const navigateWithClose = (screenName: string) => {
+//     console.log("navigaying to",screenName);
+//   props.navigation.dispatch(DrawerActions.closeDrawer());
+//    setTimeout(() => {
+//     // router.push(`/${screenName}` as any);
+//       router.push(`${screenName}` as any);
+//   }, 100);
+// };
+  
+    const navigateNoBack = (screenName: string) => {
+    console.log("navigaying to",screenName);
+  props.navigation.dispatch(DrawerActions.closeDrawer());
+   setTimeout(() => {
+      router.replace(`${screenName}` as any);
+  }, 100);
+};
 
   const SCREEN_WIDTH = Dimensions.get("window").width;
 
@@ -71,7 +88,10 @@ const DrawerContent = (props: any) => {
       >
         <TouchableHighlight
           underlayColor={theme.brandColor}
-          onPress={() => props.navigation.navigate("MyProfile")}
+          onPress={() => 
+            // props.navigation.navigate("myProfile")
+            navigateNoBack("/(stack)/myProfile")
+          }
         >
           <View style={styles.centeredContainer}>
             <View style={styles.customItem}>
@@ -97,7 +117,10 @@ const DrawerContent = (props: any) => {
         <View style={styles.customView}>
           {/* Your sidebar content */}
           <TouchableHighlight
-            onPress={() => props.navigation.navigate("(tabs)")}
+            onPress={() => 
+              // props.navigation.navigate("(tabs)"
+              navigateNoBack("/(tabs)")
+              }
             style={styles.drawerItem}
             underlayColor="transparent"
           >
@@ -148,7 +171,10 @@ const DrawerContent = (props: any) => {
                 {/* All Appointments */}
                 <TouchableHighlight
                   underlayColor={theme.brandGreyColor}
-                 onPress={() => props.navigation.navigate("allAppointments")}
+                 onPress={() =>
+                  //  props.navigation.navigate("allAppointments")
+                 navigateNoBack("/(stack)/allAppointments")
+                  }
                   style={styles.drawerSubItem}
                 >
                   <View style={styles.rowLayout}>
@@ -168,7 +194,8 @@ const DrawerContent = (props: any) => {
                 <TouchableHighlight
                   underlayColor={theme.brandGreyColor}
                   onPress={() =>
-                    props.navigation.navigate("approvedAppointment")
+                    // props.navigation.navigate("approvedAppointment")
+                   navigateNoBack("/(stack)/approvedAppointment")
                   }
                   style={styles.drawerSubItem}
                 >
@@ -191,7 +218,8 @@ const DrawerContent = (props: any) => {
                     underlayColor={theme.brandGreyColor}
                     // CreateAppointment
                     onPress={() =>
-                      props.navigation.navigate("createAppointment")
+                      // props.navigation.navigate("createAppointment")
+                     navigateNoBack("/(stack)/createAppointment")
                     }
                     style={styles.drawerSubItem}
                   >
@@ -243,7 +271,10 @@ const DrawerContent = (props: any) => {
               {/* All Customers */}
               <TouchableHighlight
                 underlayColor={theme.brandGreyColor}
-                onPress={() => props.navigation.navigate("allCustomer")}
+                onPress={() =>
+                  //  props.navigation.navigate("allCustomer")
+                 navigateNoBack("/(stack)/allCustomer")
+                  }
                 style={styles.drawerSubItem}
               >
                 <View style={styles.rowLayout}>
@@ -266,7 +297,10 @@ const DrawerContent = (props: any) => {
               {/* <PermissionAccess requiredPermissions={["create_customer"]}> */}
               <TouchableHighlight
                 underlayColor={theme.brandGreyColor}
-                onPress={() => props.navigation.navigate("createCustomer")}
+                onPress={() => 
+                  // props.navigation.navigate("createCustomer")
+                 navigateNoBack("/(stack)/createCustomer")
+                }
                 style={styles.drawerSubItem}
               >
                 <View style={styles.rowLayout}>
@@ -318,7 +352,10 @@ const DrawerContent = (props: any) => {
                   {/* All Referrals */}
                   <TouchableHighlight
                     underlayColor={theme.brandGreyColor}
-                    onPress={() => props.navigation.navigate("allReferral")}
+                    onPress={() => 
+                      // props.navigation.navigate("allReferral")
+                     navigateNoBack("/(stack)/allReferral")
+                    }
                     style={styles.drawerSubItem}
                   >
                     <View style={styles.rowLayout}>
@@ -341,7 +378,10 @@ const DrawerContent = (props: any) => {
                   {/* Add Referral */}
                   <TouchableHighlight
                     underlayColor={theme.brandGreyColor}
-                    onPress={() => props.navigation.navigate("addReferral")}
+                    onPress={() =>
+                      //  props.navigation.navigate("addReferral")
+                      navigateNoBack("/(stack)/addReferral")
+                      }
                     style={styles.drawerSubItem}
                   >
                     <View style={styles.rowLayout}>
@@ -367,7 +407,11 @@ const DrawerContent = (props: any) => {
             <TouchableHighlight
               underlayColor={theme.brandGreyColor}
               style={styles.drawerItem}
-              onPress={() => props.navigation.navigate("paymentHistory")}
+              onPress={() =>
+                //  props.navigation.navigate("paymentHistory")
+               navigateNoBack("/(stack)/paymentHistory")
+
+              }
             >
               <View style={{ flexDirection: "row", alignItems: "center" }}>
                 <View style={styles.iconWrapper}>
@@ -419,7 +463,10 @@ const DrawerContent = (props: any) => {
                 {/* All Team Members */}
                 <TouchableHighlight
                   underlayColor={theme.brandGreyColor}
-                  onPress={() => props.navigation.navigate("team")}
+                  onPress={() => 
+                    // props.navigation.navigate("allTeamMember")
+                    navigateNoBack("/(stack)/allTeamMember")
+                  }
                   style={styles.drawerSubItem}
                 >
                   <View style={styles.rowLayout}>
@@ -440,7 +487,10 @@ const DrawerContent = (props: any) => {
                 {/* Leave Calendar */}
                 <TouchableHighlight
                   underlayColor={theme.brandGreyColor}
-                  onPress={() => props.navigation.navigate("LeaveCalendar")}
+                  onPress={() => 
+                    // props.navigation.navigate("leaveCalender")
+                  navigateNoBack("/(stack)/leaveCalender")
+                  }
                   style={styles.drawerSubItem}
                 >
                   <View style={styles.rowLayout}>
@@ -463,7 +513,8 @@ const DrawerContent = (props: any) => {
                   <TouchableHighlight
                     underlayColor={theme.brandGreyColor}
                     onPress={() =>
-                      props.navigation.navigate("createTeamMember")
+                      // props.navigation.navigate("createTeamMember")
+                      navigateNoBack("/(stack)/createTeamMember")
                     }
                     style={styles.drawerSubItem}
                   >
@@ -485,7 +536,8 @@ const DrawerContent = (props: any) => {
 
                 {/* Time Tracker */}
                 <TouchableHighlight
-                  onPress={() => navigate("Timetracker")}
+                  onPress={ () => navigateNoBack("/(stack)/timeTracker")}
+
                   underlayColor={theme.brandGreyColor}
                   style={styles.drawerSubItem}
                 >
@@ -508,7 +560,10 @@ const DrawerContent = (props: any) => {
                   {/* Manage Payroll */}
                   <TouchableHighlight
                     underlayColor={theme.brandGreyColor}
-                    onPress={() => props.navigation.navigate("managePayroll")}
+                    onPress={() =>
+                      //  props.navigation.navigate("managePayroll")
+                      navigateNoBack("/(stack)/managePayroll")
+                      }
                     style={styles.drawerSubItem}
                   >
                     <View style={styles.rowLayout}>
@@ -573,7 +628,10 @@ const DrawerContent = (props: any) => {
                   {/* Sales Revenue Report */}
                   <TouchableHighlight
                     underlayColor={theme.brandGreyColor}
-                    onPress={() => props.navigation.navigate("RevenueReport")}
+                    onPress={() =>
+                      //  props.navigation.navigate("revenueReport")
+                    navigateNoBack("/(stack)/revenueReport")
+                      }
                     style={styles.drawerSubItem}
                   >
                     <View style={styles.rowLayout}>
@@ -598,7 +656,10 @@ const DrawerContent = (props: any) => {
                   {/* Income vs Expense Report */}
                   <TouchableHighlight
                     underlayColor={theme.brandGreyColor}
-                    onPress={() => props.navigation.navigate("IncomeVsExpense")}
+                    onPress={() =>
+                      //  props.navigation.navigate("incomeVsExpense")
+                     navigateNoBack("/(stack)/incomeVsExpense")
+                      } 
                     style={styles.drawerSubItem}
                   >
                     <View style={styles.rowLayout}>
@@ -611,7 +672,7 @@ const DrawerContent = (props: any) => {
                           fontSize: 12,
                         }}
                       >
-                        {" "}
+                        {/* {"  "} */}
                         Income vs Expense Report
                       </Text>
                     </View>
@@ -623,7 +684,8 @@ const DrawerContent = (props: any) => {
                   <TouchableHighlight
                     underlayColor={theme.brandGreyColor}
                     onPress={() =>
-                      props.navigation.navigate("AppointmentReport")
+                      // props.navigation.navigate("appointmentReport")
+                      navigateNoBack("/(stack)/appointmentReport")
                     }
                     style={styles.drawerSubItem}
                   >
@@ -676,7 +738,10 @@ const DrawerContent = (props: any) => {
                 {/* Permissions */}
                 <TouchableHighlight
                   underlayColor={theme.brandGreyColor}
-                  onPress={() => props.navigation.navigate("AllPermissions")}
+                  onPress={() => 
+                    // props.navigation.navigate("allPermissions")
+                   navigateNoBack("/(stack)/allPermissions")
+                  }
                   style={styles.drawerSubItem}
                 >
                   <View style={styles.rowLayout}>
@@ -699,7 +764,11 @@ const DrawerContent = (props: any) => {
                 {/* Services */}
                 <TouchableHighlight
                   underlayColor={theme.brandGreyColor}
-                  onPress={() => props.navigation.navigate("services")}
+                  onPress={() => 
+                    // props.navigation.navigate("services")
+                   navigateNoBack("/(stack)/services")
+
+                  }
                   style={styles.drawerSubItem}
                 >
                   <View style={styles.rowLayout}>
@@ -721,7 +790,10 @@ const DrawerContent = (props: any) => {
               {/* CMS */}
               <TouchableHighlight
                 underlayColor={theme.brandGreyColor}
-                onPress={() => props.navigation.navigate("Cms")}
+                onPress={() => 
+                  // props.navigation.navigate("cms")
+                  navigateNoBack("/(stack)/cms")
+                }
                 style={styles.drawerSubItem}
               >
                 <View style={styles.rowLayout}>

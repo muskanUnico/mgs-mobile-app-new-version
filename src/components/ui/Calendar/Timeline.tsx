@@ -1,11 +1,11 @@
 import React from "react";
 import {
-  View,
-  Text,
+  Dimensions,
   ScrollView,
   StyleSheet,
-  Dimensions,
+  Text,
   TouchableOpacity,
+  View,
 } from "react-native";
 const { width } = Dimensions.get("window");
 
@@ -75,7 +75,7 @@ const Timeline = ({ events, handleCards }: any) => {
     for (let i = 0; i <= 24; i++) {
       labels.push(
         <View key={i} style={[styles.timeLabelContainer, { top: i * 60 }]}>
-          <Text style={styles.timeLabel}>
+          <Text style={[styles.timeLabel,{fontWeight:800}]}>
             {i.toString().padStart(2, "0")}:00
           </Text>
         </View>

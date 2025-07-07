@@ -1,0 +1,63 @@
+import React, { useCallback, useRef } from "react";
+import { SafeAreaView, ScrollView } from "react-native";
+// component
+import Title from "@/src/components/elements/Title/Title";
+import { useTheme } from "@/src/context/ThemeContext";
+import Bottom5Services from "@/src/features/Accounts/Analytics/Bottom_5_Services";
+import Top2BookableDays from "@/src/features/Accounts/Analytics/Top_2_Bookable_Day";
+import Top5BookableTimeslot from "@/src/features/Accounts/Analytics/Top_5_Bookable_Timeslot";
+import Top5Customers from "@/src/features/Accounts/Analytics/Top_5_Customers";
+import Top5GrossingServices from "@/src/features/Accounts/Analytics/Top_5_Grossing_Services";
+import Top5Services from "@/src/features/Accounts/Analytics/Top_5_Services";
+import Top5TeamMembers from "@/src/features/Accounts/Analytics/Top_5_Team_Members";
+// import AppointmentReportFeatures from "@/src/features/Accounts/AppointmentReport/AppointmentReportFeatures";
+import AppointmentReportFeatures from "@/src/features/Accounts/AppointmentReport/AppointmentReportFeatures";
+import { SecurePageByPackage } from "@/src/middleware/PermissionAccess";
+import { useFocusEffect, useLocalSearchParams } from "expo-router";
+
+const AppointmentReportScreen = ({ navigation, route }: any) => {
+  const scrollViewRef = useRef<ScrollView>(null);
+  const { theme } = useTheme();
+  const params = useLocalSearchParams();
+
+
+
+  useFocusEffect(
+    useCallback(() => {
+    if (params?.y) {
+      const y = Number(params.y);
+      const timer = setTimeout(() => {
+        scrollViewRef.current?.scrollTo({ y, animated: true });
+      }, 500); 
+
+      return () => clearTimeout(timer);
+    }
+    }, [params?.y])
+  );
+
+  return (
+    <ScrollView ref={scrollViewRef}>
+      <SafeAreaView
+        style={[
+          { backgroundColor: theme.brandGreyColor },
+          { minHeight: "100%",paddingBottom :60},
+        ]}
+      >
+        <Title title="Appointment Report" navigation={navigation} />
+        <AppointmentReportFeatures />
+        <Top5Services />
+        <Top5GrossingServices />
+        
+        <Bottom5Services />
+        <Top5TeamMembers />
+        <Top5BookableTimeslot />
+        <Top2BookableDays />
+        <Top5Customers />
+      </SafeAreaView>
+    </ScrollView>
+  );
+};
+
+export default SecurePageByPackage(AppointmentReportScreen, [
+  "appointment_report",
+]);

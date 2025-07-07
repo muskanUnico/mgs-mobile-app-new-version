@@ -1,8 +1,10 @@
+import { FontAwesome } from "@expo/vector-icons";
+import * as Clipboard from "expo-clipboard";
+import { useRouter } from "expo-router";
 import moment from "moment";
 import React, { useState } from "react";
+import { Alert, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Divider } from "react-native-paper";
-import { FontAwesome } from "@expo/vector-icons";
-import { Text, View, StyleSheet, Alert } from "react-native";
 import { styles as externalStyles } from "../../../../assets/css";
 import {
   dividerColor,
@@ -10,15 +12,12 @@ import {
   iconEmailColor,
   iconPhoneColor,
 } from "../../../../constants/COLORS";
-import * as Clipboard from "expo-clipboard";
-import { TouchableOpacity } from "react-native";
-import { navigate } from "../../../../utils/navigationServices";
 import { useTheme } from "../../../../context/ThemeContext";
 
 const CustomerCard = ({ item, index }: any) => {
   const { theme } = useTheme();
   const [phoneNumber, setPhoneNumber] = useState(item?.telephone);
-
+  const router = useRouter();
   // Function to copy phone number to clipboard
   const copyToClipboard = () => {
     Clipboard.setString(phoneNumber);
@@ -48,7 +47,11 @@ const CustomerCard = ({ item, index }: any) => {
           </View>
           <TouchableOpacity
             onPress={() =>
-              navigate("CustomerDetails", { customerId: item._id })
+              // navigate("CustomerDetails", { customerId: item._id })
+              router.push({
+                pathname: "/(stack)/customerDetails",
+                params: { customerId: item._id },
+              })
             }
             style={styles.row}
           >

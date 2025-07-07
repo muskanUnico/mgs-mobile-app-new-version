@@ -1,11 +1,10 @@
+import { cleanText } from "@/src/utils/tools";
 import React from "react";
-import { View } from "react-native";
-import RenderHtml from "react-native-render-html";
-import { useWindowDimensions } from "react-native";
+import { TextInput, View } from "react-native";
 import { useTheme } from "../../context/ThemeContext";
 
-export const BookingPolicy = ({data}) => {
-  const { width } = useWindowDimensions();
+export const BookingPolicy = ({value,onChangeText}) => {
+  // const { width } = useWindowDimensions();
   const { theme } = useTheme();
 
   return (
@@ -21,13 +20,22 @@ export const BookingPolicy = ({data}) => {
     >
       {/* {defaultData} */}
 
-      <RenderHtml
-        contentWidth={width}
-        style={{ fontFamily: "Regular"}}
-        source={{
-          html: data?.policy.bookingPolicy,
-        }}
-      />
+           <TextInput
+              value={cleanText(value)}
+              onChangeText={onChangeText}
+              placeholder="Write booking policy here..."
+              multiline
+              textAlignVertical="top"
+              scrollEnabled={true}
+              showsVerticalScrollIndicator={true}
+              style={{
+                minHeight: 100,
+                fontSize: 12,
+                padding: 10,
+                backgroundColor: "#fff",
+                borderRadius: 8,
+              }}
+            />
     </View>
   );
 };

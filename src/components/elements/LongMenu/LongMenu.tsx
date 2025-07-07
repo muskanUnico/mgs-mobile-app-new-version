@@ -20,7 +20,7 @@ export default function LongMenu({ options, handleOptions }: LongMenuProps) {
         visible={visible}
         anchor={
           <View>
-            <MaterialIcons
+            <MaterialIcons 
               onPress={showMenu}
               name="more-vert"
               size={20}

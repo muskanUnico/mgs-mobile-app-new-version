@@ -8,8 +8,6 @@ export default function TabLayout() {
     <Tabs
       screenOptions={{
         headerShown: false,
-        // tabBarButton: HapticTab,
-
         tabBarActiveTintColor: "#f59b90",
         tabBarInactiveTintColor: "gray",
         tabBarStyle: Platform.select({
@@ -82,6 +80,7 @@ export default function TabLayout() {
             />
           ),
           // header: (props) => <Header {...props} />,
+        
         }}
       />
     </Tabs>

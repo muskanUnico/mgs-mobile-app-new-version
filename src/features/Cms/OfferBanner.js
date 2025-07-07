@@ -1,36 +1,72 @@
-import React from "react";
-import { View } from "react-native";
+import Button from "@/src/components/elements/Button/Button";
+import { useManageCMS } from "@/src/hooks/CMS";
+import CMSProps from "@/src/interface/CMS";
+import { cleanText } from "@/src/utils/tools";
+import React, { useEffect, useState } from "react";
+import {
+  ActivityIndicator,
+  Alert,
+  ScrollView,
+  StyleSheet,
+  TextInput,
+  View,
+} from "react-native";
 
-import RenderHtml from "react-native-render-html";
-import { useWindowDimensions } from "react-native";
-import { useTheme } from "../../context/ThemeContext";
+const offerBanner = ({ data }: CMSProps) => {
+  const { handleCreate, loading } = useManageCMS();
+  const [offerBanner, setOfferBanner] = useState("");
 
-export const OfferBanner = ({data}) => {
-  const { width } = useWindowDimensions();
-  const { theme } = useTheme();
+  useEffect(() => {
+    setOfferBanner(data?.offer_banner || "");
+  }, [data]);
+
+  const handleUpdate = () => {
+    if (!offerBanner.trim()) {
+      Alert.alert("Offer Banner Required");
+    } else {
+      handleCreate({ offer_banner: offerBanner });
+    }
+  };
 
   return (
-    <View
-      style={{
-        marginHorizontal: 10,
-        paddingHorizontal: 10,
-        borderWidth: 1,
-        borderColor: "black",
-        backgroundColor: theme.brandGreyColor,
-        borderRadius:10,
-        fontFamily: "Regular"
-
-      }}
-    >
-      {/* {defaultData} */}
-
-      <RenderHtml
-        contentWidth={width}
-        style={{ fontFamily: "Regular"}}
-        source={{
-          html: data?.offer_banner,
-        }}
+    <ScrollView contentContainerStyle={styles.container}>
+      <TextInput
+        style={styles.input}
+        value={cleanText(offerBanner)}
+        onChangeText={setOfferBanner}
+        placeholder="Write here..."
+        multiline
+        numberOfLines={6}
+        textAlignVertical="top"
       />
-    </View>
+
+      <View style={styles.buttonWrapper}>
+        {loading ? (
+          <ActivityIndicator size="small" color="#007bff" />
+        ) : (
+          <Button title="Update Banner" onPress={handleUpdate} />
+        )}
+      </View>
+    </ScrollView>
   );
 };
+
+export default offerBanner;
+
+const styles = StyleSheet.create({
+  container: {
+    padding: 16,
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: "#ccc",
+    borderRadius: 8,
+    padding: 12,
+    minHeight: 120,
+    backgroundColor: "#fff",
+  },
+  buttonWrapper: {
+    marginTop: 24,
+    alignSelf: "flex-start",
+  },
+});

@@ -1,23 +1,22 @@
 //@ts-nocheck
 import React from "react";
-import { FlatList, Text, View } from "react-native";
+import { FlatList, View } from "react-native";
 // css
 import { styles as externalStyles } from "../../../assets/css";
-import { brandGreyColor } from "../../../constants/COLORS";
 // hook
-import { ErrorRender } from "../../../hooks/CreateAppointment";
 import { rescheduleAppointment } from "../../../hooks/Appointment";
+import { ErrorRender } from "../../../hooks/CreateAppointment";
 import useAppointmentFlow from "../../../hooks/CreateAppointment/useAppointmentFlow";
 // component
-import Loader from "../../../components/elements/Loader/Loader";
 import Button from "../../../components/elements/Button/Button";
-import ConfirmAppointment from "../ConfirmAppointment/ConfirmAppointment";
-import CreateAppointmentFromFeature from "../CreateAppointment/CreateAppointmentFromFeature/CreateAppointmentFromFeature";
-import CreateAppointmentCardFeature from "../CreateAppointment/CreateAppointmentCardFeature/CreateAppointmentCardFeature";
+import Loader from "../../../components/elements/Loader/Loader";
 import Title from "../../../components/elements/Title/Title";
 import { useTheme } from "../../../context/ThemeContext";
+import ConfirmAppointment from "../ConfirmAppointment/ConfirmAppointment";
+import CreateAppointmentCardFeature from "../CreateAppointment/CreateAppointmentCardFeature/CreateAppointmentCardFeature";
+import CreateAppointmentFromFeature from "../CreateAppointment/CreateAppointmentFromFeature/CreateAppointmentFromFeature";
 
-const EditAppointment = ({ navigation, route }) => {
+const EditAppointment = ({ navigation, id}) => {
   const {
     wait,
     isUpdate,
@@ -47,7 +46,7 @@ const EditAppointment = ({ navigation, route }) => {
 
     manageDiscount,
     setManageDiscount,
-  } = useAppointmentFlow(route.params.id);
+  } = useAppointmentFlow(id);
 
   //rescheduleAppointmentHook
   const rescheduleAppointmentHook = rescheduleAppointment();
@@ -66,7 +65,7 @@ const EditAppointment = ({ navigation, route }) => {
     }
 
     await rescheduleAppointmentHook
-      .submit(route.params?.id, body)
+      .submit(id, body)
       .catch(() => null);
     setLoading("");
   };
@@ -119,10 +118,10 @@ const EditAppointment = ({ navigation, route }) => {
               width: "100%",
               flexDirection: "row",
               marginHorizontal: 8,
-              marginBottom: 76,
+              marginBottom: 6,
             }}
           >
-            {" "}
+      
             {Loading == "find" ? (
               <Loader />
             ) : (

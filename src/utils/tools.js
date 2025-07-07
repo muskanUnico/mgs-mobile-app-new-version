@@ -1,8 +1,18 @@
-import { blueLabelColor, greenColor, greenDimColor, maroonLabelColor, orangeColor, redLabelColor, yellowLabelColor, purpleColor, brandBlackColor } from "../constants/COLORS";
 import _ from "lodash";
 import moment from "moment";
-import { Chip } from "react-native-paper";
 import { StyleSheet, Text } from "react-native";
+import { Chip } from "react-native-paper";
+import {
+  blueLabelColor,
+  brandBlackColor,
+  greenColor,
+  greenDimColor,
+  maroonLabelColor,
+  orangeColor,
+  purpleColor,
+  redLabelColor,
+  yellowLabelColor,
+} from "../constants/COLORS";
 
 export function formatMinutesToHoursAndMinutes(minutes) {
   const duration = moment.duration(minutes, "minutes");
@@ -42,7 +52,6 @@ export function getInitialLetter(name) {
   const capitalizedInitial = final?.toUpperCase();
   return capitalizedInitial;
 }
-
 
 export function convertSchedule(input) {
   const output = {};
@@ -103,47 +112,47 @@ export const chips = (item, date) => {
     },
     chipText: {
       fontSize: 12,
-      fontFamily: "BoldText"
-
+      fontFamily: "BoldText",
     },
   });
 
   if (item?.status === "rejected") {
     return (
-      <Chip style={[styles.chip, { backgroundColor: redLabelColor }]}><Text style={[styles.chipText, { color: 'white' }]} >
-        REJECTED</Text></Chip>
+      <Chip style={[styles.chip, { backgroundColor: redLabelColor }]}>
+        <Text style={[styles.chipText, { color: "white" }]}>REJECTED</Text>
+      </Chip>
     );
   } else if (item?.status === "reschedule") {
     return (
-      <Chip
-        style={[styles.chip, { backgroundColor: orangeColor }]}
-
-      ><Text style={[styles.chipText, { color: 'black' }]} >
-          RESCHEDULE</Text> </Chip>
+      <Chip style={[styles.chip, { backgroundColor: orangeColor }]}>
+        <Text style={[styles.chipText, { color: "black" }]}>RESCHEDULE</Text>{" "}
+      </Chip>
     );
   } else if (item?.status === "cancelled") {
     return (
-      <Chip
-        style={[styles.chip, { backgroundColor: brandBlackColor }]}
-      ><Text style={[styles.chipText, { color: 'white' }]} >CANCELLED</Text></Chip>
+      <Chip style={[styles.chip, { backgroundColor: brandBlackColor }]}>
+        <Text style={[styles.chipText, { color: "white" }]}>CANCELLED</Text>
+      </Chip>
     );
   } else if (item?.status === "unapproved") {
     if (itemDate < todayDate) {
       return (
         <>
-          <Chip
-            style={[styles.chip, { backgroundColor: yellowLabelColor }]}
-          ><Text style={[styles.chipText, { color: 'black' }]}>UNAPPROVED</Text></Chip>
-          <Chip
-            style={[styles.chip, { backgroundColor: purpleColor }]}
-          ><Text style={[styles.chipText, { color: 'black' }]} >PAST</Text></Chip>
+          <Chip style={[styles.chip, { backgroundColor: yellowLabelColor }]}>
+            <Text style={[styles.chipText, { color: "black" }]}>
+              UNAPPROVED
+            </Text>
+          </Chip>
+          <Chip style={[styles.chip, { backgroundColor: purpleColor }]}>
+            <Text style={[styles.chipText, { color: "black" }]}>PAST</Text>
+          </Chip>
         </>
       );
     } else {
       return (
-        <Chip
-          style={[styles.chip, { backgroundColor: yellowLabelColor }]}
-        ><Text style={[styles.chipText, { color: 'black' }]}>UNAPPROVED</Text> </Chip>
+        <Chip style={[styles.chip, { backgroundColor: yellowLabelColor }]}>
+          <Text style={[styles.chipText, { color: "black" }]}>UNAPPROVED</Text>{" "}
+        </Chip>
       );
     }
   } else if (item?.status === "change_request") {
@@ -151,13 +160,17 @@ export const chips = (item, date) => {
       <Chip
         label="CHANGE REQUEST"
         style={[styles.chip, { backgroundColor: maroonLabelColor }]}
-      ><Text style={[styles.chipText, { color: 'black' }]} >CHANGE REQUEST</Text></Chip>
+      >
+        <Text style={[styles.chipText, { color: "black" }]}>
+          CHANGE REQUEST
+        </Text>
+      </Chip>
     );
   } else if (item?.status === "completed") {
     return (
-      <Chip
-        style={[styles.chip, { backgroundColor: blueLabelColor }]}
-      ><Text style={[styles.chipText, { color: 'black' }]} >COMPLETED</Text></Chip>
+      <Chip style={[styles.chip, { backgroundColor: blueLabelColor }]}>
+        <Text style={[styles.chipText, { color: "black" }]}>COMPLETED</Text>
+      </Chip>
     );
   } else if (
     item?.status === "approved" ||
@@ -168,23 +181,27 @@ export const chips = (item, date) => {
       if (item?.status === "confirmed") {
         return (
           <>
-            <Chip
-              style={[styles.chip, { backgroundColor: greenColor }]}
-            ><Text style={[styles.chipText, { color: 'black' }]} >TODAY</Text></Chip>
-            <Chip
-              style={[styles.chip, { backgroundColor: greenDimColor }]}
-            ><Text style={[styles.chipText, { color: 'black' }]} >CONFIRMED</Text></Chip>
+            <Chip style={[styles.chip, { backgroundColor: greenColor }]}>
+              <Text style={[styles.chipText, { color: "black" }]}>TODAY</Text>
+            </Chip>
+            <Chip style={[styles.chip, { backgroundColor: greenDimColor }]}>
+              <Text style={[styles.chipText, { color: "black" }]}>
+                CONFIRMED
+              </Text>
+            </Chip>
           </>
         );
       } else {
         return (
           <>
-            <Chip
-              style={[styles.chip, { backgroundColor: greenColor }]}
-            ><Text style={[styles.chipText, { color: 'white' }]}>TODAY</Text></Chip>
-            <Chip
-              style={[styles.chip, { backgroundColor: redLabelColor }]}
-            ><Text style={[styles.chipText, { color: 'white' }]}>CONF.PENDING</Text> </Chip>
+            <Chip style={[styles.chip, { backgroundColor: greenColor }]}>
+              <Text style={[styles.chipText, { color: "white" }]}>TODAY</Text>
+            </Chip>
+            <Chip style={[styles.chip, { backgroundColor: redLabelColor }]}>
+              <Text style={[styles.chipText, { color: "white" }]}>
+                CONF.PENDING
+              </Text>{" "}
+            </Chip>
             {/* <ConfirmYourAppointment open={open} setOpen={setOpen} appointmentId={item.id} /> */}
           </>
         );
@@ -193,23 +210,31 @@ export const chips = (item, date) => {
       if (item?.status === "confirmed") {
         return (
           <>
-            <Chip
-              style={[styles.chip, { backgroundColor: orangeColor }]}
-            ><Text style={[styles.chipText, { color: 'black' }]}>THIS WEEK</Text></Chip>
-            <Chip
-              style={[styles.chip, { backgroundColor: greenColor }]}
-            ><Text style={[styles.chipText, { color: 'black' }]} >CONFIRMED</Text></Chip>
+            <Chip style={[styles.chip, { backgroundColor: orangeColor }]}>
+              <Text style={[styles.chipText, { color: "black" }]}>
+                THIS WEEK
+              </Text>
+            </Chip>
+            <Chip style={[styles.chip, { backgroundColor: greenColor }]}>
+              <Text style={[styles.chipText, { color: "black" }]}>
+                CONFIRMED
+              </Text>
+            </Chip>
           </>
         );
       } else {
         return (
           <>
-            <Chip
-              style={[styles.chip, { backgroundColor: orangeColor }]}
-            ><Text style={[styles.chipText, { color: 'black' }]}>THIS WEEK</Text> </Chip>
-            <Chip
-              style={[styles.chip, { backgroundColor: redLabelColor }]}
-            ><Text style={[styles.chipText, { color: 'white' }]}>CONF.PENDING</Text> </Chip>
+            <Chip style={[styles.chip, { backgroundColor: orangeColor }]}>
+              <Text style={[styles.chipText, { color: "black" }]}>
+                THIS WEEK
+              </Text>{" "}
+            </Chip>
+            <Chip style={[styles.chip, { backgroundColor: redLabelColor }]}>
+              <Text style={[styles.chipText, { color: "white" }]}>
+                CONF.PENDING
+              </Text>{" "}
+            </Chip>
             {/* <ConfirmYourAppointment appointmentId={item.id} open={open} setOpen={setOpen} /> */}
           </>
         );
@@ -219,40 +244,41 @@ export const chips = (item, date) => {
       itemDate.getFullYear() === todayDate.getFullYear()
     ) {
       return (
-        <Chip
-          style={[styles.chip, { backgroundColor: yellowLabelColor }]}
-        ><Text style={[styles.chipText, { color: 'black' }]}>THIS MONTH</Text></Chip>
+        <Chip style={[styles.chip, { backgroundColor: yellowLabelColor }]}>
+          <Text style={[styles.chipText, { color: "black" }]}>THIS MONTH</Text>
+        </Chip>
       );
     } else if (itemDate < todayDate) {
       return (
-        <Chip
-          style={[styles.chip, { backgroundColor: blueLabelColor }]}
-        ><Text style={[styles.chipText, { color: 'black' }]}>PAST</Text></Chip>
+        <Chip style={[styles.chip, { backgroundColor: blueLabelColor }]}>
+          <Text style={[styles.chipText, { color: "black" }]}>PAST</Text>
+        </Chip>
       );
     } else if (itemDate > todayDate) {
       return (
-        <Chip
-          style={[styles.chip, { backgroundColor: purpleColor }]}
-        ><Text style={[styles.chipText, { color: 'black' }]}>UPCOMING</Text> </Chip>
+        <Chip style={[styles.chip, { backgroundColor: purpleColor }]}>
+          <Text style={[styles.chipText, { color: "black" }]}>UPCOMING</Text>{" "}
+        </Chip>
       );
     }
   } else if (item.paymentStatus == "pending") {
-    return <Chip
-      style={[styles.chip, { backgroundColor: redLabelColor }]}
-
-    ><Text style={[styles.chipText, { color: 'white' }]}>PENDING</Text> </Chip>;
+    return (
+      <Chip style={[styles.chip, { backgroundColor: redLabelColor }]}>
+        <Text style={[styles.chipText, { color: "white" }]}>PENDING</Text>{" "}
+      </Chip>
+    );
   } else if (item.paymentStatus == "paid") {
-    return <Chip
-      style={[styles.chip, { backgroundColor: greenColor }]}
-
-
-    ><Text style={[styles.chipText, { color: 'white' }]}>PAID</Text> </Chip>;
+    return (
+      <Chip style={[styles.chip, { backgroundColor: greenColor }]}>
+        <Text style={[styles.chipText, { color: "white" }]}>PAID</Text>{" "}
+      </Chip>
+    );
   } else if (item.paymentStatus == "refunded") {
-    return <Chip
-      style={[styles.chip, { backgroundColor: brandBlackColor }]}
-
-
-    ><Text style={[styles.chipText, { color: 'white' }]}>REFUNDED</Text></Chip>;
+    return (
+      <Chip style={[styles.chip, { backgroundColor: brandBlackColor }]}>
+        <Text style={[styles.chipText, { color: "white" }]}>REFUNDED</Text>
+      </Chip>
+    );
   }
 };
 
@@ -271,13 +297,13 @@ export function formatDateTable(date, start, end) {
 
   startDate.set({
     hour: Number(startString.slice(0, 2)),
-    minute: Number(startString.slice(2))
+    minute: Number(startString.slice(2)),
   });
 
   const endDate = moment(date);
   endDate.set({
     hour: Number(endString.slice(0, 2)),
-    minute: Number(endString.slice(2))
+    minute: Number(endString.slice(2)),
   });
 
   const formattedDate = startDate.format("DD MMM YYYY");
@@ -288,7 +314,6 @@ export function formatDateTable(date, start, end) {
     <>
       {`${formattedDate} |`}
       {` ${formattedStartTime} - ${formattedEndTime} MDT`}
-
     </>
   );
 }
@@ -314,7 +339,6 @@ export function formatTimeRange(start, end) {
 
   return `${formattedStartTime} - ${formattedEndTime} MDT`;
 }
-
 
 export function convertOppositeOfMinutesOrTime(input) {
   if (typeof input == "number") {
@@ -358,45 +382,48 @@ export function isChanged(object, base) {
   return changes(object, base);
 }
 
-
 export function formatDateforHeader(date, start, end) {
-
   // Check if start and end are numbers
-  if (typeof start !== 'number' || typeof end !== 'number') {
-    throw new Error('start and end should be numbers');
+  if (typeof start !== "number" || typeof end !== "number") {
+    throw new Error("start and end should be numbers");
   }
 
   const dateOptions = {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
+    year: "numeric",
+    month: "long",
+    day: "numeric",
   };
 
   const timeOptions = {
-    hour: 'numeric',
-    minute: 'numeric',
+    hour: "numeric",
+    minute: "numeric",
     hour12: true,
   };
 
   const startDate = new Date(date);
 
   // Convert start and end to strings in HHMM format
-  const startString = String(start).padStart(4, '0');
-  const endString = String(end).padStart(4, '0');
+  const startString = String(start).padStart(4, "0");
+  const endString = String(end).padStart(4, "0");
 
-  startDate.setHours(Number(startString.slice(0, 2)), Number(startString.slice(2)));
+  startDate.setHours(
+    Number(startString.slice(0, 2)),
+    Number(startString.slice(2))
+  );
   const endDate = new Date(date);
   endDate.setHours(Number(endString.slice(0, 2)), Number(endString.slice(2)));
 
-  const formattedDate = startDate.toLocaleDateString('en-US', dateOptions);
-  const formattedStartTime = startDate.toLocaleTimeString('en-US', timeOptions);
-  const formattedEndTime = endDate.toLocaleTimeString('en-US', timeOptions);
+  const formattedDate = startDate.toLocaleDateString("en-US", dateOptions);
+  const formattedStartTime = startDate.toLocaleTimeString("en-US", timeOptions);
+  const formattedEndTime = endDate.toLocaleTimeString("en-US", timeOptions);
 
-  return <>
-    {`${formattedDate}`}{` ${formattedStartTime} - ${formattedEndTime} MDT`}
-  </>;
+  return (
+    <>
+      {`${formattedDate}`}
+      {` ${formattedStartTime} - ${formattedEndTime} MDT`}
+    </>
+  );
 }
-
 
 export const LeaveCalenderChips = (item) => {
   const styles = StyleSheet.create({
@@ -405,42 +432,31 @@ export const LeaveCalenderChips = (item) => {
     },
     chipText: {
       fontSize: 12,
-      fontFamily: "BoldText"
-
+      fontFamily: "BoldText",
     },
   });
 
   if (item.status === "rejected") {
     return (
-      <Chip
-        style={[styles.chip, { backgroundColor: redLabelColor }]}
-      >
-        <Text style={[styles.chipText, { color: 'white' }]}>REJECTED</Text>
+      <Chip style={[styles.chip, { backgroundColor: redLabelColor }]}>
+        <Text style={[styles.chipText, { color: "white" }]}>REJECTED</Text>
       </Chip>
-
     );
   } else if (item.status === "approved") {
     return (
-      <Chip
-        style={[styles.chip, { backgroundColor: greenColor }]}
-      >
-        <Text style={[styles.chipText, { color: 'white' }]}>APPROVED </Text>
+      <Chip style={[styles.chip, { backgroundColor: greenColor }]}>
+        <Text style={[styles.chipText, { color: "white" }]}>APPROVED </Text>
       </Chip>
-
     );
   } else if (item.status === "pending") {
     return (
-      <Chip
-        style={[styles.chip, { backgroundColor: blueLabelColor }]}
-      >
-        <Text style={[styles.chipText, { color: 'black' }]}>PENDING </Text>
+      <Chip style={[styles.chip, { backgroundColor: blueLabelColor }]}>
+        <Text style={[styles.chipText, { color: "black" }]}>PENDING </Text>
       </Chip>
-
     );
   }
   return null;
 };
-
 
 export const getTotalDaysBetweenDates = (start, end) => {
   var date1 = new Date(start);
@@ -452,43 +468,44 @@ export const getTotalDaysBetweenDates = (start, end) => {
   // Convert milliseconds to days
   var differenceInDays = differenceInMilliseconds / (1000 * 60 * 60 * 24);
 
-  return differenceInDays + 1
-}
-
+  return differenceInDays + 1;
+};
 
 export const getLastDate = (type) => {
-  if (type.toLowerCase() == "none" || type == '') {
-    return '';
+  if (type.toLowerCase() == "none" || type == "") {
+    return "";
   } else {
     const currentDate = new Date();
     switch (type.toLowerCase()) {
-      case 'monthly':
+      case "monthly":
         currentDate.setMonth(currentDate.getMonth() - 1);
         break;
-      case 'biyearly':
+      case "biyearly":
         currentDate.setMonth(currentDate.getMonth() - 6);
         break;
-      case 'yearly':
+      case "yearly":
         currentDate.setFullYear(currentDate.getFullYear() - 1);
         break;
       default:
-        throw new Error('Invalid type. Please provide Monthly, Biyearly, Yearly, or None.');
+        throw new Error(
+          "Invalid type. Please provide Monthly, Biyearly, Yearly, or None."
+        );
     }
 
-    const dd = String(currentDate.getDate()).padStart(2, '0');
-    const mm = String(currentDate.getMonth() + 1).padStart(2, '0');
+    const dd = String(currentDate.getDate()).padStart(2, "0");
+    const mm = String(currentDate.getMonth() + 1).padStart(2, "0");
     const yyyy = currentDate.getFullYear();
 
-    return yyyy + '-' + mm + '-' + dd;
+    return yyyy + "-" + mm + "-" + dd;
   }
-}
+};
 
 export function formatDateForFilter(inputTimestamp) {
   if (inputTimestamp != null) {
     const date = new Date(inputTimestamp);
 
-    const day = String(date.getDate()).padStart(2, '0');
-    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, "0");
+    const month = String(date.getMonth() + 1).padStart(2, "0");
     const year = date.getFullYear();
 
     return `${year}-${month}-${day}`;
@@ -503,7 +520,11 @@ export function getAllDatesBetween(start, end) {
   const datesArray = [];
 
   // Loop through the dates from start to end, inclusive
-  for (let date = startDate; date <= endDate; date.setDate(date.getDate() + 1)) {
+  for (
+    let date = startDate;
+    date <= endDate;
+    date.setDate(date.getDate() + 1)
+  ) {
     datesArray.push(new Date(date));
   }
 
@@ -545,8 +566,7 @@ export const transformData = (data2) => {
     updatedAt: data2.appointmentId.updatedAt,
   };
   return transformedData;
-}
-
+};
 
 export const extractPathFromUrl = (url) => {
   const baseUrl = "https://admin-mgs.vercel.app/";
@@ -555,5 +575,29 @@ export const extractPathFromUrl = (url) => {
     return url.slice(baseUrl.length);
   }
 
-  return '';
-}
+  return "";
+};
+const decodeHtmlEntities = (str) => {
+  return str
+    .replace(/&nbsp;/gi, " ")
+    .replace(/&amp;/gi, "&")
+    .replace(/&lt;/gi, "<")
+    .replace(/&gt;/gi, ">")
+    .replace(/&quot;/gi, '"')
+    .replace(/&#039;/g, "'");
+};
+
+export const cleanText = (html) => {
+  if (!html) return "";
+
+  let text = html
+    .replace(/<br\s*\/?>/gi, "\n")
+    .replace(/<\/p>/gi, "\n")
+    .replace(/<[^>]+>/g, ""); 
+
+  text = decodeHtmlEntities(text);
+
+  text = text.replace(/\n{11,}/g, "\n\n\n\n\n\n\n\n\n\n");
+
+  return text;
+};

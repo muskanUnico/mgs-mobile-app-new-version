@@ -1,35 +1,34 @@
 //@ts-nocheck
+import { Entypo, FontAwesome } from "@expo/vector-icons";
 import moment from "moment";
 import React, { useState } from "react";
+import { StyleSheet, Text, View } from "react-native";
+import { styles as externalStyles } from "../../../../assets/css";
+import Button from "../../../../components/elements/Button/Button";
+import CustomTextArea from "../../../../components/elements/CustomTextArea/CustomTextArea";
+import Title from "../../../../components/elements/Title/Title";
+import {
+  iconCalenderColor
+} from "../../../../constants/COLORS";
+import { useTheme } from "../../../../context/ThemeContext";
 import {
   getAppointmentById,
   useCreateChangeRequest,
 } from "../../../../hooks/Appointment";
-import { Alert, StyleSheet, Text, View } from "react-native";
-import Button from "../../../../components/elements/Button/Button";
-import CustomTextArea from "../../../../components/elements/CustomTextArea/CustomTextArea";
-import {
-  brandColor,
-  brandGreyColor,
-  iconCalenderColor,
-} from "../../../../constants/COLORS";
-import { styles as externalStyles } from "../../../../assets/css";
-import { Entypo } from "@expo/vector-icons";
-import { FontAwesome } from "@expo/vector-icons";
-import Title from "../../../../components/elements/Title/Title";
-import { useTheme } from "../../../../context/ThemeContext";
 
-const RescheduleRequest = ({ navigation, route }: any) => {
+const RescheduleRequest = ({ navigation, route ,id}: any) => {
   const { theme } = useTheme();
-  const singleAppointment = getAppointmentById(route.params.id);
+  const singleAppointment = getAppointmentById(id);
   const [value, setValue] = useState("");
 
   const { handleSubmitComment, loading } = useCreateChangeRequest(
-    route.params.id,
+    id,
     singleAppointment.refetch,
     setValue,
     value
   );
+
+  const screenHeight = singleAppointment.data?.reschedule?.comments.length;
 
   return (
     <View

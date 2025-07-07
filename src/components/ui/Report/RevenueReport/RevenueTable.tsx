@@ -1,17 +1,17 @@
+import { FontAwesome } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 import moment from "moment";
 import React from "react";
-import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Divider } from "react-native-paper";
-import { FontAwesome } from "@expo/vector-icons";
+import { styles as externalStyles } from "../../../../assets/css";
 import {
   iconCalenderColor,
   iconColor11,
   iconColor3,
   iconPhoneColor,
 } from "../../../../constants/COLORS";
-import { styles as externalStyles } from "../../../../assets/css";
 import { TotalTip } from "../../../../utils/functions";
-import { navigate } from "../../../../utils/navigationServices";
 
 interface RevenueTableProps {
   item: any;
@@ -19,6 +19,7 @@ interface RevenueTableProps {
 }
 
 const RevenueTable: React.FC<RevenueTableProps> = ({ item, action }) => {
+  const router = useRouter();
   return (
     <View style={[externalStyles.card]}>
       <View>
@@ -70,7 +71,13 @@ const RevenueTable: React.FC<RevenueTableProps> = ({ item, action }) => {
           <Text style={[externalStyles.label]}>ACTION : </Text>
           <TouchableOpacity
             onPress={() =>
-              navigate("RevenueReportAction", { data: item, action: action })
+              router.push({
+                pathname: "/(stack)/revenueReportAction",  
+                params: {
+                  data: JSON.stringify(item),
+                  action: action.toString(),
+                },
+              })
             }
           >
             <Text style={[externalStyles.content, externalStyles.BlueText]}>

@@ -1,20 +1,19 @@
-import React from "react";
-import moment from "moment";
-import { Divider } from "react-native-paper";
 import { FontAwesome } from "@expo/vector-icons";
-import LongMenu from "../../elements/LongMenu/LongMenu";
-import { styles as externalStyles } from "../../../assets/css";
+import { useRouter } from "expo-router";
+import moment from "moment";
+import React from "react";
 import { StyleSheet, Text, TouchableWithoutFeedback, View } from "react-native";
-import { chips, formatDateTable, formatTimeRange } from "../../../utils/tools";
+import { Divider } from "react-native-paper";
+import { styles as externalStyles } from "../../../assets/css";
 import {
-  brandColor,
   iconCalenderColor,
   iconColor5,
   iconColor8,
-  iconPhoneColor,
+  iconPhoneColor
 } from "../../../constants/COLORS";
-import { navigate } from "../../../utils/navigationServices";
 import { useTheme } from "../../../context/ThemeContext";
+import { chips, formatDateTable, formatTimeRange } from "../../../utils/tools";
+import LongMenu from "../../elements/LongMenu/LongMenu";
 
 interface PaymentHistoryProps {
   handleOptions: any;
@@ -22,7 +21,7 @@ interface PaymentHistoryProps {
   item: any;
   options: any;
 }
-
+const router = useRouter();
 const PaymentHistory = ({
   handleOptions,
   index,
@@ -69,9 +68,12 @@ const PaymentHistory = ({
 
       <TouchableWithoutFeedback
         onPress={() =>
-          navigate("viewinvoice", {
-            paymentId: item?.appointmentId?.paymentId,
-          })
+          // navigate("viewinvoice", {
+          //   paymentId: item?.appointmentId?.paymentId,
+          // })
+          router.push({
+           pathname: "/(stack)/viewInvoice",
+           params :  item?.appointmentId?.paymentId})
         }
       >
         <View style={{ marginLeft: 24, marginTop: 4 }}>

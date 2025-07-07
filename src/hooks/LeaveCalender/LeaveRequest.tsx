@@ -1,10 +1,10 @@
-import { Leave } from "../../interface/LeaveRequest";
-import { useCallback, useEffect, useState } from "react";
-import { LeaveRequest } from "../../services/LeaveCalender/LeaveCalender";
-import { DeleteIcon } from "native-base";
-import { Alert } from "react-native";
+import { MaterialIcons } from '@expo/vector-icons';
 import { useFocusEffect } from "@react-navigation/native";
-import { navigate } from "../../utils/navigationServices";
+import { router, useRouter } from "expo-router";
+import { useCallback, useEffect, useState } from "react";
+import { Alert } from "react-native";
+import { Leave } from "../../interface/LeaveRequest";
+import { LeaveRequest } from "../../services/LeaveCalender/LeaveCalender";
 
 export const useLongMenuLeaveRequest = ({
   handleDeleteLeave,
@@ -20,15 +20,16 @@ export const useLongMenuLeaveRequest = ({
     btnSecName: "",
     title: "",
   });
-
-  const option = [
-    { id: 2, title: "Delete", icon: <DeleteIcon />, line: false },
-  ];
+  const router = useRouter();
+  const option = [{ id: 2, title: "Delete", icon: <MaterialIcons  name="delete-outline" size={24} color="red" />, line: false }];
 
   // handle three dot btn
   const handleOptions = (option: any, item: Leave) => {
     if (option.id == 1) {
-      navigate("RequestLeave", { item });
+      router.push({
+        pathname: "/(stack)/requestLeave",
+        params: { item: JSON.stringify(item) },
+      });
       //@ts-ignore
       setCurrentbtn({ currentOptions: option.id, id: item });
     } else if (option.id == 2) {
@@ -134,7 +135,7 @@ export const useRejectLeaveRequests = (leaveHook: any) => {
         Alert.alert(res.message);
         leaveHook.refetch();
         bottomSheetRef.current.close();
-        navigate("LeaveCalendar");
+          router.navigate("/(stack)/leaveCalender");
       })
       .catch((err) => {
         setLoading(false);
@@ -155,7 +156,7 @@ export const useApprovedLeaveRequests = (leaveHook: any) => {
       .then((res) => {
         Alert.alert(res.message);
         leaveHook.refetch();
-        navigate("LeaveCalendar");
+           router.navigate("/(stack)/leaveCalender");
       })
       .finally(() => {
         setLoading(false);
@@ -177,7 +178,7 @@ export const useCreateLeaveRequests = () => {
       .then((res) => {
         setLoading(false);
         Alert.alert("Request Leave created successfully");
-        navigate("LeaveCalendar");
+          router.navigate("/(stack)/leaveCalender");
       })
       .catch((err) => {
         setLoading(false);
@@ -201,7 +202,7 @@ export const useDeleteLeaveRequests = (leaveHook: any) => {
         setLoading(false);
         Alert.alert("Request Leave Deleted successfully");
         leaveHook.refetch();
-        navigate("LeaveCalendar");
+           router.navigate("/(stack)/leaveCalender");
       })
       .finally(() => {
         setLoading(false);
@@ -223,7 +224,8 @@ export const useUpdateLeaveRequests = () => {
       .then((res) => {
         setLoading(false);
         Alert.alert("Request Leave Updated successfully");
-        navigate("LeaveCalendar");
+        // navigate("LeaveCalendar");
+           router.navigate("/(stack)/leaveCalender");
       })
       .catch((err) => {
         setLoading(false);

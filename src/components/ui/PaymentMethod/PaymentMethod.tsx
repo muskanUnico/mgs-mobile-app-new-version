@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Text, View } from "react-native";
 import { RadioButton } from "react-native-paper";
+import { useTheme } from "../../../context/ThemeContext";
 import CollectOnline from "./CollectOnline/CollectOnline";
 import ManualTRX from "./ManualTRX/ManualTRX";
-import { brandColor } from "../../../constants/COLORS";
-import { useTheme } from "../../../context/ThemeContext";
 
 const PaymentMethod = ({ customerId, setData, amount, islater }: any) => {
   const [payMethodType, setpayMethodType] = useState("later");
@@ -34,7 +33,8 @@ const PaymentMethod = ({ customerId, setData, amount, islater }: any) => {
   const { theme } = useTheme();
 
   return (
-    <View>
+  
+     <View> 
       <View
         style={{
           flexDirection: "row",
@@ -95,12 +95,13 @@ const PaymentMethod = ({ customerId, setData, amount, islater }: any) => {
             value="Collect Latter"
             status={payMethodType === "later" ? "checked" : "unchecked"}
             onPress={() => setpayMethodType("later")}
-            color={theme.randColor}
+            color={theme.brandColor}
           />
           <Text style={{ fontFamily: "BoldText" }}>Collect Later</Text>
         </View>
       )}
     </View>
+    
   );
 };
 

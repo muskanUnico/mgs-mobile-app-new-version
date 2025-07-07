@@ -1,9 +1,9 @@
 //@ts-nocheck
 import React from "react";
 import { View } from "react-native";
-import { getPatientNotes } from "../../../../hooks/Appointment";
-import PatientNote from "../../../../components/ui/Appointment/ViewAppointment/PatientNote/PatientNote";
 import Loader from "../../../../components/elements/Loader/Loader";
+import PatientNote from "../../../../components/ui/Appointment/ViewAppointment/PatientNote/PatientNote";
+import { getPatientNotes } from "../../../../hooks/Appointment";
 
 const PatientsNotes = ({ customerId, id, navigation }: any) => {
   const { data, getloading } = getPatientNotes({ customerId: customerId });
@@ -29,7 +29,7 @@ const PatientsNotes = ({ customerId, id, navigation }: any) => {
       {getloading ? (
         <Loader />
       ) : (
-        <View style={{ marginTop: 8 }}>
+        <View style={{ marginTop: 8 , marginHorizontal:28}}>
           {data.results.map((item, index) => {
             const defaultDataShow = [
               {

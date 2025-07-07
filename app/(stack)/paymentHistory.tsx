@@ -1,11 +1,10 @@
-import React from "react";
-import { SafeAreaView } from "react-native";
-import { brandGreyColor } from "@/src/constants/COLORS";
 import Title from "@/src/components/elements/Title/Title";
+import { useTheme } from "@/src/context/ThemeContext";
 import GlobalLoader from "@/src/features/GlobalLoader/GlobalLoader";
 import PaymentHistoryFeature from "@/src/features/PaymentHistory/PaymentHistoryFeature";
 import { SecurePageByPackage } from "@/src/middleware/PermissionAccess";
-import { useTheme } from "@/src/context/ThemeContext";
+import React from "react";
+import { SafeAreaView } from "react-native";
 
 const PaymentHistoryScreen = ({ navigation }: any) => {
   const { theme } = useTheme();
@@ -18,7 +17,7 @@ const PaymentHistoryScreen = ({ navigation }: any) => {
           { minHeight: "100%", paddingBottom: 64 },
         ]}
       >
-        <Title navigation={navigation} title="Payment History" />
+        <Title title="Payment History" />
         <PaymentHistoryFeature />
       </SafeAreaView>
     </GlobalLoader>

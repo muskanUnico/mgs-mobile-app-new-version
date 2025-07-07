@@ -1,8 +1,12 @@
-import React from "react";
-import moment from "moment";
-import { Divider } from "react-native-paper";
 import { FontAwesome } from "@expo/vector-icons";
-import { Text, View, StyleSheet } from "react-native";
+import { useRouter } from "expo-router";
+import moment from "moment";
+import React from "react";
+import { StyleSheet, Text, View } from "react-native";
+import { Divider } from "react-native-paper";
+import { styles as externalStyles } from "../../../assets/css";
+import CustomDropDown from "../../../components/elements/CustomDropDown/CustomDropDown";
+import LongMenu from "../../../components/elements/LongMenu/LongMenu";
 import {
   greenColor,
   iconColor1,
@@ -12,11 +16,7 @@ import {
   iconPhoneColor,
 } from "../../../constants/COLORS";
 import { TotalTip } from "../../../utils/functions";
-import { styles as externalStyles } from "../../../assets/css";
 import { formatMinutesToHoursAndMinutes } from "../../../utils/tools";
-import LongMenu from "../../../components/elements/LongMenu/LongMenu";
-import CustomDropDown from "../../../components/elements/CustomDropDown/CustomDropDown";
-import { navigate } from "../../../utils/navigationServices";
 
 const PayrollTablefeature = ({
   item,
@@ -39,6 +39,8 @@ const PayrollTablefeature = ({
   let duration = item.hours.reduce((accumulator: any, currentValue: any) => {
     return accumulator + currentValue.duration;
   }, 0);
+
+  const router = useRouter();
 
   //  function
   const handleDataChange = (value: any, rowIndex: number, items: any) => {
@@ -137,7 +139,13 @@ const PayrollTablefeature = ({
             {formatMinutesToHoursAndMinutes(duration)}
             <Text
               style={[externalStyles.BlueText]}
-              onPress={() => navigate("WorkedHours", { item: item })}
+              onPress={() =>
+                // navigate("WorkedHours", { item: item })
+                router.push({
+                  pathname: "/(stack)/workedHours",
+                  params: { item: JSON.stringify(item) },
+                })
+              }
             >
               (view)
             </Text>
@@ -157,7 +165,12 @@ const PayrollTablefeature = ({
             {TotalTip(item.tips).toFixed(2)}
             <Text
               style={[externalStyles.BlueText]}
-              onPress={() => navigate("TipCollected", { item: item })}
+              onPress={() => 
+                  router.push({
+                  pathname: "/(stack)/tipCollected",
+                  params: { item: JSON.stringify(item) },
+                })
+              }
             >
               (view)
             </Text>

@@ -1,12 +1,12 @@
+import { useFocusEffect } from "@react-navigation/native";
+import { useRouter } from "expo-router";
 import moment from "moment";
+import { useCallback, useEffect, useState } from "react";
 import { Alert } from "react-native";
 import { Appointment } from "../interface/Appointment";
 import { timeTracker } from "../interface/Reports";
-import { getLastDate } from "../utils/tools";
-import { useCallback, useEffect, useState } from "react";
 import { TimeTracker } from "../services/TimeTracker/TimeTracker";
-import { useFocusEffect } from "@react-navigation/native";
-import { navigate } from "../utils/navigationServices";
+import { getLastDate } from "../utils/tools";
 
 export const useGetTimeTracker = (setParams: any, params: any) => {
   const [timeData, setData] = useState<timeTracker>({
@@ -18,6 +18,7 @@ export const useGetTimeTracker = (setParams: any, params: any) => {
   });
   const [isloading, setIsLoading] = useState(true);
 
+  const router = useRouter();
   const setPage = (page: number) => {
     setParams({ ...params, page: page });
   };
@@ -51,14 +52,15 @@ export const useGetTimeTracker = (setParams: any, params: any) => {
 
 export const useCreateTime = () => {
   const [loading, setLoading] = useState(true);
-
+  const router = useRouter()
   const handleCreateTime = (formateData = {}) => {
     setLoading(false);
     TimeTracker.createTimeTracker(formateData)
       .then(() => {
         setLoading(true);
         Alert.alert("Your Time Added Successfully");
-        navigate("ManagePayroll");
+        // navigate("ManagePayroll");
+        router.push("/(stack)/managePayroll")
       })
       .catch((err) => {
         Alert.alert(err?.response?.data?.message);
@@ -213,7 +215,7 @@ export const useDeleteTimeTracker = () => {
 
 export const useDeleteInsideDataTimeTracker = () => {
   const [deleteLoading, setLoading] = useState(true);
-
+  const router = useRouter();
   const handleDelete = (
     trackerId: string,
     entryId: string,
@@ -225,7 +227,8 @@ export const useDeleteInsideDataTimeTracker = () => {
         setLoading(true);
         setModalOpen(false);
         Alert.alert("Your Data Delete Successfully");
-        navigate("ManagePayroll");
+        // navigate("ManagePayroll");
+        router.push("/(stack)/managePayroll");
       })
       .finally(() => {
         setLoading(true);
@@ -237,14 +240,15 @@ export const useDeleteInsideDataTimeTracker = () => {
 
 export const useUpdateDataTimeTracker = () => {
   const [loader, setLoading] = useState(true);
-
+  const router = useRouter();
   const handleUpdate = (trackerId: string, body = {}) => {
     setLoading(false);
     TimeTracker.UpdateInsideDataTimeTracker(trackerId, body)
       .then(() => {
         setLoading(true);
         Alert.alert("Data Updated Successfully");
-        navigate("ManagePayroll");
+        // navigate("ManagePayroll");
+        router.push("/(stack)/managePayroll");
       })
       .catch((err) => {
         Alert.alert(err?.response?.data?.message);
@@ -259,14 +263,14 @@ export const useUpdateDataTimeTracker = () => {
 
 export const useUpdateInsideTimeTrackerEntry = () => {
   const [loader, setLoading] = useState(true);
-
+  const router = useRouter();
   const handleUpdateEntry = (trackerId: string, entryId: string, body = {}) => {
     setLoading(false);
     TimeTracker.updateInsideTimeTracker(trackerId, entryId, body)
       .then(() => {
         setLoading(true);
         Alert.alert("Your Data Updated Successfully");
-        navigate("ManagePayroll");
+          router.push("/(stack)/managePayroll")
       })
       .catch((err) => {
         Alert.alert(err?.response?.data?.message);
@@ -280,6 +284,7 @@ export const useUpdateInsideTimeTrackerEntry = () => {
 };
 
 export const useGetTodayAppointment = (teamMemberId: string) => {
+  // console.log("teamMemberId-------------kkk",teamMemberId)
   const [data, setdata] = useState<Appointment[] | []>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -291,7 +296,6 @@ export const useGetTodayAppointment = (teamMemberId: string) => {
     // Increment the refetch counter to force a re-fetch
     setRefetchCounter((prevCounter) => prevCounter + 1);
   };
-
   useEffect(() => {
     TimeTracker.getTodayAppointment(teamMemberId)
       .then((res) => {

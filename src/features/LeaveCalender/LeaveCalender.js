@@ -1,34 +1,39 @@
+import { Feather, FontAwesome } from "@expo/vector-icons";
 import moment from "moment";
-import { Divider } from "react-native-paper";
-import { FontAwesome } from "@expo/vector-icons";
-import { Calendar } from "react-native-calendars";
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { TouchableOpacity, View, Text, StyleSheet, ScrollView } from "react-native";
-import CustomModal from "../../components/elements/CustomModal/CustomModal";
 import {
-  brandColor,
+  Platform,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import { Calendar } from "react-native-calendars";
+import { Divider } from "react-native-paper";
+import { styles as externalStyles } from "../../assets/css";
+import CustomBottomSheet from "../../components/elements/BottomSheet/CustomBottomSheet";
+import Button from "../../components/elements/Button/Button";
+import CustomModal from "../../components/elements/CustomModal/CustomModal";
+import CustomTextArea from "../../components/elements/CustomTextArea/CustomTextArea";
+import LongMenu from "../../components/elements/LongMenu/LongMenu";
+import WarningModal from "../../components/elements/WarningModal/WarningModal";
+import {
   iconColor1,
   iconColor5,
   iconColor9,
   iconEmailColor,
 } from "../../constants/COLORS";
-import { styles as externalStyles } from "../../assets/css";
-import { LeaveCalenderChips } from "../../utils/tools";
-import LongMenu from "../../components/elements/LongMenu/LongMenu";
-import { useLongMenuLeaveRequest } from "../../hooks/LeaveCalender/LeaveRequest";
+import { useTheme } from "../../context/ThemeContext";
 import {
   useApprovedLeaveRequests,
   useDeleteLeaveRequests,
   useGetAllLeaveRequests,
+  useLongMenuLeaveRequest,
   useRejectLeaveRequests,
 } from "../../hooks/LeaveCalender/LeaveRequest";
-import { CheckCircleIcon } from "native-base";
-import Button from "../../components/elements/Button/Button";
-import CustomBottomSheet from "../../components/elements/BottomSheet/CustomBottomSheet";
-import CustomTextArea from "../../components/elements/CustomTextArea/CustomTextArea";
-import WarningModal from "../../components/elements/WarningModal/WarningModal";
 import { convertDatesToMarkedFormat } from "../../utils/functions";
-import { useTheme } from "../../context/ThemeContext";
+import { LeaveCalenderChips } from "../../utils/tools";
 
 const LeaveCalender = ({ markedDates }) => {
   const [open, setOpen] = useState(false);
@@ -82,35 +87,41 @@ const LeaveCalender = ({ markedDates }) => {
           {
             id: 3,
             title: "Approve / Reject",
-            icon: <CheckCircleIcon />,
+            icon: <Feather name="check-circle" size={16} color="green" />,
             line: false,
           },
           {
             id: 1,
             title: "Edit Leave",
-            icon: <CheckCircleIcon />,
+            icon: <Feather name="edit" size={18} color="#6B7280" />,
             line: true,
           }
         );
       }
-    }, [selectedDateData]))
+    }, [])
+  );
 
+  const onDayPress = useCallback(
+    (day) => {
+      const filteredData = markedDates.filter((item) => {
+        return item.dates.some(
+          (dateStr) =>
+            dateStr.split("T")[0] === day.dateString &&
+            item.status != "rejected"
+        );
+      });
 
-  const onDayPress = useCallback((day) => {
+      console.log("filteredData", filteredData);
 
-    const filteredData = markedDates.filter((item) => {
-      return item.dates.some(dateStr => dateStr.split('T')[0] === day.dateString && item.status != "rejected");
-    });
-
-    console.log("filteredData", filteredData)
-
-    setFilterData(filteredData)
-  }, []);
+      setFilterData(filteredData);
+    },
+    [markedDates]
+  );
 
   const handleName = (item) => {
-    setSelectedDateData(item)
-    setModalVisible(true)
-  }
+    setSelectedDateData(item);
+    setModalVisible(true);
+  };
 
   const styles = useStyles();
   const { theme } = useTheme();
@@ -126,28 +137,40 @@ const LeaveCalender = ({ markedDates }) => {
       </View>
 
       <View style={{ paddingTop: 48 }}>
-        {filteredData && <View style={[styles.pinkcard]} >
-          {filteredData.map((item, index) => {
-            return (
-              <TouchableOpacity
-                onPress={() => handleName(item)}
-                style={{ marginVertical: 4, flexDirection: 'row', gap: 4 }}
-              >
-                <Text style={{
-                  color: item.status != "approved" ? "#F98917" : "green", fontSize: 13,
-                  fontFamily: "Regular",
-                  textDecorationLine: "underline"
-                }}>{index + 1}</Text>
-                <Text style={{
-                  color: item.status != "approved" ? "#F98917" : "green", fontSize: 13,
-                  fontFamily: "Regular",
-                  textDecorationLine: "underline"
-                }} >{item?.teamMemberId?.name} </Text>
-              </TouchableOpacity>
-            )
-          })}
-        </View>
-        }
+        {filteredData && (
+          <View style={[styles.pinkcard]}>
+            {filteredData?.map((item, index) => {
+              return (
+                <TouchableOpacity
+                  key={item.id}
+                  onPress={() => handleName(item)}
+                  style={{ marginVertical: 4, flexDirection: "row", gap: 4 }}
+                >
+                  <Text
+                    style={{
+                      color: item.status != "approved" ? "#F98917" : "green",
+                      fontSize: 13,
+                      fontFamily: "Regular",
+                      textDecorationLine: "underline",
+                    }}
+                  >
+                    {index + 1}
+                  </Text>
+                  <Text
+                    style={{
+                      color: item.status != "approved" ? "#F98917" : "green",
+                      fontSize: 13,
+                      fontFamily: "Regular",
+                      textDecorationLine: "underline",
+                    }}
+                  >
+                    {item?.teamMemberId?.name}{" "}
+                  </Text>
+                </TouchableOpacity>
+              );
+            })}
+          </View>
+        )}
       </View>
 
       <CustomModal
@@ -159,7 +182,7 @@ const LeaveCalender = ({ markedDates }) => {
           <View
             style={{
               justifyContent: "center",
-              flexDirection: "row"
+              flexDirection: "row",
             }}
           >
             <FontAwesome
@@ -181,11 +204,14 @@ const LeaveCalender = ({ markedDates }) => {
           </View>
         </View>
 
-        <Text style={[{ marginTop: 4, marginLeft: 20 }, { fontFamily: "Regular" }]}>
-          {selectedDateData?.teamMemberId?.name}</Text>
+        <Text
+          style={[{ marginTop: 4, marginLeft: 20 }, { fontFamily: "Regular" }]}
+        >
+          {selectedDateData?.teamMemberId?.name}
+        </Text>
         <Divider style={[styles.divider, { marginVertical: 8 }]} />
 
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
           <View>
             <View style={styles.row}>
               <FontAwesome
@@ -197,14 +223,17 @@ const LeaveCalender = ({ markedDates }) => {
                 LEAVE TYPE
               </Text>
             </View>
-            <Text style={[externalStyles.content, { marginTop: 4, marginLeft: 8 }]}>
+            <Text
+              style={[externalStyles.content, { marginTop: 4, marginLeft: 8 }]}
+            >
               {selectedDateData?.leaveType}
             </Text>
           </View>
           <TouchableOpacity
             onPress={() => {
               setOpen(true);
-            }}>
+            }}
+          >
             <View style={styles.row}>
               <FontAwesome
                 name="calendar"
@@ -212,13 +241,18 @@ const LeaveCalender = ({ markedDates }) => {
               />
               <Text style={[externalStyles.label]}>NO. OF DAYS</Text>
             </View>
-            <Text style={[externalStyles.BlueText, { marginTop: 4, marginLeft: 20 }]}>
+            <Text
+              style={[
+                externalStyles.BlueText,
+                { marginTop: 4, marginLeft: 20 },
+              ]}
+            >
               {selectedDateData?.dates?.length.toString()}
             </Text>
           </TouchableOpacity>
         </View>
         <Divider style={[styles.divider, { marginVertical: 8 }]} />
-        <View style={{ flexDirection: 'row' }}>
+        <View style={{ flexDirection: "row" }}>
           <FontAwesome
             name="comment"
             style={[externalStyles.iconColorStyle, { color: iconColor5 }]}
@@ -230,7 +264,7 @@ const LeaveCalender = ({ markedDates }) => {
         </Text>
 
         <Divider style={[styles.divider, { marginVertical: 8 }]} />
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+        <View style={{ flexDirection: "row", alignItems: "center" }}>
           <View style={styles.row}>
             <FontAwesome
               name="info-circle"
@@ -306,24 +340,21 @@ const useStyles = () => {
       display: "flex",
       flexDirection: "row",
       alignItems: "center",
-      justifyContent: "space-between"
+      justifyContent: "space-between",
     },
     dayText: {
       fontSize: 16,
       color: "#000",
-      fontFamily: "Regular"
-
+      fontFamily: "Regular",
     },
     disabledText: {
       color: "#d9e1e8",
-      fontFamily: "Regular"
-
+      fontFamily: "Regular",
     },
     markedText: {
       fontSize: 10,
       color: "black",
       fontFamily: "Regular",
-
     },
     gbColor: {
       backgroundColor: theme.brandColor,
@@ -360,6 +391,5 @@ const useStyles = () => {
       }),
     },
   });
-}
+};
 export default LeaveCalender;
-

@@ -1,13 +1,14 @@
+import CustomCrouselPagination from "@/src/components/elements/CustomCrouselPagination/CustomCrouselPagination";
 import React, { useState } from "react";
-import { View, StyleSheet, Dimensions } from "react-native";
-import Carousel, { Pagination } from "react-native-snap-carousel";
+import { Dimensions, StyleSheet, View } from "react-native";
+import Carousel from "react-native-reanimated-carousel";
 import AppointmentCard from "../../../components/ui/Report/AppointmentReport/AppointmentCard";
+import { useTheme } from "../../../context/ThemeContext";
 import {
   useGetProfitLossMonth,
   useGetProfitLossThis,
   useGetProfitLossWeek,
 } from "../../../hooks/Accounts/Accounts";
-import { useTheme } from "../../../context/ThemeContext";
 import { formatCardCount } from "../../../utils/functions";
 
 const screenWidth = Dimensions.get("window").width;
@@ -70,22 +71,18 @@ const IvsEcards = () => {
   return (
     <View style={styles.container}>
       <Carousel
+        width={screenWidth}
+        height={180} 
         data={carouselItems}
         renderItem={renderItem}
-        sliderWidth={screenWidth}
-        itemWidth={screenWidth}
         loop
-        autoplay
-        autoplayInterval={5000}
+        autoPlay
+        autoPlayInterval={5000}
         onSnapToItem={(index) => setActiveSlide(index)}
       />
-      <Pagination
+       <CustomCrouselPagination
         dotsLength={carouselItems.length}
         activeDotIndex={activeSlide}
-        containerStyle={styles.paginationContainer}
-        dotStyle={styles.dotStyle}
-        inactiveDotOpacity={0.4}
-        inactiveDotScale={0.6}
       />
     </View>
   );
@@ -98,16 +95,7 @@ const useStyles = () => {
     container: {
       alignItems: "center",
       marginVertical: 10,
-    },
-    paginationContainer: {
-      paddingVertical: 8,
-    },
-    dotStyle: {
-      width: 5,
-      height: 5,
-      borderRadius: 5,
-      backgroundColor: theme.brandColor,
-    },
-  });
+    }
+});
 };
 export default IvsEcards;

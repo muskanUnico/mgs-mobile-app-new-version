@@ -1,14 +1,15 @@
-import React from "react";
-import moment from "moment";
-import { Divider } from "react-native-paper";
 import { MaterialIcons } from "@expo/vector-icons";
-import { Text, View, TouchableOpacity, StyleSheet } from "react-native";
-import { navigate } from "../../../../utils/navigationServices";
+import { useRouter } from "expo-router";
+import moment from "moment";
+import React from "react";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Divider } from "react-native-paper";
 import { styles as externalStyles } from "../../../../assets/css";
-import { areAllElementsUnique, formatTime } from "../../../../utils/tools";
 import CustomHeading from "../../../../components/elements/CustomHeading/CustomHeading";
+import { areAllElementsUnique, formatTime } from "../../../../utils/tools";
 
 const PastAppointments = ({ appointments }: any) => {
+  const router = useRouter();
   return (
     appointments.data.results.length > 0 && (
       <>
@@ -36,7 +37,7 @@ const PastAppointments = ({ appointments }: any) => {
                     {index} {tit}
                   </Text>
                 ))}
-                <View  key={index}  style={styles.customRowLayout}>
+                <View key={index} style={styles.customRowLayout}>
                   <View>
                     <Text style={[externalStyles.content]}>
                       {formattedDate} {startTime}
@@ -48,7 +49,11 @@ const PastAppointments = ({ appointments }: any) => {
 
                   <TouchableOpacity
                     onPress={() =>
-                      navigate(`ViewAppointment`, { id: item?.id })
+                      // navigate(`ViewAppointment`, { id: item?.id })
+                      router.push({
+                        pathname: "/(stack)/viewAppointments",
+                        params: { id: item?.id },
+                      })
                     }
                   >
                     <MaterialIcons
@@ -58,13 +63,13 @@ const PastAppointments = ({ appointments }: any) => {
                   </TouchableOpacity>
                 </View>
                 <Divider style={styles.customDivider2} />
-                </View>
+              </View>
             );
           })}
 
           {appointments.showLoadMore && (
             <Text
-            style={[styles.customMargin, externalStyles.BlueText]}
+              style={[styles.customMargin, externalStyles.BlueText]}
               onPress={appointments.loadMore}
             >
               See More
@@ -83,9 +88,9 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   customRowLayout: {
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "flex-start",
+    justifyContent: "space-between",
     paddingVertical: 8,
   },
   customDivider2: {

@@ -1,26 +1,25 @@
-import React from "react";
+import { FontAwesome } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 import moment from "moment";
-import { StyleSheet, View } from "react-native";
+import React from "react";
+import { StyleSheet, Text, TouchableWithoutFeedback, View } from "react-native";
 import { Divider } from "react-native-paper";
 import { styles as externalStyles } from "../../../assets/css";
-import { Text, TouchableWithoutFeedback } from "react-native";
-import {
-  appointmentActionOptions,
-  AppointmentPayment,
-} from "../../../hooks/Appointment/hooks";
-import { chips, formatDateTable, formatTimeRange } from "../../../utils/tools";
+import LongMenu from "../../../components/elements/LongMenu/LongMenu";
+import WarningModal from "../../../components/elements/WarningModal/WarningModal";
 import {
   iconCalenderColor,
   iconColor5,
   iconColor8,
   iconPhoneColor,
 } from "../../../constants/COLORS";
-import { FontAwesome } from "@expo/vector-icons";
-import { navigate } from "../../../utils/navigationServices";
-import LongMenu from "../../../components/elements/LongMenu/LongMenu";
 import { useAuth } from "../../../context/AuthContext";
 import { useActionHooks } from "../../../hooks/Appointment/ActionHooks";
-import WarningModal from "../../../components/elements/WarningModal/WarningModal";
+import {
+  appointmentActionOptions,
+  AppointmentPayment,
+} from "../../../hooks/Appointment/hooks";
+import { chips, formatDateTable, formatTimeRange } from "../../../utils/tools";
 
 const CalenderCards = ({ item }: any) => {
   const { permissions } = useAuth();
@@ -33,6 +32,7 @@ const CalenderCards = ({ item }: any) => {
     handleRightbtn,
     handleActionClick,
   } = useActionHooks({ appointments: [item] });
+  const router = useRouter();
 
   return (
     <>
@@ -54,9 +54,15 @@ const CalenderCards = ({ item }: any) => {
       </View>
 
       <TouchableWithoutFeedback
-        onPress={() =>
-          navigate("ViewAppointment", {
-            id: item?.paymentId?.appointmentId,
+        // onPress={() =>
+        //   navigate("ViewAppointment", {
+        //     id: item?.paymentId?.appointmentId,
+        //   })
+        // }
+        onPress={()=>
+          router.push({
+            pathname:"/(stack)/viewAppointments",
+            params:{id:item?.paymentId?.appointmentId}
           })
         }
       >
@@ -100,8 +106,7 @@ const CalenderCards = ({ item }: any) => {
         {item?.paymentId !== null &&
           item?.paymentId?.payment?.paymentStatus === "pending" && (
             <Text
-              style={[styles.redText, styles.marginLeft]}
-              style={{ fontFamily: "Regular" }}
+              style={[styles.redText, styles.marginLeft,{ fontFamily: "Regular" }]}
             >
               CAD$
               {item?.paymentId !== null && unpaidAmount.toFixed(2)} - UNPAID
@@ -210,9 +215,9 @@ const styles = StyleSheet.create({
   redText: {
     color: "red",
   },
-  marginLeft: {
-    marginLeft: 24,
-  },
+  // marginLeft: {
+  //   marginLeft: 24,
+  // },
   marginBottom: {
     marginBottom: 8,
   },

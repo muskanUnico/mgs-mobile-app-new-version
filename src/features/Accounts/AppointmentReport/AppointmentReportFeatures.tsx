@@ -1,23 +1,23 @@
 //@ts-nocheck
+import CustomCrouselPagination from "@/src/components/elements/CustomCrouselPagination/CustomCrouselPagination";
 import React, { useState } from "react";
-import { View, StyleSheet, Dimensions } from "react-native";
-import Carousel, { Pagination } from "react-native-snap-carousel";
+import { Dimensions, StyleSheet, View } from "react-native";
+import Carousel from "react-native-reanimated-carousel";
+import I9 from "../../../assets/images/a.png";
+import I4 from "../../../assets/images/aaa.png";
+import I6 from "../../../assets/images/adminreschedule.png";
+import I7 from "../../../assets/images/Cancel.png";
+import I3 from "../../../assets/images/month.png";
+import I2 from "../../../assets/images/mytoday.png";
+import I5 from "../../../assets/images/reschedule.png";
+import I1 from "../../../assets/images/today.png";
+import I8 from "../../../assets/images/unapproved.png";
 import AppointmentCard from "../../../components/ui/Report/AppointmentReport/AppointmentCard";
-import { brandColor } from "../../../constants/COLORS";
+import { useTheme } from "../../../context/ThemeContext";
 import {
   useGetAllApprovedReports,
   useGetAllReports,
 } from "../../../hooks/Accounts/Accounts";
-import I1 from "../../../assets/images/today.png";
-import I2 from "../../../assets/images/mytoday.png";
-import I3 from "../../../assets/images/month.png";
-import I4 from "../../../assets/images/aaa.png";
-import I5 from "../../../assets/images/reschedule.png";
-import I6 from "../../../assets/images/adminreschedule.png";
-import I7 from "../../../assets/images/Cancel.png";
-import I8 from "../../../assets/images/unapproved.png";
-import I9 from "../../../assets/images/a.png";
-import { useTheme } from "../../../context/ThemeContext";
 import { formatCardCount } from "../../../utils/functions";
 
 const screenWidth = Dimensions.get("window").width;
@@ -166,23 +166,19 @@ const AppointmentReportFeatures = () => {
   const { theme } = useTheme();
   return (
     <View style={styles.container}>
-      <Carousel
+       <Carousel
         data={carouselItems}
         renderItem={renderItem}
-        sliderWidth={screenWidth}
-        itemWidth={screenWidth}
+        width={screenWidth}
+        height={180}
         loop
-        autoplay
+        autoPlay
         autoplayInterval={5000}
         onSnapToItem={(index) => setActiveSlide(index)}
       />
-      <Pagination
+       <CustomCrouselPagination
         dotsLength={carouselItems.length}
         activeDotIndex={activeSlide}
-        containerStyle={styles.paginationContainer}
-        dotStyle={styles.dotStyle}
-        inactiveDotOpacity={0.4}
-        inactiveDotScale={0.6}
       />
     </View>
   );
@@ -195,15 +191,6 @@ const useStyles = () => {
     container: {
       alignItems: "center",
       marginVertical: 10,
-    },
-    paginationContainer: {
-      paddingVertical: 8,
-    },
-    dotStyle: {
-      width: 5,
-      height: 5,
-      borderRadius: 5,
-      backgroundColor: theme.brandColor,
     },
   });
 };

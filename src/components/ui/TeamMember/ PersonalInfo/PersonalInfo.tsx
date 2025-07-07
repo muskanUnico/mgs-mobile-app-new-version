@@ -1,19 +1,18 @@
 //@ts-nocheck
-import React, { useState } from "react";
+import { AntDesign, FontAwesome } from "@expo/vector-icons";
 import * as Clipboard from "expo-clipboard";
-import { FontAwesome } from "@expo/vector-icons";
-import { View, Text, TouchableOpacity, Alert } from "react-native";
+import { useRouter } from "expo-router";
+import React, { useState } from "react";
+import { Alert, Text, TouchableOpacity, View } from "react-native";
 import { styles as externalStyles } from "../../../../assets/css";
 import CustomHeading from "../../../../components/elements/CustomHeading/CustomHeading";
+import WarningModal from "../../../../components/elements/WarningModal/WarningModal";
 import {
   iconEmailColor,
   iconPersonColor,
   iconPhoneColor,
 } from "../../../../constants/COLORS";
-import { navigate } from "../../../../utils/navigationServices";
 import { useDeleteTeamMember } from "../../../../hooks/TeamMembers";
-import WarningModal from "../../../../components/elements/WarningModal/WarningModal";
-import { AntDesign } from "@expo/vector-icons";
 
 interface PersonalInfoCardProps {
   data: {
@@ -36,6 +35,7 @@ const PersonalInfoCard: React.FC<PersonalInfoCardProps> = ({
   const [memberToDelete, setMemberToDelete] = useState(null);
   const { handleDeleteTeamMember, isLoading } = useDeleteTeamMember();
   const [modalVisible, setModalVisible] = useState(false);
+  const router = useRouter();
 
   const handleDelete = () => {
     //@ts-ignore
@@ -71,7 +71,14 @@ const PersonalInfoCard: React.FC<PersonalInfoCardProps> = ({
         <CustomHeading iconName="wpforms" text="Personal Information" />
 
         <TouchableOpacity
-          onPress={() => navigate("EditPersonalInfo", { personalInfo: data })}
+          onPress={() =>
+            router.push({
+              pathname: "/(stack)/editPersonalInfo",
+              params: {
+                personalInfo: JSON.stringify(data),
+              },
+            })
+          }
         >
           <Text style={externalStyles.BlueText}>EDIT</Text>
         </TouchableOpacity>
@@ -101,7 +108,7 @@ const PersonalInfoCard: React.FC<PersonalInfoCardProps> = ({
                 { color: iconPersonColor },
               ]}
             />
-            <Text style={externalStyles.content} style={{ marginRight: 4 }}>
+            <Text style={externalStyles.content} style={{ marginRight: 4,fontWeight:700}}>
               {data?.name}
             </Text>
             <View

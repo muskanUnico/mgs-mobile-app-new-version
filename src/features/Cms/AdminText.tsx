@@ -1,12 +1,13 @@
-import { useManageCMS } from "../../hooks/CMS";
+import { useFocusEffect } from "expo-router";
+import React, { useCallback, useState } from "react";
 import { Alert, Text, View } from "react-native";
-import React, { useEffect, useState } from "react";
-import { useAuth } from "../../context/AuthContext";
-import { useTheme } from "../../context/ThemeContext";
 import { styles as externalStyles } from "../../assets/css";
 import Button from "../../components/elements/Button/Button";
-import StandardInput from "../../components/elements/StandardInput/StandardInput";
 import CustomColorPicker from "../../components/elements/ColorPicker/ColorPicker";
+import StandardInput from "../../components/elements/StandardInput/StandardInput";
+import { useAuth } from "../../context/AuthContext";
+import { useTheme } from "../../context/ThemeContext";
+import { useManageCMS } from "../../hooks/CMS";
 
 const AdminText = () => {
   const manageCreateCMS = useManageCMS();
@@ -15,19 +16,23 @@ const AdminText = () => {
   const [showModal, setShowModal] = useState(false);
 
   // state
-  const [admin, setAdmin] = useState(CMSData.admin.text);
+ const [admin, setAdmin] = useState(() => CMSData?.admin?.text || "");
 
   const [colors, setColors] = useState({
     secondary: "#00FF00",
     tertiary: "#0000FF",
   });
 
-  useEffect(() => {
-    setColors({
-      secondary: CMSData.admin.secondary,
-      tertiary: CMSData.admin.tertiary,
-    });
-  }, [CMSData]);
+  useFocusEffect(
+    useCallback(() => {
+      if (!CMSData?.admin) return;
+
+      setColors({
+        secondary: CMSData.admin.secondary || "#00FF00",
+        tertiary: CMSData.admin.tertiary || "#0000FF",
+      });
+    }, [CMSData])
+  );
 
   const handleSubmit = () => {
     if (!admin?.trim()) {

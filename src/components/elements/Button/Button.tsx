@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { ActivityIndicator } from "react-native-paper";
 import { styles as externalStyles } from "../../../assets/css";
 import { useTheme } from "../../../context/ThemeContext";
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     paddingVertical: 8,
-    paddingHorizontal: 20,
+    paddingHorizontal: 18,
     borderRadius: 16,
   },
   rowCenter: {

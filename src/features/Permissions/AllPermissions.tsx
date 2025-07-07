@@ -1,12 +1,13 @@
+import { router } from "expo-router";
 import React from "react";
-import { getRoles } from "../../hooks/Role";
-import { Searchbar } from "react-native-paper";
 import { StyleSheet, View } from "react-native";
-import { useTheme } from "../../context/ThemeContext";
+import { Searchbar } from "react-native-paper";
+import MaterialCommunityIcon from "react-native-vector-icons/MaterialCommunityIcons";
 import Button from "../../components/elements/Button/Button";
 import PermissionCard from "../../components/ui/Permissions/PermissionCard/PermissionCard";
 import { FilterBorder, placeholderTextColor } from "../../constants/COLORS";
-import MaterialCommunityIcon from "react-native-vector-icons/MaterialCommunityIcons";
+import { useTheme } from "../../context/ThemeContext";
+import { getRoles } from "../../hooks/Role";
 
 export const AllPermissions = ({ navigation }: any) => {
   const styles = useStyles();
@@ -25,7 +26,10 @@ export const AllPermissions = ({ navigation }: any) => {
         <Button
           title="Create Role"
           loading={false}
-          onPress={() => navigation.navigate("create-permission")}
+          onPress={() => 
+            // navigation.navigate("create-permission")
+             router.navigate("/(stack)/createPermission")
+          }
         />
       </View>
       <View style={styles.searchContainer}>

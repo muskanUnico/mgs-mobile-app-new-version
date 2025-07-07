@@ -1,15 +1,15 @@
+import { useFocusEffect } from "@react-navigation/native";
 import moment from "moment";
 import React, { useCallback, useState } from "react";
-import { View, StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
+import CustomBottomSheet from "../../../components/elements/BottomSheet/CustomBottomSheet";
 import Button from "../../../components/elements/Button/Button";
+import SingleDatePicker from "../../../components/elements/SingleDatePicker/SingleDatePicker";
+import StandardInput from "../../../components/elements/StandardInput/StandardInput";
 import {
   useCreateRevenue,
   useUpdateRevenue,
 } from "../../../hooks/Accounts/Revenue";
-import { useFocusEffect } from "@react-navigation/native";
-import StandardInput from "../../../components/elements/StandardInput/StandardInput";
-import CustomBottomSheet from "../../../components/elements/BottomSheet/CustomBottomSheet";
-import SingleDatePicker from "../../../components/elements/SingleDatePicker/SingleDatePicker";
 
 const AddIncome = ({
   bottomSheetRef,
@@ -25,6 +25,8 @@ const AddIncome = ({
   const [amount, setAmount] = useState("");
   const createRevenue = useCreateRevenue(refetch);
   const updateRevenue = useUpdateRevenue(navigation);
+  // console.log("nav", navigation);
+  
 
   const glodalLoading = createRevenue.loading
     ? createRevenue.loading
@@ -60,6 +62,7 @@ const AddIncome = ({
   };
 
   const handleSubmit = () => {
+    console.log("getoption====",getOption?.id);
     if (getOption?.id == 1) {
       updateRevenue.handleUpdate(wholeData?._id, form?._id, formateEdit);
     } else {

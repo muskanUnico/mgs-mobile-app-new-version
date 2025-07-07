@@ -1,9 +1,9 @@
+import CustomCrouselPagination from "@/src/components/elements/CustomCrouselPagination/CustomCrouselPagination";
 import React, { useState } from "react";
-import { View, StyleSheet, Dimensions } from "react-native";
-import Carousel, { Pagination } from "react-native-snap-carousel";
-import AppointmentCard from "../AppointmentReport/AppointmentCard";
-import { brandColor } from "../../../../constants/COLORS";
+import { Dimensions, StyleSheet, View } from "react-native";
+import Carousel from "react-native-reanimated-carousel";
 import { useTheme } from "../../../../context/ThemeContext";
+import AppointmentCard from "../AppointmentReport/AppointmentCard";
 
 const screenWidth = Dimensions.get("window").width;
 
@@ -63,21 +63,17 @@ const RevenueReportCards = ({
     <View style={styles.container}>
       <Carousel
         data={carouselItems}
+        width={screenWidth}
+        height={160}
         renderItem={renderItem}
-        sliderWidth={screenWidth}
-        itemWidth={screenWidth}
-        loop
-        autoplay
-        autoplayInterval={5000}
+         loop
+        autoPlay
+         autoPlayInterval={5000}
         onSnapToItem={(index) => setActiveSlide(index)}
       />
-      <Pagination
+        <CustomCrouselPagination
         dotsLength={carouselItems.length}
         activeDotIndex={activeSlide}
-        containerStyle={styles.paginationContainer}
-        dotStyle={styles.dotStyle}
-        inactiveDotOpacity={0.4}
-        inactiveDotScale={0.6}
       />
     </View>
   );
@@ -86,19 +82,11 @@ const RevenueReportCards = ({
 const useStyles = () => {
   const { theme } = useTheme();
 
-  return StyleSheet.create({  container: {
-    alignItems: "center",
-    marginVertical: 10,
-  },
-  paginationContainer: {
-    paddingVertical: 8,
-  },
-  dotStyle: {
-    width: 5,
-    height: 5,
-    borderRadius: 5,
-    backgroundColor: theme.brandColor,
-  },
-});
-}
+  return StyleSheet.create({
+    container: {
+      alignItems: "center",
+      marginVertical: 10,
+    }
+  });
+};
 export default RevenueReportCards;

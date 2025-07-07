@@ -1,29 +1,28 @@
-import { Text, View, StyleSheet, Alert } from "react-native";
+import { AntDesign, FontAwesome } from "@expo/vector-icons";
+import moment from "moment";
 import React, { useState } from "react";
-import { FontAwesome } from "@expo/vector-icons";
+import { Alert, StyleSheet, Text, View } from "react-native";
 import { styles as externalStyles } from "../../../assets/css";
-import { brandColor, greenColor } from "../../../constants/COLORS";
 import Button from "../../../components/elements/Button/Button";
-import WorkedHoursCard from "../../../components/ui/TeamMember/WorkedHoursCard/WorkedHoursCard";
-import { AddTime } from "../../../components/ui/TeamMember/AddTime/AddTime";
-import {
-  CalculateDuration,
-  TotalTip,
-  convertToISOFormat,
-} from "../../../utils/functions";
 import WarningModal from "../../../components/elements/WarningModal/WarningModal";
+import { AddTime } from "../../../components/ui/TeamMember/AddTime/AddTime";
+import WorkedHoursCard from "../../../components/ui/TeamMember/WorkedHoursCard/WorkedHoursCard";
+import { greenColor } from "../../../constants/COLORS";
+import { useTheme } from "../../../context/ThemeContext";
 import {
   useCreateTime,
   useDeleteInsideDataTimeTracker,
   useUpdateInsideTimeTrackerEntry,
 } from "../../../hooks/TimeTracker";
+import {
+  CalculateDuration,
+  TotalTip,
+  convertToISOFormat,
+} from "../../../utils/functions";
 import { convertStringTimeToNumber } from "../../../utils/tools";
-import moment from "moment";
-import { useTheme } from "../../../context/ThemeContext";
-import { AntDesign } from "@expo/vector-icons";
 
-export const WorkedHoursFeature = ({ naviagtion, route }: any) => {
-  const data = route.params?.item?.hours;
+export const WorkedHoursFeature = ({ naviagtion, route, item }: any) => {
+  const data = item?.hours;
   const { handleCreateTime, loading } = useCreateTime();
   const { handleUpdateEntry, loader } = useUpdateInsideTimeTrackerEntry();
   const { handleDelete, deleteLoading } = useDeleteInsideDataTimeTracker();
@@ -44,23 +43,25 @@ export const WorkedHoursFeature = ({ naviagtion, route }: any) => {
   ]);
 
   // handle three dot btn
-  const handleOptions = (option: any, item: any) => {
+  const handleOptions = (option: any, item: any) => { 
     setGetOption(item);
     if (option == 1) {
       setFields([
         {
           startTime: new Date(
             convertToISOFormat({
-              date: moment(route.params?.item?.date).format("YYYY-MM-DD"),
+              date: moment(item?.date).format("YYYY-MM-DD"),
               time: item?.startTime,
             })
           ),
           endTime: new Date(
             convertToISOFormat({
-              date: moment(route.params?.item?.date).format("YYYY-MM-DD"),
+              date: moment(item?.date).format("YYYY-MM-DD"),
               time: item?.endTime,
             })
           ),
+     
+
           duration: item?.duration,
           workedType: item?.workedType,
           reference: item?.ref || "",
@@ -90,8 +91,8 @@ export const WorkedHoursFeature = ({ naviagtion, route }: any) => {
 
   const handleSubmitbtn = () => {
     const formateData = {
-      teamMemberId: route.params?.item?.teamMemberId.id,
-      date: route.params?.item?.date,
+      teamMemberId: item?.teamMemberId.id,
+      date: item?.date,
       hours: fields.map((item, index) => ({
         startTime: convertStringTimeToNumber(
           moment(item.startTime).format("HHmm")
@@ -127,7 +128,7 @@ export const WorkedHoursFeature = ({ naviagtion, route }: any) => {
     if (isTaskEmpty) {
       Alert.alert("Task is Required");
     } else if (choosed == 1) {
-      handleUpdateEntry(route.params?.item?.id, getOption._id, update);
+      handleUpdateEntry(item?.id, getOption._id, update);
     } else {
       handleCreateTime(formateData);
     }
@@ -194,7 +195,7 @@ export const WorkedHoursFeature = ({ naviagtion, route }: any) => {
           "Are u really sure if u delete this all the worked hours log on this day will be deleted ?"
         }
         handleLeftbtn={() =>
-          handleDelete(route.params?.item?.id, getOption._id, setModalOpen)
+          handleDelete(item?.id, getOption._id, setModalOpen)
         }
         handleRightbtn={() => setModalOpen(false)}
         leftBtnName={"NO"}

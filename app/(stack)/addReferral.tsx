@@ -3,8 +3,20 @@ import { StyleSheet, ImageBackground } from "react-native";
 import Title from "@/src/components/elements/Title/Title";
 import AddReferralFeature from "@/src/features/Referral/AddReferralFeature";
 import GlobalLoader from "@/src/features/GlobalLoader/GlobalLoader";
+import { useLocalSearchParams } from "expo-router";
 
 const AddReferralScreen = ({ navigation, route }: any) => {
+  const { data, edit, title } = useLocalSearchParams();
+  const referral = data
+    ? JSON.parse(Array.isArray(data) ? data[0] : data)
+    : null;
+  const isEdit = edit === "true";
+   const screenTitle = title
+    ? Array.isArray(title)
+      ? title[0]
+      : title
+    : "Add Referrals";
+
   return (
     <>
       <ImageBackground
@@ -14,11 +26,10 @@ const AddReferralScreen = ({ navigation, route }: any) => {
         <GlobalLoader>
           <Title
             navigation={navigation}
-            title={`${
-              route?.params?.title ? route?.params?.title : "Add Refferals"
-            }`}
+            title={`${screenTitle || "Add Referrals"}`}
+
           />
-          <AddReferralFeature route={route} />
+          <AddReferralFeature  referral={referral} isEdit={isEdit} />
         </GlobalLoader>
       </ImageBackground>
     </>
@@ -30,4 +41,4 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
   },
 });
-export default AddReferralScreen
+export default AddReferralScreen;
