@@ -1,7 +1,7 @@
-import { useAuth } from "../../../../../context/AuthContext";
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { styles as externalStyles } from "../../../../../assets/css";
+import { useAuth } from "../../../../../context/AuthContext";
 import { useTheme } from "../../../../../context/ThemeContext";
 
 interface CalculateTotalprops {
@@ -36,7 +36,7 @@ const CalculateTotal = ({ data }: CalculateTotalprops) => {
         </View>
 
         <View style={styles.rowView}>
-          <Text style={[externalStyles.label]}>Tax - {CMSData.tax}%</Text>
+          <Text style={[externalStyles.label]}>Tax - {CMSData?.tax || 0}%</Text>
           <Text style={[externalStyles.content]}>${data?.tax || 0}</Text>
         </View>
 

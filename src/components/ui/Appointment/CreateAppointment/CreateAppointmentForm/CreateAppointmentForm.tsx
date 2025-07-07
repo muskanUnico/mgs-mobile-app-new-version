@@ -41,7 +41,6 @@ const CreateAppointmentForm = ({
   date,
   setDate,
 }: CreateAppointmentFormProps) => {
-  console.log("rddtx", selectedData);
   return (
     <View style={[externalStyles.container]}>
       <View style={styles.spacing}>

@@ -1,23 +1,23 @@
 // @ts-nocheck
-import React, { useState, useEffect, useCallback } from "react";
-import {
-  getTeamMemberRequirements,
-  formatServicesData,
-  validateBookingData,
-  calculateAmounts,
-} from "../../hooks/Appointment/hooks";
+import { useFocusEffect } from "@react-navigation/native";
+import React, { useCallback, useState } from "react";
+import { Alert } from "react-native";
 import { useAuth } from "../../context/AuthContext";
-import { getCouponDiscountPrice } from "../../hooks/Coupon";
 import { getAppointmentById } from "../../hooks/Appointment";
-import { callAvailabilityService, createCustomAvailability } from "./";
+import {
+  calculateAmounts,
+  formatServicesData,
+  getTeamMemberRequirements,
+  validateBookingData,
+} from "../../hooks/Appointment/hooks";
+import { getCouponDiscountPrice } from "../../hooks/Coupon";
 import {
   collectLater,
   collectManualPayment,
   collectPaymentFromStripe,
 } from "../../hooks/Payment";
 import { convertNumberToStringTime, isChanged } from "../../utils/tools";
-import { useFocusEffect } from "@react-navigation/native";
-import { Alert } from "react-native";
+import { callAvailabilityService, createCustomAvailability } from "./";
 
 const useAppointmentFlow = (defaultAppointmentId = "") => {
   const { CMSData } = useAuth();
@@ -305,6 +305,7 @@ const useAppointmentFlow = (defaultAppointmentId = "") => {
 
   useFocusEffect(
     useCallback(() => {
+       if (!CMSData) return;
       calculateAmounts({
         bookings: tableselectedData,
         manageDiscount: manageDiscount,

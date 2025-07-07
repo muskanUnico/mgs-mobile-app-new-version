@@ -63,8 +63,8 @@ function RootLayoutInner() {
 
   return !user ? (
     <Stack screenOptions={{headerShown:false}}>
-      <Stack.Screen name="index" options={{ headerShown: false }} />
-      <Stack.Screen name="forgot-password" options={{ headerShown: false }} />
+      <Stack.Screen name="/(auth)/index" options={{ headerShown: false }} />
+      <Stack.Screen name="/(auth)/forgot-password" options={{ headerShown: false }} />
     </Stack>
   ) : (
     <>
