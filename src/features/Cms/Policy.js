@@ -1,6 +1,7 @@
 import Button from "@/src/components/elements/Button/Button";
 import { useManageCMS } from "@/src/hooks/CMS";
-import React, { useEffect, useState } from "react";
+import { useFocusEffect } from "expo-router";
+import React, { useCallback, useState } from "react";
 import { KeyboardAvoidingView, Platform, ScrollView, View } from "react-native";
 import Tabs from "../../components/elements/Tabs/Tabs";
 import { BookingPolicy } from "./BookingPolicy";
@@ -24,14 +25,18 @@ export const Policy = ({ data }) => {
     cancel: "",
   });
 
-  useEffect(() => {
+useFocusEffect(
+  useCallback(() => {
+    if (!data?.policy) return;
+
     setTextAreas({
-      tc: data.policy.termsAndConditions,
-      privacy: data.policy.privacyPolicy,
-      book: data.policy.bookingPolicy,
-      cancel: data.policy.refundsAndCancellationPolicy,
+      tc: data.policy.termsAndConditions || "",
+      privacy: data.policy.privacyPolicy || "",
+      book: data.policy.bookingPolicy || "",
+      cancel: data.policy.refundsAndCancellationPolicy || "",
     });
-  }, [data]);
+  }, [data])
+);
 
   const handleTextAreaChange = (key: string, value: string) => {
     setTextAreas((prevState) => ({

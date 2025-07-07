@@ -1,21 +1,20 @@
-import { View } from "react-native";
-import { useManageCMS } from "../../hooks/CMS";
-import React, { useEffect, useState } from "react";
-import { useAuth } from "../../context/AuthContext";
+import { useFocusEffect } from "expo-router";
+import React, { useCallback, useState } from "react";
+import { Modal, Platform, Pressable, StyleSheet, Text, View } from "react-native";
+import Animated from "react-native-reanimated";
+import type { returnedResults } from "reanimated-color-picker";
+import ColorPicker, {
+  colorKit,
+  HueSlider,
+  OpacitySlider,
+  Panel1,
+  PreviewText,
+  Swatches,
+} from "reanimated-color-picker";
 import { styles as externalStyles } from "../../assets/css";
 import Button from "../../components/elements/Button/Button";
-import { Platform } from "react-native";
-import Animated from "react-native-reanimated";
-import { Modal, Pressable, StyleSheet, Text } from "react-native";
-import ColorPicker, {
-  Panel1,
-  Swatches,
-  OpacitySlider,
-  HueSlider,
-  colorKit,
-  PreviewText,
-} from "reanimated-color-picker";
-import type { returnedResults } from "reanimated-color-picker";
+import { useAuth } from "../../context/AuthContext";
+import { useManageCMS } from "../../hooks/CMS";
 
 const Colorsfeature = () => {
   const { CMSData } = useAuth();
@@ -31,11 +30,13 @@ const Colorsfeature = () => {
     brand: "#ff0000",
   });
 
-  useEffect(() => {
-    if (CMSData.colors.white) {
-      setColors(CMSData.colors);
-    }
-  }, [CMSData]);
+ useFocusEffect(
+  useCallback(() => {
+    if (!CMSData?.colors?.white) return;
+
+    setColors(CMSData.colors);
+  }, [CMSData])
+);
 
   const handleReset = () => {
     handleCreate({

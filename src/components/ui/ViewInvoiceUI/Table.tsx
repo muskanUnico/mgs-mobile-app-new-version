@@ -1,12 +1,12 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { styles as externalStyles } from "../../../assets/css";
+import { useTheme } from "../../../context/ThemeContext";
+import { useGetCMS } from "../../../hooks/CMS";
 import {
   formatDateforHeader,
   formatMinutesToHoursAndMinutes,
 } from "../../../utils/tools";
-import { useGetCMS } from "../../../hooks/CMS";
-import { useTheme } from "../../../context/ThemeContext";
 
 export const Table = ({ data }: any) => {
   const cms = useGetCMS();
@@ -130,7 +130,7 @@ export const Table = ({ data }: any) => {
                 </View>
                 <View>
                   <Text style={{ paddingTop: 12, fontFamily: "BoldText" }}>
-                    TAX-{cms.data.tax}%
+                  TAX-{cms.data?.tax ?? 0}%
                   </Text>
                 </View>
                 <Text

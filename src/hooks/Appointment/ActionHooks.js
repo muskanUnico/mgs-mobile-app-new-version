@@ -103,15 +103,6 @@ export const useActionHooks = ({ appointments = [] }) => {
       );
       const amount = getAppointment?.paymentId?.payment?.amount;
 
-      // console.log("customerId===>>>>", getAppointment?.customerId?.id || getAppointment?.customerId)
-      // console.log("appointmentId===>>>>", appointmentId)
-      // console.log("amount===>>>>", amount)
-      // console.log("appointmentData===>>>>", getAppointment)
-
-      // navigate("paymentpage", {
-
-      // });
-
       // useAppointmentStore.getState().setAppointment({
       //   customerId:
       //     getAppointment?.customerId?.id || getAppointment?.customerId,
@@ -119,15 +110,13 @@ export const useActionHooks = ({ appointments = [] }) => {
       //   amount,
       //   appointmentData: getAppointment,
       // });
-
-      // router.push("/paymentpage" );
-      router.navigate({
+      router.push({
    pathname: "/(stack)/paymentpage",
     params: {
     customerId: getAppointment?.customerId?.id || getAppointment?.customerId,
     appointmentId: appointmentId,
-    amount: String(amount), // Important: all values must be strings
-    appointmentData: JSON.stringify(getAppointment), // send full object as string
+    amount: String(amount), 
+    appointmentData: JSON.stringify(getAppointment), 
   },
 });
     }
@@ -136,9 +125,7 @@ export const useActionHooks = ({ appointments = [] }) => {
       const getAppointment = appointments.find(
         (appointment) => appointment.id == appointmentId
       );
-      // navigate("smsScreen", { getAppointment })
-
-      router.navigate(
+        router.navigate(
         `/(stack)/smsScreen?getAppointment=${encodeURIComponent(
           JSON.stringify(getAppointment)
         )}`

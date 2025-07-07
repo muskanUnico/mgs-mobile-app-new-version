@@ -87,7 +87,7 @@ const CustomerActivity = ({ customerId }: any) => {
                         //   paymentId: item?.appointmentId.paymentId,
                         // })
                        router.push({
-  pathname: "/(stack)/viewinvoice",
+  pathname: "/(stack)/viewInvoice",
   params: {
     paymentId: item?.appointmentId?.paymentId}
   })

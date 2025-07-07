@@ -8,12 +8,12 @@ const EditCommentScreen = ({ navigation, route }: any) => {
   const { item } = useLocalSearchParams();
 
   const parsedItem = typeof item === "string" ? JSON.parse(item) : JSON.parse(item[0]);
-
+  
 
 
   return (
     <GlobalLoader>
-      <SafeAreaView style={{minHeight:"100%", paddingBottom:60}}>
+      <SafeAreaView style={{minHeight:"100%", paddingBottom:200}}>
         <EditCommentFeature route={route} navigation={navigation} item={parsedItem} />
       </SafeAreaView>
     </GlobalLoader>
