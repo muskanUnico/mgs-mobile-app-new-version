@@ -82,14 +82,14 @@ export const Billto = ({ data }: any) => {
 
         <View
           style={{
-            flexDirection: "row",
+            flexDirection: "column",
             width: "100%",
             paddingRight: 6,
             paddingLeft: 6,
             margin: 0,
           }}
         >
-          <View style={{ flexDirection: "row", justifyContent: "flex-end" }}>
+          <View style={{ flexDirection: "row", justifyContent: "center",paddingRight:20 }}>
             {data.paymentId?.paymentStatus == "paid" && (
               <View>
                 <Button title="PAID IN FULL" loading={false} />
@@ -110,7 +110,7 @@ export const Billto = ({ data }: any) => {
               </View>
             )}
           </View>
-          <View style={{ flexDirection: "row" }}>
+          <View style={{ flexDirection: "row", justifyContent: "center" ,paddingLeft:20}}>
             <View>
               <View
                 style={{
