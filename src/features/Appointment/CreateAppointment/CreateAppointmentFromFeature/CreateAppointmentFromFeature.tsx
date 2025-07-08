@@ -1,13 +1,14 @@
 import moment from "moment";
 import React, { useEffect, useState } from "react";
+import CreateAppointmentForm from "../../../../components/ui/Appointment/CreateAppointment/CreateAppointmentForm/CreateAppointmentForm";
 import { getCustomers } from "../../../../hooks/Customer";
 import { convertToISOFormat } from "../../../../utils/functions";
 import { convertStringTimeToNumber } from "../../../../utils/tools";
-import CreateAppointmentForm from "../../../../components/ui/Appointment/CreateAppointment/CreateAppointmentForm/CreateAppointmentForm";
 
 // Define types for client data and details
 interface ClientData {
   defaultValue: {
+    title: string;
     email: string;
     value: string;
     telephone: string;
@@ -41,7 +42,7 @@ const CreateAppointmentFromFeature: React.FC<Props> = ({
   setDetails,
 }) => {
   const [value, setValue] = useState<CustomerData>({
-    title: clientData?.defaultValue?.email || "",
+    title: clientData?.defaultValue?.title || "",
     id: clientData?.defaultValue?.value || "",
     data: {
       email: clientData?.defaultValue?.email || "",
@@ -102,6 +103,7 @@ const CreateAppointmentFromFeature: React.FC<Props> = ({
       time: convertStringTimeToNumber(moment(time).format("HHmm")),
     });
   }, [time, date]);
+
 
   return (
     <CreateAppointmentForm

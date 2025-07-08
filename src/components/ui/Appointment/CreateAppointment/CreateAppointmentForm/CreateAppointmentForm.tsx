@@ -50,8 +50,17 @@ const CreateAppointmentForm = ({
       <View>
         <AutoComplete
           dataSet={list}
-          setInputValue={setValue}
           inputValue={value}
+          setInputValue={(input: any) => {
+            if (typeof input === "string") {
+              setValue?.({
+                title: input,
+                data: { email: "", phone: "" },
+              });
+            } else {
+              setValue?.(input);
+            }
+          }}
         />
 
         <StandardInput
