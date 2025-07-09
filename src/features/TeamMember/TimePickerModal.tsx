@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import Button from "../../components/elements/Button/Button";
-import CustomModal from "../../components/elements/CustomModal/CustomModal";
 import {
-  View,
+  FlatList,
+  StyleSheet,
   Text,
   TouchableOpacity,
-  StyleSheet,
-  FlatList,
+  View,
 } from "react-native";
+import Button from "../../components/elements/Button/Button";
+import CustomModal from "../../components/elements/CustomModal/CustomModal";
 
 const TimePickerModal = ({ modal, setModal, onChange }: any) => {
   const [selectedHour, setSelectedHour] = useState("01");
@@ -103,10 +103,11 @@ const styles = StyleSheet.create({
   },
   pickerItem: {
     fontSize: 18,
+    fontWeight: "300",
     color: "black",
   },
   selectedItem: {
-    fontWeight: "bold",
+    fontWeight: "800",
     color: "blue",
   },
   separator: {
