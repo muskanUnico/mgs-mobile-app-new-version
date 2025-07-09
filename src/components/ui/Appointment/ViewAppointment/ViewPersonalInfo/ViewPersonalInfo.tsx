@@ -1,16 +1,15 @@
-import React from "react";
-import { Text, View } from "react-native";
-import { StyleSheet } from "react-native";
 import { FontAwesome } from "@expo/vector-icons"; // Import the icon library
-import CustomHeading from "../../../../../components/elements/CustomHeading/CustomHeading";
+import React from "react";
+import { StyleSheet, Text, View } from "react-native";
+import { Divider } from "react-native-paper";
 import { styles as externalStyles } from "../../../../../assets/css";
+import CustomHeading from "../../../../../components/elements/CustomHeading/CustomHeading";
 import {
   dividerColor,
   iconEmailColor,
   iconPersonColor,
   iconPhoneColor,
 } from "../../../../../constants/COLORS";
-import { Divider } from "react-native-paper";
 
 interface ViewPersonalInfoProps {
   data: {

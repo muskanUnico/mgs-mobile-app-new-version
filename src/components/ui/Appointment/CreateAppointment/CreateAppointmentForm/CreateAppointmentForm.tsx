@@ -79,7 +79,7 @@ const CreateAppointmentForm = ({
             setSelectedData &&
             setSelectedData((old) => ({ ...old, phone: text }))
           }
-          maxLength={12}
+          maxLength={13}
         />
 
         <View style={styles.spacing2}>

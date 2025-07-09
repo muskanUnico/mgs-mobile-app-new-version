@@ -11,7 +11,8 @@ interface ClientData {
     title: string;
     email: string;
     value: string;
-    telephone: string;
+    telephone?: string;
+    phone?: string;   
   };
   setValue: (value: { value: string; title: string; email: string; phone: string }) => void;
 }
@@ -46,7 +47,7 @@ const CreateAppointmentFromFeature: React.FC<Props> = ({
     id: clientData?.defaultValue?.value || "",
     data: {
       email: clientData?.defaultValue?.email || "",
-      phone: clientData?.defaultValue?.telephone || "",
+      phone: clientData?.defaultValue?.phone || "",
     },
   });
 
