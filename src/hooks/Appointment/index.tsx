@@ -1,12 +1,12 @@
+import { useCallback, useState } from "react";
 import { Alert } from "react-native";
-import { useCallback, useEffect, useState } from "react";
-import { removeEmptyValues } from "../../utils/tools";
 import { AppointmentService } from "../../services/Appointments";
+import { removeEmptyValues } from "../../utils/tools";
 
 //interface
-import { Appointment, AppointmentResults } from "../../interface/Appointment";
 import { useFocusEffect } from "@react-navigation/native";
-import { navigate } from "../../utils/navigationServices";
+import { useRouter } from "expo-router";
+import { Appointment, AppointmentResults } from "../../interface/Appointment";
 
 export const createAppointment = () => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -221,7 +221,7 @@ export const approvedAppointment = () => {
 
 export const rescheduleAppointment = () => {
   const [loading, setLoading] = useState<boolean>(false);
-
+  const router = useRouter();
   // Define a function to trigger a re-fetch
   const submit = async (id = "", body: any) => {
     setLoading(true);
@@ -236,7 +236,10 @@ export const rescheduleAppointment = () => {
 
     if (res?.success) {
       Alert.alert("Appointment reschedule successfully");
-      navigate("ViewAppointment", { id: res?.data?.id });
+      router.push({
+        pathname: "/(stack)/viewAppointments",
+        params: { id: res?.data?.id },
+      });
     }
     return res;
   };

@@ -146,12 +146,6 @@ const BookingInfoCard = ({
               <Text style={[styles.mb4, { fontFamily: "Regular" }]}>
                 {item?.reschedule?.comment}
               </Text>
-              <Text style={[styles.mb2, { fontFamily: "BoldText" }]}>
-                Regard,
-              </Text>
-              <Text style={[styles.mb2, { fontFamily: "Regular" }]}>
-                Suzy Tasse,
-              </Text>
             </View>
           </CustomModal>
         </>
