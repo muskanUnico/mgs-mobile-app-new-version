@@ -1,17 +1,26 @@
-import LongMenu from "../../../../elements/LongMenu/LongMenu";
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import React, { useState } from "react";
+import {
+  Platform,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { Chip, Divider } from "react-native-paper";
 import { styles as externalStyles } from "../../../../../assets/css";
+import CustomModal from "../../../../elements/CustomModal/CustomModal";
+import LongMenu from "../../../../elements/LongMenu/LongMenu";
 
 const ViewDetails = ({
   client,
   appointment,
   payment,
   handleOptions,
+  reschedule,
   options,
   timestamp,
 }: any) => {
+  const [open, setOpen] = useState(false);
   return (
     <View style={[externalStyles.card]}>
       <View style={styles.startAlignedRow}>
@@ -43,7 +52,35 @@ const ViewDetails = ({
         Appointment Status
       </Text>
       <View style={styles.rowContainer}>{appointment.status}</View>
-
+      {reschedule?.status == "change_request" && (
+        <>
+          <TouchableOpacity onPress={() => setOpen(true)}>
+            <Text
+              style={{
+                textDecorationLine: "underline",
+                fontSize: 12,
+                fontFamily: "Regular",
+              }}
+            >
+              View Reschedule Request
+            </Text>
+          </TouchableOpacity>
+          <CustomModal
+            text="Request"
+            modalVisible={open}
+            setModalVisible={setOpen}
+          >
+            <View style={styles.customContainer}>
+              <Text style={[styles.mb1, { fontFamily: "BoldText" }]}>
+                Comment
+              </Text>
+              <Text style={[styles.mb4, { fontFamily: "Regular" }]}>
+                {reschedule?.comment}
+              </Text>
+            </View>
+          </CustomModal>
+        </>
+      )}
       <Divider style={styles.dividerSpacing} />
       <View style={styles.centeredRowWithSpace}>
         <Text style={[styles.customBottomMargin, externalStyles.label]}>
@@ -153,5 +190,27 @@ const styles = StyleSheet.create({
   redChip: {
     backgroundColor: "#ef4444",
     borderRadius: 16,
+  },
+  customContainer: {
+    padding: 12,
+    borderRadius: 24,
+    backgroundColor: "#fff",
+    ...Platform.select({
+      ios: {
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 1 },
+        shadowOpacity: 0.2,
+        shadowRadius: 3,
+      },
+      android: {
+        elevation: 4,
+      },
+    }),
+  },
+  mb1: {
+    marginBottom: 4,
+  },
+  mb4: {
+    marginBottom: 16,
   },
 });

@@ -92,6 +92,7 @@ const  ViewAppointmentFeature = ({ navigation, id , selectedTab:selectedTabProp 
           handleOptions={(option: any) =>
             handleActionClick(data?.id, option, data.paymentId?.id)
           }
+          reschedule ={data?.reschedule}
           timestamp={moment(data?.createdAt).format("DD MMM YYYY h:mm a ")}
         />
         <View style={{ marginHorizontal: 20, marginTop: 8 }}>
