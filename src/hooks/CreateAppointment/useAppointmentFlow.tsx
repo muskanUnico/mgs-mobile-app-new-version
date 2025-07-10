@@ -305,11 +305,10 @@ const useAppointmentFlow = (defaultAppointmentId = "") => {
 
   useFocusEffect(
     useCallback(() => {
-       if (!CMSData) return;
       calculateAmounts({
         bookings: tableselectedData,
         manageDiscount: manageDiscount,
-        dynamicTax: CMSData.tax,
+        dynamicTax: CMSData.tax||0,
       }).then((amount) => {
         let check = parseInt(amount.total);
         if (check < 0) {
