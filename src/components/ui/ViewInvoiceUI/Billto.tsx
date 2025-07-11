@@ -1,3 +1,4 @@
+import { useRouter } from "expo-router";
 import moment from "moment";
 import React from "react";
 import { Text, View } from "react-native";
@@ -9,7 +10,7 @@ import { navigate } from "../../../utils/navigationServices";
 
 export const Billto = ({ data }: any) => {
   const { theme } = useTheme();
-
+  const router = useRouter();
   const handlePayPending = () => {
     try {
       const customerId = data?.customerId?.id;
@@ -19,12 +20,15 @@ export const Billto = ({ data }: any) => {
       if (!customerId || !appointmentId || !amount) {
         throw new Error("Invalid data for navigation");
       }
-      navigate("paymentpage", {
+    router.push({
+      pathname: "/(stack)/paymentPage",
+      params: {
         customerId,
         appointmentId,
-        appointmentData,
-        amount,
-      });
+        amount: String(amount),
+        appointmentData: JSON.stringify(appointmentData),
+      },
+    });
     } catch (error) {
       console.error("Navigation error:", error);
     }

@@ -10,12 +10,13 @@ const paymentPage = () => {
       const getString = (value: string | string[] | undefined) =>
     Array.isArray(value) ? value[0] : value ?? "";
    const appointmentdata =  appointmentData && JSON.parse(getString(appointmentData));
+     const parsedAmount = Number(amount);
   return (
     <>
       <CollectPaymentPage
         customerId={customerId}
         appointmentId={appointmentId}
-        amount={amount}
+        amount={parsedAmount}
         appointmentData={appointmentdata}
       />
     </>

@@ -197,6 +197,7 @@ import { useRouter } from "expo-router";
 import React, { useState } from "react";
 import {
   Alert,
+  Dimensions,
   StyleSheet,
   Text,
   View
@@ -335,11 +336,12 @@ const CollectPaymentPage = ({
         });
     }
   };
+  const screenHeight = Dimensions.get("window").height;
 
   return (
     <GlobalLoader>
       <View
-        style={{ minHeight: "100%", backgroundColor: theme.brandGreyColor , marginBottom: 62}}
+        style={{ minHeight: 1*screenHeight, backgroundColor: theme.brandGreyColor , marginBottom: 62}}
       >
         <Title title="Collect Payment" />
         <View style={{ marginHorizontal: 16, marginBottom: 12 }}>
