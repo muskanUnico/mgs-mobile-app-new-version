@@ -104,7 +104,7 @@
 //           tips: payTips,
 //         })
 //         .then((res) => {
-//           console.log("res", res?.data) 
+//           console.log("res", res?.data)
 //           console.log("res", res?.data?.redirect_url);
 
 //           // navigate("WebViewScreen", {
@@ -146,7 +146,7 @@
 //           })
 //           .then((res) => {
 //             // goBack()
-//             router.back(); 
+//             router.back();
 //           });
 //       }
 //     }
@@ -191,17 +191,9 @@
 
 // export default CollectPaymentPage;
 
-
-
 import { useRouter } from "expo-router";
 import React, { useState } from "react";
-import {
-  Alert,
-  Dimensions,
-  StyleSheet,
-  Text,
-  View
-} from "react-native";
+import { Alert, Dimensions, StyleSheet, Text, View } from "react-native";
 import { styles as externalStyles } from "../../../assets/css";
 import Button from "../../../components/elements/Button/Button";
 import StandardInput from "../../../components/elements/StandardInput/StandardInput";
@@ -241,7 +233,6 @@ const Tips = ({ tips = [], setTips }) => {
   );
 };
 
-// ✅ MAIN PAYMENT PAGE
 const CollectPaymentPage = ({
   customerId,
   appointmentId,
@@ -251,7 +242,6 @@ const CollectPaymentPage = ({
   const { theme } = useTheme();
   const router = useRouter();
 
-  // ✅ Safe defaultTips initialization with amount
   const [tips, setTips] = useState(() => {
     return (
       appointmentData?.bookings?.reduce((acc, curr) => {
@@ -269,15 +259,10 @@ const CollectPaymentPage = ({
     );
   });
 
-  // ✅ Tips Filtering & Total
   const payTips = tips.filter((tip) => tip.amount > 0);
-  const payTipsAmount = payTips.reduce(
-    (total, tip) => total + tip.amount,
-    0
-  );
+  const payTipsAmount = payTips.reduce((total, tip) => total + tip.amount,0);
   const finalAmount = amount + payTipsAmount;
 
-  // ✅ Payment Handling
   const [paymentData, setPaymentData] = useState({});
   const chargeOnlineHook = collectPaymentFromStripe();
   const chargeManualHook = collectManualPayment();
@@ -328,8 +313,12 @@ const CollectPaymentPage = ({
           },
           tips: payTips,
         })
-        .then(() => {
-          router.back();
+        .then((res) => {
+          Alert.alert("Manual Payment successful");
+          router.push({
+            pathname: "/(stack)/viewAppointments",
+            params: { id: appointmentId},
+          });
         })
         .catch((err) => {
           Alert.alert(err.response?.data?.message || "Manual payment failed");
@@ -341,7 +330,11 @@ const CollectPaymentPage = ({
   return (
     <GlobalLoader>
       <View
-        style={{ minHeight: 1*screenHeight, backgroundColor: theme.brandGreyColor , marginBottom: 62}}
+        style={{
+          minHeight: 1 * screenHeight,
+          backgroundColor: theme.brandGreyColor,
+          marginBottom: 62,
+        }}
       >
         <Title title="Collect Payment" />
         <View style={{ marginHorizontal: 16, marginBottom: 12 }}>
