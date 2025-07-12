@@ -111,14 +111,15 @@ export const useActionHooks = ({ appointments = [] }) => {
       //   appointmentData: getAppointment,
       // });
       router.push({
-   pathname: "/(stack)/paymentpage",
-    params: {
-    customerId: getAppointment?.customerId?.id || getAppointment?.customerId,
-    appointmentId: appointmentId,
-    amount: String(amount), 
-    appointmentData: JSON.stringify(getAppointment), 
-  },
-});
+        pathname: "/(stack)/paymentPage",
+        params: {
+          customerId:
+            getAppointment?.customerId?.id || getAppointment?.customerId,
+          appointmentId: appointmentId,
+          amount: String(amount),
+          appointmentData: JSON.stringify(getAppointment),
+        },
+      });
     }
 
     if (actionItem.id === "sms") {

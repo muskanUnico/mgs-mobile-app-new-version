@@ -301,7 +301,7 @@ export const deleteAppointment = () => {
 
 export const cancelAppointment = () => {
   // let alert = useSnackbar();
-
+  const router = useRouter();
   const [loading, setLoading] = useState<boolean>(false);
 
   // Define a function to trigger a re-fetch
@@ -318,6 +318,7 @@ export const cancelAppointment = () => {
 
     if (res?.success) {
       Alert.alert("Appointment cancelled successfully");
+      router.push("/(stack)/allAppointments")
     }
     return res;
   };
