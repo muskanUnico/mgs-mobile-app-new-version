@@ -1,15 +1,14 @@
 import moment from "moment";
 import React from "react";
-import { Text } from "react-native";
-import { View } from "react-native";
+import { Text, View } from "react-native";
 import { styles as externalStyles } from "../../../assets/css";
 
 export const Payinfo = ({ invoicedata }: any) => {
   const advancedDate = moment(
     invoicedata?.paymentId?.advancePayment?.paymentDate
   ).format("DD MMM YYYY");
-
-  const AdvanceDeposit = () => {
+    console.log("hvhchv-",invoicedata.paymentId.payment.paymentStatus );
+  const AdvanceDeposit = ({invoicedata}:any) => {
     return (
       <>
         {invoicedata?.paymentId?.paymentType == "advance" && (
@@ -61,7 +60,7 @@ export const Payinfo = ({ invoicedata }: any) => {
     );
   };
 
-  const AdvanceDepositRefunded = () => {
+  const AdvanceDepositRefunded = ({invoicedata}:any) => {
     return (
       <>
         {invoicedata?.paymentId?.paymentType == "advance" && (
@@ -75,7 +74,7 @@ export const Payinfo = ({ invoicedata }: any) => {
                 fontFamily: "BoldText",
               }}
             >
-              {" "}
+
               CAD${invoicedata?.paymentId?.advancePayment?.amount || " - "} is
               SUCCESSFULLY REFUNDED on {advancedDate || ""}
             </Text>
@@ -85,7 +84,7 @@ export const Payinfo = ({ invoicedata }: any) => {
     );
   };
 
-  const PaymentNotPaid = () => {
+  const PaymentNotPaid = ({invoicedata}:any) => {
     return (
       <>
         <View>
@@ -118,9 +117,9 @@ export const Payinfo = ({ invoicedata }: any) => {
         {invoicedata?.paymentId?.paymentStatus == "paid" && (
           <>
             <AdvanceDeposit />
-            {invoicedata.paymentId.payments.map((item: any, index: number) => {
-              return <>{<PaymentsArrays key={index} item={item} />}</>;
-            })}
+            {invoicedata.paymentId.payments.map((item: any, index: number) =>(
+             <PaymentsArrays key={index} item={item} />
+            ))}
 
             <View style={{ marginTop: 4 }}>
               <Text style={{ letterSpacing: 1, fontFamily: "BoldText" }}>
@@ -168,11 +167,11 @@ export const Payinfo = ({ invoicedata }: any) => {
         {invoicedata?.paymentId?.paymentStatus == "pending" && (
           <>
             <AdvanceDeposit />
-            {invoicedata.paymentId.payments.map((item: any, index: number) => {
-              return <>{<PaymentsArrays key={index} item={item} />}</>;
-            })}
+            {invoicedata.paymentId.payments.map((item: any, index: number) => (
+              <PaymentsArrays key={index} item={item} />
+            ))}
 
-            <PaymentNotPaid />
+            <PaymentNotPaid invoicedata={invoicedata}/>
 
             {invoicedata.paymentId.tips?.map((item: any, index: number) => {
               return (
@@ -197,11 +196,11 @@ export const Payinfo = ({ invoicedata }: any) => {
 
         {invoicedata?.paymentId?.paymentStatus == "refunded" && (
           <>
-            <AdvanceDeposit />
-            <AdvanceDepositRefunded />
-            {invoicedata.paymentId.payments.map((item: any, index: number) => {
-              return <>{<PaymentsArrays key={index} item={item} />}</>;
-            })}
+            <AdvanceDeposit invoicedata={invoicedata}  />
+            <AdvanceDepositRefunded invoicedata={invoicedata}  />
+            {invoicedata.paymentId.payments.map((item: any, index: number) => (
+              <PaymentsArrays key={index} item={item} />
+            ))}
 
             {invoicedata.paymentId.payment.paymentStatus == "paid" && (
               <View>
@@ -214,7 +213,8 @@ export const Payinfo = ({ invoicedata }: any) => {
                     fontFamily: "BoldText",
                   }}
                 >
-                  CAD${invoicedata?.paymentId?.payment?.amount?.toFixed(2)} PAID
+                  CAD${invoicedata?.paymentId?.payment?.amount?.toFixed(2)}       
+                   PAID
                 </Text>
               </View>
             )}
