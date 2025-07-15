@@ -1,9 +1,11 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { Dimensions, StyleSheet, View } from "react-native";
 import Title from "../../../../../components/elements/Title/Title";
 import Button from "../../../../elements/Button/Button";
 import CustomTextArea from "../../../../elements/CustomTextArea/CustomTextArea";
 import CustomInput from "../../../../elements/Input";
+
+const ScreenHeight = Dimensions.get("window").height;
 
 interface EditCommentProps {
   formData: {
@@ -31,7 +33,7 @@ const EditComment = ({
   return (
     <>
       <View style={styles.background}>
-        <Title title=" Edit Comment" navigation={navigation} />
+        <Title title=" Edit Patient Notes" navigation={navigation} />
 
         <View style={styles.spacing}>
           <View style={styles.verticalPadding}>
@@ -120,6 +122,8 @@ export default EditComment;
 const styles = StyleSheet.create({
   background: {
     backgroundColor: "#fff8f5",
+    height: "100%",
+    paddingBottom: 226,
   },
   spacing: {
     paddingHorizontal: 24,

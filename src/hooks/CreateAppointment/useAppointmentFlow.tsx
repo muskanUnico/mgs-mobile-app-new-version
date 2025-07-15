@@ -226,7 +226,16 @@ const useAppointmentFlow = (defaultAppointmentId = "") => {
         teamMemberId: mem.teamMemberId,
         minutes: mem.minutesRequirement,
       }))
-    );
+     ) || [];
+
+    if (timeSlots.length === 0) {
+      Alert.alert(
+        "No time slots available",
+        "Please try a different time or service."
+      );
+      setLoading("");
+      return;
+    }
 
     // Create custom availability
     const res = await createCustomAvailability({
@@ -308,7 +317,7 @@ const useAppointmentFlow = (defaultAppointmentId = "") => {
       calculateAmounts({
         bookings: tableselectedData,
         manageDiscount: manageDiscount,
-        dynamicTax: CMSData.tax||0,
+        dynamicTax: CMSData.tax || 0,
       }).then((amount) => {
         let check = parseInt(amount.total);
         if (check < 0) {

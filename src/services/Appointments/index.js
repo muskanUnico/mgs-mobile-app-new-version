@@ -54,6 +54,7 @@ const deleteAppointment = (id) => {
 }
 
 const cancelAppointment = (id, refundPayment) => {
+    console.log("cancelAppointment", id, refundPayment);
     return fetcher.post(`/appointment/cancel/${id}?refundPayment=${refundPayment}`).then(response => {
         return response.data;
     })

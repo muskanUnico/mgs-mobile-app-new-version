@@ -1,10 +1,11 @@
+import { useRouter } from "expo-router";
 import React, { useEffect, useState } from "react";
 import EditComment from "../../../../components/ui/Appointment/ViewAppointment/EditComment/EditComment";
 import { addAllNotes } from "../../../../hooks/Appointment";
 
 const EditCommentFeature = ({ route, navigation , item}: any) => {
   const { submit, loading, setLoading } = addAllNotes();
-
+  const router = useRouter();
   // state store form data
   const [appointment, setAppointment] = useState();
   const [formData, setFormData] = useState({
@@ -71,7 +72,12 @@ const EditCommentFeature = ({ route, navigation , item}: any) => {
     submit(appointment, inputdata)
       .then((res) => {
         if (res?.success) {
-          navigation.navigate("ViewAppointment", { id: appointment });
+          // navigation.navigate("ViewAppointment", { id: appointment });
+                 router.push({
+            pathname: "/viewAppointments",
+            params: { id: appointment },
+          })
+       
         }
       })
       .finally(() => {

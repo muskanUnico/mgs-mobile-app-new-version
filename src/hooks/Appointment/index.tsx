@@ -317,6 +317,7 @@ export const cancelAppointment = () => {
       });
 
     if (res?.success) {
+      console.log("Response after cancel:", res);
       Alert.alert("Appointment cancelled successfully");
       router.push("/(stack)/allAppointments")
     }

@@ -1,8 +1,7 @@
 //@ts-nocheck
 
-import { navigate } from "../../utils/navigationServices";
-import { AppointmentService, AvailabilityService } from "../../services";
 import { Text, View } from "react-native";
+import { AppointmentService, AvailabilityService } from "../../services";
 
 export const callAvailabilityService = async (body, setResponse) => {
   try {
