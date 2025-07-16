@@ -66,7 +66,7 @@ const MyCalendar = ({ appointments }: any) => {
       }))
     );
     setCurrentAppointment(currentShow);
-  }, [currentDate]);
+  }, [currentDate, appointments]);
 
   const onDateChanged = useCallback((date: string) => {
     setCurrentDate(date);

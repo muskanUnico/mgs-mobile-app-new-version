@@ -10,7 +10,6 @@ import {
 } from "../../interface/Customer";
 import { CustomerService } from "../../services/Customer/Customer";
 import { TeamMemberService } from "../../services/TeamMember/TeamMember";
-import { goBack } from "../../utils/navigationServices";
 import { removeEmptyValues } from "../../utils/tools";
 
 const router= useRouter();
@@ -493,14 +492,14 @@ export const useUpdateCustomer = (
 
 export const useDeleteCustomer = () => {
   const [isLoading, setIsLoading] = useState(true);
-
+  const router = useRouter();
   const handleDeleteCustomer = (id: string) => {
     setIsLoading(false);
     CustomerService.deleteCustomer(id)
       .then((res) => {
         if (res.success) {
           Alert.alert("Deleted Successfully");
-          goBack();
+          router.back();
         }
       })
       .catch((err) => {
