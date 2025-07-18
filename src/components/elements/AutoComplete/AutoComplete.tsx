@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import {
   AutocompleteDropdown,
-  TAutocompleteDropdownItem,
+  AutocompleteDropdownItem,
 } from "react-native-autocomplete-dropdown";
 import { styles as externalStyles } from "../../../assets/css";
 import { borderColor, brandBlackColor, placeholderTextColor } from "../../../constants/COLORS";
@@ -23,7 +23,7 @@ const AutoComplete = ({
   placeholder = "Name", 
 }: AutoCompleteProps) => {
   const [selectedItem, setSelectedItem] =
-    useState<TAutocompleteDropdownItem | null>(null);
+    useState<AutocompleteDropdownItem | null>(null);
 
   useEffect(() => {
     if (selectedItem) {
@@ -31,14 +31,14 @@ const AutoComplete = ({
     }
   }, [selectedItem]);
 
-  const renderItem = (item: TAutocompleteDropdownItem) => {
+  const renderItem = (item: AutocompleteDropdownItem) => {
     return (
       <View style={styles.suggestionItem}>
         <Text style={styles.suggestionText}>{item.title}</Text>
       </View>
     );
   };
-
+  
   return (
     <View style={{ flex: 1 }}>
       {label && (
@@ -53,7 +53,7 @@ const AutoComplete = ({
         clearOnFocus={false}
         closeOnBlur={true}
         closeOnSubmit={false}
-        initialValue={inputValue}
+          initialValue={inputValue?.id ?? null}
         onSelectItem={(item) => setSelectedItem(item)}
         dataSet={dataSet}
         showClear={false}
@@ -62,7 +62,7 @@ const AutoComplete = ({
           borderColor: borderColor,
           borderBottomWidth: 1,
         }}
-        onChangeText={(text: string) => setInputValue(text)}
+        onChangeText={(text:string) => setInputValue(text)}
         showChevron={false}
         renderItem={renderItem} // Apply custom render item
         suggestionsListContainerStyle={{
@@ -77,6 +77,7 @@ const AutoComplete = ({
         }}
         textInputProps={{
           placeholder: placeholder,
+          value: inputValue?.title ?? "", 
           autoCorrect: false,
           placeholderTextColor: placeholderTextColor,
           autoCapitalize: "none",

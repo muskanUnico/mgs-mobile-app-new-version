@@ -1,25 +1,25 @@
-import { Alert, View, ImageBackground, StyleSheet } from "react-native";
 import React, { useEffect, useState } from "react";
-import { useAuth } from "../../context/AuthContext";
-import { getTeamMembers } from "../../hooks/TeamMembers";
-import {
-  getAllDatesBetween,
-  getTotalDaysBetweenDates,
-} from "../../utils/tools";
-import Button from "../../components/elements/Button/Button";
+import { Alert, ImageBackground, StyleSheet, View } from "react-native";
 import { styles as externalStyles } from "../../assets/css";
-import Title from "../../components/elements/Title/Title";
 import AutoComplete from "../../components/elements/AutoComplete/AutoComplete";
-import StandardInput from "../../components/elements/StandardInput/StandardInput";
-import CustomTextArea from "../../components/elements/CustomTextArea/CustomTextArea";
+import Button from "../../components/elements/Button/Button";
 import CustomDropDown from "../../components/elements/CustomDropDown/CustomDropDown";
+import CustomTextArea from "../../components/elements/CustomTextArea/CustomTextArea";
 import MultiDatePicker from "../../components/elements/MultiDatePicker/MultiDatePicker";
 import RangeDatePicker from "../../components/elements/RangeDatePicker/RangeDatePicker";
+import StandardInput from "../../components/elements/StandardInput/StandardInput";
+import Title from "../../components/elements/Title/Title";
+import { useAuth } from "../../context/AuthContext";
 import {
   useCreateLeaveRequests,
   useUpdateLeaveRequests,
 } from "../../hooks/LeaveCalender/LeaveRequest";
+import { getTeamMembers } from "../../hooks/TeamMembers";
 import { PermissionAccess } from "../../middleware/PermissionAccess";
+import {
+  getAllDatesBetween,
+  getTotalDaysBetweenDates,
+} from "../../utils/tools";
 
 const RequestLeaveFeature = ({ navigation, route,item }: any) => {
   const existingData = item;
@@ -44,7 +44,7 @@ const RequestLeaveFeature = ({ navigation, route,item }: any) => {
   const [end, setEnd] = useState<string | null>(null);
 
   // Options for autocomplete
-  const options = data.map((item) => ({ title: item.name, id: item?.id }));
+  const options = data.map((item) => ({ title: item?.name, id: item?.id }));
 
   const dropdownData = [
     { label: "Select Individual Dates", value: "single" },
@@ -83,13 +83,16 @@ const RequestLeaveFeature = ({ navigation, route,item }: any) => {
   useEffect(() => {
     if (existingData) {
       setTextareaValue(existingData.comment);
-      setTeamMember(existingData.teamMemberId?.id);
+      setTeamMember({
+        id: existingData.teamMemberId?.id,
+        title: existingData.teamMemberId?.name,
+      });
       setLeave(existingData.leaveType);
       setSelectedValue(existingData.dateType);
 
-      if (existingData.dateType == "range") {
-        setStart(null);
-        setEnd(null);
+      if (existingData.dateType === "range") {
+        setStart(existingData?.dates?.[0] ?? null);
+        setEnd(existingData?.dates?.[existingData.dates.length - 1] ?? null);
       } else {
         setSingle(existingData.dates);
       }

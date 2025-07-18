@@ -1,15 +1,14 @@
-import React, { useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import {
-  View,
-  Text,
-  StyleSheet,
   Modal,
+  StyleSheet,
+  Text,
   TouchableWithoutFeedback,
+  View,
 } from "react-native";
 import { Calendar, DateData } from "react-native-calendars";
-import Button from "../Button/Button";
-import { brandColor, brandWhiteColor } from "../../../constants/COLORS";
 import { useTheme } from "../../../context/ThemeContext";
+import Button from "../Button/Button";
 
 const RangeDatePicker = ({ start, end, setStart, setEnd }: any) => {
   const [selectedDates, setSelectedDates] = useState<{
@@ -23,6 +22,16 @@ const RangeDatePicker = ({ start, end, setStart, setEnd }: any) => {
   const [selectedDatesText, setSelectedDatesText] = useState<string>("");
   const [modalVisible, setModalVisible] = useState(false);
 
+  useEffect(() => {
+    if (start && end) {
+      setSelectedDatesText(`${start} to ${end}`);
+    } else if (start) {
+      setSelectedDatesText(`${start}`);
+    } else {
+      setSelectedDatesText("");
+    }
+  }, [start, end]);
+  
   const onDayPress = (day: DateData) => {
     const date = day.dateString;
     if (!start || (start && end)) {
