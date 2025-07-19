@@ -68,12 +68,12 @@ const PaymentHistory = ({
 
       <TouchableWithoutFeedback
         onPress={() =>
-          // navigate("viewinvoice", {
-          //   paymentId: item?.appointmentId?.paymentId,
-          // })
           router.push({
-           pathname: "/(stack)/viewInvoice",
-           params :  item?.appointmentId?.paymentId})
+            pathname: "/(stack)/viewInvoice",
+            params: {
+              paymentId: String(item?.appointmentId?.paymentId),
+            },
+          })
         }
       >
         <View style={{ marginLeft: 24, marginTop: 4 }}>
