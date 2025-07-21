@@ -2,26 +2,37 @@ import { useTheme } from "@/src/context/ThemeContext";
 import CreateCustomerFeature from "@/src/features/Customer/CreateCustomer/CreateCustomer";
 import GlobalLoader from "@/src/features/GlobalLoader/GlobalLoader";
 import React from "react";
-import { ImageBackground, SafeAreaView, StyleSheet, View } from "react-native";
+import {
+  Dimensions,
+  ImageBackground,
+  KeyboardAvoidingView,
+  Platform,
+  SafeAreaView,
+  StyleSheet,
+} from "react-native";
 
 const CreateCustomerScreen = ({ navigation, route }: any) => {
   const { theme } = useTheme();
-
+  const screenHeight = Dimensions.get("window").height;
   return (
     <GlobalLoader>
       <SafeAreaView
         style={[
           { backgroundColor: theme.brandGreyColor },
-          { minHeight: "100%" ,paddingBottom:60},
+          { flex: 1, paddingBottom: 60 },
         ]}
       >
-        <View style={styles.container}>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
+          style={styles.container}
+          keyboardVerticalOffset={Platform.OS === "ios" ? 0 : 20}
+        >
           <ImageBackground
             source={require("@/src/assets/images/b.png")}
             style={styles.backgroundImage}
           />
           <CreateCustomerFeature navigation={navigation} />
-        </View>
+        </KeyboardAvoidingView>
       </SafeAreaView>
     </GlobalLoader>
   );

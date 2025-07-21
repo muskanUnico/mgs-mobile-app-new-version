@@ -1,5 +1,5 @@
 import React from "react";
-import { View } from "react-native";
+import { ScrollView, View } from "react-native";
 import Button from "../../../components/elements/Button/Button";
 import Title from "../../../components/elements/Title/Title";
 import CustomerForm from "../../../components/ui/Customer/CustomerForm/CustomerForm";
@@ -21,13 +21,16 @@ const CreateCustomeFeature = ({ navigation }: any) => {
   };
 
   return (
-    <View style={{ minHeight: "100%",paddingBottom:60 }}>
+    <ScrollView
+      contentContainerStyle={{ flexGrow: 1, paddingBottom: 88 }}
+      keyboardShouldPersistTaps="handled"
+    >
       <Title navigation={navigation} title="Create Customer" />
-      <View style={{ marginHorizontal: 16 }}>
+      <View style={{ marginHorizontal: 16 , flex: 1}}>
         <CustomerForm formData={formData} setFromData={setFromData} />
         <Button onPress={handleSaveCustomer} title="Save" loading={!loader} />
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
