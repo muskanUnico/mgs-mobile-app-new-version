@@ -53,10 +53,12 @@ const UpcomingAppointments = ({ customerId }: any) => {
                 </View>
 
                 <TouchableOpacity
-                  onPress={router.push({
-                    pathname: "/(stack)/viewAppointments",
-                    params: { id: item?.id },
-                  })}
+                  onPress={() =>
+                    router.push({
+                      pathname: "/(stack)/viewAppointments",
+                      params: { id: item?.id },
+                    })
+                  }
                 >
                   <MaterialIcons
                     name="notes"
@@ -82,8 +84,14 @@ const UpcomingAppointments = ({ customerId }: any) => {
           <View style={{ paddingTop: 5, marginBottom: 8 }}>
             <Button
               title={"book appointment"}
-              onPress={() => 
-                router.push("/(stack)/createAppointment")
+              onPress={() =>
+                router.push({
+                  pathname: "/(stack)/createAppointment",
+                  params: {
+                    id: customerId,
+                    title: "Book Appointment",
+                  },
+                })
               }
             />
           </View>

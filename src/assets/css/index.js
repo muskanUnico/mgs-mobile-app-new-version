@@ -128,5 +128,10 @@ export const styles = StyleSheet.create({
   },
   globalFont: {
     fontFamily: "InterBlack",
+  },
+  wrapper:{
+    paddingHorizontal: 1,
+    marginHorizontal: 2,
+    fontFamily: "BoldText"
   }
 });
