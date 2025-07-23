@@ -11,11 +11,7 @@ const AddPayrollScreen = ({ navigation, route }: any) => {
   const { edit, rootItem } = useLocalSearchParams();
   const isEdit = String(edit).toLowerCase() === "true";
 
-  const itemData = rootItem
-    ? JSON.parse(
-        decodeURIComponent(Array.isArray(rootItem) ? rootItem[0] : rootItem)
-      )
-    : null;
+  const itemData = JSON.parse(rootItem  as string) || {};
 
   console.log("Decoded item:", itemData);
 

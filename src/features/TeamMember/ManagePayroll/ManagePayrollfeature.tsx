@@ -56,10 +56,10 @@ const ManagePayrollfeature = ({ navigation }: any) => {
   const handleAddPayroll = () => {
     router.push({
       pathname: "/(stack)/addPayroll",
-      params: { edit: "false" },
+      params: { edit: "false", rootItem: JSON.stringify(team) },
     });
   };
-
+  console.log(team, "team in manage payroll");
   const option = [
     {
       id: 1,
@@ -84,7 +84,7 @@ const ManagePayrollfeature = ({ navigation }: any) => {
         pathname: "/(stack)/addPayroll",
         params: {
           edit: "true",
-          rootItem: encodeURIComponent(JSON.stringify(item)),
+          rootItem: JSON.stringify(team),
         },
       });
     } else if (option.id == 2) {
@@ -135,8 +135,10 @@ const ManagePayrollfeature = ({ navigation }: any) => {
               inputValue={team}
               dataSet={dataSet}
               setInputValue={(value: any) => {
-                setTeamLoading(true);
                 setTeamMember(value);
+                if (value?.id) {
+                  setTeamLoading(true);
+                }
               }}
               placeholder="Select Team Member"
             />

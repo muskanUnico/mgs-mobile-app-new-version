@@ -21,8 +21,9 @@ import { convertStringTimeToNumber } from "../../../utils/tools";
 
 export const AddPayrollFeature = ({ route, isEdit,  item}: any) => {
   const { handleUpdate, loader } = useUpdateDataTimeTracker();
-  const root = item;
-
+  const root = item ;
+   console.log("Root item:", root);
+   console.log("Root item--:", item);
 
   const { handleCreateTime, loading } = useCreateTime();
   const { data } = getTeamMembers();
@@ -32,8 +33,8 @@ export const AddPayrollFeature = ({ route, isEdit,  item}: any) => {
 
   const [dateFilter, setDateFilter] = useState(new Date());
   const [team, setTeamMember] = useState({
-    id: root?.teamMemberId?.id,
-    title: root?.teamMemberId?.id,
+    id: root?.id || "",
+    title: root?.title || "",
   });
 
   const [fields, setFields] = useState<any[]>([
@@ -45,7 +46,7 @@ export const AddPayrollFeature = ({ route, isEdit,  item}: any) => {
       duration: 60,
     },
   ]);
-
+   console.log(team, "team");
   useFocusEffect(
     useCallback(() => {
           if (!isEdit || !root) return;
