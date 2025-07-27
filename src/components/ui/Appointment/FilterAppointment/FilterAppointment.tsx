@@ -1,11 +1,11 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
-import Button from "../../../elements/Button/Button";
-import CustomBottomSheet from "../../../elements/BottomSheet/CustomBottomSheet";
-import CustomDropDown from "../../../elements/CustomDropDown/CustomDropDown";
-import SingleDatePicker from "../../../elements/SingleDatePicker/SingleDatePicker";
+import { StyleSheet, Text, View } from "react-native";
 import { styles as externalStyles } from "../../../../assets/css";
 import { PermissionAccess } from "../../../../middleware/PermissionAccess";
+import CustomBottomSheet from "../../../elements/BottomSheet/CustomBottomSheet";
+import Button from "../../../elements/Button/Button";
+import CustomDropDown from "../../../elements/CustomDropDown/CustomDropDown";
+import SingleDatePicker from "../../../elements/SingleDatePicker/SingleDatePicker";
 
 const FilterAppointment = ({
   bottomSheetRef,
@@ -47,7 +47,7 @@ const FilterAppointment = ({
       <CustomBottomSheet
         bottomSheetRef={bottomSheetRef}
         text={"Filter"}
-        height={600}
+        height={650}
       >
         <View style={[externalStyles.container]}>
           <View style={styles.spacingRow}>

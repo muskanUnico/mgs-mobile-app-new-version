@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import SingleDatePicker from "../../../../components/elements/SingleDatePicker/SingleDatePicker";
 import { styles as externalStyles } from "../../../../assets/css";
+import SingleDatePicker from "../../../../components/elements/SingleDatePicker/SingleDatePicker";
 import StandardInput from "../../../../components/elements/StandardInput/StandardInput";
 
 const CustomerForm = ({ setFromData, formData }: any) => {
@@ -54,9 +54,9 @@ const CustomerForm = ({ setFromData, formData }: any) => {
           placeholder="Reference ID"
           label="Reference ID"
           onChangeText={(text: any) =>
-            setFromData({ ...formData, RefId: text })
+            setFromData({ ...formData, refId: text })
           }
-          value={formData.RefId}
+          value={formData.refId}
         />
       </View>
       <View style={styles.spacedRowLayout}>

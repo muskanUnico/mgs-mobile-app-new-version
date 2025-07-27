@@ -2,7 +2,7 @@ import { FontAwesome } from "@expo/vector-icons";
 import * as Clipboard from "expo-clipboard";
 import { useRouter } from "expo-router";
 import moment from "moment";
-import React, { useState } from "react";
+import React from "react";
 import { Alert, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Divider } from "react-native-paper";
 import { styles as externalStyles } from "../../../../assets/css";
@@ -16,14 +16,14 @@ import { useTheme } from "../../../../context/ThemeContext";
 
 const CustomerCard = ({ item, index }: any) => {
   const { theme } = useTheme();
-  const [phoneNumber, setPhoneNumber] = useState(item?.telephone);
+  // const [phoneNumber, setPhoneNumber] = useState(item?.telephone);
   const router = useRouter();
   // Function to copy phone number to clipboard
   const copyToClipboard = () => {
-    Clipboard.setString(phoneNumber);
+    Clipboard.setString(item?.telephone);
     Alert.alert(
       "Copied to clipboard",
-      `Phone number ${phoneNumber} copied to clipboard`
+      `Phone number ${item?.telephone} copied to clipboard`
     );
   };
 
@@ -82,7 +82,7 @@ const CustomerCard = ({ item, index }: any) => {
           style={[externalStyles.iconColorStyle, { color: iconPhoneColor }]}
         />
         <Text style={[externalStyles.content, styles.value]}>
-          {phoneNumber}
+          {item?.telephone}
         </Text>
       </TouchableOpacity>
 

@@ -419,7 +419,7 @@ export const CreateCustomer = (navigation: any) => {
     telephone: "",
     email: "",
     address: "",
-    RefId: "",
+    refId: "",
     dob: "",
   });
 
@@ -435,7 +435,7 @@ export const CreateCustomer = (navigation: any) => {
             telephone: "",
             email: "",
             address: "",
-            RefId: "",
+            refId: "",
             dob: "",
           });
           // navigation.navigate("AllCustomer", { updatestate: 1 });

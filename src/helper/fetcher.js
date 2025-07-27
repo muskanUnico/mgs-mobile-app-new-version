@@ -3,8 +3,8 @@ import { getItemFromLocalStorage } from "./useLocalStorage";
 
 // const apiUrl = process.env.BACKEND_URL;
 // const apiUrl = "https://mgs-backend-1.onrender.com/api/v1/admin";
-const apiUrl = "https://mgs-backend-api.onrender.com/api/v1/admin";
-// const apiUrl = "http://10.204.101.23:5000/api/v1/admin";
+// const apiUrl = "https://mgs-backend-api.onrender.com/api/v1/admin";
+const apiUrl = "http://192.168.31.98:5000/api/v1/admin";
 
 
 const fetcher = axios.create({

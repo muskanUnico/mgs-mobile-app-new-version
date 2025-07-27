@@ -35,7 +35,7 @@ const CustomerDetails = ({ navigation, route, customerId }: any) => {
     telephone: "",
     email: "",
     address: "",
-    RefId: "",
+    refId: "",
     dob: "",
   });
 
@@ -45,7 +45,7 @@ const CustomerDetails = ({ navigation, route, customerId }: any) => {
       telephone: customer?.telephone,
       email: customer?.email,
       address: customer?.address,
-      RefId: customer?.referenceId,
+      refId: customer?.refId,
       dob: customer?.dob,
     });
   }, [customerDetail.data]);
