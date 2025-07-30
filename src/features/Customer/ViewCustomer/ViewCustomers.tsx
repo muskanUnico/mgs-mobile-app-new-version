@@ -1,17 +1,17 @@
 import React, { useState } from "react";
-import { View, StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { Searchbar } from "react-native-paper";
-import { getCustomers } from "../../../hooks/Customer";
-import { useTheme } from "../../../context/ThemeContext";
-import Loader from "../../../components/elements/Loader/Loader";
-import { PermissionAccess } from "../../../middleware/PermissionAccess";
-import CustomerCard from "../../../components/ui/Customer/CustomerCard/CustomerCard";
+import MaterialCommunityIcon from "react-native-vector-icons/MaterialCommunityIcons";
 import CustomPagination from "../../../components/elements/CustomPagination/CustomPagination";
+import Loader from "../../../components/elements/Loader/Loader";
+import CustomerCard from "../../../components/ui/Customer/CustomerCard/CustomerCard";
 import {
   FilterBorder,
   placeholderTextColor,
 } from "../../../constants/COLORS";
-import MaterialCommunityIcon from "react-native-vector-icons/MaterialCommunityIcons";
+import { useTheme } from "../../../context/ThemeContext";
+import { getCustomers } from "../../../hooks/Customer";
+import { PermissionAccess } from "../../../middleware/PermissionAccess";
 
 export const ViewCustomers = () => {
   const styles = useStyles();
@@ -52,7 +52,7 @@ export const ViewCustomers = () => {
 
             <CustomPagination
               totalPage={customers.res.totalPages}
-              pageIndex={customers.page}
+              pageIndex={customers.res.page}
               gotoPage={customers.setPage}
             />
           </PermissionAccess>
