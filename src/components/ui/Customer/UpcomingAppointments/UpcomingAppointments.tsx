@@ -7,13 +7,14 @@ import { Divider } from "react-native-paper";
 import { styles as externalStyles } from "../../../../assets/css";
 import Button from "../../../../components/elements/Button/Button";
 import CustomHeading from "../../../../components/elements/CustomHeading/CustomHeading";
-import { getUpcomingAppointments } from "../../../../hooks/Customer";
+import { getSingleCustomer, getUpcomingAppointments } from "../../../../hooks/Customer";
 import { PermissionAccess } from "../../../../middleware/PermissionAccess";
 import { areAllElementsUnique, formatTime } from "../../../../utils/tools";
 
 const UpcomingAppointments = ({ customerId }: any) => {
   const appointments = getUpcomingAppointments(customerId);
   const router = useRouter();
+  const data = getSingleCustomer(customerId);
   return (
     <>
       <View style={[externalStyles.card]}>
@@ -28,7 +29,6 @@ const UpcomingAppointments = ({ customerId }: any) => {
           const title: any[] = item.bookings.map(
             (book: any) => book.serviceName
           );
-
           const memberIds = item.bookings.map((book: any) => book.teamMemberId);
           const member =
             memberIds.length > 1 && areAllElementsUnique(memberIds)
@@ -89,6 +89,9 @@ const UpcomingAppointments = ({ customerId }: any) => {
                   pathname: "/(stack)/createAppointment",
                   params: {
                     id: customerId,
+                    name: data?.data?.customer?.name,
+                    email: data?.data?.customer?.email,
+                    telephone: data?.data?.customer?.telephone,
                     title: "Book Appointment",
                   },
                 })

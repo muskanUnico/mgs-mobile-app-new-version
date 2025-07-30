@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import {
   AutocompleteDropdown,
-  AutocompleteDropdownItem,
+  AutocompleteDropdownItem
 } from "react-native-autocomplete-dropdown";
 import { styles as externalStyles } from "../../../assets/css";
-import { borderColor, brandBlackColor, placeholderTextColor } from "../../../constants/COLORS";
+import { borderColor, placeholderTextColor } from "../../../constants/COLORS";
 
 interface AutoCompleteProps {
   inputValue: any;
@@ -24,6 +24,11 @@ const AutoComplete = ({
 }: AutoCompleteProps) => {
   const [selectedItem, setSelectedItem] =
     useState<AutocompleteDropdownItem | null>(null);
+const [searchText, setSearchText] = useState("");
+
+const filteredDataSet = dataSet.filter((item: AutocompleteDropdownItem) =>
+  item.title?.toLowerCase().includes(searchText.toLowerCase())
+);
 
   useEffect(() => {
     if (selectedItem) {
@@ -38,12 +43,12 @@ const AutoComplete = ({
       </View>
     );
   };
-  
   return (
     <View style={{ flex: 1 }}>
       {label && (
         <Text
           style={[externalStyles.label]}
+          // className=" text-[14px] "
         >
           {label}
         </Text>
@@ -53,31 +58,20 @@ const AutoComplete = ({
         clearOnFocus={false}
         closeOnBlur={true}
         closeOnSubmit={false}
-          initialValue={inputValue?.id ?? null}
+        initialValue={inputValue}
         onSelectItem={(item) => setSelectedItem(item)}
-        dataSet={dataSet}
+        dataSet={filteredDataSet}
         showClear={false}
         inputContainerStyle={{
           backgroundColor: "transparent",
           borderColor: borderColor,
           borderBottomWidth: 1,
         }}
-        onChangeText={(text:string) => setInputValue(text)}
+        onChangeText={(text: string) =>{    setSearchText(text); setInputValue(text)}}
         showChevron={false}
         renderItem={renderItem} // Apply custom render item
-        suggestionsListContainerStyle={{
-          backgroundColor: "#fff",
-          borderRadius: 8,
-          paddingVertical: 4,
-          shadowColor: "#000",
-          shadowOffset: { width: 0, height: 2 },
-          shadowOpacity: 0.2,
-          shadowRadius: 4,
-          elevation: 6,
-        }}
         textInputProps={{
           placeholder: placeholder,
-          value: inputValue?.title ?? "", 
           autoCorrect: false,
           placeholderTextColor: placeholderTextColor,
           autoCapitalize: "none",
@@ -85,7 +79,6 @@ const AutoComplete = ({
             paddingLeft: 0,
             fontSize: 14,
             fontFamily: "Regular",
-            color: brandBlackColor
           }
         }}
       />
@@ -100,8 +93,6 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 10,
     fontFamily: "Regular",
-    fontSize:14,
-    backgroundColor: "#fff"
   },
   suggestionText: {
     fontFamily: "Regular",

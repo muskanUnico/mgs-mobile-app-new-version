@@ -15,7 +15,7 @@ import ConfirmAppointment from "../ConfirmAppointment/ConfirmAppointment";
 import CreateAppointmentCardFeature from "./CreateAppointmentCardFeature/CreateAppointmentCardFeature";
 import CreateAppointmentFromFeature from "./CreateAppointmentFromFeature/CreateAppointmentFromFeature";
 
-const CreateAppointmentFeature = ({ navigation }) => {
+const CreateAppointmentFeature = ({ navigation,customer}) => {
   const { theme } = useTheme();
   const {
     API_RUN,
@@ -44,7 +44,7 @@ const CreateAppointmentFeature = ({ navigation }) => {
     manageDiscount,
     setManageDiscount,
   } = useAppointmentFlow();
-
+      const screenTitle = customer?.title;
   const handleSubmit = () => {
     const body = { ...finalResponse, discount: {} };
 
@@ -65,7 +65,9 @@ const CreateAppointmentFeature = ({ navigation }) => {
           <FlatList
             ListHeaderComponent={
               <View>
-                <Title navigation={navigation} title="Create Appointments" />
+                <Title navigation={navigation} 
+                 title={`${screenTitle || "Create Appointments"}`}
+                 />
                 <View style={{ marginHorizontal: 8 }}>
                   <CreateAppointmentFromFeature
                     clientData={{
@@ -74,6 +76,7 @@ const CreateAppointmentFeature = ({ navigation }) => {
                     }}
                     details={appointmentDetails}
                     setDetails={setAppointmentDetails}
+                    customer={customer}
                   />
                 </View>
                 {!Next && (
