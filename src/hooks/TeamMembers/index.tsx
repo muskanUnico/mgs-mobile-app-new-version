@@ -1,13 +1,14 @@
 import React, { useCallback, useState } from "react";
 
 //interface
-import { Alert } from "react-native";
-import { removeEmptyValues } from "../../utils/tools";
-import { TeamMembers } from "../../interface/TeamMembers";
 import { useFocusEffect } from "@react-navigation/native";
+import { router } from "expo-router";
+import { Alert } from "react-native";
+import { setItemToLocalStorage } from "../../helper/useLocalStorage";
+import { TeamMembers } from "../../interface/TeamMembers";
 import { TeamMemberService } from "../../services/TeamMember/TeamMember";
 import { goBack, navigate } from "../../utils/navigationServices";
-import { setItemToLocalStorage } from "../../helper/useLocalStorage";
+import { removeEmptyValues } from "../../utils/tools";
 
 export const getTeamMembers = () => {
   const [res, setRes] = useState({
@@ -192,8 +193,11 @@ export const useDeleteTeamMember = () => {
     TeamMemberService.deleteTeamMember(id)
       .then((res) => {
         if (res.success) {
-          Alert.alert("Deleted Successfully");
-          goBack();
+        Alert.alert("Deleted Successfully");
+        router.push({
+          pathname: "/(stack)/allTeamMember",
+          params: { refresh: "true" },
+        });
         }
       })
       .catch((err) => {
