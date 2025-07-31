@@ -41,7 +41,7 @@ const ViewPermissions: React.FC<ViewAccessProps> = ({ roleId }) => {
   };
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1 , paddingBottom:60 }}>
       {formatApiResponse(roleInfo.data).map((item, index) => {
         return (
           <View key={index} style={[externalStyles.container]}>
@@ -53,11 +53,9 @@ const ViewPermissions: React.FC<ViewAccessProps> = ({ roleId }) => {
                 {index + 1}.
               </Text>
               <Text
-                style={[externalStyles.label]}
-                style={{ color: theme.brandColor }}
-             
+                style={[externalStyles.label] ,{color: theme.brandColor,  fontWeight:600}}
               >
-                {item.title}
+                {item.title }
               </Text>
             </View>
             <View>
