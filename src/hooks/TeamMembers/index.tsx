@@ -108,7 +108,7 @@ export const updateMember = (memberId: string) => {
         if (res?.success) {
           setLoading(false);
           Alert.alert("Member updated successfully");
-          navigate("AllTeamMember");
+          router.back();
         }
       })
       .finally(() => {
