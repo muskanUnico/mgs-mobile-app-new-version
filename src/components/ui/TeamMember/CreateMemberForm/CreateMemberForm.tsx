@@ -39,7 +39,7 @@ const CreateMemberForm: React.FC<CreateMemberFormProps> = ({
           onChangeText={(text: string) =>
             setFormData((oldData) => ({ ...oldData, telephone: text }))
           }
-          label="Phone number (optional)"
+          label="Phone number"
         />
       </View>
       <View style={{ marginVertical: 12 }}>
