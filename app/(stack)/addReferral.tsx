@@ -1,9 +1,9 @@
-import React from "react";
-import { StyleSheet, ImageBackground } from "react-native";
 import Title from "@/src/components/elements/Title/Title";
-import AddReferralFeature from "@/src/features/Referral/AddReferralFeature";
 import GlobalLoader from "@/src/features/GlobalLoader/GlobalLoader";
+import AddReferralFeature from "@/src/features/Referral/AddReferralFeature";
 import { useLocalSearchParams } from "expo-router";
+import React from "react";
+import { ImageBackground, StyleSheet } from "react-native";
 
 const AddReferralScreen = ({ navigation, route }: any) => {
   const { data, edit, title } = useLocalSearchParams();

@@ -1,8 +1,8 @@
+import AutoCompleteInput from "@/src/components/elements/AutoCompleteInput/AutoCompleteInput";
 import { useFocusEffect } from "@react-navigation/native";
 import React, { useCallback, useState } from "react";
 import { View } from "react-native";
 import { styles as externalStyles } from "../../assets/css";
-import AutoComplete from "../../components/elements/AutoComplete/AutoComplete";
 import Button from "../../components/elements/Button/Button";
 import StandardInput from "../../components/elements/StandardInput/StandardInput";
 import { getCustomers } from "../../hooks/Customer";
@@ -11,7 +11,7 @@ import {
   useUpdateReferral,
 } from "../../hooks/ManageReferral";
 
-const AddReferralFeature = ({isEdit, referral}: any) => {
+const AddReferralFeature = ({ isEdit, referral }: any) => {
   const [percent, setPercent] = useState("");
   // const [coupon, setCoupon] = useState("");
   const [customer, setCustomer] = useState({
@@ -64,13 +64,11 @@ const AddReferralFeature = ({isEdit, referral}: any) => {
     <>
       <View style={[externalStyles.container, { marginHorizontal: 12 }]}>
         <View style={{ marginTop: 12, marginBottom: 8 }}>
-          <AutoComplete
+          <AutoCompleteInput
             inputValue={customer}
             dataSet={options}
             setInputValue={setCustomer}
-            label="Select Customer"
-            placeholder="Name"
-          />
+            label="Select Customer"/>
         </View>
 
         {/* <View>
