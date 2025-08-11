@@ -1,15 +1,16 @@
 {
   "expo": {
-    "name": "my-app",
-    "slug": "my-app",
+    "name": "mgs-app",
+    "slug": "mgs-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./src/assets/icon.png",
-    "scheme": "myapp",
+    "scheme": "mgs-app",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "mgs-app"
     },
     "android": {
       "adaptiveIcon": {
@@ -17,7 +18,7 @@
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
-      "package": "com.muskanunico.myapp"
+     "package": "com.sameer_unico.mgsapp"
     },
     "web": {
       "bundler": "metro",
@@ -34,7 +35,7 @@
     "extra": {
       "router": {},
       "eas": {
-        "projectId": "e129ab9a-3fe4-4288-abc9-793f1db4d0cf"
+        "projectId": "d78f8716-2755-4aff-8ac6-638b298ee5c0"
       }
     },
      "splash": {
