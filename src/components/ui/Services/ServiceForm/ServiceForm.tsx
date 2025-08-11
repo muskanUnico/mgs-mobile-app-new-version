@@ -1,14 +1,14 @@
 import React from "react";
-import { StyleSheet, Text, View, Platform } from "react-native";
+import { Platform, StyleSheet, Text, View } from "react-native";
 import { Switch } from "react-native-paper";
 import { styles as externalStyles } from "../../../../assets/css";
-import CustomInput from "../../../../components/elements/Input";
 import Button from "../../../../components/elements/Button/Button";
-import CustomTextArea from "../../../../components/elements/CustomTextArea/CustomTextArea";
 import CustomDropDown from "../../../../components/elements/CustomDropDown/CustomDropDown";
+import CustomTextArea from "../../../../components/elements/CustomTextArea/CustomTextArea";
+import CustomInput from "../../../../components/elements/Input";
 import { borderColor } from "../../../../constants/COLORS";
-import { PermissionAccess } from "../../../../middleware/PermissionAccess";
 import { useTheme } from "../../../../context/ThemeContext";
+import { PermissionAccess } from "../../../../middleware/PermissionAccess";
 
 interface ServiceFormProps {
   option: { label: string; value: string }[];
@@ -127,7 +127,7 @@ const ServiceForm: React.FC<ServiceFormProps> = ({
           alignItems: "center",
         }}
       >
-        <Text style={{ color: theme.brandColor }}>Active</Text>
+        <Text style={{ color: theme.brandColor  , fontWeight: 700 }}>Active</Text>
 
         <Switch
           value={formData.switchValue}
@@ -156,7 +156,7 @@ const ServiceForm: React.FC<ServiceFormProps> = ({
           alignItems: "center",
         }}
       >
-        <Text style={{ color: theme.brandColor }}>
+        <Text style={{ color: theme.brandColor , fontWeight: 700 }}>
           Overlapping service availability
         </Text>
 

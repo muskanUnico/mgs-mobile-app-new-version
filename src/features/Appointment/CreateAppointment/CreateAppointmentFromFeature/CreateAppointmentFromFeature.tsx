@@ -209,7 +209,7 @@ const CreateAppointmentFromFeature: React.FC<Props> = ({
       phone: customer?.telephone || clientData?.defaultValue?.phone || "",
     },
   });
-   console.log("Customer from props==========:", customer);
+  
   // Date and time states
   const [time, setTime] = useState<Date>(
     new Date(convertToISOFormat(details))
