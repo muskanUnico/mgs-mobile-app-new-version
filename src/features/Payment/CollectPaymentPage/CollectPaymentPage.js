@@ -210,7 +210,7 @@ import GlobalLoader from "../../GlobalLoader/GlobalLoader";
 const Tips = ({ tips = [], setTips }) => {
   const handleChange = (index, value) => {
     const updatedTips = [...tips];
-    updatedTips[index].amount = Number(value) ;
+    updatedTips[index].amount = value;
     setTips(updatedTips);
   };
 
@@ -223,7 +223,7 @@ const Tips = ({ tips = [], setTips }) => {
           </Text>
           <StandardInput
             placeholder="Amount"
-            keyboardType="numeric"
+            keyboardType="decimal-pad"
             value={tip.amount?.toString() || ""}
             onChangeText={(value) => handleChange(index, value)}
           />
@@ -259,9 +259,12 @@ const CollectPaymentPage = ({
     );
   });
 
-  const payTips = tips.filter((tip) => tip.amount > 0);
-  const payTipsAmount = payTips.reduce((total, tip) => total + tip.amount,0);
-  const finalAmount = amount + payTipsAmount;
+  const payTips = tips.filter((tip) => Number(tip.amount) > 0);
+  const payTipsAmount = payTips.reduce(
+    (total, tip) => total + Number(tip.amount),
+    0
+  );
+  const finalAmount = Number(amount) + payTipsAmount;
 
   const [paymentData, setPaymentData] = useState({});
   const chargeOnlineHook = collectPaymentFromStripe();
@@ -300,7 +303,6 @@ const CollectPaymentPage = ({
       if (!paymentData.manualPayment?.ref) {
         return Alert.alert("Reference Number Required");
       }
-
       await chargeManualHook
         .submit({
           customerId,
