@@ -1,8 +1,10 @@
 //@ts-nocheck
 import { useFocusEffect } from "@react-navigation/native";
+import { router } from "expo-router";
 import moment from "moment";
 import React, { useCallback, useEffect, useState } from "react";
 import {
+  Alert,
   Platform,
   StyleSheet,
   Switch,
@@ -196,6 +198,12 @@ const TeamMemberHours = ({ navigation, route , user}: StaffMemberModalProps) => 
 
   const submit = () => {
     updateHours.submit(formData);
+    Alert.alert(
+      "Staff hours updated successfully"
+     )
+ setTimeout(() => {
+       router.back();
+    }, 1500);
   };
 
   const [index, setIndex] = useState(-1);
