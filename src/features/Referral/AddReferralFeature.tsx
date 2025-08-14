@@ -1,5 +1,7 @@
+import AutoComplete from "@/src/components/elements/AutoComplete/AutoComplete";
 import AutoCompleteInput from "@/src/components/elements/AutoCompleteInput/AutoCompleteInput";
 import { useFocusEffect } from "@react-navigation/native";
+import { useRouter } from "expo-router";
 import React, { useCallback, useState } from "react";
 import { View } from "react-native";
 import { styles as externalStyles } from "../../assets/css";
@@ -18,8 +20,7 @@ const AddReferralFeature = ({ isEdit, referral }: any) => {
     id: "",
     title: "",
   });
-
-  // customers
+  const router = useRouter();
   const { data } = getCustomers({ defaultParams: {} });
   const updateReferral = useUpdateReferral();
   const createReferral = useCreateReferral();
@@ -58,17 +59,28 @@ const AddReferralFeature = ({ isEdit, referral }: any) => {
     } else {
       createReferral.handleCreate(formatePercent);
     }
+    setTimeout(() => {
+      router.push("/(stack)/allReferral");
+    }, 1500);
   };
 
   return (
     <>
       <View style={[externalStyles.container, { marginHorizontal: 12 }]}>
         <View style={{ marginTop: 12, marginBottom: 8 }}>
-          <AutoCompleteInput
+         {isEdit?( <AutoCompleteInput
             inputValue={customer}
             dataSet={options}
             setInputValue={setCustomer}
-            label="Select Customer"/>
+            label="Select Customer"/>)
+
+             :  ( <AutoComplete
+            inputValue={customer}
+            dataSet={options}
+            setInputValue={setCustomer}
+            label="Select Customer"
+            placeholder="Name"
+          />)}
         </View>
 
         {/* <View>
