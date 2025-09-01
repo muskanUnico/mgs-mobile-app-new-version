@@ -18,27 +18,31 @@
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
-     "package": "com.sameer_unico.mgsapp"
+      "package": "com.sameer_unico.mgsapp"
     },
     "web": {
       "bundler": "metro",
-      "output": "static",
+      "output": "server",
       "favicon": "./src/assets/icon.png"
     },
-    "plugins": [
-      "expo-router"],
-  
-    
+    "plugins": [["expo-router",{
+      "origin": "https://mgs-app.expo.app"
+    }],
+     ["@stripe/stripe-react-native", {
+      "merchantIdentifier": "merchant.com.mgs-app",
+      "publishableKey": "pk_test_51RWziUCDE5s289U6YQQXnNI52tsk0skZy9U5mfbaPDiTCcixfxO2mnmF0bxZxGBlKaPBmx0gVNTKy8rvUtkVfCBo00DaUU0RKQ"
+    }]],
     "experiments": {
       "typedRoutes": true
     },
     "extra": {
+      "stripePublicKey": "pk_test_51NVVmgSE2iqRZDPdFnu5AQ2QlAqTio8PHshxelATUidy2CSUYvWtQI7HRDereuunoA4WoA6IobWq18oim0QxoKos00Kx1EnWf7",
       "router": {},
       "eas": {
         "projectId": "d78f8716-2755-4aff-8ac6-638b298ee5c0"
       }
     },
-     "splash": {
+    "splash": {
       "image": "./src/assets/splash.png",
       "resizeMode": "cover",
       "backgroundColor": "#ffffff"
