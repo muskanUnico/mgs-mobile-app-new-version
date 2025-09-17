@@ -38,17 +38,18 @@ const StandardInput: React.FC<StandardInputProps> = ({
           {label}
         </Text>
       </TouchableOpacity>
+   
       <TextInput
-        ref={inputRef}
-        style={styles.input}
-        placeholder={placeholder}
-        onFocus={() => setIsFocused(true)}
-        onBlur={() => setIsFocused(false)}
-        value={value}
-        onChangeText={(text) => onChangeText(text)}
-        editable={editable}
-        maxLength={maxLength}
-      />
+  ref={inputRef}
+  style={styles.input}
+  placeholder={placeholder}
+  onFocus={() => setIsFocused(true)}
+  onBlur={() => setIsFocused(false)}
+  value={value ?? ""}   
+  onChangeText={onChangeText} 
+  editable={editable}
+  maxLength={maxLength}
+/>
     </View>
   );
 };
