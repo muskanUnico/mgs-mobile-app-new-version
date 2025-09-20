@@ -15,6 +15,7 @@ import { navigate } from "../../utils/navigationServices";
 import moment from "moment";
 import { formatMinutesToHoursAndMinutes } from "../../utils/tools";
 import { TotalTip } from "../../utils/functions";
+import { router } from "expo-router";
 
 const MyPayrollCard = ({ item, index }: any) => {
   let hoursSum = item.hours.reduce((accumulator: any, currentValue: any) => {
@@ -81,7 +82,9 @@ const MyPayrollCard = ({ item, index }: any) => {
             {formatMinutesToHoursAndMinutes(duration)}
             <Text
               style={[externalStyles.BlueText]}
-              onPress={() => navigate("WorkedHours", { item: item })}
+              onPress={() => 
+                router.push({ pathname: "/(stack)/workedHours", params: { item: JSON.stringify(item) } })
+              }
             >
               (view)
             </Text>
@@ -101,7 +104,9 @@ const MyPayrollCard = ({ item, index }: any) => {
             {TotalTip(item.tips).toFixed(2)}
             <Text
               style={[externalStyles.BlueText]}
-              onPress={() => navigate("TipCollected", { item: item })}
+              onPress={() => 
+               router.push({ pathname: "/(stack)/tipCollected", params: { item: JSON.stringify(item) } })
+              }
             >
               (view)
             </Text>
