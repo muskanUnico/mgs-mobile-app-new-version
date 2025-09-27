@@ -23,6 +23,7 @@ import { PaymentService } from "../../../services";
 //   },
 // };
  const publicKey = Constants.expoConfig.extra.stripePublicKey;
+ 
 const PaymentAddress = () => {
  
   const { createPaymentMethod } = useStripe();
