@@ -2,7 +2,7 @@
   "expo": {
     "name": "mgs-app",
     "slug": "mgs-app",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "orientation": "portrait",
     "icon": "./src/assets/icon.png",
     "scheme": "mgs-app",
@@ -10,7 +10,10 @@
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "mgs-app"
+      "bundleIdentifier": "mgs-app",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -34,7 +37,7 @@
       "typedRoutes": true
     },
     "extra": {
-      "stripePublicKey": "pk_test_51NVVmgSE2iqRZDPdFnu5AQ2QlAqTio8PHshxelATUidy2CSUYvWtQI7HRDereuunoA4WoA6IobWq18oim0QxoKos00Kx1EnWf7",
+      "stripePublicKey": "pk_test_51SBvqH1O6VE72G0i3otR1TSF9rRGtaw38lgheqJjvppha9AKBSaRAAFXDoKaLUFyTcADLwSGA9657yeI54W9mENH00OHU9wEQZ",
       "router": {},
       "eas": {
         "projectId": "f938719b-19cf-4f70-acf2-fc7b3a58b89d"
