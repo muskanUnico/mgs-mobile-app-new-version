@@ -2,10 +2,12 @@ import axios from "axios";
 import { getItemFromLocalStorage } from "./useLocalStorage";
 
 // const apiUrl = process.env.BACKEND_URL;
-const apiUrl = "http://192.168.31.98:5001/api/v1/admin";
+// const apiUrl = "http://192.168.1.3:5001/api/v1/admin";
+const apiUrl = "https://api-v1.mygirlsouz.com/api/v1/admin";
 // const apiUrl = "https://mgs-backend-1.onrender.com/api/v1/admin";
 // const apiUrl = "https://mgs-backend-1.onrender.com/api/v1/admin";
 // const apiUrl = "https://mgs-backend-api.onrender.com/api/v1/admin";
+// const apiUrl = "https://mgs-backend-2.onrender.com/api/v1/admin";
 // const apiUrl = "https://octopus-app-t4kn9.ondigitalocean.app/api/v1/admin";     
 
 
