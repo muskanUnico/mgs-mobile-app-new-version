@@ -148,7 +148,7 @@ const useAppointmentFlow = (defaultAppointmentId = "") => {
             discount: {
               subtotal: defaultAppointmentData.amount.subtotal,
               discount: defaultAppointmentData.amount.discount,
-              tax: defaultAppointmentData.amount.tax,
+              tax: defaultAppointmentData?.amount?.tax ?? 0,
               total: defaultAppointmentData.amount.total.toFixed(2),
             },
           };
@@ -317,7 +317,7 @@ const useAppointmentFlow = (defaultAppointmentId = "") => {
       calculateAmounts({
         bookings: tableselectedData,
         manageDiscount: manageDiscount,
-        dynamicTax: CMSData.tax || 0,
+        dynamicTax: CMSData?.tax || 0,
       }).then((amount) => {
         let check = parseInt(amount.total);
         if (check < 0) {
