@@ -2,7 +2,7 @@
   "expo": {
     "name": "mgs-app",
     "slug": "mgs-app",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "orientation": "portrait",
     "icon": "./src/assets/icon.png",
     "scheme": "mgs-app",
@@ -10,7 +10,10 @@
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "mgs-app"
+      "bundleIdentifier": "mgs-app",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "adaptiveIcon": {

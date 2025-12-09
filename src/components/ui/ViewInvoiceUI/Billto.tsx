@@ -80,7 +80,7 @@ export const Billto = ({ data }: any) => {
           </Text>
           <Text style={[externalStyles.label, { marginTop: 12 }]}>ADDRESS</Text>
           <Text style={[externalStyles.content]}>
-            123st, ABC Avenue, Calgary, T1W - T4B, Canado
+            123st, ABC Avenue, Calgary, T1W - T4B, Canada
           </Text>
         </View>
 
