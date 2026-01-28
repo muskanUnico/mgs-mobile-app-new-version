@@ -2,13 +2,22 @@
 import AuthBg from "@/src/components/ui/AuthBg";
 import LoginInfo from "@/src/components/ui/Login/Info";
 import LoginModule from "@/src/features/Auth/Login/LoginModule";
-import { Keyboard, KeyboardAvoidingView, Platform, ScrollView, TouchableWithoutFeedback } from "react-native";
+import fetcher from "@/src/helper/fetcher";
+import { registerForPushNotificationsAsync } from "@/src/helper/registerForPushNotifications";
+import { useEffect } from "react";
+import {
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  TouchableWithoutFeedback,
+} from "react-native";
 
 function LoginScreen() {
   return (
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={{ flex: 1 }}
       >
         <ScrollView
@@ -22,7 +31,6 @@ function LoginScreen() {
         </ScrollView>
       </KeyboardAvoidingView>
     </TouchableWithoutFeedback>
-
   );
 }
 
