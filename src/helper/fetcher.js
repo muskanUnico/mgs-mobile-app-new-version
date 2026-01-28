@@ -2,19 +2,11 @@ import axios from "axios";
 import { getItemFromLocalStorage } from "./useLocalStorage";
 
 // const apiUrl = process.env.BACKEND_URL;
-const apiUrl = "http://192.168.43.93:5001/api/v1/admin";
-// const apiUrl = "https://mgs-backend-1.onrender.com/api/v1/admin";
-// const apiUrl = "https://mgs-backend-api.onrender.com/api/v1/admin";
+const apiUrl = "http://192.0.0.2:5001/api/v1/admin";
+export const apiUrlFCM = "http://192.0.0.2:5001/api/v1/";
 // const apiUrl = "https://octopus-app-t4kn9.ondigitalocean.app/api/v1/admin";   
-// const apiUrl = "http://192.168.1.3:5001/api/v1/admin";
 // const apiUrl = "https://api-v1.mygirlsouz.com/api/v1/admin";
-// const apiUrl = "https://mgs-backend-1.onrender.com/api/v1/admin";
-// const apiUrl = "https://mgs-backend-1.onrender.com/api/v1/admin";
-// const apiUrl = "https://mgs-backend-api.onrender.com/api/v1/admin";
-// const apiUrl = "https://mgs-backend-2.onrender.com/api/v1/admin";
 // const apiUrl = "https://octopus-app-t4kn9.ondigitalocean.app/api/v1/admin";     
-
-
 
 const fetcher = axios.create({
     baseURL: apiUrl,
@@ -34,7 +26,6 @@ fetcher.interceptors.request.use(
         // console.log("Logged User name >>>> ", user.jwt.token)
         config.headers.Authorization = `Bearer ${user?.jwt?.token}`;
 
-
         return config;
     },
     function (error) {
@@ -46,3 +37,5 @@ fetcher.interceptors.request.use(
 );
 
 export default fetcher;
+
+

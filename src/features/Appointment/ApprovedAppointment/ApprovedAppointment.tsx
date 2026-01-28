@@ -25,9 +25,9 @@ const ApprovedAppointment = ({ navigation }: any) => {
   const appointmentTableData = appointments.data.results.map((item) => {
     return {
       id: item.id,
-      name: item.customerId.name,
-      customerId: item.customerId,
-      email: item.customerId.email,
+      name: item.customerId?.name,
+      customerId: item?.customerId,
+      email: item.customerId?.email,
       amount: item.amount,
       date: item.date,
       start_time_range: item.start_time_range,

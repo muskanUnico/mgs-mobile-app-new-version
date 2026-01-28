@@ -14,8 +14,19 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import DrawerContent from "../src/components/ui/DrawerContent/DrawerContent";
 import { AuthProvider, useAuth } from "../src/context/AuthContext";
 import { ThemeProvider } from "../src/context/ThemeContext";
+import * as Notifications from 'expo-notifications';
+import { registerForPushNotificationsAsync } from "@/src/helper/registerForPushNotifications";
 
 function AuthenticatedDrawer({ user }: { user: any }) {
+
+    Notifications.setNotificationHandler({
+    handleNotification: async () => ({
+      shouldShowAlert: true,
+      shouldPlaySound: true,
+      shouldSetBadge: false,
+    }),
+  });
+
   return (
         <Drawer
           screenOptions={{

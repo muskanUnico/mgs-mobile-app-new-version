@@ -8,10 +8,18 @@ import GlobalLoader from "@/src/features/GlobalLoader/GlobalLoader";
 import HomeCards from "@/src/features/Home/HomeCards";
 import HomeChartFeature from "@/src/features/Home/HomeChartFeature";
 import { HomeSection } from "@/src/features/Home/HomeSection";
+import { apiUrlFCM } from "@/src/helper/fetcher";
+import { registerForPushNotificationsAsync } from "@/src/helper/registerForPushNotifications";
 import { useTopCustomer, useTopMembers } from "@/src/hooks/Reports";
 import { PermissionAccess } from "@/src/middleware/PermissionAccess";
-import React, { useState } from "react";
-import { ImageBackground, StyleSheet, Text, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import {
+  ImageBackground,
+  Platform,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 
 const HomeScreen = () => {
   const [selectedTab, setSelectedTab] = useState<number>(1);
@@ -20,12 +28,40 @@ const HomeScreen = () => {
   const { theme } = useTheme();
   const { user } = useAuth();
 
-   
-
-  const tabs = [ 
+  const tabs = [
     { id: 1, label: "Top 5 Customers" },
     { id: 2, label: "Top 5 Team Members" },
   ];
+
+  useEffect(() => {
+    registerForPushNotificationsAsync().then((fcmToken) => {
+      console.log("dkjhaskjdkh ====>>", fcmToken, user);
+      if (!fcmToken || !user?.jwt?.token) return;
+
+      fetch(`${apiUrlFCM}/notification/save-token`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.jwt?.token}`,
+        },
+        body: JSON.stringify({
+          token: fcmToken,
+          platform: Platform.OS,
+          userId: user?.id,
+        }),
+      })
+        .then((res) => {
+          console.log("ajsdkkjkj ==>>", res);
+          res.json();
+        })
+        .then((data) => {
+          console.log("FCM token saved", data);
+        })
+        .catch((err) => {
+          console.error("FCM error", err);
+        });
+    });
+  }, []);
 
   return (
     <ImageBackground
@@ -51,10 +87,10 @@ const HomeScreen = () => {
           </Text>
         </View>
 
-         <PermissionAccess matchPermissions={["view_appointments"]}>
+        <PermissionAccess matchPermissions={["view_appointments"]}>
           <HomeCards />
         </PermissionAccess>
- 
+
         <PermissionAccess
           matchPermissions={[
             "manage_sales_revenue_report",
@@ -86,15 +122,13 @@ const HomeScreen = () => {
           )}
 
           {selectedTab === 2 && (
-
-        
             <View style={[externalStyles.card]}>
               {members.map((item: any, index: any) => {
                 return <CustomCard item={item} index={index} key={index} />;
               })}
             </View>
           )}
-        </PermissionAccess>  
+        </PermissionAccess>
       </GlobalLoader>
     </ImageBackground>
   );
@@ -108,6 +142,3 @@ const styles = StyleSheet.create({
 });
 
 export default HomeScreen;
-
-
-
